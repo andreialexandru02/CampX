@@ -68,7 +68,7 @@ namespace CampX.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> Logout()
         {
             await LogOut();
@@ -83,14 +83,21 @@ namespace CampX.Controllers
 
             return View(model);
         }
+        [HttpGet]
+
+        public IActionResult Profile()
+        {
+            return View();
+        }
 
         private async Task LogIn(CurrentCamperDTO camper)
         {
             var claims = new List<Claim>
             {
                 new Claim("Id", camper.Id.ToString()),
-                new Claim(ClaimTypes.Name, $"{camper.FirstName} {camper.LastName}"),
-                new Claim(ClaimTypes.Email, camper.Email),
+                new Claim("FirstName", camper.FirstName),
+                new Claim("LastName", camper.LastName),
+                new Claim("Email", camper.Email)
             };
 
             camper.Roles.ForEach(role => claims.Add(new Claim(ClaimTypes.Role, role)));
@@ -99,13 +106,13 @@ namespace CampX.Controllers
             var principal = new ClaimsPrincipal(identity);
 
             await HttpContext.SignInAsync(
-                    scheme: "SocializRCookies",
+                    scheme: "CampXCookies",
                     principal: principal);
         }
 
         private async Task LogOut()
         {
-            await HttpContext.SignOutAsync(scheme: "SocializRCookies");
+            await HttpContext.SignOutAsync(scheme: "CampXCookies");
         }
     }
 }

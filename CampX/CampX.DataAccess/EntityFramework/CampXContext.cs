@@ -56,8 +56,8 @@ public partial class CampXContext : DbContext
 
             entity.Property(e => e.Name).HasMaxLength(100);
 
-            entity.HasOne(d => d.IdImageNavigation).WithMany(p => p.Badges)
-                .HasForeignKey(d => d.IdImage)
+            entity.HasOne(d => d.Image).WithMany(p => p.Badges)
+                .HasForeignKey(d => d.ImageId)
                 .HasConstraintName("FK_Badge_Images");
         });
 
@@ -74,24 +74,23 @@ public partial class CampXContext : DbContext
             entity.Property(e => e.FirstName).HasMaxLength(100);
             entity.Property(e => e.LastName).HasMaxLength(100);
 
-            entity.HasOne(d => d.IdImageNavigation).WithMany(p => p.Campers)
-                .HasForeignKey(d => d.IdImage)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+            entity.HasOne(d => d.Image).WithMany(p => p.Campers)
+                .HasForeignKey(d => d.ImageId)
                 .HasConstraintName("FK_Camper_Image");
         });
 
         modelBuilder.Entity<CamperBadge>(entity =>
         {
-            entity.HasKey(e => new { e.IdBadge, e.IdCamper }).HasName("PK__CamperBa__E67A48BE2EA5E98E");
+            entity.HasKey(e => new { e.BadgeId, e.CamperId }).HasName("PK__CamperBa__E67A48BE2EA5E98E");
 
             entity.ToTable("CamperBadge");
 
-            entity.HasOne(d => d.IdBadgeNavigation).WithMany(p => p.CamperBadges)
-                .HasForeignKey(d => d.IdBadge)
+            entity.HasOne(d => d.Badge).WithMany(p => p.CamperBadges)
+                .HasForeignKey(d => d.BadgeId)
                 .HasConstraintName("FK_CamperBadge_Badge");
 
-            entity.HasOne(d => d.IdCamperNavigation).WithMany(p => p.CamperBadges)
-                .HasForeignKey(d => d.IdCamper)
+            entity.HasOne(d => d.Camper).WithMany(p => p.CamperBadges)
+                .HasForeignKey(d => d.CamperId)
                 .HasConstraintName("FK_CamperBadge_Camper");
         });
 
@@ -117,20 +116,20 @@ public partial class CampXContext : DbContext
 
         modelBuilder.Entity<EquipmentCamperTrip>(entity =>
         {
-            entity.HasKey(e => new { e.IdCamper, e.IdEquipment, e.IdTrip }).HasName("PK__Equipmen__2E5B9ED191149D36");
+            entity.HasKey(e => new { e.CamperId, e.EquipmentId, e.TripId }).HasName("PK__Equipmen__2E5B9ED191149D36");
 
             entity.ToTable("EquipmentCamperTrip");
 
-            entity.HasOne(d => d.IdCamperNavigation).WithMany(p => p.EquipmentCamperTrips)
-                .HasForeignKey(d => d.IdCamper)
+            entity.HasOne(d => d.Camper).WithMany(p => p.EquipmentCamperTrips)
+                .HasForeignKey(d => d.CamperId)
                 .HasConstraintName("FK_EquipmentCamperTrip_Camper");
 
-            entity.HasOne(d => d.IdEquipmentNavigation).WithMany(p => p.EquipmentCamperTrips)
-                .HasForeignKey(d => d.IdEquipment)
+            entity.HasOne(d => d.Equipment).WithMany(p => p.EquipmentCamperTrips)
+                .HasForeignKey(d => d.EquipmentId)
                 .HasConstraintName("FK_EquipmentCampeTripr_Equipment");
 
-            entity.HasOne(d => d.IdTripNavigation).WithMany(p => p.EquipmentCamperTrips)
-                .HasForeignKey(d => d.IdTrip)
+            entity.HasOne(d => d.Trip).WithMany(p => p.EquipmentCamperTrips)
+                .HasForeignKey(d => d.TripId)
                 .HasConstraintName("FK_EquipmentCamperTrip_Trip");
         });
 
@@ -138,18 +137,18 @@ public partial class CampXContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK__Images__C8C63E4A5A89B8B5");
 
-            entity.HasMany(d => d.IdCampsites).WithMany(p => p.IdImages)
+            entity.HasMany(d => d.Campsites).WithMany(p => p.Roles)
                 .UsingEntity<Dictionary<string, object>>(
                     "CampsiteImage",
                     r => r.HasOne<Campsite>().WithMany()
-                        .HasForeignKey("IdCampsite")
+                        .HasForeignKey("CampsiteId")
                         .HasConstraintName("FK_CampsiteImages_Campsite"),
                     l => l.HasOne<Image>().WithMany()
-                        .HasForeignKey("IdImage")
+                        .HasForeignKey("RoleId")
                         .HasConstraintName("FK_CampsiteImages_Image"),
                     j =>
                     {
-                        j.HasKey("IdImage", "IdCampsite").HasName("PK__Campsite__65FFD46781223A53");
+                        j.HasKey("RoleId", "CampsiteId").HasName("PK__Campsite__65FFD46781223A53");
                         j.ToTable("CampsiteImages");
                     });
         });
@@ -165,19 +164,19 @@ public partial class CampXContext : DbContext
 
         modelBuilder.Entity<Request>(entity =>
         {
-            entity.HasKey(e => new { e.IdTrip, e.IdCamper }).HasName("PK__Request__B6F006DD86019C08");
+            entity.HasKey(e => new { e.TripId, e.CamperId }).HasName("PK__Request__B6F006DD86019C08");
 
             entity.ToTable("Request");
 
             entity.Property(e => e.Date).HasColumnType("date");
             entity.Property(e => e.Description).HasMaxLength(500);
 
-            entity.HasOne(d => d.IdCamperNavigation).WithMany(p => p.Requests)
-                .HasForeignKey(d => d.IdCamper)
+            entity.HasOne(d => d.Camper).WithMany(p => p.Requests)
+                .HasForeignKey(d => d.CamperId)
                 .HasConstraintName("FK_Request_Camper");
 
-            entity.HasOne(d => d.IdTripNavigation).WithMany(p => p.Requests)
-                .HasForeignKey(d => d.IdTrip)
+            entity.HasOne(d => d.Trip).WithMany(p => p.Requests)
+                .HasForeignKey(d => d.TripId)
                 .HasConstraintName("FK_Request_Trip");
         });
 
@@ -187,8 +186,8 @@ public partial class CampXContext : DbContext
 
             entity.ToTable("Review");
 
-            entity.HasOne(d => d.IdCampsiteNavigation).WithMany(p => p.Reviews)
-                .HasForeignKey(d => d.IdCampsite)
+            entity.HasOne(d => d.Campsite).WithMany(p => p.Reviews)
+                .HasForeignKey(d => d.CampsiteId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Reviews_Campsites");
         });
@@ -203,18 +202,18 @@ public partial class CampXContext : DbContext
 
             entity.Property(e => e.Name).HasMaxLength(100);
 
-            entity.HasMany(d => d.IdCampers).WithMany(p => p.IdRoles)
+            entity.HasMany(d => d.Campers).WithMany(p => p.Roles)
                 .UsingEntity<Dictionary<string, object>>(
                     "CamperRole",
                     r => r.HasOne<Camper>().WithMany()
-                        .HasForeignKey("IdCamper")
+                        .HasForeignKey("CamperId")
                         .HasConstraintName("FK_CamperRole_Camper"),
                     l => l.HasOne<Role>().WithMany()
-                        .HasForeignKey("IdRole")
+                        .HasForeignKey("RoleId")
                         .HasConstraintName("FK_CamperRole_Role"),
                     j =>
                     {
-                        j.HasKey("IdRole", "IdCamper").HasName("PK__CamperRo__9992045879EA5ED2");
+                        j.HasKey("RoleId", "CamperId").HasName("PK__CamperRo__9992045879EA5ED2");
                         j.ToTable("CamperRole");
                     });
         });
@@ -229,18 +228,18 @@ public partial class CampXContext : DbContext
             entity.Property(e => e.IsPublic).HasColumnName("isPublic");
             entity.Property(e => e.Name).HasMaxLength(100);
 
-            entity.HasMany(d => d.IdCampsites).WithMany(p => p.IdTrips)
+            entity.HasMany(d => d.Campsites).WithMany(p => p.Trips)
                 .UsingEntity<Dictionary<string, object>>(
                     "CampsiteTrip",
                     r => r.HasOne<Campsite>().WithMany()
-                        .HasForeignKey("IdCampsite")
+                        .HasForeignKey("CampsiteId")
                         .HasConstraintName("FK_CampsiteTrip_Campsite"),
                     l => l.HasOne<Trip>().WithMany()
-                        .HasForeignKey("IdTrip")
+                        .HasForeignKey("TripId")
                         .HasConstraintName("FK_CampsiteTrip_Trip"),
                     j =>
                     {
-                        j.HasKey("IdTrip", "IdCampsite").HasName("PK__Campsite__366D78FC9040F3D8");
+                        j.HasKey("TripId", "CampsiteId").HasName("PK__Campsite__366D78FC9040F3D8");
                         j.ToTable("CampsiteTrip");
                     });
         });

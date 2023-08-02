@@ -26,11 +26,14 @@ namespace CampX.BusinessLogic.Implementations.Account
         public CurrentCamperDTO Login(string email, string password)
         {
             HashType hashType = HashType.SHA384;
+            //ar x = BCrypt.Net.BCrypt.EnhancedVerify(password, "$2a$13$xaKMThAzwgmFatV3x3bp1uVIFO3iTfoQPFcUU6c6XOw.6y9WUgc7a");//, hashType));
             var camper = UnitOfWork.Campers.Get()
-                .Include(u => u.IdRoles)
-                .FirstOrDefault(u => u.Email == email && BCrypt.Net.BCrypt.EnhancedVerify(password, u.Password,hashType ));
+                .Include(u => u.Roles)
+                .SingleOrDefault(u => u.Email == email);
 
-            if (camper == null)
+
+            if (camper == null || !BCrypt.Net.BCrypt.EnhancedVerify(password, camper.Password))
+            
             {
                 return new CurrentCamperDTO { IsAuthenticated = false };
             }
@@ -42,7 +45,7 @@ namespace CampX.BusinessLogic.Implementations.Account
                 FirstName = camper.FirstName,
                 LastName = camper.LastName,
                 IsAuthenticated = true,
-                Roles = camper.IdRoles.Select(ur => ur.Name).ToList()
+                Roles = camper.Roles.Select(ur => ur.Name).ToList()
             };
         }
 
@@ -54,7 +57,7 @@ namespace CampX.BusinessLogic.Implementations.Account
 
             camper.Password = BCrypt.Net.BCrypt.EnhancedHashPassword(model.Password, 13);
 
-            camper.IdRoles.Add(UnitOfWork.Roles.Get().Where(r => r.Id == 3).SingleOrDefault());
+            camper.Roles.Add(UnitOfWork.Roles.Get().Where(r => r.Id == 3).SingleOrDefault());
 
             UnitOfWork.Campers.Insert(camper);
             // trigger mail notifi

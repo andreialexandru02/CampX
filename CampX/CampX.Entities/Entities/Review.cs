@@ -1,10 +1,9 @@
-﻿using CampX.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace CampX.Entities;
 
-public partial class Review : IEntity
+public partial class Review
 {
     public int Id { get; set; }
 
@@ -12,7 +11,7 @@ public partial class Review : IEntity
 
     public string? Content { get; set; }
 
-    public int? IdCampsite { get; set; }
+    public int? CampsiteId { get; set; }
 
-    public virtual Campsite? IdCampsiteNavigation { get; set; }
+    public virtual Campsite? Campsite { get; set; }
 }

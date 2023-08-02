@@ -26,8 +26,6 @@ builder.Services.AddDbContext<CampXContext>(options =>
 
 builder.Services.AddScoped<UnitOfWork>();
 
-builder.Services.AddCampXCurrentCamper();
-
 builder.Services.AddPresentation();
 builder.Services.AddCampXCurrentCamper();
 builder.Services.AddCampXBusinessLogic();

@@ -1,20 +1,19 @@
-﻿using CampX.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace CampX.Entities;
 
-public partial class Request : IEntity
+public partial class Request
 {
-    public int IdTrip { get; set; }
+    public int TripId { get; set; }
 
-    public int IdCamper { get; set; }
+    public int CamperId { get; set; }
 
     public DateTime? Date { get; set; }
 
     public string? Description { get; set; }
 
-    public virtual Camper IdCamperNavigation { get; set; } = null!;
+    public virtual Camper Camper { get; set; } = null!;
 
-    public virtual Trip IdTripNavigation { get; set; } = null!;
+    public virtual Trip Trip { get; set; } = null!;
 }

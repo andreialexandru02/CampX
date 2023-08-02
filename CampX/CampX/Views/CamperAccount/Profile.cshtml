@@ -1,0 +1,17 @@
+﻿@using CampX.Common.ViewModels;
+@inject CurrentCamperDTO currentCamper;
+
+@if(currentCamper.Id == 0 ){
+    <a href="~/CamperAccount/Login">Login</a>
+}
+else{
+    <div>
+        @currentCamper.Email
+    </div>
+    <div>
+        @currentCamper.FirstName
+    </div>
+    <div>
+        @currentCamper.LastName
+    </div>
+}

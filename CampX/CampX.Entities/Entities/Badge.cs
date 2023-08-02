@@ -1,10 +1,9 @@
-﻿using CampX.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace CampX.Entities;
 
-public partial class Badge : IEntity
+public partial class Badge
 {
     public int Id { get; set; }
 
@@ -12,9 +11,9 @@ public partial class Badge : IEntity
 
     public int Milestone { get; set; }
 
-    public int IdImage { get; set; }
+    public int ImageId { get; set; }
 
     public virtual ICollection<CamperBadge> CamperBadges { get; set; } = new List<CamperBadge>();
 
-    public virtual Image IdImageNavigation { get; set; } = null!;
+    public virtual Image Image { get; set; } = null!;
 }

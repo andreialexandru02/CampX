@@ -1,10 +1,9 @@
-﻿using CampX.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace CampX.Entities;
 
-public partial class Campsite : IEntity
+public partial class Campsite
 {
     public int Id { get; set; }
 
@@ -20,7 +19,7 @@ public partial class Campsite : IEntity
 
     public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
 
-    public virtual ICollection<Image> IdImages { get; set; } = new List<Image>();
+    public virtual ICollection<Image> Roles { get; set; } = new List<Image>();
 
-    public virtual ICollection<Trip> IdTrips { get; set; } = new List<Trip>();
+    public virtual ICollection<Trip> Trips { get; set; } = new List<Trip>();
 }

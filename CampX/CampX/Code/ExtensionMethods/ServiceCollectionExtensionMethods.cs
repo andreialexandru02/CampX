@@ -34,14 +34,18 @@ namespace CampX.Code.ExtensionMethods
                 var httpContext = accessor.HttpContext;
                 var claims = httpContext.User.Claims;
 
-                var camperIdClaim = claims?.FirstOrDefault(c => c.Type == "Id")?.Value;
+                var camperIdClaim = claims?.SingleOrDefault(c => c.Type == "Id")?.Value;
                 var isParsingSuccessful = int.TryParse(camperIdClaim, out int id);
-                  
+                var camperEmailClaim = claims?.SingleOrDefault(c => c.Type == "Email")?.Value;
+                var camperFirstNameClaim = claims?.SingleOrDefault(c => c.Type == "FirstName")?.Value;
+                var camperLastNameClaim = claims?.SingleOrDefault(c => c.Type == "LastName")?.Value;
                 return new CurrentCamperDTO
                 {
-                    Id = id,
-                    IsAuthenticated = httpContext.User.Identity.IsAuthenticated,
-                    Email = httpContext.User.Identity.Name
+                    Id = id
+                    ,IsAuthenticated = httpContext.User.Identity.IsAuthenticated
+                    ,Email = camperEmailClaim
+                    ,FirstName =  camperFirstNameClaim
+                    ,LastName =  camperLastNameClaim
                 };
             });
 
