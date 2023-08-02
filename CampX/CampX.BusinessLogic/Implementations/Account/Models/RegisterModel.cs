@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CampX.BusinessLogic.Implementations.Account
+namespace CampX.BusinessLogic.Implementations.Account.Models
 {
     public class RegisterModel
     {

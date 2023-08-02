@@ -21,7 +21,7 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly, typeof(BaseService).Ass
 
 builder.Services.AddDbContext<CampXContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Server=(local);Initial Catalog=CampiX;Integrated Security=true;TrustServerCertificate=true;"));
 });
 
 builder.Services.AddScoped<UnitOfWork>();

@@ -74,6 +74,7 @@ namespace CampX.DataAccess
         public void SaveChanges()
         {
             Context.SaveChanges();
+
         }
     }
 }

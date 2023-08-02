@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "vNxvO0UNYQyaOuFGQ3NxXqjKqcPriJS2WNuJ14bm/t6MqalAbqIzClJ5QLvc//GY55/33QMyqQYrlPBhJ3j0Hw==",
+  "dgSpecHash": "jD05xj7PfMA2qQbnlAFZ9IOqlBp4SmbcZnMbBs3Ov4xdSRKPTIKIGk24sK+15RVRSTxqLDXP44CMBSr8ZcC0uQ==",
   "success": true,
-  "projectFilePath": "D:\\ASP.NET\\CampX\\CampX\\CampX.csproj",
+  "projectFilePath": "D:\\ProjectRepository\\CampX\\CampX\\CampX.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\alexandru.andrei\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\alexandru.andrei\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

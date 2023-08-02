@@ -1,5 +1,6 @@
 ﻿using BCrypt.Net;
 using CampX.BusinessLogic.Base;
+using CampX.BusinessLogic.Implementations.Account.Models;
 using CampX.Common.Extensions;
 using CampX.Common.ViewModels;
 using CampX.Entities;

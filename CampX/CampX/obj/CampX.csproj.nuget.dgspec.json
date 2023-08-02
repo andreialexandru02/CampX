@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ASP.NET\\CampX\\CampX\\CampX.csproj": {}
+    "D:\\ProjectRepository\\CampX\\CampX\\CampX.csproj": {}
   },
   "projects": {
-    "D:\\ASP.NET\\CampX\\CampX.BusinessLogic\\CampX.BusinessLogic.csproj": {
+    "D:\\ProjectRepository\\CampX\\CampX.BusinessLogic\\CampX.BusinessLogic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ASP.NET\\CampX\\CampX.BusinessLogic\\CampX.BusinessLogic.csproj",
+        "projectUniqueName": "D:\\ProjectRepository\\CampX\\CampX.BusinessLogic\\CampX.BusinessLogic.csproj",
         "projectName": "CampX.BusinessLogic",
-        "projectPath": "D:\\ASP.NET\\CampX\\CampX.BusinessLogic\\CampX.BusinessLogic.csproj",
+        "projectPath": "D:\\ProjectRepository\\CampX\\CampX.BusinessLogic\\CampX.BusinessLogic.csproj",
         "packagesPath": "C:\\Users\\alexandru.andrei\\.nuget\\packages\\",
-        "outputPath": "D:\\ASP.NET\\CampX\\CampX.BusinessLogic\\obj\\",
+        "outputPath": "D:\\ProjectRepository\\CampX\\CampX.BusinessLogic\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\alexandru.andrei\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,11 +28,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "D:\\ASP.NET\\CampX\\CampX.DataAccess\\CampX.DataAccess.csproj": {
-                "projectPath": "D:\\ASP.NET\\CampX\\CampX.DataAccess\\CampX.DataAccess.csproj"
+              "D:\\ProjectRepository\\CampX\\CampX.DataAccess\\CampX.DataAccess.csproj": {
+                "projectPath": "D:\\ProjectRepository\\CampX\\CampX.DataAccess\\CampX.DataAccess.csproj"
               },
-              "D:\\ASP.NET\\CampX\\CampX.Entities\\CampX.Entities.csproj": {
-                "projectPath": "D:\\ASP.NET\\CampX\\CampX.Entities\\CampX.Entities.csproj"
+              "D:\\ProjectRepository\\CampX\\CampX.Entities\\CampX.Entities.csproj": {
+                "projectPath": "D:\\ProjectRepository\\CampX\\CampX.Entities\\CampX.Entities.csproj"
               }
             }
           }
@@ -84,14 +84,14 @@
         }
       }
     },
-    "D:\\ASP.NET\\CampX\\CampX.Common\\CampX.Common.csproj": {
+    "D:\\ProjectRepository\\CampX\\CampX.Common\\CampX.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ASP.NET\\CampX\\CampX.Common\\CampX.Common.csproj",
+        "projectUniqueName": "D:\\ProjectRepository\\CampX\\CampX.Common\\CampX.Common.csproj",
         "projectName": "CampX.Common",
-        "projectPath": "D:\\ASP.NET\\CampX\\CampX.Common\\CampX.Common.csproj",
+        "projectPath": "D:\\ProjectRepository\\CampX\\CampX.Common\\CampX.Common.csproj",
         "packagesPath": "C:\\Users\\alexandru.andrei\\.nuget\\packages\\",
-        "outputPath": "D:\\ASP.NET\\CampX\\CampX.Common\\obj\\",
+        "outputPath": "D:\\ProjectRepository\\CampX\\CampX.Common\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\alexandru.andrei\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -167,14 +167,14 @@
         }
       }
     },
-    "D:\\ASP.NET\\CampX\\CampX.DataAccess\\CampX.DataAccess.csproj": {
+    "D:\\ProjectRepository\\CampX\\CampX.DataAccess\\CampX.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ASP.NET\\CampX\\CampX.DataAccess\\CampX.DataAccess.csproj",
+        "projectUniqueName": "D:\\ProjectRepository\\CampX\\CampX.DataAccess\\CampX.DataAccess.csproj",
         "projectName": "CampX.DataAccess",
-        "projectPath": "D:\\ASP.NET\\CampX\\CampX.DataAccess\\CampX.DataAccess.csproj",
+        "projectPath": "D:\\ProjectRepository\\CampX\\CampX.DataAccess\\CampX.DataAccess.csproj",
         "packagesPath": "C:\\Users\\alexandru.andrei\\.nuget\\packages\\",
-        "outputPath": "D:\\ASP.NET\\CampX\\CampX.DataAccess\\obj\\",
+        "outputPath": "D:\\ProjectRepository\\CampX\\CampX.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\alexandru.andrei\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -191,8 +191,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "D:\\ASP.NET\\CampX\\CampX.Entities\\CampX.Entities.csproj": {
-                "projectPath": "D:\\ASP.NET\\CampX\\CampX.Entities\\CampX.Entities.csproj"
+              "D:\\ProjectRepository\\CampX\\CampX.Entities\\CampX.Entities.csproj": {
+                "projectPath": "D:\\ProjectRepository\\CampX\\CampX.Entities\\CampX.Entities.csproj"
               }
             }
           }
@@ -260,14 +260,14 @@
         }
       }
     },
-    "D:\\ASP.NET\\CampX\\CampX.Entities\\CampX.Entities.csproj": {
+    "D:\\ProjectRepository\\CampX\\CampX.Entities\\CampX.Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ASP.NET\\CampX\\CampX.Entities\\CampX.Entities.csproj",
+        "projectUniqueName": "D:\\ProjectRepository\\CampX\\CampX.Entities\\CampX.Entities.csproj",
         "projectName": "CampX.Entities",
-        "projectPath": "D:\\ASP.NET\\CampX\\CampX.Entities\\CampX.Entities.csproj",
+        "projectPath": "D:\\ProjectRepository\\CampX\\CampX.Entities\\CampX.Entities.csproj",
         "packagesPath": "C:\\Users\\alexandru.andrei\\.nuget\\packages\\",
-        "outputPath": "D:\\ASP.NET\\CampX\\CampX.Entities\\obj\\",
+        "outputPath": "D:\\ProjectRepository\\CampX\\CampX.Entities\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\alexandru.andrei\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -284,8 +284,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "D:\\ASP.NET\\CampX\\CampX.Common\\CampX.Common.csproj": {
-                "projectPath": "D:\\ASP.NET\\CampX\\CampX.Common\\CampX.Common.csproj"
+              "D:\\ProjectRepository\\CampX\\CampX.Common\\CampX.Common.csproj": {
+                "projectPath": "D:\\ProjectRepository\\CampX\\CampX.Common\\CampX.Common.csproj"
               }
             }
           }
@@ -353,14 +353,14 @@
         }
       }
     },
-    "D:\\ASP.NET\\CampX\\CampX\\CampX.csproj": {
+    "D:\\ProjectRepository\\CampX\\CampX\\CampX.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ASP.NET\\CampX\\CampX\\CampX.csproj",
+        "projectUniqueName": "D:\\ProjectRepository\\CampX\\CampX\\CampX.csproj",
         "projectName": "CampX",
-        "projectPath": "D:\\ASP.NET\\CampX\\CampX\\CampX.csproj",
+        "projectPath": "D:\\ProjectRepository\\CampX\\CampX\\CampX.csproj",
         "packagesPath": "C:\\Users\\alexandru.andrei\\.nuget\\packages\\",
-        "outputPath": "D:\\ASP.NET\\CampX\\CampX\\obj\\",
+        "outputPath": "D:\\ProjectRepository\\CampX\\CampX\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\alexandru.andrei\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -378,11 +378,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "D:\\ASP.NET\\CampX\\CampX.BusinessLogic\\CampX.BusinessLogic.csproj": {
-                "projectPath": "D:\\ASP.NET\\CampX\\CampX.BusinessLogic\\CampX.BusinessLogic.csproj"
+              "D:\\ProjectRepository\\CampX\\CampX.BusinessLogic\\CampX.BusinessLogic.csproj": {
+                "projectPath": "D:\\ProjectRepository\\CampX\\CampX.BusinessLogic\\CampX.BusinessLogic.csproj"
               },
-              "D:\\ASP.NET\\CampX\\CampX.DataAccess\\CampX.DataAccess.csproj": {
-                "projectPath": "D:\\ASP.NET\\CampX\\CampX.DataAccess\\CampX.DataAccess.csproj"
+              "D:\\ProjectRepository\\CampX\\CampX.DataAccess\\CampX.DataAccess.csproj": {
+                "projectPath": "D:\\ProjectRepository\\CampX\\CampX.DataAccess\\CampX.DataAccess.csproj"
               }
             }
           }

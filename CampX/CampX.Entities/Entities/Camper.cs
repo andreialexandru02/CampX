@@ -16,7 +16,7 @@ public partial class Camper : IEntity
 
     public DateTime? BirthDate { get; set; }
 
-    public int IdImage { get; set; }
+    public int? IdImage { get; set; }
 
     public string Password { get; set; } = null!;
 

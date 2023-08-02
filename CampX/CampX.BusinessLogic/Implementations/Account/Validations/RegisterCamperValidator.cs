@@ -1,4 +1,5 @@
 ﻿using CampX.BusinessLogic.Implementations.Account;
+using CampX.BusinessLogic.Implementations.Account.Models;
 using FluentValidation;
 
 namespace CampX.BusinessLogic.Implementations.Account

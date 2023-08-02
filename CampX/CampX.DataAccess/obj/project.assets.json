@@ -3656,11 +3656,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ASP.NET\\CampX\\CampX.DataAccess\\CampX.DataAccess.csproj",
+      "projectUniqueName": "D:\\ProjectRepository\\CampX\\CampX.DataAccess\\CampX.DataAccess.csproj",
       "projectName": "CampX.DataAccess",
-      "projectPath": "D:\\ASP.NET\\CampX\\CampX.DataAccess\\CampX.DataAccess.csproj",
+      "projectPath": "D:\\ProjectRepository\\CampX\\CampX.DataAccess\\CampX.DataAccess.csproj",
       "packagesPath": "C:\\Users\\alexandru.andrei\\.nuget\\packages\\",
-      "outputPath": "D:\\ASP.NET\\CampX\\CampX.DataAccess\\obj\\",
+      "outputPath": "D:\\ProjectRepository\\CampX\\CampX.DataAccess\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\alexandru.andrei\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3677,8 +3677,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "D:\\ASP.NET\\CampX\\CampX.Entities\\CampX.Entities.csproj": {
-              "projectPath": "D:\\ASP.NET\\CampX\\CampX.Entities\\CampX.Entities.csproj"
+            "D:\\ProjectRepository\\CampX\\CampX.Entities\\CampX.Entities.csproj": {
+              "projectPath": "D:\\ProjectRepository\\CampX\\CampX.Entities\\CampX.Entities.csproj"
             }
           }
         }
