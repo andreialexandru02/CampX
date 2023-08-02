@@ -1,0 +1,14 @@
+D:\ASP.NET\CampX\CampX.Common\bin\Debug\net7.0\CampX.Common.deps.json
+D:\ASP.NET\CampX\CampX.Common\bin\Debug\net7.0\CampX.Common.dll
+D:\ASP.NET\CampX\CampX.Common\bin\Debug\net7.0\CampX.Common.pdb
+D:\ASP.NET\CampX\CampX.Common\obj\Debug\net7.0\CampX.Common.csproj.AssemblyReference.cache
+D:\ASP.NET\CampX\CampX.Common\obj\Debug\net7.0\CampX.Common.GeneratedMSBuildEditorConfig.editorconfig
+D:\ASP.NET\CampX\CampX.Common\obj\Debug\net7.0\CampX.Common.AssemblyInfoInputs.cache
+D:\ASP.NET\CampX\CampX.Common\obj\Debug\net7.0\CampX.Common.AssemblyInfo.cs
+D:\ASP.NET\CampX\CampX.Common\obj\Debug\net7.0\CampX.Common.csproj.CoreCompileInputs.cache
+D:\ASP.NET\CampX\CampX.Common\obj\Debug\net7.0\CampX.Common.dll
+D:\ASP.NET\CampX\CampX.Common\obj\Debug\net7.0\refint\CampX.Common.dll
+D:\ASP.NET\CampX\CampX.Common\obj\Debug\net7.0\CampX.Common.pdb
+D:\ASP.NET\CampX\CampX.Common\obj\Debug\net7.0\ref\CampX.Common.dll
+D:\ASP.NET\CampX\CampX.Common\bin\Debug\net7.0\CampX.Common.runtimeconfig.json
+D:\ASP.NET\CampX\CampX.Common\obj\Debug\net7.0\CampX.Common.genruntimeconfig.cache

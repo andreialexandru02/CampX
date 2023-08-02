@@ -1,0 +1,274 @@
+﻿using System;
+using System.Collections.Generic;
+using CampX.Entities;
+using Microsoft.EntityFrameworkCore;
+
+namespace CampX.Context;
+
+public partial class CampXContext : DbContext
+{
+    public CampXContext()
+    {
+    }
+
+    public CampXContext(DbContextOptions<CampXContext> options)
+        : base(options)
+    {
+    }
+
+    public virtual DbSet<Badge> Badges { get; set; }
+
+    public virtual DbSet<Camper> Campers { get; set; }
+
+    public virtual DbSet<CamperBadge> CamperBadges { get; set; }
+
+    public virtual DbSet<Campsite> Campsites { get; set; }
+
+    public virtual DbSet<Equipment> Equipment { get; set; }
+
+    public virtual DbSet<EquipmentCamperTrip> EquipmentCamperTrips { get; set; }
+
+    public virtual DbSet<Image> Images { get; set; }
+
+    public virtual DbSet<Note> Notes { get; set; }
+
+    public virtual DbSet<Request> Requests { get; set; }
+
+    public virtual DbSet<Review> Reviews { get; set; }
+
+    public virtual DbSet<Role> Roles { get; set; }
+
+    public virtual DbSet<Trip> Trips { get; set; }
+
+    public virtual DbSet<TripCamper> TripCampers { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseSqlServer("Server=(local);Initial Catalog=CampiX;Integrated Security=true;TrustServerCertificate=true;");
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Badge>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Badge__3214EC0756ABA16D");
+
+            entity.ToTable("Badge");
+
+            entity.Property(e => e.Name).HasMaxLength(100);
+
+            entity.HasOne(d => d.IdImageNavigation).WithMany(p => p.Badges)
+                .HasForeignKey(d => d.IdImage)
+                .HasConstraintName("FK_Badge_Images");
+        });
+
+        modelBuilder.Entity<Camper>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Camper__3214EC07E754CC86");
+
+            entity.ToTable("Camper");
+
+            entity.HasIndex(e => e.Email, "UQ__Camper__A9D10534B2B064E4").IsUnique();
+
+            entity.Property(e => e.BirthDate).HasColumnType("date");
+            entity.Property(e => e.Email).HasMaxLength(100);
+            entity.Property(e => e.FirstName).HasMaxLength(100);
+            entity.Property(e => e.LastName).HasMaxLength(100);
+
+            entity.HasOne(d => d.IdImageNavigation).WithMany(p => p.Campers)
+                .HasForeignKey(d => d.IdImage)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Camper_Image");
+        });
+
+        modelBuilder.Entity<CamperBadge>(entity =>
+        {
+            entity.HasKey(e => new { e.IdBadge, e.IdCamper }).HasName("PK__CamperBa__E67A48BE2EA5E98E");
+
+            entity.ToTable("CamperBadge");
+
+            entity.HasOne(d => d.IdBadgeNavigation).WithMany(p => p.CamperBadges)
+                .HasForeignKey(d => d.IdBadge)
+                .HasConstraintName("FK_CamperBadge_Badge");
+
+            entity.HasOne(d => d.IdCamperNavigation).WithMany(p => p.CamperBadges)
+                .HasForeignKey(d => d.IdCamper)
+                .HasConstraintName("FK_CamperBadge_Camper");
+        });
+
+        modelBuilder.Entity<Campsite>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Campsite__3214EC072EA2477B");
+
+            entity.ToTable("Campsite");
+
+            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Description).HasMaxLength(500);
+            entity.Property(e => e.Latitude).HasColumnType("decimal(6, 5)");
+            entity.Property(e => e.Longitude).HasColumnType("decimal(6, 5)");
+            entity.Property(e => e.Name).HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<Equipment>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Equipmen__3214EC07C1D97D91");
+
+            entity.Property(e => e.Name).HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<EquipmentCamperTrip>(entity =>
+        {
+            entity.HasKey(e => new { e.IdCamper, e.IdEquipment, e.IdTrip }).HasName("PK__Equipmen__2E5B9ED191149D36");
+
+            entity.ToTable("EquipmentCamperTrip");
+
+            entity.HasOne(d => d.IdCamperNavigation).WithMany(p => p.EquipmentCamperTrips)
+                .HasForeignKey(d => d.IdCamper)
+                .HasConstraintName("FK_EquipmentCamperTrip_Camper");
+
+            entity.HasOne(d => d.IdEquipmentNavigation).WithMany(p => p.EquipmentCamperTrips)
+                .HasForeignKey(d => d.IdEquipment)
+                .HasConstraintName("FK_EquipmentCampeTripr_Equipment");
+
+            entity.HasOne(d => d.IdTripNavigation).WithMany(p => p.EquipmentCamperTrips)
+                .HasForeignKey(d => d.IdTrip)
+                .HasConstraintName("FK_EquipmentCamperTrip_Trip");
+        });
+
+        modelBuilder.Entity<Image>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Images__C8C63E4A5A89B8B5");
+
+            entity.HasMany(d => d.IdCampsites).WithMany(p => p.IdImages)
+                .UsingEntity<Dictionary<string, object>>(
+                    "CampsiteImage",
+                    r => r.HasOne<Campsite>().WithMany()
+                        .HasForeignKey("IdCampsite")
+                        .HasConstraintName("FK_CampsiteImages_Campsite"),
+                    l => l.HasOne<Image>().WithMany()
+                        .HasForeignKey("IdImage")
+                        .HasConstraintName("FK_CampsiteImages_Image"),
+                    j =>
+                    {
+                        j.HasKey("IdImage", "IdCampsite").HasName("PK__Campsite__65FFD46781223A53");
+                        j.ToTable("CampsiteImages");
+                    });
+        });
+
+        modelBuilder.Entity<Note>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Note__3214EC07DDF55768");
+
+            entity.ToTable("Note");
+
+            entity.Property(e => e.Content).HasMaxLength(500);
+        });
+
+        modelBuilder.Entity<Request>(entity =>
+        {
+            entity.HasKey(e => new { e.IdTrip, e.IdCamper }).HasName("PK__Request__B6F006DD86019C08");
+
+            entity.ToTable("Request");
+
+            entity.Property(e => e.Date).HasColumnType("date");
+            entity.Property(e => e.Description).HasMaxLength(500);
+
+            entity.HasOne(d => d.IdCamperNavigation).WithMany(p => p.Requests)
+                .HasForeignKey(d => d.IdCamper)
+                .HasConstraintName("FK_Request_Camper");
+
+            entity.HasOne(d => d.IdTripNavigation).WithMany(p => p.Requests)
+                .HasForeignKey(d => d.IdTrip)
+                .HasConstraintName("FK_Request_Trip");
+        });
+
+        modelBuilder.Entity<Review>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Review__3214EC077B3F8F93");
+
+            entity.ToTable("Review");
+
+            entity.HasOne(d => d.IdCampsiteNavigation).WithMany(p => p.Reviews)
+                .HasForeignKey(d => d.IdCampsite)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_Reviews_Campsites");
+        });
+
+        modelBuilder.Entity<Role>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Role__3214EC07CE019B45");
+
+            entity.ToTable("Role");
+
+            entity.HasIndex(e => e.Id, "UQ__Role__3214EC06FA4493C9").IsUnique();
+
+            entity.Property(e => e.Name).HasMaxLength(100);
+
+            entity.HasMany(d => d.IdCampers).WithMany(p => p.IdRoles)
+                .UsingEntity<Dictionary<string, object>>(
+                    "CamperRole",
+                    r => r.HasOne<Camper>().WithMany()
+                        .HasForeignKey("IdCamper")
+                        .HasConstraintName("FK_CamperRole_Camper"),
+                    l => l.HasOne<Role>().WithMany()
+                        .HasForeignKey("IdRole")
+                        .HasConstraintName("FK_CamperRole_Role"),
+                    j =>
+                    {
+                        j.HasKey("IdRole", "IdCamper").HasName("PK__CamperRo__9992045879EA5ED2");
+                        j.ToTable("CamperRole");
+                    });
+        });
+
+        modelBuilder.Entity<Trip>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Trip__3214EC07A31F6526");
+
+            entity.ToTable("Trip");
+
+            entity.Property(e => e.Description).HasMaxLength(500);
+            entity.Property(e => e.IsPublic).HasColumnName("isPublic");
+            entity.Property(e => e.Name).HasMaxLength(100);
+
+            entity.HasMany(d => d.IdCampsites).WithMany(p => p.IdTrips)
+                .UsingEntity<Dictionary<string, object>>(
+                    "CampsiteTrip",
+                    r => r.HasOne<Campsite>().WithMany()
+                        .HasForeignKey("IdCampsite")
+                        .HasConstraintName("FK_CampsiteTrip_Campsite"),
+                    l => l.HasOne<Trip>().WithMany()
+                        .HasForeignKey("IdTrip")
+                        .HasConstraintName("FK_CampsiteTrip_Trip"),
+                    j =>
+                    {
+                        j.HasKey("IdTrip", "IdCampsite").HasName("PK__Campsite__366D78FC9040F3D8");
+                        j.ToTable("CampsiteTrip");
+                    });
+        });
+
+        modelBuilder.Entity<TripCamper>(entity =>
+        {
+            entity.HasKey(e => new { e.TripId, e.CamperId }).HasName("PK__TripCamp__B6F006DDC85F7394");
+
+            entity.ToTable("TripCamper");
+
+            entity.Property(e => e.IsOrganizer).HasColumnName("isOrganizer");
+
+            entity.HasOne(d => d.Camper).WithMany(p => p.TripCampers)
+                .HasForeignKey(d => d.CamperId)
+                .HasConstraintName("FK_CamperTrip_Camper");
+
+            entity.HasOne(d => d.Note).WithMany(p => p.TripCampers)
+                .HasForeignKey(d => d.NoteId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_CamperTrip_Note");
+
+            entity.HasOne(d => d.Trip).WithMany(p => p.TripCampers)
+                .HasForeignKey(d => d.TripId)
+                .HasConstraintName("FK_CamperTrip_Trip");
+        });
+
+        OnModelCreatingPartial(modelBuilder);
+    }
+
+    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+}

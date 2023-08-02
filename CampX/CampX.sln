@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CampX", "CampX\CampX.csproj", "{27030696-B5E0-4E72-9FFA-DACC6C0D509E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{0D6D7D1F-9FD3-4AB1-8010-E78E443389FE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{779F8045-110C-4329-A94D-38AE44A47CD9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{245E246F-9B4D-4583-89B1-505F7F61C3BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CampX.Common", "CampX.Common\CampX.Common.csproj", "{25325D3A-947E-4589-A90A-B43ACBED829E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CampX.Entities", "CampX.Entities\CampX.Entities.csproj", "{56ED0B98-004F-4EEB-9A77-50CBD72D0262}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CampX.DataAccess", "CampX.DataAccess\CampX.DataAccess.csproj", "{0204B7BB-C510-41A8-8630-126A189E0F7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CampX.BusinessLogic", "CampX.BusinessLogic\CampX.BusinessLogic.csproj", "{7B80D4C1-6F3A-4545-9C00-917D8E5D1CC0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{27030696-B5E0-4E72-9FFA-DACC6C0D509E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27030696-B5E0-4E72-9FFA-DACC6C0D509E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27030696-B5E0-4E72-9FFA-DACC6C0D509E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27030696-B5E0-4E72-9FFA-DACC6C0D509E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25325D3A-947E-4589-A90A-B43ACBED829E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25325D3A-947E-4589-A90A-B43ACBED829E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25325D3A-947E-4589-A90A-B43ACBED829E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25325D3A-947E-4589-A90A-B43ACBED829E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56ED0B98-004F-4EEB-9A77-50CBD72D0262}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56ED0B98-004F-4EEB-9A77-50CBD72D0262}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56ED0B98-004F-4EEB-9A77-50CBD72D0262}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56ED0B98-004F-4EEB-9A77-50CBD72D0262}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0204B7BB-C510-41A8-8630-126A189E0F7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0204B7BB-C510-41A8-8630-126A189E0F7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0204B7BB-C510-41A8-8630-126A189E0F7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0204B7BB-C510-41A8-8630-126A189E0F7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B80D4C1-6F3A-4545-9C00-917D8E5D1CC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B80D4C1-6F3A-4545-9C00-917D8E5D1CC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B80D4C1-6F3A-4545-9C00-917D8E5D1CC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B80D4C1-6F3A-4545-9C00-917D8E5D1CC0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{27030696-B5E0-4E72-9FFA-DACC6C0D509E} = {0D6D7D1F-9FD3-4AB1-8010-E78E443389FE}
+		{56ED0B98-004F-4EEB-9A77-50CBD72D0262} = {779F8045-110C-4329-A94D-38AE44A47CD9}
+		{0204B7BB-C510-41A8-8630-126A189E0F7D} = {245E246F-9B4D-4583-89B1-505F7F61C3BF}
+		{7B80D4C1-6F3A-4545-9C00-917D8E5D1CC0} = {779F8045-110C-4329-A94D-38AE44A47CD9}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DD6EF18A-4C16-4B75-9EE7-532399817D65}
+	EndGlobalSection
+EndGlobal
