@@ -83,8 +83,8 @@ namespace CampX.Controllers
 
             return View(model);
         }
+        
         [HttpGet]
-
         public IActionResult Profile()
         {
             return View();

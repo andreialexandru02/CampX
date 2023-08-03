@@ -13,7 +13,8 @@
           "BCrypt.Net-Next": "4.0.3",
           "CampX.DataAccess": "1.0.0",
           "CampX.Entities": "1.0.0",
-          "FluentValidation": "11.6.0"
+          "FluentValidation": "11.6.0",
+          "jQuery": "3.7.0"
         },
         "runtime": {
           "CampX.BusinessLogic.dll": {}
@@ -92,6 +93,7 @@
           }
         }
       },
+      "jQuery/3.7.0": {},
       "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
         "runtime": {
           "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll": {
@@ -656,7 +658,8 @@
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
           "BCrypt.Net-Next": "4.0.3",
           "FluentValidation": "11.6.0",
-          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.9"
+          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.9",
+          "jQuery": "3.7.0"
         },
         "runtime": {
           "CampX.Common.dll": {}
@@ -669,7 +672,8 @@
           "BCrypt.Net-Next": "4.0.3",
           "CampX.Entities": "1.0.0",
           "FluentValidation": "11.6.0",
-          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.9"
+          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.9",
+          "jQuery": "3.7.0"
         },
         "runtime": {
           "CampX.DataAccess.dll": {}
@@ -682,7 +686,8 @@
           "BCrypt.Net-Next": "4.0.3",
           "CampX.Common": "1.0.0",
           "FluentValidation": "11.6.0",
-          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.9"
+          "Microsoft.EntityFrameworkCore.SqlServer": "7.0.9",
+          "jQuery": "3.7.0"
         },
         "runtime": {
           "CampX.Entities.dll": {}
@@ -737,6 +742,13 @@
       "sha512": "sha512-DWKd0jHA33d7BXVWytSoN5Oafj9nYuiLUyyFoaUboOZZiaN5tlXdcJpkRbmrrWBUTWdSxjTwIoyUs38KSU/7OQ==",
       "path": "fluentvalidation/11.6.0",
       "hashPath": "fluentvalidation.11.6.0.nupkg.sha512"
+    },
+    "jQuery/3.7.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Ao474k6pawdNMzmcObA8GtsqUg9vAMHhDsDEs5TZEc4nTy2vtv8wsBI2c4OyR1OEyNUJG3O2AvGZZlXmRLpoZg==",
+      "path": "jquery/3.7.0",
+      "hashPath": "jquery.3.7.0.nupkg.sha512"
     },
     "Microsoft.Bcl.AsyncInterfaces/1.1.1": {
       "type": "package",

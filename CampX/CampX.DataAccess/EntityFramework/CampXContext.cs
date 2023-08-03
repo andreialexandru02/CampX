@@ -100,10 +100,9 @@ public partial class CampXContext : DbContext
 
             entity.ToTable("Campsite");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Description).HasMaxLength(500);
-            entity.Property(e => e.Latitude).HasColumnType("decimal(6, 5)");
-            entity.Property(e => e.Longitude).HasColumnType("decimal(6, 5)");
+            entity.Property(e => e.Latitude).HasColumnType("decimal(12, 9)");
+            entity.Property(e => e.Longitude).HasColumnType("decimal(12, 9)");
             entity.Property(e => e.Name).HasMaxLength(100);
         });
 

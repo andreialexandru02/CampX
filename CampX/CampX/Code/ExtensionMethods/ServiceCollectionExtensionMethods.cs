@@ -5,7 +5,7 @@ using CampX.BusinessLogic.Implementations.Account;
 using CampX.Code.Base;
 using CampX.Common.ViewModels;
 using System;
-
+using CampX.BusinessLogic.Implementations.Map;
 
 namespace CampX.Code.ExtensionMethods
 {
@@ -22,7 +22,9 @@ namespace CampX.Code.ExtensionMethods
         {
             services.AddScoped<ServiceDependencies>();
             services.AddScoped<CamperAccountService>();
+            services.AddScoped<CampsiteService>();
             // add new services
+
             return services;
         }
 

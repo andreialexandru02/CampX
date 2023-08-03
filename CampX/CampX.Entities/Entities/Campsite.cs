@@ -13,9 +13,9 @@ public partial class Campsite
 
     public int Difficulty { get; set; }
 
-    public decimal? Latitude { get; set; }
+    public decimal Latitude { get; set; }
 
-    public decimal? Longitude { get; set; }
+    public decimal Longitude { get; set; }
 
     public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
 

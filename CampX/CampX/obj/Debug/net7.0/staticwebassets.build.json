@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "1lBjkwYSRGUuR4Dp9TJm2ixJ8xEStbj14RipMYeiEUA=",
+  "Hash": "5o+bzUl0ZVDpAz/NppwkQqKpqc+ICXLIB/g3JgwyBZs=",
   "Source": "CampX",
   "BasePath": "_content/CampX",
   "Mode": "Default",
@@ -51,6 +51,40 @@
       "OriginalItemSpec": "D:\\ProjectRepository\\CampX\\CampX\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\CampX.bundle.scp.css"
     },
     {
+      "Identity": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\css\\Map\\AddCampsite.css",
+      "SourceId": "CampX",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\",
+      "BasePath": "_content/CampX",
+      "RelativePath": "css/Map/AddCampsite.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Map\\AddCampsite.css"
+    },
+    {
+      "Identity": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\css\\Map\\ShowMap.css",
+      "SourceId": "CampX",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\",
+      "BasePath": "_content/CampX",
+      "RelativePath": "css/Map/ShowMap.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Map\\ShowMap.css"
+    },
+    {
       "Identity": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\css\\site.css",
       "SourceId": "CampX",
       "SourceType": "Discovered",
@@ -83,6 +117,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\js\\Map\\AddCampsite.js",
+      "SourceId": "CampX",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\",
+      "BasePath": "_content/CampX",
+      "RelativePath": "js/Map/AddCampsite.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Map\\AddCampsite.js"
+    },
+    {
+      "Identity": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\js\\Map\\ShowMap.js",
+      "SourceId": "CampX",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\",
+      "BasePath": "_content/CampX",
+      "RelativePath": "js/Map/ShowMap.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Map\\ShowMap.js"
     },
     {
       "Identity": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\js\\site.js",
@@ -1069,6 +1137,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\Photos\\icons8-tent-48.png",
+      "SourceId": "CampX",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\",
+      "BasePath": "_content/CampX",
+      "RelativePath": "Photos/icons8-tent-48.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Photos\\icons8-tent-48.png"
     }
   ]
 }

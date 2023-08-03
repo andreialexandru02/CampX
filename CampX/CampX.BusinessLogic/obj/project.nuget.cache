@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "WvhCwU9dFwGSt1nIbCQxrrCC/wOtq7AeR9VSPUkvlojEtKUdpX2VEU9wcGP3uVNA9+5ifdErRNiYtOCqYGi8Rw==",
+  "dgSpecHash": "wX3s1O0B5ANMrfJNCXcwBoflwYrkLsuf4HZCPv3Wd2QtWHJ7/gb+CGrm7V70TFp8kXyn0KYcE/yDV/M99YbQsA==",
   "success": true,
   "projectFilePath": "D:\\ProjectRepository\\CampX\\CampX.BusinessLogic\\CampX.BusinessLogic.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\alexandru.andrei\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\alexandru.andrei\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\alexandru.andrei\\.nuget\\packages\\fluentvalidation\\11.6.0\\fluentvalidation.11.6.0.nupkg.sha512",
+    "C:\\Users\\alexandru.andrei\\.nuget\\packages\\jquery\\3.7.0\\jquery.3.7.0.nupkg.sha512",
     "C:\\Users\\alexandru.andrei\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\alexandru.andrei\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\alexandru.andrei\\.nuget\\packages\\microsoft.data.sqlclient\\5.0.2\\microsoft.data.sqlclient.5.0.2.nupkg.sha512",

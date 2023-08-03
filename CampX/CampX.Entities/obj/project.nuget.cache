@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "HwE4t2c+WBwmT5N7qrGe5s240jFl+JHeP582wobGwRExRHbcFnA7gyA1JyQRFHXw5baTX/VgiNnTcedSDJHIUQ==",
+  "dgSpecHash": "lw72SwWGbYwSMh+uJUeWtbsn5Wz/Oer8F58lldfHXrsrvJD9e35L6ozPfioL8zulP11AmrZAIMSyVGWBuuweDw==",
   "success": true,
   "projectFilePath": "D:\\ProjectRepository\\CampX\\CampX.Entities\\CampX.Entities.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,7 @@
     "C:\\Users\\alexandru.andrei\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\alexandru.andrei\\.nuget\\packages\\fluentvalidation\\11.6.0\\fluentvalidation.11.6.0.nupkg.sha512",
     "C:\\Users\\alexandru.andrei\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\alexandru.andrei\\.nuget\\packages\\jquery\\3.7.0\\jquery.3.7.0.nupkg.sha512",
     "C:\\Users\\alexandru.andrei\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\alexandru.andrei\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\alexandru.andrei\\.nuget\\packages\\microsoft.data.sqlclient\\5.0.2\\microsoft.data.sqlclient.5.0.2.nupkg.sha512",

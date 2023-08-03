@@ -65,6 +65,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.9, )"
+            },
+            "jQuery": {
+              "target": "Package",
+              "version": "[3.7.0, )"
             }
           },
           "imports": [
@@ -158,6 +162,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.9, )"
+            },
+            "jQuery": {
+              "target": "Package",
+              "version": "[3.7.0, )"
             }
           },
           "imports": [
@@ -251,6 +259,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.9, )"
+            },
+            "jQuery": {
+              "target": "Package",
+              "version": "[3.7.0, )"
             }
           },
           "imports": [

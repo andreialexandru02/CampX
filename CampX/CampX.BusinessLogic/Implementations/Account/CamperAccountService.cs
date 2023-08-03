@@ -18,9 +18,8 @@ namespace CampX.BusinessLogic.Implementations.Account
         public CamperAccountService(ServiceDependencies dependencies)
             : base(dependencies)
         {
-            this.RegisterCamperValidator = new RegisterCamperValidator();
+            this.RegisterCamperValidator = new RegisterCamperValidator(UnitOfWork);
         }
-
 
 
         public CurrentCamperDTO Login(string email, string password)
@@ -76,7 +75,6 @@ namespace CampX.BusinessLogic.Implementations.Account
                 })
                 .ToList();
         }
-
         public void DisableUser() 
         {
         }
