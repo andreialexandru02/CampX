@@ -5,12 +5,16 @@
       "PackagePath": "staticwebassets\\CampX.bundle.scp.css"
     },
     {
-      "Id": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\Photos\\icons8-tent-48.png",
-      "PackagePath": "staticwebassets\\Photos\\icons8-tent-48.png"
+      "Id": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\Images\\icons8-tent-48.png",
+      "PackagePath": "staticwebassets\\Images\\icons8-tent-48.png"
     },
     {
       "Id": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\css\\Map\\AddCampsite.css",
       "PackagePath": "staticwebassets\\css\\Map\\AddCampsite.css"
+    },
+    {
+      "Id": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\css\\Map\\CampsiteDetails.css",
+      "PackagePath": "staticwebassets\\css\\Map\\CampsiteDetails.css"
     },
     {
       "Id": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\css\\Map\\ShowMap.css",
@@ -25,8 +29,12 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\js\\Map\\AddCampsite.js",
-      "PackagePath": "staticwebassets\\js\\Map\\AddCampsite.js"
+      "Id": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\js\\Map\\AddEditCampsite.js",
+      "PackagePath": "staticwebassets\\js\\Map\\AddEditCampsite.js"
+    },
+    {
+      "Id": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\js\\Map\\CampsiteDetails.js",
+      "PackagePath": "staticwebassets\\js\\Map\\CampsiteDetails.js"
     },
     {
       "Id": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\js\\Map\\ShowMap.js",

@@ -2,18 +2,18 @@
 @{
     ViewData["Title"] = "View";
 }
-<script type="text/javascript" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""></script>
+<script type="text/javascript" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""/>
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin="" />
 
-<link rel="stylesheet" href="~/css/Map/AddCampsite.css" type="text/css"/>
+<link rel="stylesheet" href="~/css/Map/AddCampsite.css" type="text/css" />
 
 <script type="text/javascript" defer src="~/js/Map/AddEditCampsite.js"></script>
 
-<h1>Add Campsite</h1>
+<h1>Edit Campsite</h1>
 
 
 <hr />
@@ -23,7 +23,7 @@
 <div id="map"></div>
 <div class="row">
     <div class="col-md-4">
-        <form id = "AddCampSiteForm"asp-action="AddCampsite" asp-controller="Map">
+        <form asp-action="EditCampsite" asp-controller="Map" asp-route-id="@ViewContext.RouteData.Values["id"]">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -41,16 +41,16 @@
                 <span asp-validation-for="Difficulty" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Latitude" class="control-label id = "lat_form""></label>
-                <input id= "LatInput" asp-for="Latitude" class="form-control" />
+                <label asp-for="Latitude" class="control-label id = " lat_form""></label>
+                <input id="LatInput" asp-for="Latitude" class="form-control" value="@Model.Latitude" />
                 <span asp-validation-for="Latitude" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Longitude" class="control-label" id = "lng_form"></label>
-                <input id= "LngInput" asp-for="Longitude"  class="form-control" />
+                <label asp-for="Longitude" class="control-label" id="lng_form"></label>
+                <input id="LngInput" asp-for="Longitude" class="form-control" value ="@Model.Longitude" />
                 <span asp-validation-for="Longitude" class="text-danger"></span>
             </div>
- 
+
             <br></br>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

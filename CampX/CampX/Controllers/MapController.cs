@@ -48,11 +48,64 @@ namespace CampX.Controllers
 
         [HttpGet]
 
-        public IActionResult GetCoordinates()
+        public IActionResult DisplayCampsites()
         {
-            return Json(Service.GetCoordinates());
+            return Json(Service.DisplayCampsites());
         }
 
+        [HttpGet]
+
+        public IActionResult CampsiteDetails(int id)
+        {
+            var campsite = Service.CampsiteDetails(id);
+
+            if (campsite == null)
+            {
+                return View("Error_NotFound");
+            }
+
+            return View("CampsiteDetails", campsite);
+        }
+
+
+        [HttpGet]
+
+        public IActionResult Delete(int id)
+        {
+
+            return DeleteCampsite(id);
+        }
+        [HttpPost]
+
+        public IActionResult DeleteCampsite(int id)
+        {
+            Service.DeleteCampsite(id);
+
+            return RedirectToAction("ShowMap", "Map");
+        }
+
+        [HttpGet]
+
+        public IActionResult EditCampsite(int id)
+        {
+            var campsite = Service.CampsiteDetails(id);
+            
+            return View("EditCampsite", campsite);
+        }
+
+        [HttpPost]
+
+        public IActionResult EditCampsite(AddCampsiteModel model, int id)
+        {
+            if (model == null)
+            {
+                return View("Error_NotFound");
+            }
+
+            Service.EditCampsite(model,id);
+
+            return RedirectToAction("ShowMap", "Map");
+        }
     }
 
   

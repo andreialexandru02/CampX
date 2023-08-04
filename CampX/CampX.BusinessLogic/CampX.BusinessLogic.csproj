@@ -19,4 +19,8 @@
     <ProjectReference Include="..\CampX.Entities\CampX.Entities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Implementations\Trip\Mapping\" />
+  </ItemGroup>
+
 </Project>

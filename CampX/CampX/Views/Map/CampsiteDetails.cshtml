@@ -1,0 +1,34 @@
+﻿@model CampX.BusinessLogic.Implementations.Map.Models.AddCampsiteModel;
+
+@*LeaftLet refferences*@
+<script type="text/javascript" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin="" />
+
+@*My refferences*@
+<link rel="stylesheet" href="~/css/Map/CampsiteDetails.css" type="text/css" />
+<script type="text/javascript" defer src="~/js/Map/CampsiteDetails.js"></script>
+
+      
+    <div>
+        @Model.Name
+    </div>
+    <div>
+        @Model.Description
+    </div>
+    <div>
+        @Model.Difficulty
+    </div>
+    <div id="Lat">
+        @Model.Latitude
+    </div>
+    <div id="Lng">
+        @Model.Longitude
+    </div>
+<div id="map"></div>
+
+<a asp-controller="Map" asp-action="Delete" asp-route-id="@ViewContext.RouteData.Values["id"]"> Delete Campsite</a>
+<a asp-controller="Map" asp-action="EditCampsite" asp-route-id="@ViewContext.RouteData.Values["id"]"> Edit Campsite</a>

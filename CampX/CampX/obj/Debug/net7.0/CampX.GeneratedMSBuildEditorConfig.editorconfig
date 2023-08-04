@@ -40,6 +40,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFwXEFkZENhbXBzaXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/ProjectRepository/CampX/CampX/Views/Map/CampsiteDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFwXENhbXBzaXRlRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/ProjectRepository/CampX/CampX/Views/Map/EditCampsite.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFwXEVkaXRDYW1wc2l0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/ProjectRepository/CampX/CampX/Views/Map/ShowMap.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFwXFNob3dNYXAuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

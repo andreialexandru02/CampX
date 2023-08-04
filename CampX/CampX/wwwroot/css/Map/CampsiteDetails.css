@@ -1,0 +1,10 @@
+﻿#map {
+    height: 350px;
+    width: 700px;
+}
+#Lat{
+    display: none;
+}
+#Lng{
+    display:none;
+}
