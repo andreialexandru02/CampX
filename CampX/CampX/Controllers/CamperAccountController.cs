@@ -114,5 +114,7 @@ namespace CampX.Controllers
         {
             await HttpContext.SignOutAsync(scheme: "CampXCookies");
         }
+        
+
     }
 }

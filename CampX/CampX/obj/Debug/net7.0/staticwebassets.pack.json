@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\Images\\icons8-tent-48.png"
     },
     {
+      "Id": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\css\\HomePage.css",
+      "PackagePath": "staticwebassets\\css\\HomePage.css"
+    },
+    {
       "Id": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\css\\Map\\AddCampsite.css",
       "PackagePath": "staticwebassets\\css\\Map\\AddCampsite.css"
     },
@@ -27,6 +31,10 @@
     {
       "Id": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\js\\HomePage.js",
+      "PackagePath": "staticwebassets\\js\\HomePage.js"
     },
     {
       "Id": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\js\\Map\\AddEditCampsite.js",

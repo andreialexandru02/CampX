@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ZJRTKuoC0rSr7esmZ6vTioTS7ZMpiEaJL1Ggfg6Hp6s=",
+  "Hash": "ucnMtpFGLVZpv/c6wbc3u3SEbrHYOJ0A0UOGj6aWtso=",
   "Source": "CampX",
   "BasePath": "_content/CampX",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "D:\\ProjectRepository\\CampX\\CampX\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\CampX.bundle.scp.css"
+    },
+    {
+      "Identity": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\css\\HomePage.css",
+      "SourceId": "CampX",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\",
+      "BasePath": "_content/CampX",
+      "RelativePath": "css/HomePage.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\HomePage.css"
     },
     {
       "Identity": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\css\\Map\\AddCampsite.css",
@@ -151,6 +168,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Images\\icons8-tent-48.png"
+    },
+    {
+      "Identity": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\js\\HomePage.js",
+      "SourceId": "CampX",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\",
+      "BasePath": "_content/CampX",
+      "RelativePath": "js/HomePage.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\HomePage.js"
     },
     {
       "Identity": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\js\\Map\\AddEditCampsite.js",

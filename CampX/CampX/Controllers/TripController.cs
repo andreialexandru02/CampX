@@ -4,21 +4,21 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CampX.Controllers
 {
-    //public class TripController : BaseController
+    //public class tripcontroller : basecontroller
     //{
 
-    //    //private readonly TripService Service;
+    //    //private readonly tripservice service;
 
-    //    //public TripController(ControllerDependencies dependencies, TripService service)
+    //    //public tripcontroller(controllerdependencies dependencies, tripservice service)
     //    //   : base(dependencies)
     //    //{
-    //    //    this.Service = service;
+    //    //    this.service = service;
     //    //}
 
 
-    //    public IActionResult Index()
+    //    public iactionresult index()
     //    {
-    //        return View();
+    //        return view();
     //    }
-   // }
+    // }
 }

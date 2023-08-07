@@ -1,18 +1,31 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-
-    <a href = "~/CamperAccount/Login">Login</a>
-    <a href="~/CamperAccount/Register">Register</a>
-    <a href="~/CamperAccount/Profile">Profile</a>
-    <a href="~/Map/ShowMap">Map</a>
-
+@*<link rel="stylesheet" href="~/css/HomePage.css" type="text/css" />
+*@
+    <nav>
+        <ul>
+            <li>
+                <a href="~/CamperAccount/Login">Login</a>
+            </li>
+            <li>
+                <a href="~/CamperAccount/Register">Register</a>
+            </li>
+            <li>
+                <a href="~/CamperAccount/Profile">Profile</a>
+            </li>
+            <li>
+                <a href="~/Map/ShowMap">Map</a>
+            </li>
+            <li>
+                <a href="~/Map/CampsiteDetails/9">Campsite9</a>
+            </li>
+        
+        </ul>
+    </nav>
+    <br></br>
+ 
     <form method="post" asp-controller="CamperAccount" asp-action="Logout">
         <button type="submit">Logut</button>
     </form>
-
-</div>
+ 

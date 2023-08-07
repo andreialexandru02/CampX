@@ -15,3 +15,4 @@ public partial class Review
 
     public virtual Campsite? Campsite { get; set; }
 }
+    
