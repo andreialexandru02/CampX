@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace CampX.BusinessLogic.Implementations.Reviews.Models
 {
-    public class ReviewModel
+    public class AddReviewModel
     {
-        public int Id { get; set; }
         public int Rating { get; set; }
+
         public string? Content { get; set; }
+
+        public int? CampsiteId { get; set; }
     }
 }

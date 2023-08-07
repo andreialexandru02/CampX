@@ -16,3 +16,51 @@ span{
 i{
     margin-left: 20px;
 }
+.star-rating {
+    display: inline-block;
+}
+
+    .star-rating input[type="radio"] {
+        display: none;
+    }
+
+    .star-rating label {
+        font-size: 24px;
+        color: #ccc;
+        cursor: pointer;
+    }
+
+        .star-rating label:before {
+            content: "\2605"; /* Unicode character for a star */
+        }
+
+    .star-rating input[type="radio"]:checked ~ label {
+        color: gold;
+    }
+
+        .star-rating input[type="radio"]:checked ~ label ~ input[type="radio"] + label {
+            color: #ccc;
+        }
+.expandable-input {
+    position: relative;
+    width: 100%;
+    max-width: 400px; /* Set a maximum width if desired */
+}
+
+.expandable-input textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    resize: none;
+    overflow: hidden;
+    min-height: 40px;
+    transition: min-height 0.2s ease-in-out;
+}
+
+.expandable-input textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+#reviewInput{
+    display: none;
+}

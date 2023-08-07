@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CampX.BusinessLogic.Implementations.Reviews.Validations
 {
-    public class ReviewValidator : AbstractValidator<ReviewModel>
+    public class ReviewValidator : AbstractValidator<AddReviewModel>
     {
         private readonly UnitOfWork _unitOfWork;
         public ReviewValidator(UnitOfWork unitOfWork)
@@ -18,7 +18,8 @@ namespace CampX.BusinessLogic.Implementations.Reviews.Validations
             _unitOfWork = unitOfWork;
             RuleFor(r => r.Rating)
                 .NotEmpty().WithMessage("Camp obligatoriu!");
-
+            RuleFor(r => r.CampsiteId)
+                .NotEmpty().WithMessage("Camp obligatoriu!");
         }
     }
 }

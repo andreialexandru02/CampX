@@ -16,10 +16,6 @@ var tentIcon = L.icon({
     iconAnchor: [20, 20], // point of the icon which will correspond to marker's location
 });
 
-
-marker = L.marker([latitude.innerText, longitude.innerText], { icon: tentIcon }).addTo(map)
-
-
 const ShowReviews = (id) => {
     $.ajax({
         type: "get",
@@ -29,6 +25,9 @@ const ShowReviews = (id) => {
         .done((reviews) => {
 
             var div = document.getElementById("review-container")
+            var plus = document.createElement('i')
+            plus.className = "fas fa-plus"
+            div.appendChild(plus)
             reviews.forEach(review => {
 
                 reviewElement = document.createElement('div')
@@ -37,30 +36,65 @@ const ShowReviews = (id) => {
                 var ratingSpan = document.createElement('span')
                 ratingSpan.innerText = review.rating
                 reviewElement.appendChild(ratingSpan)
-                reviewElement.appendChild(contentSpan)  
+                reviewElement.appendChild(contentSpan)
                 var edit = document.createElement('i')
                 edit.className = 'fas fa-times'
                 reviewElement.appendChild(edit)
                 div.appendChild(reviewElement)
                 console.log(review.rating)
                 edit.onclick = () => {
-                    //window.location.href = `/Review/Delete/${review.id}&${id}`
-                    
-                    window.location.href = '/Review/Delete/' 
-                    + "?param1=" + `${review.id}` + "&param2=" + `${id}`
+                    // window.location.href = `/Review/Delete/${review.id}&${id}`
+                    $.ajax({
+                        type: "post",
+                        url: `/Review/DeleteReview`,
+                        datatype: "json",
+                        data: {
+                            Id: review.id,
+                            CampsiteId: id
+                        }
+                    })
+                        .done(() => {
+                            window.location.reload()
+                        })
+
                 }
-            })
-            var plus = document.createElement('i')
-            plus.className = "fas fa-plus"
-            div.appendChild(plus)
-            plus.onclick = () => {
-                window.location.href = `/Review/AddReview/${id}`
-            }
+                plus.onclick = () => {
+
+                    //console.log("asdads")
+                    var reviewInput = document.getElementById("reviewInput")
+                    reviewInput.style.display = "block";
+                    reviewButton = document.getElementById("reviewButton")
+                    var reviewContent = document.getElementById("expandableField")
+                    var reviewRating = document.getElementById("reviewRating")
+                    reviewButton.onclick = () => {
+                       // console.log(review.id, id, reviewRating.value, reviewContent.value)
+                        $.ajax({
+                            type: "post",
+                            url: `/Review/AddReview`,
+                            datatype: "json",
+                            data: {
+                                campsiteid: id,
+                                rating: reviewRating.value,
+                                content: reviewContent.value
+                            }
+                        })
+                            .done(() => {
+                                window.location.reload()
+                            })
+                      
+                    }
+                }
+        })
             
+           
+
             
+
+
         })
 }
+marker = L.marker([latitude.innerText, longitude.innerText], { icon: tentIcon }).addTo(map)
+
 var url = window.location.href.split('/');
 var id = url[url.length - 1];
-
 ShowReviews(id)

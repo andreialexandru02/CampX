@@ -1,5 +1,6 @@
 ﻿using CampX.BusinessLogic.Implementations.Map;
 using CampX.BusinessLogic.Implementations.Reviews;
+using CampX.BusinessLogic.Implementations.Reviews.Models;
 using CampX.Code.Base;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
@@ -24,22 +25,31 @@ namespace CampX.Controllers
             return Json(Service.ShowReviews(id));
         }
 
-        [HttpGet]
+        //[HttpGet]
 
-        public IActionResult Delete(int id,int idCampsite)
-        {               
-            return DeleteReview(id, idCampsite);
-        }
+        //public IActionResult Delete(int id,int idCampsite)
+        //{               
+        //    return DeleteReview(id, idCampsite);
+        //}
         
         [HttpPost]
 
-        public IActionResult DeleteReview(int id, int idCampsite)
+        public IActionResult DeleteReview(DeleteReviewModel  model)
         {
 
-            Service.DeleteReview(id);
+            Service.DeleteReview(model.Id);
 
-            return RedirectToAction("CampsiteDetails", "Map", new { id = idCampsite});
+            return RedirectToAction("CampsiteDetails", "Map", new { id = model.CampsiteId});
 
+        }
+
+        [HttpPost]
+
+        public IActionResult AddReview(AddReviewModel model)
+        {
+            Service.AddReview(model);
+
+            return RedirectToAction("CampsiteDetails", "Map", new { id = model.CampsiteId });
         }
     }
 }

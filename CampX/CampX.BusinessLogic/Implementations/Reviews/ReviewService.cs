@@ -3,7 +3,9 @@ using CampX.BusinessLogic.Implementations.Map.Models;
 using CampX.BusinessLogic.Implementations.Map.Validations;
 using CampX.BusinessLogic.Implementations.Reviews.Models;
 using CampX.BusinessLogic.Implementations.Reviews.Validations;
+using CampX.Common.Extensions;
 using CampX.DataAccess;
+using CampX.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,6 +45,23 @@ namespace CampX.BusinessLogic.Implementations.Reviews
                  .Where(r => r.Id == id)
                  .SingleOrDefault()
             );
+            UnitOfWork.SaveChanges();
+        }
+
+        public void AddReview(AddReviewModel model)
+        {
+            ReviewValidator.Validate(model).ThenThrow();
+
+            var review = Mapper.Map<AddReviewModel, Review>(model);
+
+            //camper.Password = BCrypt.Net.BCrypt.EnhancedHashPassword(model.Password, 13);
+
+            // camper.Roles.Add(UnitOfWork.Roles.Get().Where(r => r.Id == 3).SingleOrDefault());
+
+            UnitOfWork.Reviews.Insert(review);
+            // trigger mail notifi
+            // insert audit 
+
             UnitOfWork.SaveChanges();
         }
     }

@@ -49,6 +49,10 @@
       "PackagePath": "staticwebassets\\js\\Map\\ShowMap.js"
     },
     {
+      "Id": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\js\\Map\\StartRating.js",
+      "PackagePath": "staticwebassets\\js\\Map\\StartRating.js"
+    },
+    {
       "Id": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

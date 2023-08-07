@@ -14,7 +14,7 @@ namespace CampX.BusinessLogic.Implementations
     {
         public ReviewProfile()
         {
-            CreateMap<ReviewModel, Review>();
+            CreateMap<AddReviewModel, Review>();
 
         }   
     }
