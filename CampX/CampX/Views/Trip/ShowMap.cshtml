@@ -1,6 +1,6 @@
 ﻿@model CampX.BusinessLogic.Implementations.Trips.Models.AddTripModel;
 @using CampX.Common.ViewModels;
-@inject CurrentCamperDTO currentCamper;
+@inject CurrentCamperDTO currentCamper
 
 @if (currentCamper.IsAuthenticated == false)
 {
@@ -8,7 +8,7 @@
 }
 else
 {
-    
+    <input id="currentCamper" type= "hidden" value = @currentCamper.Id></input>
     <a href="~/Map/AddCampsite">Adauga Campsite</a>
     <script type="text/javascript" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
@@ -20,40 +20,39 @@ else
     <link rel="stylesheet" href="~/css/Trip/ShowMap.css" type="text/css" />
 
     <script type="text/javascript" defer src="~/js/Trip/ShowMap.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
 
+    <span>Selecteaza de pe harta campsite-urile unde vrei sa mergi in excursie</span>
     <div id="map"></div>
     <div id="selectedCampsites">
 
     </div>
     <div class="row">
-        <div class="col-md-4">
-            <form asp-action="Register" asp-controller="CamperAccount">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div id ="tripForm" class="col-md-4">
+
                 <div class="form-group">
-                    <label asp-for="Name" class="control-label"></label>
-                    <input asp-for="Name" class="form-control" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>               
-                <div class="form-group">
-                    <label asp-for="Description" class="control-label"></label>
-                    <input asp-for="Description" class="form-control" />
-                    <span asp-validation-for="Description" class="text-danger"></span>
+                    <label a class="control-label">Nume trip</label>
+                    <input id= "nameInput" class="form-control" />
+                    <span  class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="IsPublic" for="isPublic" class="control-label"></label>
-                    <input asp-for="IsPublic" class="form-control" id ="isPublic" type="checkbox" />
-                    <span asp-validation-for="IsPublic" class="text-danger"></span>
+                    <label class="control-label">Descriere</label>
+                    <textarea id="descriptionInput" class="form-control"></textarea>
+                </div>
+                
+                <select class="form-control" id="visibility">
+                    <option value="" disabled selected>Alege vizibilitatea...</option>
+                    <option value="public">Public</option>
+                    <option value="private">Private</option>
+                </select>
+                <div class="form-group">
+                    <label  class="control-label">Data trip</label>
+                    <input id="dateInput" type="date" class="form-control" value = null />
                 </div>
                 <div class="form-group">
-                    <label asp-for="Date" class="control-label"></label>
-                    <input asp-for="Date" class="form-control" />
-                    <span asp-validation-for="Date" class="text-danger"></span>
+                    <input id="submitButton" type="submit" value="Save" class="btn btn-primary" />
                 </div>
-                <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
-                </div>
-            </form>
         </div>
     </div>
 }

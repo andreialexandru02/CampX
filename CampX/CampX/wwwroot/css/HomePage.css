@@ -1,23 +1,21 @@
 body {
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: left;
+    
     background-color: #EDF1D6;
-
 }
 
-nav {
+/*nav {
     background-color: #EDF1D6;
     padding: 10px;
     margin-top: 30px;
     margin-left: 40px;
     height: 40px;
     display: flex;
-    justify-content: center; /* Center the navigation links horizontally */
-    align-items: center; /* Center the navigation links vertically */
-    zoom: ;
-}
+    justify-content: center;*/ /* Center the navigation links horizontally */
+    /*align-items: center;*/ /* Center the navigation links vertically */
+    /*zoom: ;
+}*/
 
 ul {
     list-style: none;
@@ -62,9 +60,6 @@ a:hover {
 }
 #campXLogo:hover {
     cursor: pointer;
-}
-#logoBG {
-    background-color: #EDF1D6;
 }
 
 /*.navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 {

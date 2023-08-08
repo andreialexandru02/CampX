@@ -1,7 +1,7 @@
 ﻿#map {
     height: 350px;
     width: 700px;
-
+    border
 }
 #Lat{
     display: none;
@@ -63,4 +63,7 @@ i{
 }
 #reviewInput{
     display: none;
+}
+#reviewRatingDiv{
+    max-height:fit-content;
 }

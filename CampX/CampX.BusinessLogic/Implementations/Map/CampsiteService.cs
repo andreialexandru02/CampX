@@ -40,7 +40,10 @@ namespace CampX.BusinessLogic.Implementations.Map
 
            // camper.Roles.Add(UnitOfWork.Roles.Get().Where(r => r.Id == 3).SingleOrDefault());
 
-            UnitOfWork.Campsites.Insert(campsite);
+            var insertedCampsite =  UnitOfWork.Campsites.Insert(campsite);
+
+            Console.WriteLine(insertedCampsite);
+                
             // trigger mail notifi
             // insert audit 
 

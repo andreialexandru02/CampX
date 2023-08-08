@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using CampX.BusinessLogic.Implementations.Trips.Models;
-using CampX.DataAccess;
 using CampX.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,14 +9,12 @@ using System.Threading.Tasks;
 
 namespace CampX.BusinessLogic.Implementations.Trips.Mapping
 {
-    public class TripProfile : Profile
+    public class TripCamperProfile : Profile
     {
-
-        public TripProfile()
+        public TripCamperProfile()
         {
-            CreateMap<AddTripModel, Trip>()
-                .ForMember(t => t.Campsites, t => t.Ignore())
-                .ForMember(t => t.TripCampers, t => t.Ignore());
+            CreateMap<TripCamperModel, TripCamper>();
+                //.ForMember(t => t.TripId, t => t.MapFrom(t => t.));
         }
     }
 }

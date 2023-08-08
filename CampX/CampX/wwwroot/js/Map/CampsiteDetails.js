@@ -32,22 +32,27 @@ const ShowReviews = (id) => {
             reviewButton = document.getElementById("reviewButton")
             var reviewContent = document.getElementById("expandableField")
             var reviewRating = document.getElementById("reviewRating")
+            let span = document.createElement('span')
+            span.innerText = 'Review incomplet'
+            span.style.color = 'red'
+            reviewInput.appendChild(span)
+            span.style.display = 'none'
+            document.getElementById('ratingDiv').onclick = () => {
+                reviewRating.disabled = false
+            }
             plusIcon.onclick = () => {
 
                 if (plusIcon.className == 'fas fa-plus') { 
                     reviewRating.value = ''
                     reviewContent.value = ''
-                    console.log(reviewRating.value)
+                    
                     plusIcon.className = 'fas fa-minus'
-                    reviewInput.style.display = "block";                 
-                    reviewButton.onclick = () => {
+                    reviewInput.style.display = "block";
+                    
+                    reviewButton.onclick = () => {                      
+                        if (reviewRating.disabled === true || reviewContent.value === '') {
 
-                        if (reviewContent.value === '' || reviewContent.value === '') {
-
-                                let span = document.createElement('span')
-                                span.innerText = 'Review incomplet'
-                                span.style.color = 'red'
-                                reviewInput.appendChild(span)
+                            span.style.display = 'block'
                         }
                         else {
                             $.ajax({

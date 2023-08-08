@@ -45,17 +45,19 @@
 <div id="review-container">Reviews
 
     <div id="reviewInput" class="row">
-        <div class="col-md-4">
-            <div class="expandable-input">
-                    <label class="control-label"></label>
-                    <textarea id="expandableField"></textarea>
-            </div>
-
+        <div class="col-md-6" >
             <div class="form-group">
-                <label class="control-label"></label>
-                <input id="reviewRating" type="range" min="1" max="5" value="" class="form-control"
+                <label class="control-label">Descriere</label>
+                <textarea id="expandableField" class="form-control"></textarea>
             </div>
-            <button id= "reviewButton" type="button" class="btn btn-primary">Add Review</button>
+             
+            <div id="ratingDiv" class="form-group">
+                <label class="control-label">Rating review</label>
+                <input id="reviewRating" type="range" min="1" max="5" disabled class="form-control" />
+            </div>
+            <div id= "reviewButtonDiv" >
+                <button id="reviewButton" type="button" class="btn btn-primary">Add Review</button>
+            </div>
         </div>
 
     </div>

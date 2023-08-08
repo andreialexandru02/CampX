@@ -13,14 +13,14 @@ namespace CampX.BusinessLogic.Implementations.Trips.Models
 
         public string? Description { get; set; }
 
-        public bool IsPublic { get; set; }
-        
+        public bool? IsPublic { get; set; }
+
         public DateTime? Date { get; set; }
-        
+
         public string Code { get; set; } = null!;
 
-        public virtual ICollection<TripCamper> TripCampers { get; set; } = new List<TripCamper>();
+        public virtual List<int> TripCampers { get; set; }
 
-        public virtual ICollection<Campsite> Campsites { get; set; } = new List<Campsite>();
+        public virtual List<int> Campsites { get; set; }
     }
 }

@@ -3,4 +3,26 @@
     height: 400px;
     width: 600px;
 }
+.expandable-input {
+    position: relative;
+    width: 100%;
+    max-width: 400px; /* Set a maximum width if desired */
+}
 
+.expandable-input textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    resize: none;
+    overflow: hidden;
+    min-height: 40px;
+    transition: min-height 0.2s ease-in-out;
+}
+
+.expandable-input textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+#visibility{
+    margin-top: 25px
+}

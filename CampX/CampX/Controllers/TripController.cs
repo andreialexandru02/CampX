@@ -1,5 +1,6 @@
 ﻿using CampX.BusinessLogic.Implementations.Map;
 using CampX.BusinessLogic.Implementations.Trips;
+using CampX.BusinessLogic.Implementations.Trips.Models;
 using CampX.Code.Base;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,6 +28,15 @@ namespace CampX.Controllers
         public IActionResult DisplayCampsites()
         {
             return Json(Service.DisplayCampsites());
+        }
+
+        [HttpPost]
+
+        public IActionResult AddTrip(AddTripModel model)
+        {
+
+            Service.AddTrip(model);
+            return RedirectToAction("ShowMap", "Trip");
         }
     }
 }
