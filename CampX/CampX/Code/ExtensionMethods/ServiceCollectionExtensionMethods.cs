@@ -6,7 +6,7 @@ using CampX.Code.Base;
 using CampX.Common.ViewModels;
 using System;
 using CampX.BusinessLogic.Implementations.Map;
-using CampX.BusinessLogic.Implementations.Trip;
+using CampX.BusinessLogic.Implementations.Trips;
 using CampX.BusinessLogic.Implementations.Reviews;
 
 namespace CampX.Code.ExtensionMethods

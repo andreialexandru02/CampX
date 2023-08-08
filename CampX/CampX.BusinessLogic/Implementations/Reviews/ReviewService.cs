@@ -6,6 +6,7 @@ using CampX.BusinessLogic.Implementations.Reviews.Validations;
 using CampX.Common.Extensions;
 using CampX.DataAccess;
 using CampX.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,11 +18,13 @@ namespace CampX.BusinessLogic.Implementations.Reviews
     public class ReviewService : BaseService
     {
         private readonly ReviewValidator ReviewValidator;
+        private readonly ReviewEditValidator ReviewEditValidator;
 
         public ReviewService(ServiceDependencies dependencies)
             : base(dependencies)
         {
             this.ReviewValidator = new ReviewValidator(UnitOfWork);
+            this.ReviewEditValidator = new ReviewEditValidator(UnitOfWork);
         }
         public List<ReviewModel> ShowReviews(int id)
         {
@@ -61,6 +64,23 @@ namespace CampX.BusinessLogic.Implementations.Reviews
             UnitOfWork.Reviews.Insert(review);
             // trigger mail notifi
             // insert audit 
+
+            UnitOfWork.SaveChanges();
+        }
+        public void EditReview(EditReviewModel model)
+        {
+            ReviewEditValidator.Validate(model).ThenThrow();
+
+
+            var review = UnitOfWork.Reviews.Get()
+                .Where(c => c.Id == model.Id)
+                .AsNoTracking()
+                .SingleOrDefault();
+
+            review = Mapper.Map<EditReviewModel, Review>(model);
+
+            UnitOfWork.Reviews.Update(review);
+
 
             UnitOfWork.SaveChanges();
         }

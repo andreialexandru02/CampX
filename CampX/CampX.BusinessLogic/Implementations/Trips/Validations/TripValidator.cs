@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using FluentValidation;
 using System.Threading.Tasks;
-using CampX.BusinessLogic.Implementations.Trip.Models;
+using CampX.BusinessLogic.Implementations.Trips .Models;
 
-namespace CampX.BusinessLogic.Implementations.Trip.Validations
+namespace CampX.BusinessLogic.Implementations.Trips.Validations
 {
     public class TripValidator : AbstractValidator<AddTripModel>
     {

@@ -25,4 +25,8 @@
     <ProjectReference Include="..\CampX.DataAccess\CampX.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\js\Trip\" />
+  </ItemGroup>
+
 </Project>

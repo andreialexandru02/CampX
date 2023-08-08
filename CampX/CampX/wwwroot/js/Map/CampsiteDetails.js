@@ -25,25 +25,76 @@ const ShowReviews = (id) => {
         .done((reviews) => {
 
             var div = document.getElementById("review-container")
-            var plus = document.createElement('i')
-            plus.className = "fas fa-plus"
-            div.appendChild(plus)
+            var plusIcon = document.createElement('i')
+            plusIcon.className = "fas fa-plus"
+            div.appendChild(plusIcon)
+            var reviewInput = document.getElementById("reviewInput")
+            reviewButton = document.getElementById("reviewButton")
+            var reviewContent = document.getElementById("expandableField")
+            var reviewRating = document.getElementById("reviewRating")
+            plusIcon.onclick = () => {
+
+                if (plusIcon.className == 'fas fa-plus') { 
+                    reviewRating.value = ''
+                    reviewContent.value = ''
+                    console.log(reviewRating.value)
+                    plusIcon.className = 'fas fa-minus'
+                    reviewInput.style.display = "block";                 
+                    reviewButton.onclick = () => {
+
+                        if (reviewContent.value === '' || reviewContent.value === '') {
+
+                                let span = document.createElement('span')
+                                span.innerText = 'Review incomplet'
+                                span.style.color = 'red'
+                                reviewInput.appendChild(span)
+                        }
+                        else {
+                            $.ajax({
+                                type: "post",
+                                url: `/Review/AddReview`,
+                                datatype: "json",
+                                data: {
+                                    campsiteid: id,
+                                    rating: reviewRating.value,
+                                    content: reviewContent.value
+                                }
+                            })
+                                .done(() => {
+                                    window.location.reload()
+                                })
+                        }
+
+                    }
+                }
+                else {
+                    reviewInput.style.display = "none";
+                    plusIcon.className = 'fas fa-plus'
+                }
+            }
+
+            var sumReviews = 0
             reviews.forEach(review => {
 
+                sumReviews += review.rating
                 reviewElement = document.createElement('div')
                 var contentSpan = document.createElement('span')
-                contentSpan.innerText = review.content
+                contentSpan.innerText = `Continut: ${review.content}`
                 var ratingSpan = document.createElement('span')
-                ratingSpan.innerText = review.rating
+                ratingSpan.innerText = `Rating: ${review.rating}`
                 reviewElement.appendChild(ratingSpan)
+                reviewElement.appendChild(document.createElement('br'))
                 reviewElement.appendChild(contentSpan)
-                var edit = document.createElement('i')
-                edit.className = 'fas fa-times'
-                reviewElement.appendChild(edit)
+                var deleteIcon = document.createElement('i')
+                var editIcon = document.createElement('i')
+                editIcon.className = 'fas fa-pencil-alt'
+                deleteIcon.className = 'fas fa-times'
+                reviewElement.appendChild(editIcon)
+                reviewElement.appendChild(deleteIcon)
                 div.appendChild(reviewElement)
                 console.log(review.rating)
-                edit.onclick = () => {
-                    // window.location.href = `/Review/Delete/${review.id}&${id}`
+                deleteIcon.onclick = () => {
+
                     $.ajax({
                         type: "post",
                         url: `/Review/DeleteReview`,
@@ -58,40 +109,39 @@ const ShowReviews = (id) => {
                         })
 
                 }
-                plus.onclick = () => {
-
-                    //console.log("asdads")
-                    var reviewInput = document.getElementById("reviewInput")
+                               
+                editIcon.onclick = () => {
                     reviewInput.style.display = "block";
-                    reviewButton = document.getElementById("reviewButton")
-                    var reviewContent = document.getElementById("expandableField")
-                    var reviewRating = document.getElementById("reviewRating")
                     reviewButton.onclick = () => {
-                       // console.log(review.id, id, reviewRating.value, reviewContent.value)
                         $.ajax({
                             type: "post",
-                            url: `/Review/AddReview`,
+                            url: `/Review/EditReview`,
                             datatype: "json",
                             data: {
-                                campsiteid: id,
-                                rating: reviewRating.value,
-                                content: reviewContent.value
+                                Id: review.id,
+                                Campsiteid: id,
+                                Rating: reviewRating.value,
+                                Content: reviewContent.value
                             }
                         })
                             .done(() => {
                                 window.location.reload()
                             })
-                      
+
                     }
+                    
                 }
+            })
+            if (reviews.length == 0) {
+                document.getElementById('ratingAverage').innerText += 'Nu exista rating!'
+            }
+            else {
+
+                document.getElementById('ratingAverage').innerText += ` ${(sumReviews / reviews.length).toFixed(1)}`
+            }
+             
         })
             
-           
-
-            
-
-
-        })
 }
 marker = L.marker([latitude.innerText, longitude.innerText], { icon: tentIcon }).addTo(map)
 

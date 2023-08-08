@@ -19,13 +19,16 @@
 
       
     <div>
-        @Model.Name
+       Nume: @Model.Name
     </div>
     <div>
-        @Model.Description
+        Descriere: @Model.Description
     </div>
     <div>
-        @Model.Difficulty
+       Dificultate: @Model.Difficulty
+    </div>
+    <div id="ratingAverage">
+        Rating:  
     </div>
     <div id="Lat">
         @Model.Latitude
@@ -33,6 +36,7 @@
     <div id="Lng">
         @Model.Longitude
     </div>
+    
 <div id="map"></div>
 
 <a asp-controller="Map" asp-action="Delete" asp-route-id="@ViewContext.RouteData.Values["id"]"> Delete Campsite</a>
@@ -49,13 +53,10 @@
 
             <div class="form-group">
                 <label class="control-label"></label>
-                <input id="reviewRating"type="range" min="1" max="5" class="form-control" 
+                <input id="reviewRating" type="range" min="1" max="5" value="" class="form-control"
             </div>
             <button id= "reviewButton" type="button" class="btn btn-primary">Add Review</button>
         </div>
 
     </div>
-
-   
-
 </div>

@@ -31,15 +31,15 @@ namespace CampX.Controllers
         //{               
         //    return DeleteReview(id, idCampsite);
         //}
-        
+
         [HttpPost]
 
-        public IActionResult DeleteReview(DeleteReviewModel  model)
+        public IActionResult DeleteReview(DeleteReviewModel model)
         {
 
             Service.DeleteReview(model.Id);
 
-            return RedirectToAction("CampsiteDetails", "Map", new { id = model.CampsiteId});
+            return RedirectToAction("CampsiteDetails", "Map", new { id = model.CampsiteId });
 
         }
 
@@ -49,6 +49,13 @@ namespace CampX.Controllers
         {
             Service.AddReview(model);
 
+            return RedirectToAction("CampsiteDetails", "Map", new { id = model.CampsiteId });
+        }
+
+        public IActionResult EditReview(EditReviewModel model)
+        {
+            Service.EditReview(model);
+;           
             return RedirectToAction("CampsiteDetails", "Map", new { id = model.CampsiteId });
         }
     }

@@ -1,24 +1,32 @@
 ﻿using CampX.BusinessLogic.Implementations.Map;
+using CampX.BusinessLogic.Implementations.Trips;
 using CampX.Code.Base;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CampX.Controllers
 {
-    //public class tripcontroller : basecontroller
-    //{
+    public class TripController : BaseController
+    {
 
-    //    //private readonly tripservice service;
+        private readonly TripService Service;
+        private readonly CampsiteService campsiteService;
 
-    //    //public tripcontroller(controllerdependencies dependencies, tripservice service)
-    //    //   : base(dependencies)
-    //    //{
-    //    //    this.service = service;
-    //    //}
+        public TripController(ControllerDependencies dependencies, TripService service)
+           : base(dependencies)
+        {
+            this.Service = service;
+        }
+        [HttpGet]
+        public IActionResult ShowMap()
+        {
+            return View();
+        }
 
+        [HttpGet]
 
-    //    public iactionresult index()
-    //    {
-    //        return view();
-    //    }
-    // }
+        public IActionResult DisplayCampsites()
+        {
+            return Json(Service.DisplayCampsites());
+        }
+    }
 }

@@ -25,6 +25,10 @@
       "PackagePath": "staticwebassets\\css\\Map\\ShowMap.css"
     },
     {
+      "Id": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\css\\Trip\\ShowMap.css",
+      "PackagePath": "staticwebassets\\css\\Trip\\ShowMap.css"
+    },
+    {
       "Id": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
@@ -51,6 +55,10 @@
     {
       "Id": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\js\\Map\\StartRating.js",
       "PackagePath": "staticwebassets\\js\\Map\\StartRating.js"
+    },
+    {
+      "Id": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\js\\Trip\\ShowMap.js",
+      "PackagePath": "staticwebassets\\js\\Trip\\ShowMap.js"
     },
     {
       "Id": "D:\\ProjectRepository\\CampX\\CampX\\wwwroot\\js\\site.js",

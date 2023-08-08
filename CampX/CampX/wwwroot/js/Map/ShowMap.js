@@ -1,8 +1,10 @@
+
 var map = L.map('map').setView([45.9443, 25.0094], 8);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 20,
     attribution: '© OpenStreetMap'
 }).addTo(map);
+
 
 var tentIcon = L.icon({
     iconUrl: 'https://localhost:44364/Images/icons8-tent-48.png',

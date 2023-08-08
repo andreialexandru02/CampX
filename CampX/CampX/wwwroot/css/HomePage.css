@@ -4,7 +4,7 @@ body {
     display: flex;
     justify-content: left;
     background-color: #EDF1D6;
-    background-color: #EDF1D6;
+
 }
 
 nav {
@@ -64,7 +64,7 @@ a:hover {
     cursor: pointer;
 }
 #logoBG {
-    background-color: red;
+    background-color: #EDF1D6;
 }
 
 /*.navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 {
