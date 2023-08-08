@@ -11,8 +11,7 @@ public partial class Review
 
     public string? Content { get; set; }
 
-    public int? CampsiteId { get; set; }
+    public int CampsiteId { get; set; }
 
-    public virtual Campsite? Campsite { get; set; }
+    public virtual Campsite Campsite { get; set; } = null!;
 }
-    

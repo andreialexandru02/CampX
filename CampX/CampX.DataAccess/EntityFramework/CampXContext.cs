@@ -187,7 +187,6 @@ public partial class CampXContext : DbContext
 
             entity.HasOne(d => d.Campsite).WithMany(p => p.Reviews)
                 .HasForeignKey(d => d.CampsiteId)
-                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Reviews_Campsites");
         });
 
@@ -223,6 +222,10 @@ public partial class CampXContext : DbContext
 
             entity.ToTable("Trip");
 
+            entity.Property(e => e.Code)
+                .HasMaxLength(6)
+                .IsFixedLength();
+            entity.Property(e => e.Date).HasColumnType("date");
             entity.Property(e => e.Description).HasMaxLength(500);
             entity.Property(e => e.IsPublic).HasColumnName("isPublic");
             entity.Property(e => e.Name).HasMaxLength(100);
