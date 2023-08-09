@@ -79,7 +79,7 @@ namespace CampX.BusinessLogic.Implementations.Map
             })
             .SingleOrDefault();
 
-            UnitOfWork.SaveChanges();
+            //UnitOfWork.SaveChanges();
             return campsite;
         }
 

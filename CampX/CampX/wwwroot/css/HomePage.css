@@ -44,11 +44,11 @@ a {
     text-decoration: none;
     padding: 8px 15px;
     color: #1e2f1a;
-}
+} 
 
 a:hover {
-    background-color:  #1e2f1a;
-    color: #EDF1D6;
+        background-color:  #1e2f1a;
+        color: #EDF1D6;
         border-radius: 5px;
     }
 

@@ -1,0 +1,18 @@
+﻿#map {
+    height: 350px;
+    width: 700px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#joinButton, #requestButton {
+    margin-bottom: 10px;
+    background-color: transparent;
+    color: #1e2f1a;
+    border: 1.5px solid #1e2f1a;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#joinButton:hover,#requestButton:hover {
+    background-color: #1e2f1a;
+    color: #EDF1D6;
+    border-radius: 5px;
+}

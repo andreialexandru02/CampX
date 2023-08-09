@@ -9,7 +9,7 @@ public partial class Request
 
     public int CamperId { get; set; }
 
-    public DateTime? Date { get; set; }
+    public DateTime Date { get; set; }
 
     public string? Description { get; set; }
 

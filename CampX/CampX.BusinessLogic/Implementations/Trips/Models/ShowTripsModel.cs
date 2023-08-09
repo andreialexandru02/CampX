@@ -7,22 +7,21 @@ using System.Threading.Tasks;
 
 namespace CampX.BusinessLogic.Implementations.Trips.Models
 {
-    public class AddTripModel
+    public class ShowTripsModel
     {
-        public string? Name { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
 
         public string? Description { get; set; }
 
-        public bool? IsPublic { get; set; }
+        public bool IsPublic { get; set; }
 
         public DateTime? Date { get; set; }
 
         public string Code { get; set; } = null!;
 
-        public List<int> TripCampers { get; set; }
+         public  ICollection<TripCamperModel> TripCampers { get; set; } = new List<TripCamperModel>();
 
-        public List<int> Campsites { get; set; }
-
-
+         public  ICollection<TripCampsitesModel> Campsites { get; set; } = new List<TripCampsitesModel>();
     }
 }

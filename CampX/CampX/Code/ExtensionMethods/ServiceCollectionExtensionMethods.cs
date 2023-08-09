@@ -8,6 +8,7 @@ using System;
 using CampX.BusinessLogic.Implementations.Map;
 using CampX.BusinessLogic.Implementations.Trips;
 using CampX.BusinessLogic.Implementations.Reviews;
+using CampX.BusinessLogic.Implementations.Requests;
 
 namespace CampX.Code.ExtensionMethods
 {
@@ -27,6 +28,7 @@ namespace CampX.Code.ExtensionMethods
             services.AddScoped<CampsiteService>();
             services.AddScoped<TripService>();
             services.AddScoped<ReviewService>();
+            services.AddScoped<RequestService>();
             // add new services
 
             return services;

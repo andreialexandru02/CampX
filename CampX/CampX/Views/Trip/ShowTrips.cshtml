@@ -1,0 +1,82 @@
+﻿@model IEnumerable<CampX.BusinessLogic.Implementations.Trips.Models.ShowTripsModel>
+
+@{
+    ViewData["Title"] = "ShowTrip";
+}
+
+<h1>ShowTrip</h1>
+
+<p>
+    <a asp-action="Show">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                Locuri de campare
+            </th>
+            <th>
+                Organizator
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @if (item.Date != null)
+                {
+                        @String.Format("{0:d}", item.Date);
+                }
+                else
+                {
+                    <text>Nu a fost setat o data pentru acesta excursie</text>
+                }
+            </td>
+            <td>
+                    @foreach (var campsite in item.Campsites)
+                    {
+
+                        <a asp-controller="Map" asp-action="CampsiteDetails" asp-route-id=@campsite.Id> 
+                            @campsite.Name
+                        </a>
+                    }
+            </td>
+            <td>
+                    @foreach(var camper in item.TripCampers)
+                    {
+                        @if (camper.IsOrganizer)
+                        {
+                             <span>
+                                <a>
+                                      @camper.Camper.FirstName
+                                      @camper.Camper.LastName  
+                                  </a>
+                                   este organizatorul acestui trip!
+                             </span>
+                        }
+                    }
+            </td>
+            <td >
+                    <a asp-controller="Trip" asp-action="TripDetails" asp-route-id=@item.Id> Detalii</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

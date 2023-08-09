@@ -11,7 +11,7 @@ public partial class TripCamper
 
     public int? NoteId { get; set; }
 
-    public bool? IsOrganizer { get; set; }
+    public bool IsOrganizer { get; set; }
 
     public virtual Camper Camper { get; set; } = null!;
 

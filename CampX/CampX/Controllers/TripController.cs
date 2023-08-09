@@ -38,5 +38,24 @@ namespace CampX.Controllers
             Service.AddTrip(model);
             return RedirectToAction("ShowMap", "Trip");
         }
+
+        [HttpGet]
+        public IActionResult ShowTrips()
+        {
+            var models = Service.ShowTrips();
+
+            return View(models);
+        }
+        [HttpGet]
+        public IActionResult TripDetails(int id)
+        {
+            var model = Service.TripDetails(id);
+            return View("TripDetails", model);
+        }
+        [HttpGet]
+        public IActionResult TripDetailsJSON([FromQuery]int id)
+        {
+            return Json(Service.TripDetails(id));
+        }
     }
 }
