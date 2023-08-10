@@ -15,7 +15,7 @@ namespace CampX.BusinessLogic.Implementations.Requests.Validations
         public RequestValidator()
         {
 
-            RuleFor(c => c.Trip)
+            RuleFor(c => c.TripId)
                 .NotEmpty().WithMessage("Camp obligatoriu!");
             RuleFor(c => c.CamperId)
                .NotEmpty().WithMessage("Camp obligatoriu!");

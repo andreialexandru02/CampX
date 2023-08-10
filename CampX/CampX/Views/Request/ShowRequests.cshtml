@@ -1,0 +1,56 @@
+﻿@model IEnumerable<CampX.BusinessLogic.Implementations.Requests.Models.ShowRequestsModel>
+@{
+    ViewData["Title"] = "ShowTrip";
+}
+
+<h1>Requesturile tale:</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nume trip
+            </th>
+            <th>
+                Date trip
+            </th>
+            <th>
+                Nume Camper
+            </th>
+            <th>
+                Descriere
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Trip.Name)
+                </td>
+                <td>
+                    @if (item.Trip.Date != null)
+                    {
+                        @String.Format("{0:d}", item.Trip.Date)
+                        ;
+                    }
+                    else
+                    {
+                        <text>Nu a fost setat o data pentru acesta excursie</text>
+                    }
+                </td>                              
+                <td>
+                    @Html.DisplayFor(modelItem => item.Camper.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+               @* <td>
+                    <a asp-controller="Trip" asp-action="TripDetails" asp-route-id=@item.Id> Detalii</a>
+                </td>*@
+            </tr>
+        }
+    </tbody>
+</table>

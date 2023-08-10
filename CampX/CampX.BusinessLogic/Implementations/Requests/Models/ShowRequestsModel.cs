@@ -8,13 +8,12 @@ using System.Threading.Tasks;
 
 namespace CampX.BusinessLogic.Implementations.Requests.Models
 {
-    public class AddRequestModel
+    public class ShowRequestsModel
     {
+        public CamperModel Camper { get; set; }
 
-        public int CamperId { get; set; } 
- 
-        public int TripId { get; set; }
- 
+        public RequestTripModel Trip { get; set; }
+
         public string? Description { get; set; }
     }
 }

@@ -26,27 +26,61 @@ $.ajax({
     var requestDescription = document.getElementById('expandableField')
     joinButton = document.getElementById('joinButton')
     requestButton = document.getElementById('requestButton')
+    var requestSpan = document.createElement('span')
+    requestSpan.innerHTML = 'Ai facut deja un request pentru acest trip!'
+    requestSpan.style.color = 'red';
+    requestDiv.appendChild(requestSpan)
+    requestSpan.style.display = 'none'
 
     joinButton.onclick = () => {
         joinButton.style.display = 'none'
         requestDiv.style.display = 'block'
 
         requestButton.onclick = () => {
-            requestDiv.style.display = 'none'
-            console.log(typeof requestDescription.value)
+           requestDiv.style.display = 'none'
+           console.log(trip.id)
+
+            
             $.ajax({
                 type: "post",
-                url: '/Request/AddRequest',
-                datatype: "json",
+                url: '/Request/CheckRequest',
                 data: {
-                    Trip: trip
-                    ,CamperId: currentCamper.value                 
-                    ,Description: requestDescription.value ?? 'Nu a fost introdusa o descriere!'
+                    TripId: trip.id
+                    , CamperId: currentCamper.value
+                    , Description: requestDescription.value ?? 'Nu a fost introdusa o descriere!'
                 }
-            })
-                .done(() => {
-                    window.location.reload()
-                })
+            })  
+                .done((result) => {
+                    if (result) {
+                        $.ajax({
+                            type: "post",
+                            url: '/Request/AddRequest',
+                            datatype: "json",
+                            data: {
+                                TripId: trip.id
+                                , CamperId: currentCamper.value
+                                , Description: requestDescription.value ?? 'Nu a fost introdusa o descriere!'
+                            }
+                        })
+                            .done(() => {
+                                window.location.reload()
+                            })
+                    }
+                    else {                       
+                        requestSpan.style.display = 'block'
+                        requestDiv.style.display = 'block'
+                        
+                    }
+                }
+
+
+            )
+            
+
+                
+            
+           
+
         }
 
 

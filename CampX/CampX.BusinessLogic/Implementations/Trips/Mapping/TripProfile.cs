@@ -21,6 +21,7 @@ namespace CampX.BusinessLogic.Implementations.Trips.Mapping
 
             CreateMap<TripCamperModel, TripCamper>();
             CreateMap<TripCamperIdModel, TripCamper>();
+            CreateMap<TripNoFKModel, Trip>();
         }
     }
 }

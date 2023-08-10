@@ -11,7 +11,7 @@ namespace CampX.BusinessLogic.Implementations.Trips.Models
     {
         public int TripId { get; set; }
 
-        public CamperModel Camper { get; set; }
+        public CamperModel? Camper { get; set; }
 
         public int? NoteId { get; set; }
 
