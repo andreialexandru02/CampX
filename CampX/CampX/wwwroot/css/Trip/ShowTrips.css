@@ -1,0 +1,12 @@
+﻿#searchButton {
+    background-color: #1e2f1a;
+    border-radius: 5px;
+    color: #EDF1D6;
+    border: 2px solid #1e2f1a;
+}
+
+#searchInput {
+    background-color: #EDF1D6;
+    border-radius: 5px;
+    border: 2px solid #1e2f1a;
+}

@@ -10,6 +10,7 @@ using CampX.Common.Extensions;
 using CampX.Common.ViewModels;
 using CampX.DataAccess;
 using CampX.Entities;
+
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -62,63 +63,66 @@ namespace CampX.BusinessLogic.Implementations.Requests
                 .Any();
         }
         public List<ShowRequestsModel> ShowRequests()
-        {
-;
-            
-            
-            var tripCampers = UnitOfWork.Requests.Get()
-
-                .Include(tc => tc.Trip)
-                .ThenInclude(tcc => tcc.TripCampers)
-                .Include(c => c.Camper)
-                .Select(r => r.Trip.TripCampers).ToList();
-            var organizer = new List<TripCamper>();
-            foreach(var tripCamper in tripCampers)
-            {
-
-                if (tripCamper.SingleOrDefault().IsOrganizer &&
-                    tripCamper.SingleOrDefault().CamperId == CurrentCamper.Id)
-                {
-                    
-                    organizer.Add(tripCamper.SingleOrDefault());   
-                }
-            }
-
-            Console.WriteLine(organizer);
-
+        { 
+                       
             var requests = UnitOfWork.Requests.Get()
-                .Include(t => t.Trip)
-                .Include(c => c.Camper)
-                .Select(t => t.Trip.TripCampers)
-                .ToList();
+                    .Include(t => t.Trip).ThenInclude(tc => tc.TripCampers)
+                    .Include(c=> c.Camper)
+                    .Where(r => r.Trip.TripCampers
+                        .Any(tc => tc.IsOrganizer && tc.CamperId == CurrentCamper.Id))
+                    .ToList();
 
             Console.WriteLine(requests);
 
             var requestsList = new List<ShowRequestsModel>();
             foreach(var request in requests)
             {
+                Console.WriteLine("aklmndla");
                 requestsList.Add(
 
-                    new ShowRequestsModel
+                new ShowRequestsModel
+                { 
+                    Camper = new CamperModel
                     {
-                        /*Camper = new CamperModel
-                        {
-                            FirstName = request.Camper.FirstName,
-                            LastName = request.Camper.LastName,
-                            Email = request.Camper.Email,
-                            Id = request.Camper.Id
-                        },
-                        Trip = new RequestTripModel
-                        {
-                            Name = request.Trip.Name,
-                            Id = request.Trip.Id,
-                            Date = request.Trip.Date
-                        },
-                        Description = request.Description*/
-                    }
-                );
+                        FirstName = request.Camper.FirstName,
+                        LastName = request.Camper.LastName,
+                        Email = request.Camper.Email,
+                        Id = request.Camper.Id
+                    },
+                    Trip = new RequestTripModel
+                    {
+                        Name = request.Trip.Name,
+                        Id = request.Trip.Id,
+                        Date = request.Trip.Date
+                    },
+                    Description = "asdasd"
+                });
+                    
             }
             return requestsList;
+        }
+        public void DeleteRequest(CamperIdTripIdModel model)
+        {          
+            UnitOfWork.Requests.Delete(
+                UnitOfWork.Requests.Get()
+                    .Where(c => c.CamperId == model.CamperId && c.TripId == model.TripId)
+                    .SingleOrDefault()
+            );
+            UnitOfWork.SaveChanges();    
+        }
+        public void AcceptRequest(CamperIdTripIdModel model)
+        {
+            var tripCamper = Mapper.Map<TripCamperIdModel, TripCamper>(
+                 new TripCamperIdModel
+                 {
+                     TripId = model.TripId,
+                     CamperId = model.CamperId,
+                     IsOrganizer = false
+                 });
+
+            UnitOfWork.TripCampers.Insert(tripCamper);
+
+            UnitOfWork.SaveChanges();
         }
     }
 }

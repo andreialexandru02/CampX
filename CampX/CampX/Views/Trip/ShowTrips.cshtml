@@ -5,7 +5,8 @@
 }
 
 <h1>ShowTrip</h1>
-
+<link rel="stylesheet" href="~/css/Trip/ShowTrips.css" type="text/css" />
+<script type="text/javascript" defer src="~/js/Trip/ShowTrips.js"></script>
 <p>
     <a asp-action="Show">Create New</a>
 </p>
@@ -80,3 +81,8 @@
 }
     </tbody>
 </table>
+<div class="input-group">
+    <input id="searchInput" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+    <button id="searchButton" type="button" class="btn btn-outline-primary">Search</button>
+</div>
+<div id="searchDiv"><div>

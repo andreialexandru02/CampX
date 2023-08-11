@@ -2,6 +2,7 @@
 using CampX.BusinessLogic.Implementations.Trips;
 using CampX.BusinessLogic.Implementations.Trips.Models;
 using CampX.Code.Base;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CampX.Controllers
@@ -56,6 +57,23 @@ namespace CampX.Controllers
         public IActionResult TripDetailsJSON([FromQuery]int id)
         {
             return Json(Service.TripDetails(id));
+        }
+        [HttpPost]
+
+        public IActionResult DeleteTrip(int id)
+        {
+            Service.DeleteTrip(id);
+            return RedirectToAction("ShowTrips", "Trip");
+        }
+        [HttpPost]
+        public IActionResult SearchTrip(string code)
+        {
+            var id = Service.SearchCode(code);
+            if(id == -1)
+            {
+                return NotFound();
+            }
+            return Ok(new { redirectUrl = $"/Trip/TripDetails/{id}" });
         }
     }
 }

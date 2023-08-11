@@ -3,6 +3,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 20,
     attribution: '© OpenStreetMap'
 }).addTo(map);
+var currentCamper = document.getElementById('currentCamper')
 
 var url = window.location.href.split('/');
 var id = url[url.length - 1];
@@ -13,18 +14,36 @@ $.ajax({
     data: { id: id }
 }).done((trip) => {
     trip.campsites.forEach((campsite) => {
-
         console.log(campsite.latitude, campsite.longitude)
         marker = L.marker([campsite.latitude, campsite.longitude], { icon: tentIcon }).addTo(map)
         marker.on('click', function () {
-            window.location.href = '../Map/CampsiteDetails/' + campsite.id;
+            window.location.href = '/Map/CampsiteDetails/' + campsite.id;
         })
     })
-    var currentCamper = document.getElementById('currentCamper')
+    deleteButton = document.getElementById("deleteButton")
+    deleteButton.style.display = 'none'
+    trip.tripCampers.forEach((item) => {
+
+        if (item.camper.id == currentCamper.value && item.isOrganizer) {
+
+            deleteButton.style.display = 'block'
+        }   
+    })
     var requestDiv = document.getElementById('requestContainer')
     requestDiv.style.display = 'none'
     var requestDescription = document.getElementById('expandableField')
     joinButton = document.getElementById('joinButton')
+    var isInTrip = false
+    trip.tripCampers.forEach((item) => {
+
+        if (item.camper.id == currentCamper.value) {
+            isInTrip = true;
+        }
+    })
+    if (isInTrip)
+    {
+        joinButton.style.display = 'none'
+    }
     requestButton = document.getElementById('requestButton')
     var requestSpan = document.createElement('span')
     requestSpan.innerHTML = 'Ai facut deja un request pentru acest trip!'

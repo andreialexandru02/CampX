@@ -16,7 +16,7 @@ namespace CampX.Controllers
         {
             this.Service = service;
         }
-
+        [HttpPost]
         public bool CheckRequest(AddRequestModel model)
         {
             if (Service.CheckRequestDuplicate(model))
@@ -25,14 +25,14 @@ namespace CampX.Controllers
             }
             return true;
         }
+        [HttpPost]
         public IActionResult AddRequest(AddRequestModel model)
         {
-            
 
             Service.AddRequest(model);
             return View();
         }
-
+        [HttpGet]
         public IActionResult ShowRequests()
         {
             if (!currentCamper.IsAuthenticated)
@@ -43,5 +43,34 @@ namespace CampX.Controllers
 
             return View(models);
         }
+        [HttpGet]
+        public IActionResult ShowRequestsJson()
+        {
+            if (!currentCamper.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "CamperAccount");
+            }
+            return Json(Service.ShowRequests());
+        }
+
+        [HttpPost]
+
+        public IActionResult DeleteRequest(CamperIdTripIdModel model)
+        {
+            Service.DeleteRequest(model);
+
+            return RedirectToAction("ShowRequests", "Request");
+        }
+
+        [HttpPost]
+
+        public IActionResult AcceptRequest(CamperIdTripIdModel model)
+        {
+            Service.AcceptRequest(model);
+            Service.DeleteRequest(model);
+
+            return RedirectToAction("ShowRequests", "Request");
+        }
+
     }
 }

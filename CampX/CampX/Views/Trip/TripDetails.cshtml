@@ -18,66 +18,73 @@
 
 <script type="text/javascript" defer src="~/js/Trip/TripDetails.js"></script>
 <script type="text/javascript" defer src="~/js/TentIcon.js"></script>
-<h1>TripDetails</h1>
-<div id="map"></div>
-<div>
-
-    <dl class="row">
-        <dt class = "col-sm-2">
-            Nume:
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            Descriere:
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description) 
-        </dd>
-        <dt class = "col-sm-2">
-            Vizibilitate:
-        </dt>
-        <dd class = "col-sm-10">
-            @if (Model.IsPublic)
-            {
-                <span>Public</span>
-            }
-            else
-            {
-               <span>Privat</span>
-         
-            }
-        </dd>
-        <dt class = "col-sm-2">
-            Data:
-        </dt>
-        <dd class = "col-sm-10">       
-            @if (Model.Date != null)
-            {
-                @String.Format("{0:d}", Model.Date);
-            }
-            else
-            {
-                <span>Nu a fost setat o data pentru acesta excursie</span>
-            }
-        </dd>
-        <dt class = "col-sm-2">
-            Cod
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Code)
-        </dd>
-    </dl>
-</div>
-
-
 @if (currentCamper.IsAuthenticated == false)
 {
     <a href="~/CamperAccount/Login">Login</a>
 }
-else
-{
+else{   
+    <h1>TripDetails</h1>
+    <div id="map"></div>
+    <div>
+
+        <dl class="row">
+            <dt class = "col-sm-2">
+                Nume:
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt class = "col-sm-2">
+                Descriere:
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Description) 
+            </dd>
+            <dt class = "col-sm-2">
+                Vizibilitate:
+            </dt>
+            <dd class = "col-sm-10">
+                @if (Model.IsPublic)
+                {
+                    <span>Public</span>
+                }
+                else
+                {
+                   <span>Privat</span>
+         
+                }
+            </dd>
+            <dt class = "col-sm-2">
+                Data:
+            </dt>
+            <dd class = "col-sm-10">       
+                @if (Model.Date != null)
+                {
+                    @String.Format("{0:d}", Model.Date);
+                }
+                else
+                {
+                    <span>Nu a fost setat o data pentru acesta excursie</span>
+                }
+            </dd>
+            <dt class = "col-sm-2">
+                Cod
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Code)
+            </dd>
+            <dt class="col-sm-2">
+                Participanti:
+            </dt>
+            <dd class="col-sm-10">
+                @foreach(var tripCamper in Model.TripCampers)
+                {
+                    <span>@tripCamper.Camper.FirstName @tripCamper.Camper.LastName,</span>
+                }
+            </dd>
+        </dl>
+    </div>
+
     <input id="currentCamper" type= "hidden" value = @currentCamper.Id>
     <button class="btn btn-primary" id="joinButton">Join</button>
     <div id="requestContainer">
@@ -93,16 +100,11 @@ else
             </div>
         </div>
     </div>
+
+    <div>
+        <a asp-action="ShowTrips">Back to List</a>
+    </div>
+    <div>
+        <a id="deleteButton" asp-action="DeleteTrip" asp-route-id=@Model.Id>Delete Trip</a>
+    </div>
 }
-
-
-
-
-
-
-
-
-
-<div>
-    <a asp-action="ShowTrips">Back to List</a>
-</div>

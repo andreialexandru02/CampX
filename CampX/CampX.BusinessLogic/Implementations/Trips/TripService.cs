@@ -175,6 +175,24 @@ namespace CampX.BusinessLogic.Implementations.Trips
 
             return trip;
         }
+        public void DeleteTrip(int id)
+        {
+            UnitOfWork.Trips.Delete(
+                UnitOfWork.Trips.Get()
+                    .Where(t => t.Id == id)
+                    .SingleOrDefault()
+            );
+            UnitOfWork.SaveChanges();
+        }
+        public int SearchCode(string code)
+        {
+            var trip = UnitOfWork.Trips.Get()
+                .SingleOrDefault(t => t.Code == code);
+            if(trip == null ) {
+                return -1;
+            }
+            return trip.Id;
+        }
     }
 
 }
