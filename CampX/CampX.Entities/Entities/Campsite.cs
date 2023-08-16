@@ -19,7 +19,7 @@ public partial class Campsite
 
     public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
 
-    public virtual ICollection<Image> Roles { get; set; } = new List<Image>();
+    public virtual ICollection<Image> Images { get; set; } = new List<Image>();
 
     public virtual ICollection<Trip> Trips { get; set; } = new List<Trip>();
 }

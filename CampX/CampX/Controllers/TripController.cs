@@ -58,8 +58,8 @@ namespace CampX.Controllers
         {
             return Json(Service.TripDetails(id));
         }
-        [HttpPost]
-
+        
+        [HttpGet]
         public IActionResult DeleteTrip(int id)
         {
             Service.DeleteTrip(id);
@@ -73,7 +73,9 @@ namespace CampX.Controllers
             {
                 return NotFound();
             }
-            return Ok(new { redirectUrl = $"/Trip/TripDetails/{id}" });
+            // return Ok(new { redirectUrl = $"/Trip/TripDetails/{id}" });
+            //return RedirectToAction("ShowMap", "Trip");
+            return Json(id);
         }
     }
 }

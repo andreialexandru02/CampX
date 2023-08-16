@@ -136,7 +136,7 @@ public partial class CampXContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("PK__Images__C8C63E4A5A89B8B5");
 
-            entity.HasMany(d => d.Campsites).WithMany(p => p.Roles)
+            entity.HasMany(d => d.Campsites).WithMany(p => p.Images)
                 .UsingEntity<Dictionary<string, object>>(
                     "CampsiteImage",
                     r => r.HasOne<Campsite>().WithMany()

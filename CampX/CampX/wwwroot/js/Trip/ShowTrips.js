@@ -22,9 +22,8 @@ searchButton.onclick = () => {
                 searchDiv.innerText = "Nu exista un trip cu acest cod!"
                 searchDiv.style.display = 'block'
             })
-            .done(() => {
-               // window.location.href = '../Trip/TripDetails/' + campsite.id;
-               console.log("done")
+            .done((id) => {
+                window.location.href = '../Trip/TripDetails/' + id;
             })
     }
 }

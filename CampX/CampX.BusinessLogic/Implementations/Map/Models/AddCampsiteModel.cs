@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CampX.BusinessLogic.Implementations.Images.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,5 +18,7 @@ namespace CampX.BusinessLogic.Implementations.Map.Models
         public decimal Latitude { get; set; }
 
         public decimal Longitude { get; set; }
+
+        public  ICollection<ImageModel> Images { get; set; } = new List<ImageModel>();
     }
 }

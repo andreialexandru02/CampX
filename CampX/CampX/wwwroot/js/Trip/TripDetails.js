@@ -16,6 +16,19 @@ $.ajax({
     trip.campsites.forEach((campsite) => {
         console.log(campsite.latitude, campsite.longitude)
         marker = L.marker([campsite.latitude, campsite.longitude], { icon: tentIcon }).addTo(map)
+
+        var iframeLink = `https://www.meteoblue.com/en/weather/widget/three?geoloc=manual&lat=${campsite.latitude}&lon=${campsite.longitude}&nocurrent=0&noforecast=0&days=4&tempunit=CELSIUS&windunit=KILOMETER_PER_HOUR&layout=image` 
+        var iframe = document.createElement("iframe");
+        console.log(iframeLink)
+        iframe.src = iframeLink;
+        iframe.frameBorder = "0";
+        iframe.scrolling = "NO";
+        iframe.allowTransparency = "true";
+        iframe.sandbox = "allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox";
+        iframe.style.width = "460px";
+        iframe.style.height = "590px";
+
+        document.getElementById("weatherContainer").appendChild(iframe);
         marker.on('click', function () {
             window.location.href = '/Map/CampsiteDetails/' + campsite.id;
         })
@@ -91,19 +104,10 @@ $.ajax({
                         
                     }
                 }
-
-
             )
-            
-
-                
-            
-           
 
         }
 
-
-
     }
-
+    
 })

@@ -2,57 +2,66 @@
 @{
     ViewData["Title"] = "ShowTrip";
 }
+
+
+<link rel="stylesheet" href="~/css/Request/ShowRequests.css" type="text/css" />
 <script type="text/javascript" defer src="~/js/Request/ShowRequests.js"></script>
 <h1>Requesturile tale:</h1>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Nume trip
-            </th>
-            <th>
-                Date trip
-            </th>
-            <th>
-                Nume Camper
-            </th>
-            <th>
-                Descriere
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+@if(Model.Count() == 0)
+{
+    <div>Nu aveti niciun request nou!</div>
+}
+else
+{
+    <table class="table">
+        <thead>
             <tr>
-                <td class="requestTd">
-                    @Html.DisplayFor(modelItem => item.Trip.Name)
-                </td>
-                <td class="requestTd">
-                    @if (item.Trip.Date != null)
-                    {
-                        @String.Format("{0:d}", item.Trip.Date)
-                        ;
-                    }
-                    else
-                    {
-                        <text>Nu a fost setat o data pentru acesta excursie</text>
-                    }
-                </td>
-                <td class="requestTd">
-                    @Html.DisplayFor(modelItem => item.Camper.FirstName)
-                </td>
-                <td class="requestTd">
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
+                <th>
+                    Nume trip
+                </th>
+                <th>
+                    Date trip
+                </th>
+                <th>
+                    Nume Camper
+                </th>
+                <th>
+                    Descriere
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="requestTd">
+                        @Html.DisplayFor(modelItem => item.Trip.Name)
+                    </td>
+                    <td class="requestTd">
+                        @if (item.Trip.Date != null)
+                        {
+                            @String.Format("{0:d}", item.Trip.Date)
+                            ;
+                        }
+                        else
+                        {
+                            <text>Nu a fost setat o data pentru acesta excursie</text>
+                        }
+                    </td>
+                    <td class="requestTd">
+                        @Html.DisplayFor(modelItem => item.Camper.FirstName)
+                    </td>
+                    <td class="requestTd">
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
 
-                   <a onclick="AcceptDelete('@item.Camper.Id', '@item.Trip.Id', '/Request/AcceptRequest')">&#x2714;</a>
-                    <a onclick="AcceptDelete('@item.Camper.Id', '@item.Trip.Id', '/Request/DeleteRequest')">&#10006</a               
-                </td>
-            </tr>            
-        }
-    </tbody>
-</table>
+                       <a class = "acceptDecline" onclick="AcceptDelete('@item.Camper.Id', '@item.Trip.Id', '/Request/AcceptRequest')">&#x2714;</a>
+                        <a class = "acceptDecline" onclick="AcceptDelete('@item.Camper.Id', '@item.Trip.Id', '/Request/DeleteRequest')">&#10006</a               
+                    </td>
+                </tr>            
+            }
+        </tbody>
+    </table>
+}

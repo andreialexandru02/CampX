@@ -72,7 +72,7 @@ namespace CampX.Controllers
         public async Task<IActionResult> Logout()
         {
             await LogOut();
-
+            
             return RedirectToAction("Index", "Home");
         }
 
