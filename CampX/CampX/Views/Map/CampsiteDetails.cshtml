@@ -1,4 +1,4 @@
-﻿@model CampX.BusinessLogic.Implementations.Map.Models.AddCampsiteModel;
+﻿@model CampX.BusinessLogic.Implementations.Map.Models.CampsiteDetailsModel;
 
 @*LeaftLet refferences*@
 <script type="text/javascript" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -38,8 +38,14 @@
     
 <div id="map"></div>
 
-<a asp-controller="Map" asp-action="Delete" asp-route-id="@ViewContext.RouteData.Values["id"]"> Delete Campsite</a>
-<a asp-controller="Map" asp-action="EditCampsite" asp-route-id="@ViewContext.RouteData.Values["id"]"> Edit Campsite</a>
+@foreach(var imgId in Model.ImageIds)
+{
+    <img style="height: 225px; display: inline-block;" src="/Image/GetImgContent?id=@imgId" />
+    
+}
+
+<a style="display: block;" asp-controller="Map" asp-action="Delete" asp-route-id="@ViewContext.RouteData.Values["id"]"> Delete Campsite</a>
+<a style="display: block;" asp-controller="Map" asp-action="EditCampsite" asp-route-id="@ViewContext.RouteData.Values["id"]"> Edit Campsite</a>
 
 <div id="review-container">Reviews
 

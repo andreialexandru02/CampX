@@ -4,7 +4,9 @@ using CampX.BusinessLogic.Implementations.Map;
 using CampX.BusinessLogic.Implementations.Map.Models;
 using CampX.Code.Base;
 using CampX.Entities;
+using System.Web;
 using Microsoft.AspNetCore.Mvc;
+using CampX.BusinessLogic.Implementations.Images;
 
 namespace CampX.Controllers
 {
@@ -12,11 +14,14 @@ namespace CampX.Controllers
     {
 
         private readonly CampsiteService Service;
+        private readonly ImagesService imgService;
 
-        public MapController(ControllerDependencies dependencies, CampsiteService service)
+        public MapController(ControllerDependencies dependencies, CampsiteService service,ImagesService imgService)
            : base(dependencies)
         {
             this.Service = service;
+            this.imgService = imgService;
+
         }
 
         [HttpGet]
@@ -36,12 +41,21 @@ namespace CampX.Controllers
 
         public IActionResult AddCampsite(AddCampsiteModel model)
         {
-            if (model == null)
+            /*for (int i = 0; i < Request.Files.Count; i++)
+            {
+                HttpPostedFileBase file = Request.Files[i];
+                if (file != null)
+                {
+                    // Do something here
+                }
+            }*/
+                if (model == null)
             {
                 return View("Error_NotFound");
             }
-
-            Service.AddCampsite(model);
+            var imgList = imgService.AddImages(model.Images);
+            
+            Service.AddCampsite(model,imgList);
 
             return RedirectToAction("ShowMap", "Map");
         }
@@ -88,14 +102,14 @@ namespace CampX.Controllers
 
         public IActionResult EditCampsite(int id)
         {
-            var campsite = Service.CampsiteDetails(id);
+            var campsite = Service.CampsiteToEdit(id);
             
             return View("EditCampsite", campsite);
         }
 
         [HttpPost]
 
-        public IActionResult EditCampsite(AddCampsiteModel model, int id)
+        public IActionResult EditCampsite(EditCampsiteModel model, int id)
         {
             if (model == null)
             {

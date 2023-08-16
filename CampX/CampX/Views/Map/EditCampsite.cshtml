@@ -1,4 +1,4 @@
-﻿@model CampX.BusinessLogic.Implementations.Map.Models.AddCampsiteModel
+﻿@model CampX.BusinessLogic.Implementations.Map.Models.EditCampsiteModel
 @{
     ViewData["Title"] = "View";
 }
@@ -21,9 +21,14 @@
 
 
 <div id="map"></div>
+@foreach (var imgId in Model.stringImageIds.Split(','))
+{
+    <img style="height: 225px; display: inline-block;" src="/Image/GetImgContent?id=@imgId"/>
+}
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="EditCampsite" asp-controller="Map" asp-route-id="@ViewContext.RouteData.Values["id"]">
+        <form asp-action="EditCampsite" asp-controller="Map" asp-route-id="@ViewContext.RouteData.Values["id"]" enctype="multipart/form-data" method="post">
+            
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -50,11 +55,16 @@
                 <input id="LngInput" asp-for="Longitude" class="form-control" value ="@Model.Longitude" />
                 <span asp-validation-for="Longitude" class="text-danger"></span>
             </div>
-
+            <div class="form-group">
+                <label asp-for="Images" class="control-label" id="img_form"></label>
+                <input asp-for="Images" type="file" name="Images" id="ImageData" multiple/>
+                <span asp-validation-for="Images" class="text-danger"></span>
+            </div>
+            <input asp-for="stringImageIds" value = "@Model.stringImageIds" type= "hidden" />
             <br></br>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
+            </div>                   
         </form>
     </div>
 </div>

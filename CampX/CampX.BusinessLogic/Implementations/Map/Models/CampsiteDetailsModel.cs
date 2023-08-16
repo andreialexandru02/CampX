@@ -1,4 +1,4 @@
-﻿using CampX.BusinessLogic.Implementations.Images.Models;
+﻿using CampX.Entities;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CampX.BusinessLogic.Implementations.Map.Models
 {
-    public class AddCampsiteModel
+    public class CampsiteDetailsModel
     {
         public string Name { get; set; } = null!;
 
@@ -20,6 +20,6 @@ namespace CampX.BusinessLogic.Implementations.Map.Models
 
         public decimal Longitude { get; set; }
 
-        public List<IFormFile> Images { get; set; }
+        public List <int> ImageIds { get; set; }
     }
 }
