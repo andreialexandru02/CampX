@@ -193,6 +193,63 @@ namespace CampX.BusinessLogic.Implementations.Trips
             }
             return trip.Id;
         }
+
+        public List<ShowTripsModel> ShowCurrentCamperTrips()
+        {
+            var trips = UnitOfWork.Trips.Get()
+                    .Include(tc => tc.TripCampers).ThenInclude(c => c.Camper)
+                    .Include(c => c.Campsites)
+                    .Where(t => t.TripCampers.Any(tc => tc.IsOrganizer && tc.CamperId == CurrentCamper.Id))
+                    .ToList();
+
+           
+
+            var currentCamperTrips = new List<ShowTripsModel>();
+            foreach (var trip in trips)
+            {
+                var campsites = new List<TripCampsitesModel>();
+                var tripCampers = new List<TripCamperModel>();
+                foreach (var campsite in trip.Campsites)
+                {
+                    campsites.Add(new TripCampsitesModel
+                    {
+                        Id = campsite.Id,
+                        Name = campsite.Name,
+                        Description = campsite.Description,
+                        Difficulty = campsite.Difficulty,
+                        Latitude = campsite.Latitude,
+                        Longitude = campsite.Longitude,
+                    });                 
+                }
+                foreach(var tripCamper in trip.TripCampers)
+                {
+                    tripCampers.Add(new TripCamperModel
+                    {
+                        TripId = trip.Id,
+                        Camper = new CamperModel
+                        {
+                            Id = tripCamper.Camper.Id,
+                            FirstName = tripCamper.Camper.FirstName,
+                            LastName = tripCamper.Camper.LastName,
+                            Email = tripCamper.Camper.Email
+                        },
+                        IsOrganizer = tripCamper.IsOrganizer
+                    });
+                }
+                    currentCamperTrips.Add(new ShowTripsModel
+                {
+                    Id = trip.Id,
+                    Name = trip.Name,
+                    Description = trip.Description,
+                    Date = trip.Date,
+                    IsPublic = trip.IsPublic,
+                    Code = trip.Code,
+                    Campsites = campsites,
+                    TripCampers = tripCampers
+                    });
+            }
+            return currentCamperTrips; 
+        }
     }
 
 }

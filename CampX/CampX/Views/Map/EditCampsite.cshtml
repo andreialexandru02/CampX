@@ -61,12 +61,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Images" class="control-label" id="img_form"></label>
-                <input asp-for="Images" type="file" name="Images" id="ImageData" multiple/>
+                <input class="form-control" asp-for="Images" type="file" name="Images" id="ImageData" multiple />
                 <span asp-validation-for="Images" class="text-danger"></span>
             </div>
             <div>
 
-                <select asp-for="ImageIds"  multiple="multiple" name="ImageIds" id="multipleSelect">
+                <select style ="display: none; asp-for="ImageIds"  multiple="multiple" name="ImageIds" id="multipleSelect">
                     @foreach (var img in Model.ImageIds)
                     {
                         <option id=@($"option{img}") value="@img"></option>

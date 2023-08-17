@@ -1,6 +1,9 @@
 ﻿using BCrypt.Net;
 using CampX.BusinessLogic.Base;
 using CampX.BusinessLogic.Implementations.Account.Models;
+using CampX.BusinessLogic.Implementations.Badges.Models;
+using CampX.BusinessLogic.Implementations.Campers.Models;
+using CampX.BusinessLogic.Implementations.Trips.Models;
 using CampX.Common.Extensions;
 using CampX.Common.ViewModels;
 using CampX.Entities;
@@ -82,6 +85,65 @@ namespace CampX.BusinessLogic.Implementations.Account
         }
 
         public void ChangePassword() { }
+
+        public CamperProfileModel GetCamperProfile(int id)
+        {
+            
+            var camper =  UnitOfWork.Campers.Get()
+                .Where(c => c.Id == id)
+                .SingleOrDefault();
+
+            var camperBadges = UnitOfWork.CamperBadges.Get()
+                .Where(cb => cb.CamperId == id)
+                .ToList();
+
+            var camperBadgesList = new List<CamperBadgeModel>();
+
+            foreach (var camperBadge in camperBadges)
+            {
+                var badge = UnitOfWork.Badges.Get()
+                    .Where(b => b.Id == camperBadge.BadgeId)
+                    .SingleOrDefault();
+
+                camperBadgesList.Add(new CamperBadgeModel
+                {
+                    CamperId = camperBadge.CamperId,
+                    Score = camperBadge.Score,
+                    Badge = new BadgeModel
+                    {
+                        Name = badge.Name,
+                        Milestone = badge.Milestone,
+                        ImageId = badge.ImageId,
+                    }
+                });
+            }
+            var trips = UnitOfWork.Trips.Get()
+                    .Include(tc => tc.TripCampers)
+                    .Where(t => t.IsPublic &&
+                        t.TripCampers.Any(tc => tc.IsOrganizer && tc.CamperId == camper.Id))
+                    .ToList();
+
+            var profileTrips = new List<TripForCamperProfileModel>();
+            foreach(var trip in trips)
+            {
+                profileTrips.Add(new TripForCamperProfileModel
+                {
+                    Id = trip.Id,
+                    Name = trip.Name,
+                    Description = trip.Description,
+                    Date = trip.Date
+                });
+            }
+            var camperProfileDebugger = new CamperProfileModel
+            {
+                FirstName = camper.FirstName,
+                LastName = camper.LastName,
+                Email = camper.Email,
+                CamperBadges = camperBadgesList,
+                Trips = profileTrips
+            };
+            return camperProfileDebugger;
+        }
     }
 }
 

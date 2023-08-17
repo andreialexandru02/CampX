@@ -1,0 +1,60 @@
+﻿@model CampX.BusinessLogic.Implementations.Campers.Models.CamperProfileModel;
+
+
+<h1>Camper Profile</h1>
+<h3>@Model.FirstName @Model.LastName</h3>
+<div>@Model.Email </div>
+
+<h3>Badge-uri</h3>
+@foreach(var camperBadge in Model.CamperBadges)
+{
+    <div style=" display: inline-block; margin-right: 50px;" >
+        <img style="height: 100px; display: inline-block;" src="/Image/GetImgContent?id=@camperBadge.Badge.ImageId" />
+        <div>@camperBadge.Badge.Name</div>
+        <div>Scor @camperBadge.Score</div>
+
+    </div>
+}
+@if(Model.Trips.Count != 0)
+{
+    
+    <table class="table">
+        <thead>
+            <h3>Tripuri organizate de @Model.FirstName @Model.LastName</h3>
+            <tr>
+                <th>
+                   Nume
+                </th>
+                <th>
+                   Descriere
+                </th>
+                <th>
+                   Date
+                </th>
+            </tr>
+        </thead>
+    
+        <tbody>
+            @foreach (var item in Model.Trips) {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @if (item.Date != null)
+                            {
+                                    @String.Format("{0:d}", item.Date);
+                            }
+                            else
+                            {
+                                <text>Nu a fost setat o data pentru acesta excursie</text>
+                            }
+                        </td>
+                    </tr>
+            }
+        </tbody>
+    </table>
+}

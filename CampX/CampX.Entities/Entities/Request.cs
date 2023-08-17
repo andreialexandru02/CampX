@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CampX.Entities;
+namespace CampX;
 
 public partial class Request
 {
@@ -9,7 +9,7 @@ public partial class Request
 
     public int CamperId { get; set; }
 
-    public DateTime Date { get; set; }
+    public DateTime? Date { get; set; }
 
     public string? Description { get; set; }
 

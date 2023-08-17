@@ -28,7 +28,6 @@
             <th>
                 Organizator
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -65,7 +64,7 @@
                         @if (camper.IsOrganizer)
                         {
                              <span>
-                                <a>
+                                <a href="~/CamperAccount/CamperProfile/@camper.Camper.Id">
                                       @camper.Camper.FirstName
                                       @camper.Camper.LastName  
                                   </a>

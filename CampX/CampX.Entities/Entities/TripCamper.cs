@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CampX.Entities;
+namespace CampX;
 
 public partial class TripCamper
 {
@@ -9,13 +9,11 @@ public partial class TripCamper
 
     public int CamperId { get; set; }
 
-    public int? NoteId { get; set; }
-
-    public bool IsOrganizer { get; set; }
+    public bool? IsOrganizer { get; set; }
 
     public virtual Camper Camper { get; set; } = null!;
 
-    public virtual Note? Note { get; set; }
+    public virtual ICollection<Note> Notes { get; set; } = new List<Note>();
 
     public virtual Trip Trip { get; set; } = null!;
 }

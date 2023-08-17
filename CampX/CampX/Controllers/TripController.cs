@@ -77,5 +77,13 @@ namespace CampX.Controllers
             //return RedirectToAction("ShowMap", "Trip");
             return Json(id);
         }
+
+        [HttpGet]
+
+        public IActionResult ShowCurrentCamperTrips()
+        {
+            var model = Service.ShowCurrentCamperTrips(); 
+            return View("ShowCurrentCamperTrips", model);
+        }
     }
 }

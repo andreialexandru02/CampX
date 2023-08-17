@@ -1,0 +1,129 @@
+﻿@model IEnumerable<CampX.BusinessLogic.Implementations.Trips.Models.ShowTripsModel>
+
+@{
+    ViewData["Title"] = "ShowTrip";
+}
+
+@using CampX.Common.ViewModels;
+@inject CurrentCamperDTO currentCamper
+<link rel="stylesheet" href="~/css/Trip/ShowCurrentCamperTrips.css" type="text/css" />
+<script type="text/javascript" defer src="~/js/Trip/ShowCurrentCamperTrips.js"></script>
+@if (currentCamper.IsAuthenticated == false)
+{
+    <a href="~/CamperAccount/Login">Login</a>
+}
+else if(@Model.Count() == 0 ){
+    <h1>Nu esti organizatorul niciunul trip!</h1>
+    <p>
+        <a asp-action="ShowMap">Creaza un trip nou!</a>
+    </p>
+}
+else{
+
+
+    <h1>Tripurile organizate de tine</h1>
+    <link rel="stylesheet" href="~/css/Trip/ShowTrips.css" type="text/css" />
+    <script type="text/javascript" defer src="~/js/Trip/ShowTrips.js"></script>
+    <p>
+        <a asp-action="ShowMap">Creaza un trip nou!</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Nume
+                </th>
+                <th>
+                    Descriere
+                </th>
+                <th>
+                    Data
+                </th>
+                <th>
+                    Vizibilitate
+                </th>
+                <th>
+                    Cod
+                </th>
+                <th>
+                    Locuri de campare
+                </th>
+                <th>
+                    Participanti
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @if (item.Date != null)
+                        {
+                            @String.Format("{0:d}", item.Date)
+                            ;
+                        }
+                        else
+                        {
+                            <text>Nu a fost setat o data pentru acesta excursie</text>
+                        }
+                    </td>
+                    <td>
+                        @if (item.IsPublic)
+                        {
+                            <text>Public</text>
+                        }
+                        else
+                        {
+                            <text>Privat</text>
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Code)
+                    </td>
+                    <td>
+                        @foreach (var campsite in item.Campsites)
+                        {
+
+                            <a asp-controller="Map" asp-action="CampsiteDetails" asp-route-id=@campsite.Id>
+                                @campsite.Name
+                            </a>
+                        }
+                    </td>
+                    <td>
+                        @if(item.TripCampers.Count == 1)
+                        {
+                            <text>Esti singurul participant al acestui trip!</text>
+                        }
+                        else
+                        {
+                            <div class="divTotiParticipantii">
+                                @foreach (var camper in item.TripCampers)
+                                {
+                                    @if (!camper.IsOrganizer)
+                                    {
+                                        <div class="divParticipant">
+                                            <a href="~/CamperAccount/CamperProfile/@camper.Camper.Id">
+                                                @camper.Camper.FirstName
+                                                @camper.Camper.LastName
+                                            </a>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        }
+                    </td>
+                    <td>
+                        <a asp-controller="Trip" asp-action="TripDetails" asp-route-id=@item.Id> Detalii</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

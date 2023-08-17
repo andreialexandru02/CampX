@@ -1,8 +1,7 @@
-﻿using CampX.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace CampX.Entities;
+namespace CampX;
 
 public partial class Badge
 {

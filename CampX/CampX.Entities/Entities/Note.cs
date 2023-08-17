@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CampX.Entities;
+namespace CampX;
 
 public partial class Note
 {
@@ -9,5 +9,9 @@ public partial class Note
 
     public string Content { get; set; } = null!;
 
-    public virtual ICollection<TripCamper> TripCampers { get; set; } = new List<TripCamper>();
+    public int TripId { get; set; }
+
+    public int CamperId { get; set; }
+
+    public virtual TripCamper TripCamper { get; set; } = null!;
 }

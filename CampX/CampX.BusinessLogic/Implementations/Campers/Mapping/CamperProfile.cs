@@ -15,7 +15,8 @@ namespace CampX.BusinessLogic.Implementations.Campers.Mapping
     {
         public CamperProfile()
         {
-            CreateMap<CamperModel, Camper>();          
+            CreateMap<CamperModel, Camper>();     
+            CreateMap<CamperBadgeModel, CamperBadge>();
         }
     }
 }

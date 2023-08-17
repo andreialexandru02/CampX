@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CampX.Entities;
+namespace CampX;
 
 public partial class EquipmentCamperTrip
 {

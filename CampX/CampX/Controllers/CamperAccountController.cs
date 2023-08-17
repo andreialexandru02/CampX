@@ -115,6 +115,11 @@ namespace CampX.Controllers
             await HttpContext.SignOutAsync(scheme: "CampXCookies");
         }
         
+        public IActionResult CamperProfile(int id)
+        {
+            var model = Service.GetCamperProfile(id);
+            return View("CamperProfile", model);
+        }
 
     }
 }
