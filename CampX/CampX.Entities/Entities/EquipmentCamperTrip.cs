@@ -1,9 +1,10 @@
-﻿using System;
+﻿using CampX.Common;
+using System;
 using System.Collections.Generic;
 
 namespace CampX;
 
-public partial class EquipmentCamperTrip
+public partial class EquipmentCamperTrip : IEntity
 {
     public int CamperId { get; set; }
 

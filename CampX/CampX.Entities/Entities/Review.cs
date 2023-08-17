@@ -1,9 +1,10 @@
-﻿using System;
+﻿using CampX.Common;
+using System;
 using System.Collections.Generic;
 
 namespace CampX;
 
-public partial class Review
+public partial class Review : IEntity
 {
     public int Id { get; set; }
 

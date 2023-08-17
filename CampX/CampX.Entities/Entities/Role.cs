@@ -1,9 +1,10 @@
-﻿using System;
+﻿using CampX.Common;
+using System;
 using System.Collections.Generic;
 
 namespace CampX;
 
-public partial class Role
+public partial class Role : IEntity
 {
     public int Id { get; set; }
 

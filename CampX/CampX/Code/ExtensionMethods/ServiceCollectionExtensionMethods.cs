@@ -10,6 +10,7 @@ using CampX.BusinessLogic.Implementations.Trips;
 using CampX.BusinessLogic.Implementations.Reviews;
 using CampX.BusinessLogic.Implementations.Requests;
 using CampX.BusinessLogic.Implementations.Images;
+using CampX.BusinessLogic.Implementations.Notes;
 
 namespace CampX.Code.ExtensionMethods
 {
@@ -31,6 +32,7 @@ namespace CampX.Code.ExtensionMethods
             services.AddScoped<ReviewService>();
             services.AddScoped<RequestService>();
             services.AddScoped<ImagesService>();
+            services.AddScoped<NoteService>();
             // add new services
 
             return services;

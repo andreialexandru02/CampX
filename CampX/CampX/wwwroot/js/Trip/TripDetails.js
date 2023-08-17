@@ -111,3 +111,13 @@ $.ajax({
     }
     
 })
+
+
+$.ajax({
+    type: "GET",
+    url: "/Note/ShowNotes",
+    data: { id: id }
+}).done((note) => {
+
+    console.log(note)
+})

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using CampX.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CampX.Context;
@@ -159,6 +158,11 @@ public partial class CampXContext : DbContext
             entity.ToTable("Note");
 
             entity.Property(e => e.Content).HasMaxLength(500);
+
+            entity.HasOne(d => d.TripCamper).WithMany(p => p.Notes)
+                .HasForeignKey(d => new { d.TripId, d.CamperId })
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_NOTE_TRIPCAMPER");
         });
 
         modelBuilder.Entity<Request>(entity =>
@@ -257,11 +261,6 @@ public partial class CampXContext : DbContext
             entity.HasOne(d => d.Camper).WithMany(p => p.TripCampers)
                 .HasForeignKey(d => d.CamperId)
                 .HasConstraintName("FK_CamperTrip_Camper");
-
-            entity.HasOne(d => d.Note).WithMany(p => p.TripCampers)
-                .HasForeignKey(d => d.NoteId)
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("FK_CamperTrip_Note");
 
             entity.HasOne(d => d.Trip).WithMany(p => p.TripCampers)
                 .HasForeignKey(d => d.TripId)

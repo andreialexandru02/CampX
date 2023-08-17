@@ -116,7 +116,6 @@ namespace CampX.BusinessLogic.Implementations.Trips
                             LastName = tc.Camper.LastName,
                             Email = tc.Camper.Email
                         },
-                        NoteId = tc.NoteId,
                         IsOrganizer = tc.IsOrganizer,
                     }).ToList(),
                     Campsites = trip.Campsites.Select(tc => new TripCampsitesModel
@@ -156,7 +155,6 @@ namespace CampX.BusinessLogic.Implementations.Trips
                             LastName = tc.Camper.LastName,
                             Email = tc.Camper.Email
                         },
-                        NoteId = tc.NoteId,
                         IsOrganizer = tc.IsOrganizer,
                     }).ToList(),
                     Campsites = c.Campsites.Select(tc => new TripCampsitesModel

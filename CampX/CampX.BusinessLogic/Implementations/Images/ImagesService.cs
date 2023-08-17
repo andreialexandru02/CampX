@@ -38,7 +38,7 @@ namespace CampX.BusinessLogic.Implementations.Images
 
 
 
-                    var imageEntity = Mapper.Map<ImageModel, Entities.Image>(new ImageModel
+                    var imageEntity = Mapper.Map<ImageModel, Image>(new ImageModel
                     {
                         ImageData = bytes
                     });

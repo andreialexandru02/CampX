@@ -1,9 +1,10 @@
-﻿using System;
+﻿using CampX.Common;
+using System;
 using System.Collections.Generic;
 
 namespace CampX;
 
-public partial class Request
+public partial class Request : IEntity
 {
     public int TripId { get; set; }
 
