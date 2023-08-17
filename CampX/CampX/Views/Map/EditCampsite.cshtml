@@ -23,10 +23,10 @@
 <div id="map"></div>
 @foreach (var imgId in Model.ImageIds)  
 {
-    <div style="display: inline-block;">
+    <div id=@($"div{imgId}") style ="display: inline-block;">
 
         <img style="height: 225px; display: block;" src="/Image/GetImgContent?id=@imgId" />
-        <button class="butoaneStergere" style="color: red; display: block;"> Sterge Imaginea</button>
+        <button id=@($"buton{imgId}") class="butoaneStergere" style="color: red; display: block;"> Sterge Imaginea</button>
     </div>
 }
 <div class="row">
@@ -64,15 +64,15 @@
                 <input asp-for="Images" type="file" name="Images" id="ImageData" multiple/>
                 <span asp-validation-for="Images" class="text-danger"></span>
             </div>
-            @*<div>
+            <div>
 
                 <select asp-for="ImageIds"  multiple="multiple" name="ImageIds" id="multipleSelect">
                     @foreach (var img in Model.ImageIds)
                     {
-                        <option  value="@img" selected></option>
+                        <option id=@($"option{img}") value="@img"></option>
                     }
                 </select>
-            </div>*@
+            </div>
             <br></br>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

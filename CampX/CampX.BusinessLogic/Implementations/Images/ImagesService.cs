@@ -62,6 +62,17 @@ namespace CampX.BusinessLogic.Implementations.Images
             }
             return img.ImageData;
         }
+        public void DeleteImages(List<int> imgListToDelete)
+        {
+            var imagesToDelete = UnitOfWork.Images.Get()
+                .Where(i => imgListToDelete.Contains(i.Id))
+                .ToList();  
 
+            foreach(var img in imagesToDelete)
+            {
+                UnitOfWork.Images.Delete(img);
+                UnitOfWork.SaveChanges();
+            }
+        }
     }
 }

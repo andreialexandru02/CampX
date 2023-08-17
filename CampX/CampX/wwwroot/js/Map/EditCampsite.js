@@ -36,23 +36,14 @@ $.ajax({
     data: { id: id }
 }).done((campsite) => {
 
-
-    // Function to handle click on delete buttons
-    function handleDeleteClick(event) {
-        var button = event.target;
-        var element = parseInt(button.getAttribute("data-imgId"));
-
-        if (!isNaN(element)) {
-            console.log("Element:", element);
-            // Perform your desired action with the element
+   var imagesToDeleteIds = []
+    campsite.imageIds.forEach((imgId) => {
+        document.getElementById(`option${imgId}`).selected = false;
+        var button = document.getElementById(`buton${imgId}`)
+        button.onclick = () => {
+            document.getElementById(`div${imgId}`).style.display = 'none'
+            document.getElementById(`option${imgId}`).selected = true;
+            console.log(imgId)
         }
-    }
-
-    var deleteButtons = document.querySelectorAll(".butoaneStergere");
-    deleteButtons.forEach((button) => {
-        button.addEventListener("click", handleDeleteClick);
-    });
-  
-
-
+    })
 })

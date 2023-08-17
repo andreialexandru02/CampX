@@ -122,9 +122,15 @@ namespace CampX.Controllers
             {
                 return View("Error_NotFound");
             }
-
-            var imgList = imgService.AddImages(model.Images);
-
+            if (model.ImageIds != null)
+            {
+                imgService.DeleteImages(model.ImageIds);
+            }
+            var imgList = new List<int>();
+            if (model.Images != null)
+            {
+                imgList = imgService.AddImages(model.Images);
+            }
             Service.EditCampsite(model,imgList,id);
 
             return RedirectToAction("ShowMap", "Map");

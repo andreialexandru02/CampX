@@ -15,10 +15,7 @@ namespace CampX.BusinessLogic.Implementations.Images.NewFolder
         private readonly UnitOfWork _unitOfWork;
         public ImageValidator(UnitOfWork unitOfWork)
         {
-            _unitOfWork = unitOfWork;
-            RuleFor(i => i.ImageData)
-                .NotEmpty().WithMessage("Camp obligatoriu!");
-
+    
         }
     }
 }
