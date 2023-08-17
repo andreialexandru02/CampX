@@ -19,7 +19,7 @@ namespace CampX.BusinessLogic.Implementations.Map.Models
 
         public decimal Longitude { get; set; }
 
-        public string stringImageIds { get; set; }
+        public List<int> ImageIds { get; set; }
 
 
         public List<IFormFile> Images { get; set; }

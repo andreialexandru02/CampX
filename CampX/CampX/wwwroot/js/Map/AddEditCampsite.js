@@ -9,15 +9,8 @@ var inputLat = document.getElementById('LatInput')
 var inputLng = document.getElementById('LngInput')
 
 
+var marker = null
 
-//marker = L.marker([inputLat.value, inputLat.value], { icon: tentIcon }).addTo(map)
-if (inputLat.value == 0.0 && inputLng.value == 0.0) {
-    var marker = null
-}
-else {
-    marker = L.marker([inputLat.value, inputLng.value], { icon: tentIcon }).addTo(map)
-    
-}
 function onMapClick(e) {
 
     if (marker != null) {

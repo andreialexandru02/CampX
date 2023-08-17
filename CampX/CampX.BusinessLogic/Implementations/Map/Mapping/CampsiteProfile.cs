@@ -21,8 +21,8 @@ namespace CampX.BusinessLogic.Implementations.Map.Mapping
             CreateMap<EditCampsiteModel, Campsite>()
                 .ForMember(t => t.Images, t => t.Ignore());
             CreateMap<CampsiteDetailsModel, EditCampsiteModel>()
-                 .ForMember(e => e.Images, e => e.Ignore())
-                 .ForMember(e => e.stringImageIds, e => e.MapFrom(d => string.Join(",", d.ImageIds.Select(x => x.ToString()).ToArray())));
+                 .ForMember(e => e.Images, e => e.Ignore()); 
+                // .ForMember(e => e.stringImageIds, e => e.MapFrom(d => string.Join(",", d.ImageIds.Select(x => x.ToString()).ToArray())));
 
         }
     }

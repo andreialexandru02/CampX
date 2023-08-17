@@ -107,6 +107,13 @@ namespace CampX.Controllers
             return View("EditCampsite", campsite);
         }
 
+        [HttpGet]
+
+        public IActionResult EditCampsiteJson(int id)
+        {
+            return Json(Service.CampsiteToEdit(id));          
+        }
+
         [HttpPost]
 
         public IActionResult EditCampsite(EditCampsiteModel model, int id)
@@ -116,7 +123,9 @@ namespace CampX.Controllers
                 return View("Error_NotFound");
             }
 
-            Service.EditCampsite(model,id);
+            var imgList = imgService.AddImages(model.Images);
+
+            Service.EditCampsite(model,imgList,id);
 
             return RedirectToAction("ShowMap", "Map");
         }

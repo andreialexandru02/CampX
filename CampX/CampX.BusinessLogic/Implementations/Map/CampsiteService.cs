@@ -111,10 +111,9 @@ namespace CampX.BusinessLogic.Implementations.Map
             );
             UnitOfWork.SaveChanges();
         }
-        public void EditCampsite(EditCampsiteModel model, int id)
+        public void EditCampsite(EditCampsiteModel model, List<int> imgList , int id)
         {
             EditCampsiteValidator.Validate(model).ThenThrow();
-
 
             var campsite = UnitOfWork.Campsites.Get()
                 .Where(c => c.Id == id)
@@ -122,6 +121,12 @@ namespace CampX.BusinessLogic.Implementations.Map
                 .SingleOrDefault();
 
             campsite = Mapper.Map<EditCampsiteModel, Campsite>(model);
+
+            var images = UnitOfWork.Images.Get()
+                .Where(i => imgList.Contains(i.Id))
+                .ToList();
+            //.Concat(model.ImageIds.ToList())
+            campsite.Images = images;
 
             campsite.Id = id;
             
