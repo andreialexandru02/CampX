@@ -17,7 +17,7 @@ $.ajax({
         console.log(campsite.latitude, campsite.longitude)
         marker = L.marker([campsite.latitude, campsite.longitude], { icon: tentIcon }).addTo(map)
 
-        var iframeLink = `https://www.meteoblue.com/en/weather/widget/three?geoloc=manual&lat=${campsite.latitude}&lon=${campsite.longitude}&nocurrent=0&noforecast=0&days=4&tempunit=CELSIUS&windunit=KILOMETER_PER_HOUR&layout=image` 
+        /*var iframeLink = `https://www.meteoblue.com/en/weather/widget/three?geoloc=manual&lat=${campsite.latitude}&lon=${campsite.longitude}&nocurrent=0&noforecast=0&days=4&tempunit=CELSIUS&windunit=KILOMETER_PER_HOUR&layout=image` 
         var iframe = document.createElement("iframe");
         console.log(iframeLink)
         iframe.src = iframeLink;
@@ -28,7 +28,7 @@ $.ajax({
         iframe.style.width = "460px";
         iframe.style.height = "590px";
 
-        document.getElementById("weatherContainer").appendChild(iframe);
+        document.getElementById("weatherContainer").appendChild(iframe);*/
         marker.on('click', function () {
             window.location.href = '/Map/CampsiteDetails/' + campsite.id;
         })
@@ -40,12 +40,14 @@ $.ajax({
         if (item.camper.id == currentCamper.value && item.isOrganizer) {
 
             deleteButton.style.display = 'block'
+          //  break
         }   
     })
     var requestDiv = document.getElementById('requestContainer')
     requestDiv.style.display = 'none'
     var requestDescription = document.getElementById('expandableField')
     joinButton = document.getElementById('joinButton')
+    var noteDiv = document.getElementById("note-container")
     var isInTrip = false
     trip.tripCampers.forEach((item) => {
 
@@ -53,9 +55,11 @@ $.ajax({
             isInTrip = true;
         }
     })
-    if (isInTrip)
-    {
+    if (isInTrip) {
         joinButton.style.display = 'none'
+    }
+    else {
+        noteDiv.style.display = 'none'
     }
     requestButton = document.getElementById('requestButton')
     var requestSpan = document.createElement('span')
@@ -63,11 +67,10 @@ $.ajax({
     requestSpan.style.color = 'red';
     requestDiv.appendChild(requestSpan)
     requestSpan.style.display = 'none'
-
+    
     joinButton.onclick = () => {
         joinButton.style.display = 'none'
         requestDiv.style.display = 'block'
-
         requestButton.onclick = () => {
            requestDiv.style.display = 'none'
            console.log(trip.id)
@@ -111,13 +114,121 @@ $.ajax({
     }
     
 })
-
+//NOTES
 
 $.ajax({
     type: "GET",
     url: "/Note/ShowNotes",
     data: { id: id }
-}).done((note) => {
+}).done((notes) => {
 
-    console.log(note)
+            var noteDiv = document.getElementById("note-container")
+            var plusIcon = document.createElement('i')
+            plusIcon.className = "fas fa-plus"
+            noteDiv.appendChild(plusIcon)
+            var noteInput = document.getElementById("noteInput")
+            noteInput.style.display = 'none'
+            noteButton = document.getElementById("noteButton")
+            var noteContent = document.getElementById("noteExpandableField")
+            let span = document.createElement('span')
+            span.innerText = 'Notita incompleta'
+            span.style.color = 'red'
+            noteInput.appendChild(span)
+            span.style.display = 'none'
+            plusIcon.onclick = () => {
+
+                if (plusIcon.className == 'fas fa-plus') {
+                    noteContent.value = ''
+
+                    plusIcon.className = 'fas fa-minus'
+                    noteInput.style.display = "block";
+
+                    noteButton.onclick = () => {
+                        console.log(noteContent.value)
+                        if (noteContent.value == '') {
+                            span.style.display = 'block'
+                        }
+                        else {
+                            $.ajax({
+                                type: "post",
+                                url: `/Note/AddNote`,
+                                datatype: "json",
+                                data: {
+                                    content: noteContent.value,
+                                    tripId: id,
+                                    camperId: currentCamper.value
+                                }
+                            })
+                                .done(() => {
+                                    window.location.reload()
+                                })
+                        }
+
+                    }
+                }
+                else {
+                    noteInput.style.display = "none";
+                    plusIcon.className = 'fas fa-plus'
+                }
+            }
+
+            notes.forEach(note => {
+
+            noteElement = document.createElement('div')
+            var contentSpan = document.createElement('span')
+            contentSpan.innerText = note.content
+            noteElement.appendChild(document.createElement('br'))
+            noteElement.appendChild(contentSpan)
+            var deleteIcon = document.createElement('i')
+            var editIcon = document.createElement('i')
+            editIcon.className = 'fas fa-pencil-alt'
+            deleteIcon.className = 'fas fa-times'
+            noteElement.appendChild(editIcon)
+            noteElement.appendChild(deleteIcon)
+            noteDiv.appendChild(noteElement)
+            deleteIcon.onclick = () => {
+
+                $.ajax({
+                    type: "post",
+                    url: `/Note/DeleteNote`,
+                    datatype: "json",
+                    data: {
+                        Id: note.id,
+                        TripId: id,
+                        Content: noteContent.value,
+                        CamperId: currentCamper.value
+                    }
+                })
+                    .done(() => {
+                        window.location.reload()
+                    })
+
+            }
+
+            editIcon.onclick = (e) => {
+                noteInput.style.display = "block";
+                plusIcon.className = 'fas fa-minus'
+                noteContent.value = e.target.previousSibling.innerText
+                noteButton.onclick = () => {
+                    $.ajax({
+                        type: "post",
+                        url: `/Note/EditNote`,
+                        datatype: "json",
+                        data: {
+                            Id: note.id,
+                            Tripid: id,
+                            CamperId: currentCamper.value,
+                            Content: noteContent.value
+                        }
+                    })
+                        .done(() => {
+                            window.location.reload()
+                        })
+                }
+            }
+        })           
+
+
+
+    
 })

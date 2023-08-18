@@ -142,11 +142,11 @@ public partial class CampXContext : DbContext
                         .HasForeignKey("CampsiteId")
                         .HasConstraintName("FK_CampsiteImages_Campsite"),
                     l => l.HasOne<Image>().WithMany()
-                        .HasForeignKey("RoleId")
+                        .HasForeignKey("ImageId")
                         .HasConstraintName("FK_CampsiteImages_Image"),
                     j =>
                     {
-                        j.HasKey("RoleId", "CampsiteId").HasName("PK__Campsite__65FFD46781223A53");
+                        j.HasKey("ImageId", "CampsiteId").HasName("PK__Campsite__65FFD46781223A53");
                         j.ToTable("CampsiteImages");
                     });
         });

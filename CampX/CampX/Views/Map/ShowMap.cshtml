@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<CampX.BusinessLogic.Implementations.Map.Models.ShowCampsitesModel>
+
 <a href="~/Map/AddCampsite">Adauga Campsite</a>
 <script type="text/javascript" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
@@ -13,4 +14,49 @@
 
 
 
-<div id="map" class="box-shadow"></div>
+
+<div id="container">
+    <div id="map" class="box-shadow"></div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Difficulty)
+                </th>
+                <th>
+                    Rating
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Difficulty)
+                    </td>
+                    <td>
+                        rating
+                    </td>
+                    <td>
+                        <a asp-controller="Map" asp-action="CampsiteDetails" asp-route-id=@item.Id> Detalii</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

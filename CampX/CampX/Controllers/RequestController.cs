@@ -72,5 +72,14 @@ namespace CampX.Controllers
             return RedirectToAction("ShowRequests", "Request");
         }
 
+        [HttpGet]
+
+        public IActionResult ShowPendingRequests() {
+
+            var model = Service.ShowPendingRequests();
+            return View(model);
+        
+        }
+
     }
 }

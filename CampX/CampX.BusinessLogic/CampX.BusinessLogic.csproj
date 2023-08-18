@@ -20,8 +20,4 @@
     <ProjectReference Include="..\CampX.Entities\CampX.Entities.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Implementations\Notes\Mapping\" />
-  </ItemGroup>
-
 </Project>

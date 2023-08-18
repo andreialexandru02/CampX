@@ -27,7 +27,8 @@ namespace CampX.Controllers
         [HttpGet]
         public IActionResult ShowMap()
         {
-            return View();
+            var model = Service.GetCampsites();
+            return View(model);
         }
         [HttpGet]
         public IActionResult AddCampsite()
@@ -53,7 +54,11 @@ namespace CampX.Controllers
             {
                 return View("Error_NotFound");
             }
-            var imgList = imgService.AddImages(model.Images);
+            var imgList = new List<int>();
+            if (model.Images != null)
+            {
+                imgList = imgService.AddImages(model.Images);
+            }
             
             Service.AddCampsite(model,imgList);
 

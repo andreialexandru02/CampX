@@ -59,13 +59,9 @@ namespace CampX.BusinessLogic.Implementations.Reviews
 
             var review = Mapper.Map<AddReviewModel, Review>(model);
 
-            //camper.Password = BCrypt.Net.BCrypt.EnhancedHashPassword(model.Password, 13);
-
-            // camper.Roles.Add(UnitOfWork.Roles.Get().Where(r => r.Id == 3).SingleOrDefault());
+            
 
             UnitOfWork.Reviews.Insert(review);
-            // trigger mail notifi
-            // insert audit 
 
             UnitOfWork.SaveChanges();
         }

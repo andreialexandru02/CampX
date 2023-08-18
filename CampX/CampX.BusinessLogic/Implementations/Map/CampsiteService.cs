@@ -34,6 +34,21 @@ namespace CampX.BusinessLogic.Implementations.Map
         }
 
 
+        public List<ShowCampsitesModel> GetCampsites()
+        {
+            var campsites = UnitOfWork.Campsites.Get()
+                .Select(c => new ShowCampsitesModel
+                {
+                    Id =  c.Id,
+                    Name =  c.Name,
+                    Description = c.Description,
+                    Difficulty = c.Difficulty,                  
+                } )
+                .ToList();
+
+            return campsites;
+        }
+
         public void AddCampsite(AddCampsiteModel model, List<int> imgList)
         {
 

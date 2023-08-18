@@ -18,9 +18,9 @@ namespace CampX.Controllers
             this.Service = service;
         }
 
-        public IActionResult AddNote(NoteModel model)
+        public IActionResult AddNote(AddNoteModel model)
         {
-           // Service.AddNote(model);
+            Service.AddNote(model);
 
             return RedirectToAction("TripDetails", "trip", new { id = model.TripId });
         }
@@ -29,6 +29,14 @@ namespace CampX.Controllers
         public IActionResult ShowNotes(int id)
         {
             return Json(Service.ShowNotes(id));
+        }
+
+        [HttpPost]
+
+        public IActionResult DeleteNote(ShowNoteModel model)
+        {
+            Service.DeleteNote(model);
+            return RedirectToAction("TripDetails", "trip", new { id = model.TripId });
         }
     }
 }

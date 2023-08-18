@@ -108,8 +108,12 @@ const ShowReviews = (id) => {
 
                 }
                                
-                editIcon.onclick = () => {
+                editIcon.onclick = (e) => {
+                    console.log('asdisajd')
                     reviewInput.style.display = "block";
+                    plusIcon.className = 'fas fa-minus'
+                    reviewContent.value = e.target.previousSibling.innerText.split(': ')[1]
+                    console.log(e.target.previousSibling)
                     reviewButton.onclick = () => {
                         $.ajax({
                             type: "post",

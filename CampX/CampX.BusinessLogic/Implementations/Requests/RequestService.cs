@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Azure.Core;
 using CampX.BusinessLogic.Base;
 using CampX.BusinessLogic.Implementations.Campers.Models;
 using CampX.BusinessLogic.Implementations.Requests.Models;
@@ -123,6 +124,47 @@ namespace CampX.BusinessLogic.Implementations.Requests
             UnitOfWork.TripCampers.Insert(tripCamper);
 
             UnitOfWork.SaveChanges();
+        }
+
+        public List<Request> ShowPendingRequests()
+        {
+            var requests = UnitOfWork.Requests.Get()
+                .Include(r => r.Camper)
+                .Include(r => r.Trip)
+                .Where(r => r.CamperId == CurrentCamper.Id)
+                /*.Select(r => new PendingRequestsModel
+                {
+                    Camper = new CamperModel {
+                        FirstName = r.Camper.FirstName,
+                        LastName = r.Camper.LastName,
+                        Email = r.Camper.Email,
+                        Id = r.Camper.Id
+                    },
+                    Trip = new PendingRequestsTripModel
+                    {
+                        Id = r.Trip.Id,
+                        Name = r.Trip.Name,
+                        Date = r.Trip.Date,
+                        TripCampers = UnitOfWork.TripCampers.Get()
+                                        .Include(tc => tc.Camper)
+                                        .Where(tc => tc.TripId == r.Trip.Id && tc.IsOrganizer)
+                                        .Select(tc => new TripCamperOrganizerModel
+                                        {
+                                            IsOrganizer = tc.IsOrganizer,
+                                            Camper = new CamperModel
+                                            {
+                                                FirstName = tc.Camper.FirstName,
+                                                LastName = tc.Camper.LastName,
+                                                Email = tc.Camper.Email,
+                                                Id = tc.Camper.Id
+                                            },
+                                        })
+                                        .ToList()
+                    }
+
+                })*/
+                .ToList();
+            return requests;
         }
     }
 }
