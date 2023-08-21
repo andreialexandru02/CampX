@@ -4,6 +4,7 @@ using CampX.Context;
 using CampX.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using CampX.Code.ExtensionMethods;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,10 +31,19 @@ builder.Services.AddPresentation();
 builder.Services.AddCampXCurrentCamper();
 builder.Services.AddCampXBusinessLogic();
 
+builder.Services.AddAuthorization(options => {
+    options.AddPolicy("RequireAdministratorRole",
+        policy => policy.RequireClaim(ClaimTypes.Role, "1"));
+    options.AddPolicy("RequireModeratorRole",
+        policy => policy.RequireClaim(ClaimTypes.Role, "2"));
+
+    
+});
+
 builder.Services.AddAuthentication("CampXCookies")
        .AddCookie("CampXCookies", options =>
        {
-           options.AccessDeniedPath = new PathString("/Home");
+           options.AccessDeniedPath = new PathString("/Home/Error_Unauthorized");
            options.LoginPath = new PathString("/CamperAccount/Login");
        });
 

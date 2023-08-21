@@ -248,6 +248,64 @@ namespace CampX.BusinessLogic.Implementations.Trips
             }
             return currentCamperTrips; 
         }
+
+        public bool CheckOrganizer(int id)
+        {
+            var organizerId = UnitOfWork.Trips.Get()
+               .Include(t => t.TripCampers).ThenInclude(tc => tc.Camper)
+               .Where(t => t.Id == id)
+               .Select(t => t.TripCampers
+                           .SingleOrDefault(tc => tc.IsOrganizer).Camper.Id).SingleOrDefault();
+
+            return organizerId == CurrentCamper.Id;
+           
+        }
+        public ShowTripsModel TripToEdit(int id)
+        {
+            
+           
+            var trip = UnitOfWork.Trips.Get()
+                .Include(c => c.Campsites)
+                .Include(tc => tc.TripCampers).ThenInclude(c => c.Camper)
+                .Select(t => new ShowTripsModel
+                {
+                    Id = t.Id,
+                    Name = t.Name,
+                    Description = t.Description,
+                    IsPublic = t.IsPublic,
+                    Code = t.Code,
+                    Campsites = UnitOfWork.Campsites.Get()
+                                .Where(c => t.Campsites.Contains(c))
+                                .Select(c => new TripCampsitesModel
+                                {
+                                    Id = c.Id,
+                                    Name = c.Name,
+                                    Description = c.Description,
+                                    Difficulty = c.Difficulty,
+                                    Latitude = c.Latitude,
+                                    Longitude = c.Longitude
+                                })
+                                .ToList(),
+                    TripCampers = UnitOfWork.TripCampers.Get()
+                                .Where(tc => tc.TripId == t.Id)
+                                .Select(tc => new TripCamperModel
+                                {
+                                    TripId = tc.TripId,
+                                    Camper = new CamperModel
+                                    {
+                                        Id = tc.CamperId,
+                                        FirstName = tc.Camper.FirstName,
+                                        LastName = tc.Camper.LastName,
+                                        Email = tc.Camper.Email
+                                    },
+                                    IsOrganizer = tc.IsOrganizer
+                                })
+                                .ToList()
+
+                })
+                .SingleOrDefault(t => t.Id == id);
+            return trip;
+        }
     }
 
 }

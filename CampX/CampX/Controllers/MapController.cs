@@ -7,9 +7,11 @@ using CampX.Entities;
 using System.Web;
 using Microsoft.AspNetCore.Mvc;
 using CampX.BusinessLogic.Implementations.Images;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CampX.Controllers
 {
+    [Authorize]
     public class MapController : BaseController
     {
 
@@ -25,6 +27,7 @@ namespace CampX.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult ShowMap()
         {
             var model = Service.GetCampsites();
@@ -39,7 +42,7 @@ namespace CampX.Controllers
         }
 
         [HttpPost]
-
+        [Authorize(Policy = "RequireAdministratorRole")]
         public IActionResult AddCampsite(AddCampsiteModel model)
         {
             /*for (int i = 0; i < Request.Files.Count; i++)
@@ -66,7 +69,7 @@ namespace CampX.Controllers
         }
 
         [HttpGet]
-
+        [AllowAnonymous]
         public IActionResult DisplayCampsites()
         {
             return Json(Service.DisplayCampsites());

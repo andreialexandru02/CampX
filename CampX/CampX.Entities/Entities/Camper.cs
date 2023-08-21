@@ -27,6 +27,8 @@ public partial class Camper : IEntity
     public virtual Image? Image { get; set; }
 
     public virtual ICollection<Request> Requests { get; set; } = new List<Request>();
+    
+    public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
 
     public virtual ICollection<TripCamper> TripCampers { get; set; } = new List<TripCamper>();
 

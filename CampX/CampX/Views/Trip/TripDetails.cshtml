@@ -18,11 +18,11 @@
 
 <script type="text/javascript" defer src="~/js/Trip/TripDetails.js"></script>
 <script type="text/javascript" defer src="~/js/TentIcon.js"></script>
-@if (currentCamper.IsAuthenticated == false)
+@*@if (currentCamper.IsAuthenticated == false)
 {
     <a href="~/CamperAccount/Login">Login</a>
 }
-else{   
+else{  *@ 
     <h1>TripDetails</h1>
     <div id="map"></div>
     <div>
@@ -109,11 +109,11 @@ else{
     <div>
         <a id="deleteButton" asp-controller = "Trip" asp-action="DeleteTrip" asp-route-id=@Model.Id>Delete Trip</a>
     </div>
- @*   
+    
    <div id="weatherContainer"></div>
-   @* <iframe src="https://www.meteoblue.com/en/weather/widget/three/bucharest_romania_683506?geoloc=manual&lat="+ @Model.Campsites.SingleOrDefault().Latitude +"&lon="+ @Model.Campsites.SingleOrDefault().Longitude +"&nocurrent=0&noforecast=0&days=4&tempunit=CELSIUS&windunit=KILOMETER_PER_HOUR&layout=image"frameborder="0" scrolling="NO" allowtransparency="true" sandbox="allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox" style="width: 460px; height: 590px"></iframe>
+    <iframe src="https://www.meteoblue.com/en/weather/widget/three/bucharest_romania_683506?geoloc=manual&lat="+ @Model.Campsites.SingleOrDefault().Latitude +"&lon="+ @Model.Campsites.SingleOrDefault().Longitude +"&nocurrent=0&noforecast=0&days=4&tempunit=CELSIUS&windunit=KILOMETER_PER_HOUR&layout=image"frameborder="0" scrolling="NO" allowtransparency="true" sandbox="allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox" style="width: 460px; height: 590px"></iframe>
     <div><!-- DO NOT REMOVE THIS LINK --><a href="https://www.meteoblue.com/en/weather/week/bucharest_romania_683506?utm_source=weather_widget&utm_medium=linkus&utm_content=three&utm_campaign=Weather%2BWidget" 
-    target="_blank" rel="noopener">meteoblue</a></div>*@
+    target="_blank" rel="noopener">meteoblue</a></div>
     <div id="note-container">
         Notite
 

@@ -3,11 +3,12 @@ using CampX.BusinessLogic.Implementations.Notes.Models;
 using CampX.BusinessLogic.Implementations.Reviews;
 using CampX.BusinessLogic.Implementations.Reviews.Models;
 using CampX.Code.Base;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CampX.Controllers
 {
-
+    [Authorize]
     public class NoteController : BaseController
     {
         private readonly NoteService Service;

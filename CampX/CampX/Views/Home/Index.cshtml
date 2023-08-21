@@ -1,12 +1,17 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@using CampX.Common.ViewModels;
+@inject CurrentCamperDTO currentCamper
 @*<link rel="stylesheet" href="~/css/HomePage.css" type="text/css" />
 *@
     
     <br></br>
  
     <form method="post" asp-controller="CamperAccount" asp-action="Logout">
-    <button type="submit" class="btn btn-primary">Logut</button>
+    @if (currentCamper.IsAuthenticated == true)
+    {
+        <button type="submit" class="btn btn-primary">Logut</button>
+     }
     </form>
  

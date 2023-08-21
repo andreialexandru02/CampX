@@ -3,10 +3,12 @@ using CampX.BusinessLogic.Implementations.Requests.Models;
 using CampX.BusinessLogic.Implementations.Reviews;
 using CampX.Code.Base;
 using CampX.Common.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CampX.Controllers
 {
+    [Authorize]
 
     public class RequestController : BaseController
     {
@@ -56,7 +58,7 @@ namespace CampX.Controllers
         [HttpPost]
 
         public IActionResult DeleteRequest(CamperIdTripIdModel model)
-        {
+        {          
             Service.DeleteRequest(model);
 
             return RedirectToAction("ShowRequests", "Request");

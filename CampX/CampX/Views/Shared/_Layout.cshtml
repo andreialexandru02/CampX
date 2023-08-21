@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using CampX.Common.ViewModels;
+@inject CurrentCamperDTO currentCamper
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -30,41 +32,40 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">                     
                         <li class="nav-item">
-                            <a href="~/CamperAccount/Login">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="~/CamperAccount/Register">Register</a>
-                        </li>
-                        <li  class="nav-item">
-                            <a href="~/CamperAccount/Profile">Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a  href="~/Map/ShowMap">Map</a>
-                        </li>
-                        <li class="nav-item">
-                            <a  href="~/Map/CampsiteDetails/15">Campsite15</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="~/Trip/ShowMap">TripsMap</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="~/Trip/ShowTrips">TripsList</a>
-                        </li>
-                        <l1 class ="nav-item">
-                            <a href="~/Trip/TripDetails/24">TripDetails24</a>
-                        </l1>
-                        <l1 class="nav-item">
-                            <a href="~/Request/ShowRequests">My Requests</a>
-                        </l1
-                        <l1 class="nav-item">
-                            <a href="~/CamperAccount/CamperProfile/2">CamperProfile2</a>
-                        </l1>
-                        <l1 class="nav-item">
-                            <a href="~/Trip/ShowCurrentCamperTrips">myTrips</a>
-                        </l1>
-                        <l1 class="nav-item">
-                            <a href="~/Request/ShowPendingRequests/">Pending Requests</a>
-                        </l1>
+                                <a href="~/CamperAccount/Login">Login</a>
+                           </li>
+                           <li class="nav-item">
+                                <a href="~/CamperAccount/Register">Register</a>
+                           </li>
+                           <li class="nav-item">
+                                <a  href="~/Map/ShowMap">Map</a>
+                           </li>
+                           <li class="nav-item">
+                                <a href="~/Trip/ShowTrips">TripsList</a>
+                           </li>   
+                        @if (currentCamper.IsAuthenticated == true)
+                        {
+                            <li  class="nav-item">
+                                <a href="~/CamperAccount/Profile">Profile</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="~/Trip/ShowMap">TripsMap</a>
+                            </li>
+
+                            <l1 class ="nav-item">
+                                <a href="~/Trip/TripDetails/24">TripDetails24</a>
+                            </l1>
+                            <l1 class="nav-item">
+                                <a href="~/Request/ShowRequests">My Requests</a>
+                            </l1>
+                            <l1 class="nav-item">
+                                <a href="~/Trip/ShowCurrentCamperTrips">myTrips</a>
+                            </l1>
+                            <l1 class="nav-item">
+                                <a href="~/Request/ShowPendingRequests/">Pending Requests</a>
+                            </l1>
+                        }
                     </ul>
                 </div>
             </div>

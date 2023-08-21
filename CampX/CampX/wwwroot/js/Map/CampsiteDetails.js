@@ -54,6 +54,7 @@ const ShowReviews = (id) => {
                                 datatype: "json",
                                 data: {
                                     campsiteid: id,
+                                    CamperId: document.getElementById('currentCamper').value,
                                     rating: reviewRating.value,
                                     content: reviewContent.value
                                 }
@@ -124,6 +125,7 @@ const ShowReviews = (id) => {
                                 Campsiteid: id,
                                 Rating: reviewRating.value,
                                 Content: reviewContent.value
+
                             }
                         })
                             .done(() => {

@@ -82,7 +82,17 @@ namespace CampX.BusinessLogic.Implementations.Reviews
 
             UnitOfWork.SaveChanges();
         }
+        public bool CheckReviewOwner(int id)
+        {
+            var reviewOwnerId = UnitOfWork.Reviews.Get()
+                .Where(r => r.Id == id)
+                .Select(r => r.CamperId)
+                .SingleOrDefault();
+
+            return reviewOwnerId == CurrentCamper.Id;
     }
+    }
+  
 
     
 }

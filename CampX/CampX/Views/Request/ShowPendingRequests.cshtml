@@ -1,0 +1,69 @@
+﻿@model IEnumerable<CampX.BusinessLogic.Implementations.Requests.Models.PendingRequestsModel>
+@{
+    ViewData["Title"] = "ShowTrip";
+}
+
+
+<link rel="stylesheet" href="~/css/Request/ShowRequests.css" type="text/css" />
+@*<script type="text/javascript" defer src="~/js/Request/ShowRequests.js"></script>
+*@<h1>Requesturile tale:</h1>
+@if(Model.Count() == 0)
+{
+    <h3>Nu aveti niciun request in asteptare!</h3>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Nume trip
+                </th>
+                <th>
+                    Date trip
+                </th>
+                <th>
+                    Nume Organizator
+                </th>
+@*                <th>
+                    Descriere
+                </th>*@
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="requestTd">
+                        @Html.DisplayFor(modelItem => item.Trip.Name)
+                    </td>
+                    <td class="requestTd">
+                        @if (item.Trip.Date != null)
+                        {
+                            @String.Format("{0:d}", item.Trip.Date)
+                            ;
+                        }
+                        else
+                        {
+                            <text>Nu a fost setat o data pentru acesta excursie</text>
+                        }
+                    </td>
+                    <td class="requestTd">
+                        @foreach(var tripCamper in item.Trip.TripCampers)
+                        {
+                            if (tripCamper.IsOrganizer)
+                            {
+                                <text>@tripCamper.Camper.FirstName @tripCamper.Camper.LastName </text>
+                                
+                            }
+                        }
+                    </td>
+                   @* <td class="requestTd">
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>*@
+
+                </tr>            
+            }
+        </tbody>
+    </table>
+}

@@ -2,11 +2,14 @@
 using CampX.BusinessLogic.Implementations.Reviews;
 using CampX.BusinessLogic.Implementations.Reviews.Models;
 using CampX.Code.Base;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
 
 namespace CampX.Controllers
 {
+    [Authorize]
+
     public class ReviewController : BaseController
     {
 
@@ -19,7 +22,7 @@ namespace CampX.Controllers
         }
 
         [HttpGet]
-
+        [AllowAnonymous]
         public IActionResult ShowReviews(int id)
         {
             return Json(Service.ShowReviews(id));
@@ -33,10 +36,13 @@ namespace CampX.Controllers
         //}
 
         [HttpPost]
-
+         
         public IActionResult DeleteReview(DeleteReviewModel model)
         {
-
+            if (!Service.CheckReviewOwner(model.Id))
+            {
+                return RedirectToAction("Error_Unauthorized", "Home");
+            }
             Service.DeleteReview(model.Id);
 
             return RedirectToAction("CampsiteDetails", "Map", new { id = model.CampsiteId });
@@ -54,6 +60,10 @@ namespace CampX.Controllers
 
         public IActionResult EditReview(EditReviewModel model)
         {
+            if (!Service.CheckReviewOwner(model.Id))
+            {
+                return RedirectToAction("Error_Unauthorized", "Home");
+            }
             Service.EditReview(model);
 ;           
             return RedirectToAction("CampsiteDetails", "Map", new { id = model.CampsiteId });

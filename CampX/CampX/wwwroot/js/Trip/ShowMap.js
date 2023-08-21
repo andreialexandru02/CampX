@@ -92,7 +92,7 @@ const displayCampsites = () => {
             submitButton.onclick = () => {
 
                 if (selectedCampsitesIdsList.length == 0) {
-                    span.innerText = 'Selecteaza de pe hartacampsite-urile unde vrei sa mergi!'
+                    span.innerText = 'Selecteaza de pe harta campsite-urile unde vrei sa mergi!'
                     span.style.display = 'block'
                 }
                 else if (nameInput.value === '') { 

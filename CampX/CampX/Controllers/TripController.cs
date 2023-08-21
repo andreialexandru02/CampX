@@ -2,11 +2,13 @@
 using CampX.BusinessLogic.Implementations.Trips;
 using CampX.BusinessLogic.Implementations.Trips.Models;
 using CampX.Code.Base;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CampX.Controllers
 {
+    [Authorize]
     public class TripController : BaseController
     {
 
@@ -41,6 +43,7 @@ namespace CampX.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult ShowTrips()
         {
             var models = Service.ShowTrips();
@@ -48,6 +51,7 @@ namespace CampX.Controllers
             return View(models);
         }
         [HttpGet]
+
         public IActionResult TripDetails(int id)
         {
             var model = Service.TripDetails(id);
@@ -62,10 +66,15 @@ namespace CampX.Controllers
         [HttpGet]
         public IActionResult DeleteTrip(int id)
         {
+            if (!Service.CheckOrganizer(id))
+            {
+                return RedirectToAction("Error_Unauthorized", "Home");
+            }
             Service.DeleteTrip(id);
             return RedirectToAction("ShowTrips", "Trip");
         }
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult SearchTrip(string code)
         {
             var id = Service.SearchCode(code);
@@ -79,11 +88,24 @@ namespace CampX.Controllers
         }
 
         [HttpGet]
-
+        
         public IActionResult ShowCurrentCamperTrips()
         {
             var model = Service.ShowCurrentCamperTrips(); 
             return View("ShowCurrentCamperTrips", model);
+        }
+        
+        [HttpGet]
+        public IActionResult EditTrip(int id)
+        {
+
+            if (!Service.CheckOrganizer(id))
+            {
+                return RedirectToAction("Error_Unauthorized", "Home");
+            }
+            var trip = Service.TripToEdit(id);
+
+            return View("EditCampsite", trip);
         }
     }
 }

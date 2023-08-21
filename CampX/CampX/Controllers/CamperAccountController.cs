@@ -4,6 +4,7 @@ using CampX.BusinessLogic.Implementations.Account.Models;
 using CampX.Code.Base;
 using CampX.Common.ViewModels;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using System.Collections.Generic;
@@ -69,6 +70,7 @@ namespace CampX.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await LogOut();

@@ -6,8 +6,13 @@
     margin-top: 50px;
 }
 table {
-    
     position: relative;
     margin-left: 550px;
-    margin-top: -800px
+    margin-top: -800px;
+}
+
+.campsiteDescription {
+    
+    max-height: 50px;
+    overflow: hidden;
 }

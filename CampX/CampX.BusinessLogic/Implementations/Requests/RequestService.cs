@@ -126,13 +126,13 @@ namespace CampX.BusinessLogic.Implementations.Requests
             UnitOfWork.SaveChanges();
         }
 
-        public List<Request> ShowPendingRequests()
+        public List<PendingRequestsModel> ShowPendingRequests()
         {
             var requests = UnitOfWork.Requests.Get()
                 .Include(r => r.Camper)
                 .Include(r => r.Trip)
-                .Where(r => r.CamperId == CurrentCamper.Id)
-                /*.Select(r => new PendingRequestsModel
+                .Where(r => r.Camper.Id == CurrentCamper.Id)
+                .Select(r => new PendingRequestsModel
                 {
                     Camper = new CamperModel {
                         FirstName = r.Camper.FirstName,
@@ -160,9 +160,10 @@ namespace CampX.BusinessLogic.Implementations.Requests
                                             },
                                         })
                                         .ToList()
-                    }
+                    },
+                    Description =  r.Description
 
-                })*/
+                })
                 .ToList();
             return requests;
         }

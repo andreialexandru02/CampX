@@ -13,6 +13,10 @@ public partial class Review : IEntity
     public string? Content { get; set; }
 
     public int CampsiteId { get; set; }
+    
+    public int CamperId { get; set; }
 
     public virtual Campsite Campsite { get; set; } = null!;
+
+    public virtual Camper Camper { get; set; } = null!;
 }

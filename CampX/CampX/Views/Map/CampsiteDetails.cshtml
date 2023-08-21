@@ -66,3 +66,7 @@
 
     </div>
 </div>
+@using CampX.Common.ViewModels;
+@inject CurrentCamperDTO currentCamper
+
+<input id="currentCamper" type="hidden" value=@currentCamper.Id>

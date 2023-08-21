@@ -25,7 +25,7 @@ namespace CampX.BusinessLogic.Implementations.Notes
         public List<ShowNoteModel> ShowNotes(int id) {
 
             var notes = UnitOfWork.Notes.Get()
-                .Where(n => n.TripId == id && n.CamperId == CurrentCamper.Id)
+                .Where(n => n.TripId == id)// && n.CamperId == CurrentCamper.Id) pentru afisare doar a note-urilor mele
                 .Select(n => new ShowNoteModel
                 {
                     Id = n.Id,

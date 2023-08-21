@@ -192,6 +192,10 @@ public partial class CampXContext : DbContext
             entity.HasOne(d => d.Campsite).WithMany(p => p.Reviews)
                 .HasForeignKey(d => d.CampsiteId)
                 .HasConstraintName("FK_Reviews_Campsites");
+
+            entity.HasOne(d => d.Camper).WithMany(p => p.Reviews)
+                .HasForeignKey(d => d.CamperId)
+                .HasConstraintName("FK_Reviews_Campers");
         });
 
         modelBuilder.Entity<Role>(entity =>

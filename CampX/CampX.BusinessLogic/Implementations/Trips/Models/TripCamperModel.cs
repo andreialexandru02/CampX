@@ -13,8 +13,6 @@ namespace CampX.BusinessLogic.Implementations.Trips.Models
 
         public CamperModel? Camper { get; set; }
 
-        public int? NoteId { get; set; }
-
         public bool IsOrganizer { get; set; }
     }
 }
