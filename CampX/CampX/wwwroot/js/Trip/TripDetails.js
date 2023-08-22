@@ -35,12 +35,15 @@ $.ajax({
     })
     deleteButton = document.getElementById("deleteButton")
     deleteButton.style.display = 'none'
+    finishButton = document.getElementById("finishButton")
+    finishButton.style.display = 'none'
     trip.tripCampers.forEach((item) => {
 
         if (item.camper.id == currentCamper.value && item.isOrganizer) {
 
             deleteButton.style.display = 'block'
-          //  break
+            finishButton.style.display = 'block'
+          // break
         }   
     })
     var requestDiv = document.getElementById('requestContainer')
@@ -73,7 +76,7 @@ $.ajax({
         requestDiv.style.display = 'block'
         requestButton.onclick = () => {
            requestDiv.style.display = 'none'
-           console.log(trip.id)
+           //console.log(trip.id)
 
             
             $.ajax({
