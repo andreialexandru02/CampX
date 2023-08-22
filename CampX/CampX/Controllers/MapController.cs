@@ -42,7 +42,7 @@ namespace CampX.Controllers
         }
 
         [HttpPost]
-        [Authorize(Policy = "RequireAdministratorRole")]
+        //[Authorize(Policy = "RequireAdministratorRole")]
         public IActionResult AddCampsite(AddCampsiteModel model)
         {
             /*for (int i = 0; i < Request.Files.Count; i++)
@@ -94,7 +94,10 @@ namespace CampX.Controllers
 
         public IActionResult Delete(int id)
         {
-
+            if (!Service.CheckCampsiteOwner(id))
+            {
+                return RedirectToAction("Error_Unauthorized", "Home");
+            }
             return DeleteCampsite(id);
         }
         [HttpPost]
@@ -110,6 +113,11 @@ namespace CampX.Controllers
 
         public IActionResult EditCampsite(int id)
         {
+
+            if (!Service.CheckCampsiteOwner(id))
+            {
+                return RedirectToAction("Error_Unauthorized", "Home");
+            }
             var campsite = Service.CampsiteToEdit(id);
             
             return View("EditCampsite", campsite);
@@ -118,7 +126,7 @@ namespace CampX.Controllers
         [HttpGet]
 
         public IActionResult EditCampsiteJson(int id)
-        {
+        {            
             return Json(Service.CampsiteToEdit(id));          
         }
 
@@ -126,6 +134,7 @@ namespace CampX.Controllers
 
         public IActionResult EditCampsite(EditCampsiteModel model, int id)
         {
+           
             if (model == null)
             {
                 return View("Error_NotFound");

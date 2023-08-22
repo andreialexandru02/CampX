@@ -20,6 +20,8 @@ namespace CampX.BusinessLogic.Implementations.Map.Models
 
         public decimal Longitude { get; set; }
 
+        public int CamperId { get; set; }
+
         public List<IFormFile>? Images { get; set; }
     }
 }

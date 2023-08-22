@@ -103,6 +103,10 @@ public partial class CampXContext : DbContext
             entity.Property(e => e.Latitude).HasColumnType("decimal(12, 9)");
             entity.Property(e => e.Longitude).HasColumnType("decimal(12, 9)");
             entity.Property(e => e.Name).HasMaxLength(100);
+            
+            entity.HasOne(d => d.Camper).WithMany(p => p.Campsites)
+                .HasForeignKey(d => d.CamperId)
+                .HasConstraintName("FK_CampsiteCamper");
         });
 
         modelBuilder.Entity<Equipment>(entity =>

@@ -7,8 +7,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 20,
     attribution: '© OpenStreetMap'
 }).addTo(map);
-
-
+var currentCamper = document.getElementById('currentCamper')
 const ShowReviews = (id) => {
     $.ajax({
         type: "get",
@@ -54,7 +53,7 @@ const ShowReviews = (id) => {
                                 datatype: "json",
                                 data: {
                                     campsiteid: id,
-                                    CamperId: document.getElementById('currentCamper').value,
+                                    CamperId: currentCamper.value,
                                     rating: reviewRating.value,
                                     content: reviewContent.value
                                 }
@@ -75,6 +74,7 @@ const ShowReviews = (id) => {
             var sumReviews = 0
             reviews.forEach(review => {
 
+                var authorized = review.camperId == currentCamper.value
                 sumReviews += review.rating
                 reviewElement = document.createElement('div')
                 var contentSpan = document.createElement('span')
@@ -90,49 +90,63 @@ const ShowReviews = (id) => {
                 deleteIcon.className = 'fas fa-times'
                 reviewElement.appendChild(editIcon)
                 reviewElement.appendChild(deleteIcon)
+                if (!authorized) {
+
+                    deleteIcon.style.display = 'none'
+                    editIcon.style.display = 'none'
+                }
                 div.appendChild(reviewElement)
                 console.log(review.rating)
                 deleteIcon.onclick = () => {
-
-                    $.ajax({
-                        type: "post",
-                        url: `/Review/DeleteReview`,
-                        datatype: "json",
-                        data: {
-                            Id: review.id,
-                            CampsiteId: id
-                        }
-                    })
-                        .done(() => {
-                            window.location.reload()
-                        })
-
-                }
-                               
-                editIcon.onclick = (e) => {
-                    console.log('asdisajd')
-                    reviewInput.style.display = "block";
-                    plusIcon.className = 'fas fa-minus'
-                    reviewContent.value = e.target.previousSibling.innerText.split(': ')[1]
-                    console.log(e.target.previousSibling)
-                    reviewButton.onclick = () => {
+                    if (!authorized) {
+                        window.location.href = '/Home/Error_Unauthorized';
+                    }
+                    else {
                         $.ajax({
                             type: "post",
-                            url: `/Review/EditReview`,
+                            url: `/Review/DeleteReview`,
                             datatype: "json",
                             data: {
                                 Id: review.id,
-                                Campsiteid: id,
-                                Rating: reviewRating.value,
-                                Content: reviewContent.value
-
+                                CampsiteId: id
                             }
                         })
                             .done(() => {
                                 window.location.reload()
                             })
-
                     }
+                }
+                               
+                editIcon.onclick = (e) => {
+                    if (!authorized) {
+                        window.location.href = '/Home/Error_Unauthorized';
+                    }
+                    else {
+
+                        reviewInput.style.display = "block";
+                        plusIcon.className = 'fas fa-minus'
+                        reviewContent.value = e.target.previousSibling.innerText.split(': ')[1]
+                        console.log(e.target.previousSibling)
+                        reviewButton.onclick = () => {
+                            $.ajax({
+                                type: "post",
+                                url: `/Review/EditReview`,
+                                datatype: "json",
+                                data: {
+                                    Id: review.id,
+                                    Campsiteid: id,
+                                    CamperId: currentCamper.value,
+                                    Rating: reviewRating.value,
+                                    Content: reviewContent.value
+
+                                }
+                            })
+                                .done(() => {
+                                    window.location.reload()
+                                })
+
+                        }
+                    }  
                     
                 }
             })

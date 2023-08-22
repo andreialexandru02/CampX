@@ -36,8 +36,22 @@ namespace CampX.Controllers
 
         public IActionResult DeleteNote(ShowNoteModel model)
         {
+            if (!Service.CheckNoteOwner(model.Id))
+            {
+                return RedirectToAction("Error_Unauthorized", "Home");
+            }
             Service.DeleteNote(model);
             return RedirectToAction("TripDetails", "trip", new { id = model.TripId });
         }
+        public IActionResult EditNote(ShowNoteModel model)
+        {
+            if (!Service.CheckNoteOwner(model.Id))
+            {
+                return RedirectToAction("Error_Unauthorized", "Home");
+            }
+            Service.EditNote(model);
+            return RedirectToAction("TripDetails", "trip", new { id = model.TripId });
+        }
+
     }
 }

@@ -35,10 +35,11 @@ namespace CampX.BusinessLogic.Implementations.Reviews
                 Id = r.Id
                 ,Rating = r.Rating
                 ,Content = r.Content
+                ,CamperId = r.CamperId
 
             })
             .ToList();
-            UnitOfWork.SaveChanges();
+           // UnitOfWork.SaveChanges();
             return reviews;
         }
         public void DeleteReview(int id)

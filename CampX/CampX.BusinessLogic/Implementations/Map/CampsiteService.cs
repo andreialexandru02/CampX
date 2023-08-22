@@ -39,11 +39,11 @@ namespace CampX.BusinessLogic.Implementations.Map
             var campsites = UnitOfWork.Campsites.Get()
                 .Select(c => new ShowCampsitesModel
                 {
-                    Id =  c.Id,
-                    Name =  c.Name,
+                    Id = c.Id,
+                    Name = c.Name,
                     Description = c.Description,
-                    Difficulty = c.Difficulty,                  
-                } )
+                    Difficulty = c.Difficulty,
+                })
                 .ToList();
 
             return campsites;
@@ -66,10 +66,10 @@ namespace CampX.BusinessLogic.Implementations.Map
 
             campsite.Images = images;
 
-            var insertedCampsite =  UnitOfWork.Campsites.Insert(campsite);
+            var insertedCampsite = UnitOfWork.Campsites.Insert(campsite);
 
             Console.WriteLine(insertedCampsite);
-                
+
             // trigger mail notifi
             // insert audit 
 
@@ -82,8 +82,10 @@ namespace CampX.BusinessLogic.Implementations.Map
             .Select(c => new DisplayCampsitesModel
             {
                 Id = c.Id
-                ,Latitude = c.Latitude
-                ,Longitude = c.Longitude,
+                ,
+                Latitude = c.Latitude
+                ,
+                Longitude = c.Longitude,
             })
             .ToList();
 
@@ -99,10 +101,12 @@ namespace CampX.BusinessLogic.Implementations.Map
             {
                 Name = c.Name
                 ,Description = c.Description
-                ,Difficulty =  c.Difficulty
+                ,Difficulty = c.Difficulty
                 ,Latitude = c.Latitude
                 ,Longitude = c.Longitude
-                ,ImageIds = c.Images.Select(i => i.Id).ToList() 
+                ,ImageIds = c.Images.Select(i => i.Id).ToList()
+                ,CamperId = c.CamperId
+             
             })
             .SingleOrDefault();
 
@@ -126,7 +130,7 @@ namespace CampX.BusinessLogic.Implementations.Map
             );
             UnitOfWork.SaveChanges();
         }
-        public void EditCampsite(EditCampsiteModel model, List<int> imgList , int id)
+        public void EditCampsite(EditCampsiteModel model, List<int> imgList, int id)
         {
             EditCampsiteValidator.Validate(model).ThenThrow();
 
@@ -144,10 +148,17 @@ namespace CampX.BusinessLogic.Implementations.Map
             campsite.Images = images;
 
             campsite.Id = id;
-            
+
             UnitOfWork.Campsites.Update(campsite);
 
             UnitOfWork.SaveChanges();
+        }
+        public bool CheckCampsiteOwner(int id)
+        {
+            return UnitOfWork.Campsites.Get()
+                .Where(r => r.Id == id)
+                .Select(r => r.CamperId)
+                .SingleOrDefault() == CurrentCamper.Id;
         }
     }
 }

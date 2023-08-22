@@ -31,7 +31,7 @@ namespace CampX.BusinessLogic.Implementations.Notes
                     Id = n.Id,
                     Content = n.Content,
                     TripId = n.TripId,
-                    CamperId =  CurrentCamper.Id
+                    CamperId =  n.CamperId
                 })
                 .ToList();
             return notes;
@@ -73,6 +73,13 @@ namespace CampX.BusinessLogic.Implementations.Notes
 
 
             UnitOfWork.SaveChanges();
+        }
+        public bool CheckNoteOwner(int id)
+        {
+            return UnitOfWork.Notes.Get()
+                .Where(r => r.Id == id)
+                .Select(r => r.CamperId)
+                .SingleOrDefault() == CurrentCamper.Id;
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿@model CampX.BusinessLogic.Implementations.Map.Models.CampsiteDetailsModel;
+@using CampX.Common.ViewModels;
+@inject CurrentCamperDTO currentCamper
 
 @*LeaftLet refferences*@
 <script type="text/javascript" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -42,9 +44,11 @@
     <img style="height: 225px; display: inline-block;" src="/Image/GetImgContent?id=@imgId" />
     
 }
-
-<a style="display: block;" asp-controller="Map" asp-action="Delete" asp-route-id="@ViewContext.RouteData.Values["id"]"> Delete Campsite</a>
-<a style="display: block;" asp-controller="Map" asp-action="EditCampsite" asp-route-id="@ViewContext.RouteData.Values["id"]"> Edit Campsite</a>
+@if(Model.CamperId == currentCamper.Id)
+{ 
+    <a style="display: block;" asp-controller="Map" asp-action="Delete" asp-route-id="@ViewContext.RouteData.Values["id"]"> Delete Campsite</a>
+    <a style="display: block;" asp-controller="Map" asp-action="EditCampsite" asp-route-id="@ViewContext.RouteData.Values["id"]"> Edit Campsite</a>
+}
 
 <div id="review-container">Reviews
 
@@ -66,7 +70,5 @@
 
     </div>
 </div>
-@using CampX.Common.ViewModels;
-@inject CurrentCamperDTO currentCamper
 
 <input id="currentCamper" type="hidden" value=@currentCamper.Id>

@@ -2,6 +2,10 @@
 @{
     ViewData["Title"] = "View";
 }
+
+@using CampX.Common.ViewModels;
+@inject CurrentCamperDTO currentCamper
+
 <script type="text/javascript" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""></script>
@@ -17,8 +21,6 @@
 
 
 <hr />
-
-
 
 <div id="map"></div>
 <div class="row">
@@ -56,6 +58,8 @@
                 <input class="form-control" asp-for="Images" type="file" name="Images" id="ImageData" multiple />
                 <span asp-validation-for="Images" class="text-danger"></span>
             </div>
+
+            <input asp-for = "CamperId" type="hidden" value=@currentCamper.Id>
             <br></br>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

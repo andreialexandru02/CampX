@@ -12,7 +12,9 @@ namespace CampX.BusinessLogic.Implementations.Reviews.Models
         public int Rating { get; set; }
 
         public string? Content { get; set; }
+        
 
         public int? CampsiteId { get; set; }
+        public int? CamperId { get; set; }
     }
 }

@@ -33,4 +33,6 @@ public partial class Camper : IEntity
     public virtual ICollection<TripCamper> TripCampers { get; set; } = new List<TripCamper>();
 
     public virtual ICollection<Role> Roles { get; set; } = new List<Role>();
+    
+    public virtual ICollection<Campsite> Campsites { get; set; } = new List<Campsite>();
 }
