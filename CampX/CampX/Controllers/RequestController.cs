@@ -58,7 +58,7 @@ namespace CampX.Controllers
         [HttpPost]
 
         public IActionResult DeleteRequest(CamperIdTripIdModel model)
-        {          
+        {                        
             Service.DeleteRequest(model);
 
             return RedirectToAction("ShowRequests", "Request");

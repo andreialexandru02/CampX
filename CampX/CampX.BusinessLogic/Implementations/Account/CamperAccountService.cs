@@ -67,6 +67,10 @@ namespace CampX.BusinessLogic.Implementations.Account
 
             UnitOfWork.SaveChanges();
         }
+        public void ChangePassword(ChangePasswordModel model)
+        {
+
+        }
 
         public List<ListItemModel<string, int>> GetCampers()
         {

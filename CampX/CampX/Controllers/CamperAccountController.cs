@@ -31,6 +31,14 @@ namespace CampX.Controllers
 
             return View("Register", model);
         }
+        [HttpGet]
+
+        public IActionResult ChangePassword()
+        {
+            var model = new ChangePasswordModel();
+            return View(model);
+
+        }
 
         [HttpPost]
         public IActionResult Register(RegisterModel model)
@@ -44,7 +52,19 @@ namespace CampX.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+        [HttpPost]
 
+        public IActionResult ChangePassword(ChangePasswordModel model)
+        {
+            if (model == null)
+            {
+                return View("Error_NotFound");
+            }
+
+            Service.ChangePassword(model);
+
+            return RedirectToAction("Index", "Home");
+        }
         [HttpGet]
         public IActionResult Login()
         {

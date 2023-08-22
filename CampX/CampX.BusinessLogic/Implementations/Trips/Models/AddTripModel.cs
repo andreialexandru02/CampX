@@ -17,6 +17,8 @@ namespace CampX.BusinessLogic.Implementations.Trips.Models
 
         public DateTime? Date { get; set; }
 
+        public int Nights { get; set;}
+
         public string Code { get; set; } = null!;
 
         public List<int> TripCampers { get; set; }

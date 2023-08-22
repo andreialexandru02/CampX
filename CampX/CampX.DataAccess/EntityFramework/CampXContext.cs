@@ -241,7 +241,7 @@ public partial class CampXContext : DbContext
             entity.Property(e => e.Description).HasMaxLength(500);
             entity.Property(e => e.IsPublic).HasColumnName("isPublic");
             entity.Property(e => e.Name).HasMaxLength(100);
-
+            entity.Property(e => e.Nights);
             entity.HasMany(d => d.Campsites).WithMany(p => p.Trips)
                 .UsingEntity<Dictionary<string, object>>(
                     "CampsiteTrip",

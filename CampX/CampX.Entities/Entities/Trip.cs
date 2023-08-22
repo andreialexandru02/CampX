@@ -18,6 +18,8 @@ public partial class Trip : IEntity
 
     public string Code { get; set; } = null!;
 
+    public int Nights { get; set; }
+
     public virtual ICollection<EquipmentCamperTrip> EquipmentCamperTrips { get; set; } = new List<EquipmentCamperTrip>();
 
     public virtual ICollection<Request> Requests { get; set; } = new List<Request>();

@@ -41,6 +41,8 @@ const displayCampsites = () => {
            
             var submitButton = document.getElementById('submitButton')
             var selectedCampsitesIdsList = []
+
+            var numberOfNights = 0
             campsites.forEach(campsite => {
 
                 
@@ -55,8 +57,8 @@ const displayCampsites = () => {
                     var campsiteDiv = document.createElement('div')
                     var img = document.createElement('img')
                     img.src = 'https://localhost:44364/Images/icons8-tent-48.png'
-                    img.height = 40
-                    img.width = 40
+                    img.height = 60
+                    img.width = 60
                     img.alt = 'Tent Icon'
                     var minusIcon = document.createElement('i')
                     minusIcon.className = 'fas fa-times'
@@ -65,10 +67,47 @@ const displayCampsites = () => {
                         window.location.href = '../Map/CampsiteDetails/' + campsite.id;
                     }                    
                     var campsiteName = document.createElement('span')
-                    campsiteName.innerHTML = ` ${campsite.name}`
+                    nightImg = document.createElement('img')
+                    nightImg.className = 'nightIcon'
+                    nightImg.src = 'https://localhost:44364/Images/night_624106.png'
+                    nightImg.height = 25
+                    nightImg.width = 25
+                    nightImg.alt = 'Night Icon'
+                    nightsSpan = document.createElement('span')
+                    nightsSpan.id = `nightspan${campsite.id}`
+                    numberOfNights += 1
+                    nightsSpan.appendChild(nightImg)
+                    
+                    addNight = document.createElement('i')
+                    addNight.className = 'fas fa-plus'
+                    deleteNight = document.createElement('i')
+                    deleteNight.className = 'fas fa-minus'
+                    
+                    addNight.onclick = (e) => {
+       
+                        numberOfNights += 1
+                        e.target.previousSibling.appendChild(nightImg.cloneNode(true))
+                        console.log(numberOfNights)
+                    }
+                    deleteNight.onclick = (e) => {
+
+                        const nightsSpan = document.getElementById(`nightspan${campsite.id}`)
+                       
+                        if (nightsSpan.children.length > 1) {
+                            numberOfNights -= 1
+                            nightsSpan.removeChild(nightsSpan.children[nightsSpan.children.length - 1]);
+                        }
+                        console.log(numberOfNights)
+                    }
+
+                    campsiteName.innerHTML = ` ${campsite.name} `
+                    campsiteDiv.appendChild(minusIcon)
                     campsiteDiv.appendChild(img)
                     campsiteDiv.appendChild(campsiteName)
-                    campsiteDiv.appendChild(minusIcon)
+                    campsiteDiv.appendChild(nightsSpan)
+                    campsiteDiv.appendChild(addNight)
+                    campsiteDiv.appendChild(deleteNight)
+                    
                     selectedCampsites.appendChild(campsiteDiv)
                     minusIcon.onclick = () => {
                         selectedCampsites.removeChild(campsiteDiv)
@@ -115,10 +154,12 @@ const displayCampsites = () => {
                             ,Date: dateInput.value
                             ,Code: codeInput
                             ,Campsites: selectedCampsitesIdsList
-                            ,TripCampers: [currentCamper.value]
+                            , TripCampers: [currentCamper.value]
+                            ,Nights: numberOfNights
                         }
                     })
                         .done(() => {
+                          
                             window.location.reload()
                         })
                 }
