@@ -2,6 +2,7 @@
 using CampX.BusinessLogic.Implementations.Notes.Models;
 using CampX.BusinessLogic.Implementations.Requests.Models;
 using CampX.BusinessLogic.Implementations.Trips.Models;
+using CampX.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

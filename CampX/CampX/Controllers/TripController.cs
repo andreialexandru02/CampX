@@ -58,11 +58,11 @@ namespace CampX.Controllers
             return View("TripDetails", model);
         }
         [HttpGet]
-        public IActionResult TripDetailsJSON([FromQuery]int id)
+        public IActionResult TripDetailsJSON([FromQuery] int id)
         {
             return Json(Service.TripDetails(id));
         }
-        
+
         [HttpGet]
         public IActionResult DeleteTrip(int id)
         {
@@ -78,7 +78,7 @@ namespace CampX.Controllers
         public IActionResult SearchTrip(string code)
         {
             var id = Service.SearchCode(code);
-            if(id == -1)
+            if (id == -1)
             {
                 return NotFound();
             }
@@ -88,13 +88,13 @@ namespace CampX.Controllers
         }
 
         [HttpGet]
-        
+
         public IActionResult ShowCurrentCamperTrips()
         {
-            var model = Service.ShowCurrentCamperTrips(); 
+            var model = Service.ShowCurrentCamperTrips();
             return View("ShowCurrentCamperTrips", model);
         }
-        
+
         [HttpGet]
         public IActionResult EditTrip(int id)
         {
@@ -106,6 +106,18 @@ namespace CampX.Controllers
             var trip = Service.TripToEdit(id);
 
             return View("EditCampsite", trip);
+        }
+
+        [HttpPost]
+
+        public IActionResult FinishTrip(int id)
+        {
+            if (!Service.CheckOrganizer(id))
+            {
+                return RedirectToAction("Error_Unauthorized", "Home");
+            }
+            Service.FinishTrip(id);
+            return RedirectToAction("ShowTrips", "Trip");
         }
     }
 }

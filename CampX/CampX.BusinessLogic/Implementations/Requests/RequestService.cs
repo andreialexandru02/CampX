@@ -38,7 +38,7 @@ namespace CampX.BusinessLogic.Implementations.Requests
         {
             RequestValidator.Validate(model).ThenThrow();
 
-            var request = Mapper.Map<AddRequestModel, Request>(model);
+            var request = Mapper.Map<AddRequestModel, Entities.Request>(model);
 
             request.Date = DateTime.Now;
 

@@ -27,4 +27,8 @@
     <ProjectReference Include="..\CampX.Common\CampX.Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CampXContext.cs\" />
+  </ItemGroup>
+
 </Project>

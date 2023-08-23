@@ -1,10 +1,9 @@
-﻿using CampX.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace CampX;
+namespace CampX.Entities;
 
-public partial class CamperBadge : IEntity
+public partial class CamperBadge
 {
     public int BadgeId { get; set; }
 

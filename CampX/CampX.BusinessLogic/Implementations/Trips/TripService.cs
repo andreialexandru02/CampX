@@ -86,8 +86,8 @@ namespace CampX.BusinessLogic.Implementations.Trips
 
 
             var trips = UnitOfWork.Trips.Get()
-                .Include(c => c.Campsites)
-                .Include(tc => tc.TripCampers).ThenInclude(tcc => tcc.Camper)
+               // .Include(c => c.Campsites)
+                //.Include(tc => tc.TripCampers).ThenInclude(tcc => tcc.Camper)
                 .Where(t => t.IsPublic == true)
                 .ToList();
             
@@ -194,11 +194,11 @@ namespace CampX.BusinessLogic.Implementations.Trips
 
         public List<ShowTripsModel> ShowCurrentCamperTrips()
         {
-            var trips = UnitOfWork.Trips.Get()
-                    .Include(tc => tc.TripCampers).ThenInclude(c => c.Camper)
+            var trips = UnitOfWork.Trips.Get();
+                    /*.Include(tc => tc.TripCampers).ThenInclude(c => c.Camper)
                     .Include(c => c.Campsites)
                     .Where(t => t.TripCampers.Any(tc => tc.IsOrganizer && tc.CamperId == CurrentCamper.Id))
-                    .ToList();
+                    .ToList();*/
 
            
 
@@ -305,6 +305,19 @@ namespace CampX.BusinessLogic.Implementations.Trips
                 })
                 .SingleOrDefault(t => t.Id == id);
             return trip;
+        }
+        public void FinishTrip(int id)
+        {
+
+            var numberOfNights = UnitOfWork.Trips.Get()
+                .Where(t => t.Id == id)
+                .Select(t => t.Nights)
+                .SingleOrDefault();
+
+            Console.WriteLine(numberOfNights);
+
+
+            //DeleteTrip(id);
         }
     }
 

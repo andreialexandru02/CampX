@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CampX.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CampX.Context;
@@ -103,7 +104,7 @@ public partial class CampXContext : DbContext
             entity.Property(e => e.Latitude).HasColumnType("decimal(12, 9)");
             entity.Property(e => e.Longitude).HasColumnType("decimal(12, 9)");
             entity.Property(e => e.Name).HasMaxLength(100);
-            
+
             entity.HasOne(d => d.Camper).WithMany(p => p.Campsites)
                 .HasForeignKey(d => d.CamperId)
                 .HasConstraintName("FK_CampsiteCamper");
@@ -193,13 +194,13 @@ public partial class CampXContext : DbContext
 
             entity.ToTable("Review");
 
+            entity.HasOne(d => d.Camper).WithMany(p => p.Reviews)
+                .HasForeignKey(d => d.CamperId)
+                .HasConstraintName("FK_ReviewCamper");
+
             entity.HasOne(d => d.Campsite).WithMany(p => p.Reviews)
                 .HasForeignKey(d => d.CampsiteId)
                 .HasConstraintName("FK_Reviews_Campsites");
-
-            entity.HasOne(d => d.Camper).WithMany(p => p.Reviews)
-                .HasForeignKey(d => d.CamperId)
-                .HasConstraintName("FK_Reviews_Campers");
         });
 
         modelBuilder.Entity<Role>(entity =>
@@ -241,7 +242,7 @@ public partial class CampXContext : DbContext
             entity.Property(e => e.Description).HasMaxLength(500);
             entity.Property(e => e.IsPublic).HasColumnName("isPublic");
             entity.Property(e => e.Name).HasMaxLength(100);
-            entity.Property(e => e.Nights);
+
             entity.HasMany(d => d.Campsites).WithMany(p => p.Trips)
                 .UsingEntity<Dictionary<string, object>>(
                     "CampsiteTrip",
