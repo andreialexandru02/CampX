@@ -108,7 +108,7 @@ namespace CampX.Controllers
             return View("EditCampsite", trip);
         }
 
-        [HttpPost]
+        [HttpGet]
 
         public IActionResult FinishTrip(int id)
         {

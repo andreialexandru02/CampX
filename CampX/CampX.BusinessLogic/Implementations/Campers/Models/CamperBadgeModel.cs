@@ -15,6 +15,8 @@ namespace CampX.BusinessLogic.Implementations.Campers.Models
 
         public int Score { get; set; }
 
+        public int BadgeId { get; set; }
+
         public BadgeModel Badge { get; set; } = null!;
 
     }

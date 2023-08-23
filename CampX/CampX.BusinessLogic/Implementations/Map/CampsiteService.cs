@@ -134,12 +134,12 @@ namespace CampX.BusinessLogic.Implementations.Map
         {
             EditCampsiteValidator.Validate(model).ThenThrow();
 
-            var campsite = UnitOfWork.Campsites.Get()
+            /*var campsite = UnitOfWork.Campsites.Get()
                 .Where(c => c.Id == id)
                 .AsNoTracking()
-                .SingleOrDefault();
+                .SingleOrDefault();*/
 
-            campsite = Mapper.Map<EditCampsiteModel, Campsite>(model);
+            var campsite = Mapper.Map<EditCampsiteModel, Campsite>(model);
 
             var images = UnitOfWork.Images.Get()
                 .Where(i => imgList.Contains(i.Id))

@@ -1,7 +1,6 @@
 ﻿@model CampX.BusinessLogic.Implementations.Trips.Models.ShowTripsModel
 @using CampX.Common.ViewModels;
 @inject CurrentCamperDTO currentCamper
-
 @{
     ViewData["Title"] = "TripDetails";
 }
@@ -129,6 +128,51 @@ else{  *@
     </div>
 
 
-   <div id="weatherContainer"></div>
-<iframe src="https://www.meteoblue.com/en/weather/widget/three/voineasa_romania_662531?geoloc=fixed&nocurrent=0&noforecast=0&days=4&tempunit=CELSIUS&windunit=KILOMETER_PER_HOUR&layout=image" frameborder="0" scrolling="NO" allowtransparency="true" sandbox="allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox" style="width: 460px; height: 590px"></iframe>
-<div><!-- DO NOT REMOVE THIS LINK --><a href="https://www.meteoblue.com/en/weather/week/voineasa_romania_662531?utm_source=weather_widget&utm_medium=linkus&utm_content=three&utm_campaign=Weather%2BWidget" target="_blank" rel="noopener">meteoblue</a></div>
+@*   <div id="weatherContainer"></div>
+*@@*<iframe src="https://www.meteoblue.com/en/weather/widget/three/voineasa?geoloc=fixed&nocurrent=0&noforecast=0&days=4&tempunit=CELSIUS&windunit=KILOMETER_PER_HOUR&layout=image" frameborder="0" scrolling="NO" allowtransparency="true" sandbox="allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox" style="width: 460px; height: 590px"></iframe>
+<div><!-- DO NOT REMOVE THIS LINK --><a href="https://www.meteoblue.com/en/weather/week/voineasa_romania_662531?utm_source=weather_widget&utm_medium=linkus&utm_content=three&utm_campaign=Weather%2BWidget" target="_blank" rel="noopener">meteoblue</a></div>*@
+<script>
+    function reverseGeocode(lat, lng, callback) {
+        const apiUrl = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`;
+        fetch(apiUrl)
+            .then((response) => response.json())
+            .then((data) => {
+                const address = data.display_name;
+                callback(address);
+            })
+            .catch((error) => {
+                console.error("Error performing reverse geocoding:", error);
+            });
+    }
+</script>
+
+
+@foreach(var campsite in Model.Campsites)
+{
+
+    <!-- the DIV that will contain the widget --> <div class=@($"weatherWidget{@campsite.Id}")></div>
+    <script>
+        reverseGeocode(@campsite.Latitude, @campsite.Longitude, function (address) {
+            window.weatherWidgetConfig = window.weatherWidgetConfig || [];
+            window.weatherWidgetConfig.push({
+                selector: `.weatherWidget${@campsite.Id}`,
+                apiKey: "JKTNYCW7LJPC3HEPDAXN93LT7", //Sign up for your personal key
+                location: address, //Enter an address
+                unitGroup: "metric", //"us" or "metric"
+                forecastDays: 5, //how many days forecast to show
+                title: address// `${campsite.Name}`, //optional title to show in the
+                showTitle: true,
+                showConditions: true
+            });
+
+            (function () {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://www.visualcrossing.com/widgets/forecast-simple/weather-forecast-widget-simple.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        });
+
+    </script>
+}
+

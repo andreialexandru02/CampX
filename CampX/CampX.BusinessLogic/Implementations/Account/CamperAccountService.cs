@@ -1,12 +1,16 @@
 ﻿using BCrypt.Net;
 using CampX.BusinessLogic.Base;
 using CampX.BusinessLogic.Implementations.Account.Models;
+using CampX.BusinessLogic.Implementations.Account.Validations;
+using CampX.BusinessLogic.Implementations.Badges;
 using CampX.BusinessLogic.Implementations.Badges.Models;
 using CampX.BusinessLogic.Implementations.Campers.Models;
+using CampX.BusinessLogic.Implementations.Map;
 using CampX.BusinessLogic.Implementations.Trips.Models;
 using CampX.Common.Extensions;
 using CampX.Common.ViewModels;
 using CampX.Entities;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,11 +21,13 @@ namespace CampX.BusinessLogic.Implementations.Account
     public class CamperAccountService : BaseService
     {
         private readonly RegisterCamperValidator RegisterCamperValidator;
+        private readonly ChangePasswordValidator ChangePasswordValidator;
 
         public CamperAccountService(ServiceDependencies dependencies)
             : base(dependencies)
         {
             this.RegisterCamperValidator = new RegisterCamperValidator(UnitOfWork);
+            this.ChangePasswordValidator =  new ChangePasswordValidator(UnitOfWork);
         }
 
 
@@ -61,14 +67,42 @@ namespace CampX.BusinessLogic.Implementations.Account
 
             camper.Roles.Add(UnitOfWork.Roles.Get().Where(r => r.Id == 3).SingleOrDefault());
 
-            UnitOfWork.Campers.Insert(camper);
+            var CamperId = UnitOfWork.Campers.Insert(camper);
             // trigger mail notifi
             // insert audit 
-
             UnitOfWork.SaveChanges();
+            
+            AddCamperBadgesForCreatedCamper(CamperId.Id);
+
+        }
+        public void AddCamperBadgesForCreatedCamper(int id)
+        {
+            var badgeIds = UnitOfWork.Badges.Get()
+                .Select(b => b.Id)
+                .ToList();
+
+            foreach (var badgeId in badgeIds)
+            {
+                var camperBadge = Mapper.Map<CamperBadgeModel, CamperBadge>(new CamperBadgeModel
+                {
+                    CamperId = id,
+                    BadgeId = badgeId,
+                    Score = 0
+                });
+                UnitOfWork.CamperBadges.Insert(camperBadge);
+                UnitOfWork.SaveChanges();
+            }
         }
         public void ChangePassword(ChangePasswordModel model)
         {
+            ChangePasswordValidator.Validate(model).ThenThrow();
+            var camper = UnitOfWork.Campers.Get()
+                .SingleOrDefault(c => c.Id == model.Id);
+            if (camper == null || !BCrypt.Net.BCrypt.EnhancedVerify(model.OldPassword, camper.Password))
+
+            {
+                //return new CurrentCamperDTO { IsAuthenticated = false };
+            }
 
         }
 

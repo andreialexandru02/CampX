@@ -17,6 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace CampX.BusinessLogic.Implementations.Trips
 {
@@ -86,8 +87,8 @@ namespace CampX.BusinessLogic.Implementations.Trips
 
 
             var trips = UnitOfWork.Trips.Get()
-               // .Include(c => c.Campsites)
-                //.Include(tc => tc.TripCampers).ThenInclude(tcc => tcc.Camper)
+                .Include(c => c.Campsites)
+                .Include(tc => tc.TripCampers).ThenInclude(tcc => tcc.Camper)
                 .Where(t => t.IsPublic == true)
                 .ToList();
             
@@ -194,11 +195,11 @@ namespace CampX.BusinessLogic.Implementations.Trips
 
         public List<ShowTripsModel> ShowCurrentCamperTrips()
         {
-            var trips = UnitOfWork.Trips.Get();
-                    /*.Include(tc => tc.TripCampers).ThenInclude(c => c.Camper)
+            var trips = UnitOfWork.Trips.Get()
+                    .Include(tc => tc.TripCampers).ThenInclude(c => c.Camper)
                     .Include(c => c.Campsites)
                     .Where(t => t.TripCampers.Any(tc => tc.IsOrganizer && tc.CamperId == CurrentCamper.Id))
-                    .ToList();*/
+                    .ToList();
 
            
 
@@ -314,10 +315,30 @@ namespace CampX.BusinessLogic.Implementations.Trips
                 .Select(t => t.Nights)
                 .SingleOrDefault();
 
-            Console.WriteLine(numberOfNights);
+            var tripCampers = UnitOfWork.Trips.Get()
+                .Include(tc => tc.TripCampers).ThenInclude(c => c.Camper).ThenInclude(cb => cb.CamperBadges)
+                .Where(t => t.Id == id)
+                .Select(t => t.TripCampers)
+                .SingleOrDefault();
+
+            foreach (var tripCamper in tripCampers)
+            {              
+
+                foreach (var camperBadge in tripCamper.Camper.CamperBadges)
+                {
+
+                   
 
 
-            //DeleteTrip(id);
+                    var badgeCamper = UnitOfWork.CamperBadges.Get()
+                           .Where(cb => cb.BadgeId == camperBadge.BadgeId && cb.CamperId == tripCamper.CamperId)
+                           .SingleOrDefault();
+
+                    badgeCamper.Score += numberOfNights;
+                    UnitOfWork.CamperBadges.Update(badgeCamper);
+                    UnitOfWork.SaveChanges();
+                }
+            }
         }
     }
 

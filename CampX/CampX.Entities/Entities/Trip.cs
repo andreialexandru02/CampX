@@ -17,7 +17,7 @@ public partial class Trip
 
     public string Code { get; set; } = null!;
 
-    public int? Nights { get; set; }
+    public int Nights { get; set; }
 
     public virtual ICollection<EquipmentCamperTrip> EquipmentCamperTrips { get; set; } = new List<EquipmentCamperTrip>();
 

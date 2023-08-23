@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 
 namespace CampX.BusinessLogic.Implementations.Account.Validations
 {
-    public class ChangePasswordValidator : AbstractValidator<RegisterModel>
+    public class ChangePasswordValidator : AbstractValidator<ChangePasswordModel>
     {
+        private readonly UnitOfWork _unitOfWork;
         public ChangePasswordValidator(UnitOfWork unitOfWork)
         {
-
+            _unitOfWork = unitOfWork;
             RuleFor(r => r.Password)
                 .NotEmpty().WithMessage("Camp obligatoriu!")
                 .Must(PasswordTooShort)
@@ -26,7 +27,9 @@ namespace CampX.BusinessLogic.Implementations.Account.Validations
                 .NotEmpty().WithMessage("Camp obligatoriu!")
                 .Equal(r => r.Password)
                 .WithMessage("Cele 2 parole nu coincid!");
-           
+            RuleFor(r => new {r.Id, r.OldPassword})
+                .Must(r => CheckOldPassword(r.Id, r.OldPassword))
+                                       .WithMessage("Parola gresita!");
 
         }
       
@@ -37,8 +40,19 @@ namespace CampX.BusinessLogic.Implementations.Account.Validations
                 return false;
             }
             return true; ;
-      }
-      
+        }
+        public bool CheckOldPassword(int id, string password)
+        {
+            var camper = _unitOfWork.Campers.Get()
+                .SingleOrDefault(c => c.Id == id);
+
+            if (camper == null || !BCrypt.Net.BCrypt.EnhancedVerify(password, camper.Password));
+            {
+                return false;
+            }
+            return true;
+        }
+
     }
 
 }
