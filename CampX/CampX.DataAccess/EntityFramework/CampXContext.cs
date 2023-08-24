@@ -4,7 +4,6 @@ using CampX.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CampX.Context;
-
 public partial class CampXContext : DbContext
 {
     public CampXContext()
@@ -72,6 +71,7 @@ public partial class CampXContext : DbContext
             entity.Property(e => e.BirthDate).HasColumnType("date");
             entity.Property(e => e.Email).HasMaxLength(100);
             entity.Property(e => e.FirstName).HasMaxLength(100);
+            entity.Property(e => e.IsBanned).HasColumnName("isBanned");
             entity.Property(e => e.LastName).HasMaxLength(100);
 
             entity.HasOne(d => d.Image).WithMany(p => p.Campers)
@@ -163,11 +163,6 @@ public partial class CampXContext : DbContext
             entity.ToTable("Note");
 
             entity.Property(e => e.Content).HasMaxLength(500);
-
-            entity.HasOne(d => d.TripCamper).WithMany(p => p.Notes)
-                .HasForeignKey(d => new { d.TripId, d.CamperId })
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_NOTE_TRIPCAMPER");
         });
 
         modelBuilder.Entity<Request>(entity =>
@@ -196,6 +191,7 @@ public partial class CampXContext : DbContext
 
             entity.HasOne(d => d.Camper).WithMany(p => p.Reviews)
                 .HasForeignKey(d => d.CamperId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ReviewCamper");
 
             entity.HasOne(d => d.Campsite).WithMany(p => p.Reviews)

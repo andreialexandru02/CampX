@@ -81,5 +81,13 @@ namespace CampX.BusinessLogic.Implementations.Notes
                 .Select(r => r.CamperId)
                 .SingleOrDefault() == CurrentCamper.Id;
         }
+        public bool IdOfTripExists(int id)
+        {
+            var trip = UnitOfWork.Trips.Get()
+                .SingleOrDefault(r => r.Id == id);
+
+            return trip != null;
+
+        }
     }
 }

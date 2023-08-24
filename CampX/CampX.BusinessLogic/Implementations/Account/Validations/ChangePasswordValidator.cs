@@ -1,6 +1,7 @@
 ﻿using CampX.BusinessLogic.Implementations.Account.Models;
 using CampX.DataAccess;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,9 +45,11 @@ namespace CampX.BusinessLogic.Implementations.Account.Validations
         public bool CheckOldPassword(int id, string password)
         {
             var camper = _unitOfWork.Campers.Get()
+                
                 .SingleOrDefault(c => c.Id == id);
 
-            if (camper == null || !BCrypt.Net.BCrypt.EnhancedVerify(password, camper.Password));
+            var corectPassword = BCrypt.Net.BCrypt.EnhancedVerify(password, camper.Password);
+            if (camper == null || !corectPassword)
             {
                 return false;
             }

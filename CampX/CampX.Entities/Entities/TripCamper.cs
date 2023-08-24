@@ -13,7 +13,5 @@ public partial class TripCamper
 
     public virtual Camper Camper { get; set; } = null!;
 
-    public virtual ICollection<Note> Notes { get; set; } = new List<Note>();
-
     public virtual Trip Trip { get; set; } = null!;
 }

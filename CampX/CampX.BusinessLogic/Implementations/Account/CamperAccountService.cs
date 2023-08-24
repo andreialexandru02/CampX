@@ -6,6 +6,7 @@ using CampX.BusinessLogic.Implementations.Badges;
 using CampX.BusinessLogic.Implementations.Badges.Models;
 using CampX.BusinessLogic.Implementations.Campers.Models;
 using CampX.BusinessLogic.Implementations.Map;
+using CampX.BusinessLogic.Implementations.Map.Models;
 using CampX.BusinessLogic.Implementations.Trips.Models;
 using CampX.Common.Extensions;
 using CampX.Common.ViewModels;
@@ -22,12 +23,14 @@ namespace CampX.BusinessLogic.Implementations.Account
     {
         private readonly RegisterCamperValidator RegisterCamperValidator;
         private readonly ChangePasswordValidator ChangePasswordValidator;
+        private readonly EditCamperValidator EditCamperValidator;
 
         public CamperAccountService(ServiceDependencies dependencies)
             : base(dependencies)
         {
             this.RegisterCamperValidator = new RegisterCamperValidator(UnitOfWork);
             this.ChangePasswordValidator =  new ChangePasswordValidator(UnitOfWork);
+            this.EditCamperValidator = new EditCamperValidator(UnitOfWork,CurrentCamper);
         }
 
 
@@ -40,8 +43,11 @@ namespace CampX.BusinessLogic.Implementations.Account
                 .SingleOrDefault(u => u.Email == email);
 
 
-            if (camper == null || !BCrypt.Net.BCrypt.EnhancedVerify(password, camper.Password))
-            
+            if (camper.IsBanned)
+            {
+                return new CurrentCamperDTO { IsBanned = true };
+            }
+            if (camper == null || !BCrypt.Net.BCrypt.EnhancedVerify(password, camper.Password))          
             {
                 return new CurrentCamperDTO { IsAuthenticated = false };
             }
@@ -53,7 +59,8 @@ namespace CampX.BusinessLogic.Implementations.Account
                 FirstName = camper.FirstName,
                 LastName = camper.LastName,
                 IsAuthenticated = true,
-                Roles = camper.Roles.Select(ur => ur.Name).ToList()
+                Roles = camper.Roles.Select(ur => ur.Name).ToList(),
+                IsBanned =  false
             };
         }
 
@@ -98,10 +105,13 @@ namespace CampX.BusinessLogic.Implementations.Account
             ChangePasswordValidator.Validate(model).ThenThrow();
             var camper = UnitOfWork.Campers.Get()
                 .SingleOrDefault(c => c.Id == model.Id);
-            if (camper == null || !BCrypt.Net.BCrypt.EnhancedVerify(model.OldPassword, camper.Password))
+            if (camper != null && BCrypt.Net.BCrypt.EnhancedVerify(model.OldPassword, camper.Password))
 
             {
-                //return new CurrentCamperDTO { IsAuthenticated = false };
+                camper.Password = BCrypt.Net.BCrypt.EnhancedHashPassword(model.Password, 13);
+
+                UnitOfWork.Campers.Update(camper);
+                UnitOfWork.SaveChanges();
             }
 
         }
@@ -116,10 +126,52 @@ namespace CampX.BusinessLogic.Implementations.Account
                 })
                 .ToList();
         }
-        public void DisableUser() 
+        public void DeleteCamper() 
+        {
+            
+            
+        }
+
+        public EditCamperModel EditCamper(int id)
+        {
+            var camper =  UnitOfWork.Campers.Get()
+
+                .Where(c => c.Id == id)
+                .Select(c => new EditCamperModel
+                {
+                    Id = c.Id,
+                    Email =  c.Email,
+                    FirstName =  c.FirstName,
+                    LastName = c.LastName, 
+                    BirthDay = c.BirthDate
+                })
+                .SingleOrDefault();
+            return camper;
+        }
+
+        public void EditCamper(EditCamperModel model)
         {
 
-            
+            var validationResult = EditCamperValidator.Validate(model);
+            if (!validationResult.IsValid)
+            {
+                var X = 3;
+                validationResult.ThenThrow();
+            }
+
+
+
+            var camper = UnitOfWork.Campers.Get()
+                .AsNoTracking()
+                .SingleOrDefault(c => c.Id == model.Id);
+
+            var editedCamper = Mapper.Map<EditCamperModel, Camper>(model);
+            editedCamper.Password = camper.Password;
+
+            UnitOfWork.Campers.Update(editedCamper);
+            UnitOfWork.SaveChanges();
+
+
         }
 
         public void ChangePassword() { }
@@ -174,13 +226,46 @@ namespace CampX.BusinessLogic.Implementations.Account
             }
             var camperProfileDebugger = new CamperProfileModel
             {
+                Id = camper.Id,
                 FirstName = camper.FirstName,
                 LastName = camper.LastName,
                 Email = camper.Email,
                 CamperBadges = camperBadgesList,
-                Trips = profileTrips
+                Trips = profileTrips,
+                isBanned = camper.IsBanned
             };
             return camperProfileDebugger;
+        }
+
+        public bool CheckCamperOwner(int id)
+        {
+            return id == CurrentCamper.Id;
+        }
+        public void BanCamper(int id)
+        {
+            var camper = UnitOfWork.Campers.Get()
+                .SingleOrDefault(c => c.Id == id);
+            camper.IsBanned = true;
+
+            UnitOfWork.Campers.Update(camper);
+            UnitOfWork.SaveChanges();
+        }
+        public void UnBanCamper(int id)
+        {
+            var camper = UnitOfWork.Campers.Get()
+                .SingleOrDefault(c => c.Id == id);
+            camper.IsBanned = false;
+
+            UnitOfWork.Campers.Update(camper);
+            UnitOfWork.SaveChanges();
+        }
+        public bool IdExists(int id)
+        {
+            var camper = UnitOfWork.Campers.Get()
+                .SingleOrDefault(r => r.Id == id);
+
+            return camper != null;
+
         }
     }
 }

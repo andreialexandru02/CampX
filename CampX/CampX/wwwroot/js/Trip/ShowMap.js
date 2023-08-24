@@ -42,7 +42,7 @@ const displayCampsites = () => {
             var submitButton = document.getElementById('submitButton')
             var selectedCampsitesIdsList = []
 
-            var numberOfNights = 0
+            var nightsAtCampsite = {}
             campsites.forEach(campsite => {
 
                 

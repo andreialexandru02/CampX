@@ -160,5 +160,13 @@ namespace CampX.BusinessLogic.Implementations.Map
                 .Select(r => r.CamperId)
                 .SingleOrDefault() == CurrentCamper.Id;
         }
+        public bool IdExists(int id)
+        {
+            var campsite = UnitOfWork.Campsites.Get()
+                .SingleOrDefault(r => r.Id == id);
+
+            return campsite != null;
+           
+        }
     }
 }

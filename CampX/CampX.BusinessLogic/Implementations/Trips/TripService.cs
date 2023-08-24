@@ -340,6 +340,14 @@ namespace CampX.BusinessLogic.Implementations.Trips
                 }
             }
         }
+        public bool IdExists(int id)
+        {
+            var trip = UnitOfWork.Trips.Get()
+                .SingleOrDefault(r => r.Id == id);
+
+            return trip != null;
+
+        }
     }
 
 }

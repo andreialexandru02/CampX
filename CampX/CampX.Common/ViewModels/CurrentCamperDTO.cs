@@ -17,6 +17,8 @@ namespace CampX.Common.ViewModels
 
         public bool IsAuthenticated { get; set; }
 
+        public bool IsBanned { get; set; }
+
         public List<string> Roles { get; set; }
 
         public CurrentCamperDTO()

@@ -108,6 +108,7 @@ else{  *@
     <div>
         <a id="deleteButton" asp-controller = "Trip" asp-action="DeleteTrip" asp-route-id=@Model.Id>Delete Trip</a>
         <a id="finishButton" asp-controller = "Trip" asp-action="FinishTrip" asp-route-id=@Model.Id>Finish Trip</a>
+    <a id="finishButton" asp-controller="Trip" asp-action="EditTrip" asp-route-id=@Model.Id>Edit Trip</a>
     </div>
     
     <div id="note-container">

@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace CampX.Controllers
 {
+    
     public class CamperAccountController : BaseController
     {
         private readonly CamperAccountService Service;
@@ -32,7 +33,7 @@ namespace CampX.Controllers
             return View("Register", model);
         }
         [HttpGet]
-
+        [Authorize]
         public IActionResult ChangePassword()
         {
             var model = new ChangePasswordModel();
@@ -53,7 +54,7 @@ namespace CampX.Controllers
             return RedirectToAction("Index", "Home");
         }
         [HttpPost]
-
+        [Authorize]
         public IActionResult ChangePassword(ChangePasswordModel model)
         {
             if (model == null)
@@ -77,7 +78,10 @@ namespace CampX.Controllers
         public async Task<IActionResult> Login(LoginModel model)
         {
             var camper = Service.Login(model.Email, model.Password);
-            
+            if (camper.IsBanned)
+            {
+                return View("YouHaveBeenBanned"); 
+            }
             if (!camper.IsAuthenticated)
             {
                 model.AreCredentialsInvalid = true;
@@ -88,7 +92,11 @@ namespace CampX.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-
+        [HttpGet]
+        public IActionResult YouHaveBeenBanned()
+        {
+            return View();
+        }
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> Logout()
@@ -98,15 +106,16 @@ namespace CampX.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [HttpGet]
+        /*[HttpGet]
         public IActionResult DemoPage()
         {
             var model = Service.GetCampers();
 
             return View(model);
-        }
+        }*/
         
         [HttpGet]
+        [Authorize]
         public IActionResult Profile()
         {
             return View();
@@ -131,16 +140,78 @@ namespace CampX.Controllers
                     scheme: "CampXCookies",
                     principal: principal);
         }
-
+        [Authorize]
         private async Task LogOut()
         {
             await HttpContext.SignOutAsync(scheme: "CampXCookies");
         }
-        
+        [Authorize]
         public IActionResult CamperProfile(int id)
         {
+            if (!Service.IdExists(id))
+            {
+                return View("Error_NotFound");
+            }
             var model = Service.GetCamperProfile(id);
             return View("CamperProfile", model);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult EditCamper(int id)
+        {
+            if (!Service.IdExists(id))
+            {
+                return View("Error_NotFound");
+            }
+            if (!Service.CheckCamperOwner(id))
+            {
+                return RedirectToAction("Error_Unauthorized", "Home");
+            }
+            var model = Service.EditCamper(id);
+
+            return View(model);
+
+            
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult EditCamper(EditCamperModel model)
+        {
+            if (model == null)
+            {
+                return View("Error_NotFound");
+            }
+            @Service.EditCamper(model);
+            return RedirectToAction("CamperProfile", new { id = model.Id});
+        }
+
+ 
+        [Authorize(Policy = "RequireModeratorRole")]
+        [Authorize(Policy = "RequireAdministratorRole")]
+        public IActionResult BanCamper(int id)
+        {
+            if (!Service.IdExists(id))
+            {
+                return View("Error_NotFound");
+            }
+            Service.BanCamper(id);
+
+            return RedirectToAction("CamperProfile", new { id = id });
+        }
+ 
+        [Authorize(Policy = "RequireModeratorRole")]
+        [Authorize(Policy = "RequireAdministratorRole")]
+        public IActionResult UnBanCamper(int id)
+        {
+            if (!Service.IdExists(id))
+            {
+                return View("Error_NotFound");
+            }
+            Service.UnBanCamper(id);
+
+            return RedirectToAction("CamperProfile", new { id = id });
         }
 
     }

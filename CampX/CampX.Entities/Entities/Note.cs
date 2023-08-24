@@ -12,6 +12,4 @@ public partial class Note
     public int TripId { get; set; }
 
     public int CamperId { get; set; }
-
-    public virtual TripCamper TripCamper { get; set; } = null!;
 }

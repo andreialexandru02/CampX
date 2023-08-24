@@ -15,7 +15,7 @@ public partial class Review
 
     public int CamperId { get; set; }
 
-    public virtual Camper? Camper { get; set; }
+    public virtual Camper Camper { get; set; } = null!;
 
     public virtual Campsite Campsite { get; set; } = null!;
 }

@@ -13,11 +13,12 @@ public partial class Camper
 
     public string Email { get; set; } = null!;
 
-    public DateTime? BirthDate { get; set; }
+    public DateTime BirthDate { get; set; }
 
     public int? ImageId { get; set; }
 
     public string Password { get; set; } = null!;
+    public bool IsBanned { get; set; }
 
     public virtual ICollection<CamperBadge> CamperBadges { get; set; } = new List<CamperBadge>();
 

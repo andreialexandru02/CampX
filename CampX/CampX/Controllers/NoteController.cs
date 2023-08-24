@@ -29,6 +29,10 @@ namespace CampX.Controllers
 
         public IActionResult ShowNotes(int id)
         {
+            if (!Service.IdOfTripExists(id))
+            {
+                return View("Error_NotFound");
+            }
             return Json(Service.ShowNotes(id));
         }
 

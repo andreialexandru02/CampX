@@ -17,7 +17,7 @@ namespace CampX.BusinessLogic.Implementations.Trips.Models
 
         public DateTime? Date { get; set; }
 
-        public int Nights { get; set;}
+        Dictionary<int, int> NightsAtCampsite { get; set; } = new Dictionary<int, int>();
 
         public string Code { get; set; } = null!;
 

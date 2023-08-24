@@ -33,9 +33,9 @@ builder.Services.AddCampXBusinessLogic();
 
 builder.Services.AddAuthorization(options => {
     options.AddPolicy("RequireAdministratorRole",
-        policy => policy.RequireClaim(ClaimTypes.Role, "1"));
+        policy => policy.RequireClaim(ClaimTypes.Role, "Admin"));
     options.AddPolicy("RequireModeratorRole",
-        policy => policy.RequireClaim(ClaimTypes.Role, "2"));
+        policy => policy.RequireClaim(ClaimTypes.Role, "Moderator"));
 
     
 });

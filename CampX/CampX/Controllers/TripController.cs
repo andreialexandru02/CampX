@@ -55,17 +55,30 @@ namespace CampX.Controllers
         public IActionResult TripDetails(int id)
         {
             var model = Service.TripDetails(id);
+
+            if (model == null)
+            {
+                return View("Error_NotFound");
+            }
             return View("TripDetails", model);
         }
         [HttpGet]
         public IActionResult TripDetailsJSON([FromQuery] int id)
         {
+            if (!Service.IdExists(id))
+            {
+                return View("Error_NotFound");
+            }
             return Json(Service.TripDetails(id));
         }
 
         [HttpGet]
         public IActionResult DeleteTrip(int id)
         {
+            if (!Service.IdExists(id))
+            {
+                return View("Error_NotFound");
+            }
             if (!Service.CheckOrganizer(id))
             {
                 return RedirectToAction("Error_Unauthorized", "Home");
@@ -98,20 +111,27 @@ namespace CampX.Controllers
         [HttpGet]
         public IActionResult EditTrip(int id)
         {
-
+            if (!Service.IdExists(id))
+            {
+                return View("Error_NotFound");
+            }
             if (!Service.CheckOrganizer(id))
             {
                 return RedirectToAction("Error_Unauthorized", "Home");
             }
-            var trip = Service.TripToEdit(id);
-
-            return View("EditCampsite", trip);
+            var model = Service.TripToEdit(id);
+            
+            return View("EditTrip", model);
         }
 
         [HttpGet]
 
         public IActionResult FinishTrip(int id)
         {
+            if (!Service.IdExists(id))
+            {
+                return View("Error_NotFound");
+            }
             if (!Service.CheckOrganizer(id))
             {
                 return RedirectToAction("Error_Unauthorized", "Home");

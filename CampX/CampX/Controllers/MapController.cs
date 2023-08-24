@@ -79,6 +79,8 @@ namespace CampX.Controllers
 
         public IActionResult CampsiteDetails(int id)
         {
+
+           
             var campsite = Service.CampsiteDetails(id);
 
             if (campsite == null)
@@ -94,6 +96,10 @@ namespace CampX.Controllers
 
         public IActionResult Delete(int id)
         {
+            if (!Service.IdExists(id))
+            {
+                return View("Error_NotFound");
+            }
             if (!Service.CheckCampsiteOwner(id))
             {
                 return RedirectToAction("Error_Unauthorized", "Home");
@@ -114,6 +120,10 @@ namespace CampX.Controllers
         public IActionResult EditCampsite(int id)
         {
 
+            if (!Service.IdExists(id))
+            {
+                return View("Error_NotFound");
+            }
             if (!Service.CheckCampsiteOwner(id))
             {
                 return RedirectToAction("Error_Unauthorized", "Home");
@@ -126,7 +136,11 @@ namespace CampX.Controllers
         [HttpGet]
 
         public IActionResult EditCampsiteJson(int id)
-        {            
+        {
+            if (!Service.IdExists(id))
+            {
+                return View("Error_NotFound");
+            }
             return Json(Service.CampsiteToEdit(id));          
         }
 
