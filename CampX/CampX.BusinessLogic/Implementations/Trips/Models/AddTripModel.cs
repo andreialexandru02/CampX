@@ -9,6 +9,8 @@ namespace CampX.BusinessLogic.Implementations.Trips.Models
 {
     public class AddTripModel
     {
+        
+      
         public string? Name { get; set; }
 
         public string? Description { get; set; }
@@ -17,7 +19,7 @@ namespace CampX.BusinessLogic.Implementations.Trips.Models
 
         public DateTime? Date { get; set; }
 
-        Dictionary<int, int> NightsAtCampsite { get; set; } = new Dictionary<int, int>();
+        public Dictionary<int, int> NightsAtCampsite { get; set; } = new Dictionary<int, int>();
 
         public string Code { get; set; } = null!;
 

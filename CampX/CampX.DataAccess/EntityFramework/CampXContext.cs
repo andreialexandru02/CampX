@@ -4,6 +4,7 @@ using CampX.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CampX.Context;
+
 public partial class CampXContext : DbContext
 {
     public CampXContext()
@@ -28,6 +29,8 @@ public partial class CampXContext : DbContext
     public virtual DbSet<EquipmentCamperTrip> EquipmentCamperTrips { get; set; }
 
     public virtual DbSet<Image> Images { get; set; }
+
+    public virtual DbSet<Night> Nights { get; set; }
 
     public virtual DbSet<Note> Notes { get; set; }
 
@@ -107,6 +110,7 @@ public partial class CampXContext : DbContext
 
             entity.HasOne(d => d.Camper).WithMany(p => p.Campsites)
                 .HasForeignKey(d => d.CamperId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_CampsiteCamper");
         });
 
@@ -154,6 +158,18 @@ public partial class CampXContext : DbContext
                         j.HasKey("ImageId", "CampsiteId").HasName("PK__Campsite__65FFD46781223A53");
                         j.ToTable("CampsiteImages");
                     });
+        });
+
+        modelBuilder.Entity<Night>(entity =>
+        {
+            entity.HasKey(e => new { e.TripId, e.CampsiteId }).HasName("PK__Nights__70D161E418D9B9B9");
+
+            entity.HasOne(d => d.Campsite).WithMany(p => p.Nights)
+                .HasForeignKey(d => d.CampsiteId)
+                .HasConstraintName("FK_Nights_Campsites");
+            entity.HasOne(d => d.Trip).WithMany(p => p.Nights)
+                .HasForeignKey(d => d.TripId)
+                .HasConstraintName("FK_Nights_Trips");
         });
 
         modelBuilder.Entity<Note>(entity =>

@@ -15,8 +15,22 @@ $.ajax({
 }).done((trip) => {
     trip.campsites.forEach((campsite) => {
         console.log(campsite.latitude, campsite.longitude)
+        
         marker = L.marker([campsite.latitude, campsite.longitude], { icon: tentIcon }).addTo(map)
+        var popupLText = trip.nightsAtCampsite[campsite.id] > 1 ? `${trip.nightsAtCampsite[campsite.id]} nopti!` : 'O noapte!'
 
+        marker.on('mouseover', function (e) {
+            console.log(trip.nightsAtCampsite[campsite.id])
+            e.target.bindPopup(popupLText, { closeOnClick: false, autoClose: false }).openPopup()
+        }) 
+        marker.on('mouseout', function (e) {
+            console.log(campsite.id)
+            //e.target.bindPopup("outfasd", { closeOnClick: false, autoClose: false }).openPopup()
+            map.closePopup(e.target.getPopup());
+            e.target.unbindPopup(); 
+        }) 
+        
+       //console.log(trip.nightsAtCampsite[campsite.id])
         /*var iframeLink = `https://www.meteoblue.com/en/weather/widget/three?geoloc=manual&lat=${campsite.latitude}&lon=${campsite.longitude}&nocurrent=0&noforecast=0&days=4&tempunit=CELSIUS&windunit=KILOMETER_PER_HOUR&layout=image` 
         var iframe = document.createElement("iframe");
         console.log(iframeLink)

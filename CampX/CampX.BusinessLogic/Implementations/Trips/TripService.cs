@@ -3,6 +3,7 @@ using CampX.BusinessLogic.Base;
 using CampX.BusinessLogic.Implementations.Campers.Models;
 using CampX.BusinessLogic.Implementations.Map.Models;
 using CampX.BusinessLogic.Implementations.Map.Validations;
+using CampX.BusinessLogic.Implementations.Nights.Models;
 using CampX.BusinessLogic.Implementations.Reviews.Models;
 using CampX.BusinessLogic.Implementations.Reviews.Validations;
 using CampX.BusinessLogic.Implementations.Trips.Models;
@@ -15,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.WebSockets;
 using System.Text;
 using System.Threading.Tasks;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
@@ -55,32 +57,47 @@ namespace CampX.BusinessLogic.Implementations.Trips
             ExecuteInTransaction(uow =>
             {
             
-            TripValidator.Validate(model).ThenThrow();
+                TripValidator.Validate(model).ThenThrow();
 
-            var trip = Mapper.Map<AddTripModel, Trip>(model);
+                var trip = Mapper.Map<AddTripModel, Trip>(model);
 
-            var campsites = uow.Campsites.Get()
-                .Where(c => model.Campsites.Contains(c.Id))
-                .ToList();
+                var campsites = uow.Campsites.Get()
+                    .Where(c => model.Campsites.Contains(c.Id))
+                    .ToList();
 
-            trip.Campsites = campsites;
+                //INSERT IN NIGHTS
 
-            trip = uow.Trips.Insert(trip);
 
-            uow.SaveChanges();
+                trip.Campsites = campsites;
 
-            var tripCamper = Mapper.Map<TripCamperIdModel, TripCamper>(
-                new TripCamperIdModel
+                trip = uow.Trips.Insert(trip);
+
+                uow.SaveChanges();
+
+                var tripCamper = Mapper.Map<TripCamperIdModel, TripCamper>(
+                    new TripCamperIdModel
+                    {
+                        TripId = trip.Id,
+                        CamperId = model.TripCampers[0],
+                        IsOrganizer = true
+                    });
+                uow.TripCampers.Insert(tripCamper);
+
+                uow.SaveChanges();
+                foreach (var campsite in campsites)
                 {
-                    TripId = trip.Id,
-                    CamperId = model.TripCampers[0],
-                    IsOrganizer = true
-                });
+                    var nights = Mapper.Map<AddNightsModel, Night>(new AddNightsModel
+                    {
+                        CampsiteId = campsite.Id
+                        , TripId = trip.Id
+                        ,
+                        NumberOfNights = model.NightsAtCampsite[campsite.Id]
+                    });
+                    uow.Nights.Insert(nights);
 
-            uow.TripCampers.Insert(tripCamper);
-
-            uow.SaveChanges();
-        });
+                    uow.SaveChanges();
+                }
+            });
 
     }
     public List<ShowTripsModel> ShowTrips() {
@@ -134,6 +151,17 @@ namespace CampX.BusinessLogic.Implementations.Trips
         }
         public ShowTripsModel TripDetails(int id)
         {
+            var nightsAtCampsite = new Dictionary<int, int>();
+
+            var nights = UnitOfWork.Nights.Get()
+                .Where(n => n.TripId == id)
+                .ToList();
+
+
+            foreach(var night in nights)
+            {
+                nightsAtCampsite.Add(night.CampsiteId ,night.NumberOfNights);
+            }
             var trip = UnitOfWork.Trips.Get()
                 .Include(c => c.Campsites)
                 .Include(tc => tc.TripCampers).ThenInclude(tcc => tcc.Camper)
@@ -166,7 +194,8 @@ namespace CampX.BusinessLogic.Implementations.Trips
                         Difficulty = tc.Difficulty,
                         Latitude = tc.Latitude,
                         Longitude = tc.Longitude
-                    }).ToList()
+                    }).ToList(),
+                    NightsAtCampsite = nightsAtCampsite
 
 
                 })
@@ -334,11 +363,26 @@ namespace CampX.BusinessLogic.Implementations.Trips
                            .Where(cb => cb.BadgeId == camperBadge.BadgeId && cb.CamperId == tripCamper.CamperId)
                            .SingleOrDefault();
 
-                    badgeCamper.Score += numberOfNights;
+                    //badgeCamper.Score += numberOfNights;
                     UnitOfWork.CamperBadges.Update(badgeCamper);
                     UnitOfWork.SaveChanges();
                 }
             }
+        }
+
+
+        public void EditTrip(ShowTripsModel model)
+        {
+
+            var trip = UnitOfWork.Trips.Get()
+                .AsNoTracking()
+                .SingleOrDefault(t => t.Id == model.Id);
+
+            trip = Mapper.Map<ShowTripsModel, Trip>(model);
+
+            UnitOfWork.Trips.Update(trip);
+            UnitOfWork.SaveChanges();
+
         }
         public bool IdExists(int id)
         {
@@ -348,6 +392,7 @@ namespace CampX.BusinessLogic.Implementations.Trips
             return trip != null;
 
         }
+
     }
 
 }

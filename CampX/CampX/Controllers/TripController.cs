@@ -5,6 +5,7 @@ using CampX.Code.Base;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 
 namespace CampX.Controllers
 {
@@ -122,6 +123,17 @@ namespace CampX.Controllers
             var model = Service.TripToEdit(id);
             
             return View("EditTrip", model);
+        }
+        [HttpPost]
+        public IActionResult EditTrip(ShowTripsModel model)
+        {
+            if(model == null)
+            {
+                return View("Error_NotFound");
+            }
+
+            Service.EditTrip(model);
+            return RedirectToAction("TripDetails", "Trip", new { id = model.Id });
         }
 
         [HttpGet]

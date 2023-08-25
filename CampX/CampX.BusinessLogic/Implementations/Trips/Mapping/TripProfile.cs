@@ -17,12 +17,17 @@ namespace CampX.BusinessLogic.Implementations.Trips.Mapping
         {
             CreateMap<AddTripModel, Trip>()
                 .ForMember(t => t.Campsites, t => t.Ignore())
-                .ForMember(t => t.TripCampers, t => t.Ignore());
+                .ForMember(t => t.TripCampers, t => t.Ignore())
+                .ForMember(t => t.Nights, t => t.Ignore());
 
             CreateMap<TripCamperModel, TripCamper>();
             CreateMap<TripCamperIdModel, TripCamper>();
             CreateMap<TripNoFKModel, Trip>();
-          
+            CreateMap<ShowTripsModel, Trip>()
+                .ForMember(t => t.Campsites, t => t.Ignore())
+                .ForMember(t => t.TripCampers, t => t.Ignore())
+                .ForMember(t => t.Nights, t => t.Ignore());
+
         }
     }
 }

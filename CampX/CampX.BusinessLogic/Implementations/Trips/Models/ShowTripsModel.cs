@@ -19,8 +19,9 @@ namespace CampX.BusinessLogic.Implementations.Trips.Models
         public DateTime? Date { get; set; }
 
         public string Code { get; set; } = null!;
+        public Dictionary<int, int> NightsAtCampsite { get; set; } = new Dictionary<int, int>();
 
-         public  ICollection<TripCamperModel> TripCampers { get; set; } = new List<TripCamperModel>();
+        public  ICollection<TripCamperModel> TripCampers { get; set; } = new List<TripCamperModel>();
 
          public  ICollection<TripCampsitesModel> Campsites { get; set; } = new List<TripCampsitesModel>();
     }

@@ -52,6 +52,7 @@ const displayCampsites = () => {
               
                 marker.on('click', function () {                    
 
+                    nightsAtCampsite[campsite.id] = 0
                     selectedCampsitesIdsList.push(campsite.id)
                     map.removeLayer(marker)
                     var campsiteDiv = document.createElement('div')
@@ -75,7 +76,7 @@ const displayCampsites = () => {
                     nightImg.alt = 'Night Icon'
                     nightsSpan = document.createElement('span')
                     nightsSpan.id = `nightspan${campsite.id}`
-                    numberOfNights += 1
+                    nightsAtCampsite[campsite.id] += 1
                     nightsSpan.appendChild(nightImg)
                     
                     addNight = document.createElement('i')
@@ -85,19 +86,19 @@ const displayCampsites = () => {
                     
                     addNight.onclick = (e) => {
        
-                        numberOfNights += 1
+                        nightsAtCampsite[campsite.id] += 1
                         e.target.previousSibling.appendChild(nightImg.cloneNode(true))
-                        console.log(numberOfNights)
+                        console.log(nightsAtCampsite)
                     }
                     deleteNight.onclick = (e) => {
 
                         const nightsSpan = document.getElementById(`nightspan${campsite.id}`)
                        
                         if (nightsSpan.children.length > 1) {
-                            numberOfNights -= 1
+                            nightsAtCampsite[campsite.id] -= 1
                             nightsSpan.removeChild(nightsSpan.children[nightsSpan.children.length - 1]);
                         }
-                        console.log(numberOfNights)
+                        console.log(nightsAtCampsite)
                     }
 
                     campsiteName.innerHTML = ` ${campsite.name} `
@@ -111,7 +112,9 @@ const displayCampsites = () => {
                     selectedCampsites.appendChild(campsiteDiv)
                     minusIcon.onclick = () => {
                         selectedCampsites.removeChild(campsiteDiv)
+                        
                         marker.addTo(map)
+                        delete nightsAtCampsite[campsite.id]
                         const index = selectedCampsitesIdsList.indexOf(campsite.id);
                         if (index > -1) { 
 
@@ -148,14 +151,15 @@ const displayCampsites = () => {
                         url: `/Trip/AddTrip`,
                         datatype: "json",
                         data: {
+                            
                             Name: nameInput.value
                             ,Description: descriptionInput.value
                             ,IsPublic: publicInput.value == 'public'
                             ,Date: dateInput.value
                             ,Code: codeInput
                             ,Campsites: selectedCampsitesIdsList
-                            , TripCampers: [currentCamper.value]
-                            ,Nights: numberOfNights
+                            ,TripCampers: [currentCamper.value]
+                            ,NightsAtCampsite: nightsAtCampsite
                         }
                     })
                         .done(() => {

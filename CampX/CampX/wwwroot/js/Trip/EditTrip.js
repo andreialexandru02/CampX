@@ -3,7 +3,8 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 20,
     attribution: '© OpenStreetMap'
 }).addTo(map);
-
+var url = window.location.href.split('/');
+var ViewId = url[url.length - 1];
 function GenerateRandomCode() {
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
     var randomCode = '';
@@ -30,114 +31,38 @@ $.ajax({
     url: "/Trip/DisplayCampsites",
     datatype: "json",
 })
-    .done((campsites) => {
-
-        var currentCamper = document.getElementById('currentCamper')
-        var nameInput = document.getElementById('nameInput')
-        nameInput.value = ''
-        var descriptionInput = document.getElementById('descriptionInput')
-        descriptionInput.value = ''
-        var publicInput = document.getElementById('visibility')
-        var dateInput = document.getElementById('dateInput')
-
-        var submitButton = document.getElementById('submitButton')
-        var selectedCampsitesIdsList = []
-
-        
+    .done((campsites) =>
         $.ajax({
             type: "get",
             url: "/Trip/TripDetailsJSON",
             data: { id: id }
-        })
-            .done((trip) => {
+        }).done((trip) => {
+            var currentCamper = document.getElementById('currentCamper')
+            var nameInput = document.getElementById('nameInput')
+            nameInput.value = ''
+            var descriptionInput = document.getElementById('descriptionInput')
+            descriptionInput.value = ''
+            var publicInput = document.getElementById('visibility')
+            var dateInput = document.getElementById('dateInput')
 
-                trip.campsites.forEach((campsite) => {
-
-
-                    selectedCampsitesIdsList.push(campsite.id)
-                    marker = document.getElementById(`marker${campsite.id}`)
-                    map.removeLayer(marker)
-                    var campsiteDiv = document.createElement('div')
-                    var img = document.createElement('img')
-                    img.src = 'https://localhost:44364/Images/icons8-tent-48.png'
-                    img.height = 60
-                    img.width = 60
-                    img.alt = 'Tent Icon'
-                    var minusIcon = document.createElement('i')
-                    minusIcon.className = 'fas fa-times'
-                    img.onclick = () => {
-
-                        window.location.href = '../Map/CampsiteDetails/' + campsite.id;
-                    }
-                    var campsiteName = document.createElement('span')
-                    nightImg = document.createElement('img')
-                    nightImg.className = 'nightIcon'
-                    nightImg.src = 'https://localhost:44364/Images/night_624106.png'
-                    nightImg.height = 25
-                    nightImg.width = 25
-                    nightImg.alt = 'Night Icon'
-                    nightsSpan = document.createElement('span')
-                    nightsSpan.id = `nightspan${campsite.id}`
-                    numberOfNights += 1
-                    nightsSpan.appendChild(nightImg)
-
-                    addNight = document.createElement('i')
-                    addNight.className = 'fas fa-plus'
-                    deleteNight = document.createElement('i')
-                    deleteNight.className = 'fas fa-minus'
-
-                    for (var i = 0; i < numberOfNights; i++) {
-                        e.target.previousSibling.appendChild(nightImg.cloneNode(true))
-
-                    }
-
-
-                    campsiteName.innerHTML = ` ${campsite.name} `
-                    campsiteDiv.appendChild(minusIcon)
-                    campsiteDiv.appendChild(img)
-                    campsiteDiv.appendChild(campsiteName)
-                    campsiteDiv.appendChild(nightsSpan)
-                    campsiteDiv.appendChild(addNight)
-                    campsiteDiv.appendChild(deleteNight)
-
-                    selectedCampsites.appendChild(campsiteDiv)
-                    minusIcon.onclick = () => {
-                        selectedCampsites.removeChild(campsiteDiv)
-                        marker.addTo(map)
-                        const index = selectedCampsitesIdsList.indexOf(campsite.id);
-                        if (index > -1) {
-
-                            selectedCampsitesIdsList.splice(index, 1);
-                        }
-                    }
-                })
-            })
-    })
-   
-       /* campsites.forEach(campsite => {
-
-
-            var marker = L.marker([campsite.latitude, campsite.longitude], { icon: tentIcon }).addTo(map)
-            //marker.id = `marker${campsite.id}`
-           // var selectedCampsites = document.getElementById("selectedCampsites")
-
-            *//*marker.on('click', function () {
-
+            var submitButton = document.getElementById('submitButton')
+            var selectedCampsitesIdsList = []
+            var selectedCampsites = document.getElementById("selectedCampsites")
+            var createCampsiteSelectionDiv = (campsite) => {
                 selectedCampsitesIdsList.push(campsite.id)
-                map.removeLayer(marker)
-                campsiteDiv = document.createElement('div')
-                img = document.createElement('img')
+                var campsiteDiv = document.createElement('div')
+                var img = document.createElement('img')
                 img.src = 'https://localhost:44364/Images/icons8-tent-48.png'
                 img.height = 60
                 img.width = 60
                 img.alt = 'Tent Icon'
-                minusIcon = document.createElement('i')
+                var minusIcon = document.createElement('i')
                 minusIcon.className = 'fas fa-times'
                 img.onclick = () => {
 
                     window.location.href = '../Map/CampsiteDetails/' + campsite.id;
                 }
-                campsiteName = document.createElement('span')
+                var campsiteName = document.createElement('span')
                 nightImg = document.createElement('img')
                 nightImg.className = 'nightIcon'
                 nightImg.src = 'https://localhost:44364/Images/night_624106.png'
@@ -146,9 +71,14 @@ $.ajax({
                 nightImg.alt = 'Night Icon'
                 nightsSpan = document.createElement('span')
                 nightsSpan.id = `nightspan${campsite.id}`
-                numberOfNights += 1
                 nightsSpan.appendChild(nightImg)
+                if (trip.nightsAtCampsite[campsite.id] == null) {
+                    trip.nightsAtCampsite[campsite.id] = 1
+                }
+                for (var i = 1; i < trip.nightsAtCampsite[campsite.id]; i++) {
 
+                    nightsSpan.appendChild(nightImg.cloneNode(true))
+                }
                 addNight = document.createElement('i')
                 addNight.className = 'fas fa-plus'
                 deleteNight = document.createElement('i')
@@ -156,20 +86,21 @@ $.ajax({
 
                 addNight.onclick = (e) => {
 
-                    numberOfNights += 1
+                    trip.nightsAtCampsite[campsite.id] += 1
                     e.target.previousSibling.appendChild(nightImg.cloneNode(true))
-                    console.log(numberOfNights)
+                    console.log(trip.nightsAtCampsite[campsite.id])
                 }
                 deleteNight.onclick = (e) => {
 
                     const nightsSpan = document.getElementById(`nightspan${campsite.id}`)
 
                     if (nightsSpan.children.length > 1) {
-                        numberOfNights -= 1
+                        trip.nightsAtCampsite[campsite.id] -= 1
                         nightsSpan.removeChild(nightsSpan.children[nightsSpan.children.length - 1]);
                     }
-                    console.log(numberOfNights)
+                    console.log(trip.nightsAtCampsite[campsite.id])
                 }
+
 
                 campsiteName.innerHTML = ` ${campsite.name} `
                 campsiteDiv.appendChild(minusIcon)
@@ -180,60 +111,84 @@ $.ajax({
                 campsiteDiv.appendChild(deleteNight)
 
                 selectedCampsites.appendChild(campsiteDiv)
-                *//*minusIcon.onclick = () => {
+                minusIcon.onclick = () => {
                     selectedCampsites.removeChild(campsiteDiv)
-                    marker.addTo(map)
+
+                    campsite.marker.addTo(map)
+                    delete trip.nightsAtCampsite[campsite.id]
                     const index = selectedCampsitesIdsList.indexOf(campsite.id);
                     if (index > -1) {
 
                         selectedCampsitesIdsList.splice(index, 1);
                     }
-                }*//*
-            })*//*
-
-        })*/
-
-        
-        var codeInput = GenerateRandomCode()
-        let span = document.createElement('span')
-        span.style.color = 'red'
-        document.getElementById('tripForm').appendChild(span)
-        span.style.display = 'none'
-        submitButton.onclick = () => {
-
-            if (selectedCampsitesIdsList.length == 0) {
-                span.innerText = 'Selecteaza de pe harta campsite-urile unde vrei sa mergi!'
-                span.style.display = 'block'
+                }
             }
-            else if (nameInput.value === '') {
-                span.innerText = 'Seteaza numele'
-                span.style.display = 'block'
-            }
-            else if (publicInput.value === "") {
-                span.innerText = 'Seteaza daca vrei ca tripul tau sa fie public sau privat'
-                span.style.display = 'block'
-            }
-            else {
-                $.ajax({
-                    type: "post",
-                    url: `/Trip/AddTrip`,
-                    datatype: "json",
-                    data: {
-                        Name: nameInput.value
-                        , Description: descriptionInput.value
-                        , IsPublic: publicInput.value == 'public'
-                        , Date: dateInput.value
-                        , Code: codeInput
-                        , Campsites: selectedCampsitesIdsList
-                        , TripCampers: [currentCamper.value]
-                        , Nights: numberOfNights
-                    }
+
+            var selectedCampsiteIds = trip.campsites.map(c => c.id);
+            campsites.filter(c => selectedCampsiteIds.indexOf(c.id) > -1).forEach((campsite) => {
+
+                createCampsiteSelectionDiv(campsite)
+                campsite.isInitiallySelected = true;
+            })
+
+            //unselectedCampsites = campsites.filter(campsite => !trip.campsites.some(tripCampsite => campsite.id == tripCampsite.id));
+            campsites.forEach(campsite => {
+
+                campsite.marker = L.marker([campsite.latitude, campsite.longitude], { icon: tentIcon })
+                if (!campsite.isInitiallySelected) {
+                    campsite.marker.addTo(map);
+                }
+                campsite.marker.on('click', function () {
+                    map.removeLayer(campsite.marker)
+                    createCampsiteSelectionDiv(campsite);
                 })
-                    .done(() => {
+            })
 
-                        window.location.reload()
+            var codeInput = GenerateRandomCode()
+            let span = document.createElement('span')
+            span.style.color = 'red'
+            document.getElementById('tripForm').appendChild(span)
+            span.style.display = 'none'
+            nameInput.value = trip.name
+            descriptionInput.value = trip.description
+            dateInput.value = new Date(trip.date).toISOString().substr(0, 10);
+            trip.isPublic ? document.getElementById('public').selected = true : document.getElementById('privat').selected = true
+            submitButton.onclick = () => {
+                if (selectedCampsitesIdsList.length == 0) {
+                    span.innerText = 'Selecteaza de pe harta campsite-urile unde vrei sa mergi!'
+                    span.style.display = 'block'
+                }
+                else if (nameInput.value === '') {
+                    span.innerText = 'Seteaza numele'
+                    span.style.display = 'block'
+                }
+                else if (publicInput.value === "") {
+                    span.innerText = 'Seteaza daca vrei ca tripul tau sa fie public sau privat'
+                    span.style.display = 'block'
+                }
+                else {
+                    $.ajax({
+                        type: "post",
+                        url: `/Trip/EditTrip`,
+                        datatype: "json",
+                        data: {
+                             Id: ViewId
+                            , Name: nameInput.value
+                            , Description: descriptionInput.value
+                            , IsPublic: publicInput.value == 'public'
+                            , Date: dateInput.value
+                            , Code: codeInput
+                            , Campsites: selectedCampsitesIdsList
+                            , TripCampers: [currentCamper.value]
+                            , NightsAtCampsite: trip.nightsAtCampsite
+                        }
                     })
-            }
-        }
+                        .done(() => {
 
-    })
+                            window.location.reload()
+                        })
+                }
+            }
+        })
+
+    )

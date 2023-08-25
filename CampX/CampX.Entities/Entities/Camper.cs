@@ -18,6 +18,7 @@ public partial class Camper
     public int? ImageId { get; set; }
 
     public string Password { get; set; } = null!;
+
     public bool IsBanned { get; set; }
 
     public virtual ICollection<CamperBadge> CamperBadges { get; set; } = new List<CamperBadge>();

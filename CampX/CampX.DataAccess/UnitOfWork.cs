@@ -71,6 +71,9 @@ namespace CampX.DataAccess
         private IRepository<TripCamper> tripCampers;
         public IRepository<TripCamper> TripCampers => tripCampers ?? (tripCampers = new BaseRepository<TripCamper>(Context));
 
+        private IRepository<Night> nights;
+        public IRepository<Night> Nights=> nights ?? (nights = new BaseRepository<Night>(Context));
+
         public void SaveChanges()
         {
             Context.SaveChanges();

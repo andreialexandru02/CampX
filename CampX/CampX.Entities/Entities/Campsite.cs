@@ -19,7 +19,9 @@ public partial class Campsite
 
     public int CamperId { get; set; }
 
-    public virtual Camper? Camper { get; set; }
+    public virtual Camper Camper { get; set; } = null!;
+
+    public virtual ICollection<Night> Nights { get; set; } = new List<Night>();
 
     public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
 
