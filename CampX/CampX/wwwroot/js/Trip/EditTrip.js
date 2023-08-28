@@ -79,9 +79,9 @@ $.ajax({
 
                     nightsSpan.appendChild(nightImg.cloneNode(true))
                 }
-                addNight = document.createElement('i')
+                var addNight = document.createElement('i')
                 addNight.className = 'fas fa-plus'
-                deleteNight = document.createElement('i')
+                var deleteNight = document.createElement('i')
                 deleteNight.className = 'fas fa-minus'
 
                 addNight.onclick = (e) => {
@@ -143,7 +143,36 @@ $.ajax({
                     createCampsiteSelectionDiv(campsite);
                 })
             })
+            var participantsDiv = document.getElementById("participantsDiv")
+            trip.tripCampers.forEach(participant => {
+                var participantSpan = document.createElement('span')
+                var soloParticipant = document.createElement('span')
+                soloParticipant.innerText = 'Esti singurul participant al acestui trip'
+                participantsDiv.appendChild(soloParticipant)
+                soloParticipant.style.display = 'none'
 
+                if (trip.tripCampers.length == 1) {
+                    soloParticipant.style.display = 'block'
+                }
+                else {
+
+                    if (!participant.isOrganizer) {
+                        
+                        participantSpan.innerText = `${participant.camper.firstName} ${participant.camper.lastName}`                      
+                        participantsDiv.appendChild(participantSpan)
+                    }
+
+                    participantSpan.onclick = () => {
+                        participantsDiv.removeChild(participantSpan)
+                        trip.tripCampers = trip.tripCampers.filter(obj => obj !== participant);
+                        if (trip.tripCampers.length == 1) {
+                            soloParticipant.style.display = 'block'
+                        }
+                    }
+                }
+                
+
+            })
             var codeInput = GenerateRandomCode()
             let span = document.createElement('span')
             span.style.color = 'red'
@@ -153,7 +182,8 @@ $.ajax({
             descriptionInput.value = trip.description
             dateInput.value = new Date(trip.date).toISOString().substr(0, 10);
             trip.isPublic ? document.getElementById('public').selected = true : document.getElementById('privat').selected = true
-            submitButton.onclick = () => {
+            submitButton.onclick = (e) => {
+                e.preventDefault();
                 if (selectedCampsitesIdsList.length == 0) {
                     span.innerText = 'Selecteaza de pe harta campsite-urile unde vrei sa mergi!'
                     span.style.display = 'block'
@@ -179,13 +209,14 @@ $.ajax({
                             , Date: dateInput.value
                             , Code: codeInput
                             , Campsites: selectedCampsitesIdsList
-                            , TripCampers: [currentCamper.value]
+                            , TripCampers: trip.tripCampers
                             , NightsAtCampsite: trip.nightsAtCampsite
+                             
                         }
                     })
                         .done(() => {
 
-                            window.location.reload()
+                            window.location.href = '/Trip/TripDetails/' + trip.id;
                         })
                 }
             }

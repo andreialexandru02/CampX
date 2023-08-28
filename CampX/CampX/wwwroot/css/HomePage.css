@@ -1,67 +1,7 @@
-body {
-    margin: 0;
-    padding: 0;
-    
-    background-color: #EDF1D6;
+﻿#textLogo{
+    justify-content:center;
+    background-color:red;
 }
-
-/*nav {
-    background-color: #EDF1D6;
-    padding: 10px;
-    margin-top: 30px;
-    margin-left: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;*/ /* Center the navigation links horizontally */
-    /*align-items: center;*/ /* Center the navigation links vertically */
-    /*zoom: ;
-}*/
-
-ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    font-size: 20px;
-    
-    
+body{
+    background-color: red;
 }
-
-li {
-    margin-right: 15px;
-    height: 30px;
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    background-color:  #609966;
-    border-radius: 5px;
-    
-    
-}
-
-a {
-    color: black;
-    text-decoration: none;
-    padding: 8px 15px;
-    color: #1e2f1a;
-} 
-
-a:hover {
-        background-color:  #1e2f1a;
-        color: #EDF1D6;
-        border-radius: 5px;
-    }
-
-#campXLogo {
-   
-    width: 48px;
-    height: 48px;
-    vertical-align: bottom;
-}
-#campXLogo:hover {
-    cursor: pointer;
-}
-
-/*.navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 {
-    background-color: red !important;
-}*/

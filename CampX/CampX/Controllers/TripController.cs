@@ -133,7 +133,7 @@ namespace CampX.Controllers
             }
 
             Service.EditTrip(model);
-            return RedirectToAction("TripDetails", "Trip", new { id = model.Id });
+            return Ok(model.Id);
         }
 
         [HttpGet]

@@ -15,6 +15,7 @@ using CampX.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.WebSockets;
 using System.Text;
@@ -375,10 +376,44 @@ namespace CampX.BusinessLogic.Implementations.Trips
         {
 
             var trip = UnitOfWork.Trips.Get()
-                .AsNoTracking()
+                .Include(n => n.Nights)
+                .Include(c => c.Campsites)
+                .Include(c => c.TripCampers)
                 .SingleOrDefault(t => t.Id == model.Id);
 
-            trip = Mapper.Map<ShowTripsModel, Trip>(model);
+
+            Mapper.Map<ShowTripsModel, Trip>(model,trip);
+
+            var nightAtCampsite = new Collection<Night>();
+            trip.TripCampers.Clear();
+
+            foreach(var night in model.NightsAtCampsite)
+            {
+                Console.WriteLine(night);
+                nightAtCampsite.Add(new Night
+                {
+                    CampsiteId = night.Key,
+                    NumberOfNights = night.Value,
+                    TripId = trip.Id
+                });
+            }
+            var campsites = UnitOfWork.Campsites.Get()
+                .Where(c => model.NightsAtCampsite.Keys.Contains(c.Id))
+                .ToList();
+            trip.Nights = nightAtCampsite;
+            trip.Campsites = campsites;
+            foreach (var tripCamper in model.TripCampers) 
+            {
+                
+                trip.TripCampers.Add(new TripCamper
+                {
+                    CamperId = tripCamper.Camper.Id,
+                    TripId = trip.Id,
+                    IsOrganizer = tripCamper.IsOrganizer
+
+                });
+            }
+            //trip.TripCampers = model.TripCampers;
 
             UnitOfWork.Trips.Update(trip);
             UnitOfWork.SaveChanges();
