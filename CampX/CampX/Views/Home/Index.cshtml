@@ -1,22 +1,44 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    ViewData["Class"] = "HomePage";
 }
 @*<link rel="stylesheet" href="~/css/HomePage.css" type="text/css" />
 *@@using CampX.Common.ViewModels;
 @inject CurrentCamperDTO currentCamper
 <link rel="stylesheet" href="~/css/HomePage.css" type="text/css" />
 
-    
-    <br></br>
- 
-    <form method="post" asp-controller="CamperAccount" asp-action="Logout">
+   @* <form method="post" asp-controller="CamperAccount" asp-action="Logout">
     @if (currentCamper.IsAuthenticated == true)
     {
         <button type="submit" class="btn btn-primary">Logut</button>
      }
-    </form>
+    </form>*@
 
-    <div id = "textLogo">
-    <img src="Images\CampXText.png" alt="CampXTextLogo">
+    <div class="home-content">
+        <div class="home-icon">
+        <a href="~/Map/ShowMap">
+               <img class = "icons" id= "mapIcon" src="../Images/MapIcon.png" alt="MapIcon">
+           </a>
+        </div>
+        <div class="home-map">
+            <div class="LogoMottoDiv">
+                <div class="home-map-text">
+                    <div class = "textLogoDiv">
+                        <img class ="textLogoImg" src="../Images/CampXText.png" alt="CampXTextLogo">
+                    </div>
+                    <div class= "mottoDiv">Cel mai usor mod de a organiza tripul perfect!</div>
+                </div>
+
+            <div class="hartaRomaniaDiv">
+                    <img class ="hartaRomaniaImg" src="../Images/HartaRomaniaVerdeInchis.png" alt="CampXTextLogo">
+                </div>
+            </div> 
+        </div>
+        <div class="home-icon">
+            <a href="~/Trip/ShowTrips">
+                <img class = "icons" id="tripListIcon" src="../Images/TripsListIcon.png" alt="TripsListIcon">
+            </a>
+        </div>
     </div>
- 
+
+

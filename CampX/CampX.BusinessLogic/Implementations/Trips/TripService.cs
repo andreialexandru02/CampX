@@ -340,10 +340,7 @@ namespace CampX.BusinessLogic.Implementations.Trips
         public void FinishTrip(int id)
         {
 
-            var numberOfNights = UnitOfWork.Trips.Get()
-                .Where(t => t.Id == id)
-                .Select(t => t.Nights)
-                .SingleOrDefault();
+           
 
             var tripCampers = UnitOfWork.Trips.Get()
                 .Include(tc => tc.TripCampers).ThenInclude(c => c.Camper).ThenInclude(cb => cb.CamperBadges)
@@ -364,7 +361,12 @@ namespace CampX.BusinessLogic.Implementations.Trips
                            .Where(cb => cb.BadgeId == camperBadge.BadgeId && cb.CamperId == tripCamper.CamperId)
                            .SingleOrDefault();
 
-                    //badgeCamper.Score += numberOfNights;
+                    var nights = UnitOfWork.Nights.Get()                        
+                        .Where(n => n.TripId == id)
+                        .Select(n => n.NumberOfNights)
+                        .ToList();
+
+                    badgeCamper.Score += nights.Sum();
                     UnitOfWork.CamperBadges.Update(badgeCamper);
                     UnitOfWork.SaveChanges();
                 }

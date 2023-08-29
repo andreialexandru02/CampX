@@ -10,3 +10,7 @@
     border-radius: 5px;
     border: 2px solid #1e2f1a;
 }
+.largeList {
+    max-height: 50px;
+    overflow: hidden;
+}

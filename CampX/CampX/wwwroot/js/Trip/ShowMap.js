@@ -96,7 +96,11 @@ const displayCampsites = () => {
                        
                         if (nightsSpan.children.length > 1) {
                             nightsAtCampsite[campsite.id] -= 1
-                            nightsSpan.removeChild(nightsSpan.children[nightsSpan.children.length - 1]);
+                            nightToDelete = nightsSpan.children[nightsSpan.children.length - 1]
+                            nightToDelete.classList.add("slide-down");
+                            setTimeout(() => {                             
+                                nightsSpan.removeChild(nightToDelete);
+                            }, 400);
                         }
                         console.log(nightsAtCampsite)
                     }

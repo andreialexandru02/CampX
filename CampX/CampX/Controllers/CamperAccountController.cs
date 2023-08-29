@@ -97,6 +97,7 @@ namespace CampX.Controllers
         {
             return View();
         }
+        
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> Logout()

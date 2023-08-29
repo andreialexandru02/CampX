@@ -26,10 +26,35 @@
 #visibility{
     margin-top: 25px
 }
-.nightIcon{
+.nightIcon {
     margin-left: 5px;
-    margin-right:5px;
+    margin-right: 5px;
+    animation: slideIn 1s ease-out forwards;
 }
+.slide-down {
+
+    animation: slideOut 0.4s ease-in forwards;
+}
+
 i{
     margin-right: 5px
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+    }
+
+    to {
+        transform: translateY(0px);
+    }
+}
+@keyframes slideOut {
+    from {
+        transform: translateY(0px);
+    }
+
+    to {
+        transform: translateY(40px);
+    }
 }

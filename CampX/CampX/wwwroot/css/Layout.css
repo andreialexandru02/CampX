@@ -1,67 +1,106 @@
 body {
     margin: 0;
     padding: 0;
-    
-    background-color: #EDF1D6;
+    background-color: #FFEECB;
+}
+.navbar {
+    background-color: #005249;
+    color: #FFEECB;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 20px;
 }
 
-/*nav {
-    background-color: #EDF1D6;
-    padding: 10px;
-    margin-top: 30px;
-    margin-left: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;*/ /* Center the navigation links horizontally */
-    /*align-items: center;*/ /* Center the navigation links vertically */
-    /*zoom: ;
-}*/
-
-ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
+.my-account {
+    position: relative;
+    cursor: pointer;
     font-size: 20px;
-    
-    
 }
 
-li {
-    margin-right: 15px;
-    height: 30px;
+.logo {
     display: flex;
-    justify-content: center; 
-    align-items: center; 
-    background-color:  #609966;
-    border-radius: 5px;
-    
-    
+    align-items: center;
 }
 
-a {
-    color: black;
-    text-decoration: none;
-    padding: 8px 15px;
-    color: #1e2f1a;
-} 
-
-a:hover {
-        background-color:  #1e2f1a;
-        color: #EDF1D6;
-        border-radius: 5px;
+    .logo img {
+        height: 45px;
     }
 
-#campXLogo {
-   
-    width: 48px;
-    height: 48px;
-    vertical-align: bottom;
-}
-#campXLogo:hover {
-    cursor: pointer;
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 150px;
+    background-color: #005249;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 1;
 }
 
-/*.navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 {
-    background-color: red !important;
-}*/
+.my-account:hover .dropdown-content {
+    display: block;
+    justify-content: center;
+}
+a {
+    display: block;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #005249;
+    /* border: solid 2px #1e2f1a; */
+    border-radius: 5px;
+    margin-top: 2px;
+}
+
+.dropdown-content a  {
+    display: block;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #FFEECB;
+
+    /* border: solid 2px #1e2f1a; */
+    border-radius: 5px;
+    margin-top: 2px;
+}
+
+.dropdown-content button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    display: block;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #FFEECB;
+
+    /* border: solid 2px #1e2f1a; */
+    border-radius: 5px;
+    margin-top: 2px;
+}
+
+.dropdown-content a:hover, button:hover {
+    background-color: #FFEECB;
+    color: #005249;
+}
+
+a:hover {
+    background-color: #005249;
+    color: #FFEECB;
+}
+.dropdown-content:hover {
+    display: block;
+}
+
+.divider {
+    border-top: 1px solid #ccc;
+    margin: 5px 0; /* Adjust margin as needed */
+}
+
+.logo {
+    height: 60px;
+}
