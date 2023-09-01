@@ -10,6 +10,7 @@ using CampX.DataAccess;
 using CampX.Entities;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -96,6 +97,7 @@ namespace CampX.BusinessLogic.Implementations.Map
         public CampsiteDetailsModel CampsiteDetails(int id)
         {
             var campsite = UnitOfWork.Campsites.Get()
+            //.Include(c => c.Images)
             .Where(c => c.Id == id)
             .Select(c => new CampsiteDetailsModel
             {
@@ -134,17 +136,23 @@ namespace CampX.BusinessLogic.Implementations.Map
         {
             EditCampsiteValidator.Validate(model).ThenThrow();
 
-            /*var campsite = UnitOfWork.Campsites.Get()
+            var campsite = UnitOfWork.Campsites.Get()
+                .Include(c => c.Images)
                 .Where(c => c.Id == id)
                 .AsNoTracking()
-                .SingleOrDefault();*/
+                .SingleOrDefault();
 
-            var campsite = Mapper.Map<EditCampsiteModel, Campsite>(model);
+            campsite = Mapper.Map<EditCampsiteModel, Campsite>(model);
 
             var images = UnitOfWork.Images.Get()
                 .Where(i => imgList.Contains(i.Id))
                 .ToList();
             //.Concat(model.ImageIds.ToList())
+
+           /* foreach(var image in images)
+            {
+                campsite.Images.Add(image);
+            }*/
             campsite.Images = images;
 
             campsite.Id = id;

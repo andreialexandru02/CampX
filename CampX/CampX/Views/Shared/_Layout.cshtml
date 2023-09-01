@@ -28,7 +28,13 @@
                     </div>
 
                     <div class="my-account">
-                        Contul meu
+                        @if(currentCamper.IsAuthenticated) 
+                        {
+                            <text>Contul meu</text> 
+                        }
+                        else{
+                            <text> Autentifica-te  </text>
+                        }
                         <div class="dropdown-content">
                             <a href="~/CamperAccount/Login">Login</a>
                             <div class="divider"></div>

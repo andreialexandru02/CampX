@@ -9,7 +9,7 @@
 else
 {
     <input id="currentCamper" type= "hidden" value = @currentCamper.Id></input>
-    <a href="~/Map/AddCampsite">Adauga Campsite</a>
+    <button id="addCampsite" onclick="window.location.href='../Map/AddCampsite'" type="button" class="btn btn-dark">Creaza un campsite nou </button>
     <script type="text/javascript" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
             crossorigin=""></script>
@@ -23,7 +23,7 @@ else
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
 
-    <span>Selecteaza de pe harta campsite-urile unde vrei sa mergi in excursie si cate nopti vei sta in fiecare </span>
+    <div>Selecteaza de pe harta campsite-urile unde vrei sa mergi in excursie si cate nopti vei sta in fiecare </div>
     <div id="map"></div>
     <div id="selectedCampsites">
 

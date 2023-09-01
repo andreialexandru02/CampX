@@ -6,6 +6,8 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 map.className = "box-shadow"
 
+var showMore = document.getElementsByClassName("showMore")
+
 
 const displayCampsites = () => {
     $.ajax({

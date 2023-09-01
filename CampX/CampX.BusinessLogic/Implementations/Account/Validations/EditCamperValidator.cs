@@ -24,11 +24,17 @@ namespace CampX.BusinessLogic.Implementations.Account.Validations
                 .NotEmpty().WithMessage("Camp obligatoriu!")
                 .Must(NotAlreadyExist)
                 .WithMessage("Exista deja un utilizator cu acest email!")
-                .EmailAddress(FluentValidation.Validators.EmailValidationMode.AspNetCoreCompatible);          
+                .Must(InputTooLong)
+                .WithMessage("Email-ul este prea lung")
+                .EmailAddress(FluentValidation.Validators.EmailValidationMode.AspNetCoreCompatible);
             RuleFor(r => r.FirstName)
-                .NotEmpty().WithMessage("Camp obligatoriu!");            
+                .NotEmpty().WithMessage("Camp obligatoriu!")
+                .Must(InputTooLong)
+                .WithMessage("Prenumele este prea lung");
             RuleFor(r => r.LastName)
-                .NotEmpty().WithMessage("Camp obligatoriu!");
+                .NotEmpty().WithMessage("Camp obligatoriu!")
+                .Must(InputTooLong)
+                .WithMessage("Numele de familie este prea lung");
             RuleFor(r => r.BirthDay)
                 .NotEmpty().WithMessage("Camp obligatoriu!")
                 .Must(BeValidBirthDate).WithMessage("Camperii trebuie sa aiba minim 13 ani!");
@@ -51,6 +57,10 @@ namespace CampX.BusinessLogic.Implementations.Account.Validations
             }
             return false;
 
+        }
+        public bool InputTooLong(string name)
+        {
+            return name.Length <= 100;
         }
         private bool BeValidBirthDate(DateTime birthDate)
         {

@@ -50,7 +50,6 @@ namespace CampX.Controllers
         }
 
         [HttpPost]
-
         public IActionResult AddReview(AddReviewModel model)
         {
             Service.AddReview(model);

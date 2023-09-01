@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using CampX.BusinessLogic.Implementations.Images;
 using Microsoft.AspNetCore.Authorization;
 
+
 namespace CampX.Controllers
 {
     [Authorize]
@@ -38,6 +39,11 @@ namespace CampX.Controllers
         {
             var model = new AddCampsiteModel();
 
+            /*string originalUrl = Request.Url.AbsoluteUri;
+
+            // Store the original URL in a session or cookie
+            Session["OriginalUrl"] = originalUrl;*/
+            
             return View("AddCampsite", model);
         }
 

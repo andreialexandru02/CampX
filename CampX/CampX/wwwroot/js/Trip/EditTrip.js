@@ -93,10 +93,20 @@ $.ajax({
                 deleteNight.onclick = (e) => {
 
                     const nightsSpan = document.getElementById(`nightspan${campsite.id}`)
-
+/*
                     if (nightsSpan.children.length > 1) {
                         trip.nightsAtCampsite[campsite.id] -= 1
                         nightsSpan.removeChild(nightsSpan.children[nightsSpan.children.length - 1]);
+                    }
+                    const nightsSpan = document.getElementById(`nightspan${campsite.id}`)
+*/
+                    if (nightsSpan.children.length > 1) {
+                        trip.nightsAtCampsite[campsite.id] -= 1
+                        nightToDelete = nightsSpan.children[nightsSpan.children.length - 1]
+                        nightToDelete.classList.add("slide-down");
+                        setTimeout(() => {
+                            nightsSpan.removeChild(nightToDelete);
+                        }, 400);
                     }
                     console.log(trip.nightsAtCampsite[campsite.id])
                 }
@@ -190,6 +200,14 @@ $.ajax({
                 }
                 else if (nameInput.value === '') {
                     span.innerText = 'Seteaza numele'
+                    span.style.display = 'block'
+                }
+                else if (nameInput.value.length > 100) {
+                    span.innerText = 'Numele este prea lung'
+                    span.style.display = 'block'
+                }
+                else if (descriptionInput.value != null && descriptionInput.value.length > 500) {
+                    span.innerText = 'Descriere prea lunga'
                     span.style.display = 'block'
                 }
                 else if (publicInput.value === "") {

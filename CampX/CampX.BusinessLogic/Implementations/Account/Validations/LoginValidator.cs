@@ -20,5 +20,6 @@ namespace CampX.BusinessLogic.Implementations.Account.Validations
             RuleFor(r => r.Password)
                 .NotEmpty().WithMessage("Camp obligatoriu!");
         }    
+
     }
 }

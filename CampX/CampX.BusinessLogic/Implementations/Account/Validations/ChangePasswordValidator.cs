@@ -55,7 +55,7 @@ namespace CampX.BusinessLogic.Implementations.Account.Validations
             }
             return true;
         }
-
+      
     }
 
 }

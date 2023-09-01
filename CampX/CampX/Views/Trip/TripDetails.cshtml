@@ -3,6 +3,7 @@
 @inject CurrentCamperDTO currentCamper
 @{
     ViewData["Title"] = "TripDetails";
+    ViewData["Class"] = "TripDetails";
 }
 
 @*Leaftlet*@
@@ -76,12 +77,14 @@ else{  *@
                 Participanti:
             </dt>
             <dd class="col-sm-10">
+                
                 @foreach(var tripCamper in Model.TripCampers)
                 {
                     <a href="~/CamperAccount/CamperProfile/@tripCamper.Camper.Id">
                         @tripCamper.Camper.FirstName @tripCamper.Camper.LastName    
                     </a>
                 }
+            
             </dd>
         </dl>
     </div>
@@ -161,7 +164,7 @@ else{  *@
                 location: address, //Enter an address
                 unitGroup: "metric", //"us" or "metric"
                 forecastDays: 5, //how many days forecast to show
-                title: address// `${campsite.Name}`, //optional title to show in the
+                title: address,// `${campsite.Name}`, //optional title to show in the
                 showTitle: true,
                 showConditions: true
             });

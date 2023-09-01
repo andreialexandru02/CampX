@@ -1,16 +1,42 @@
 ﻿#searchButton {
-    background-color: #1e2f1a;
+    background-color: #005249;
     border-radius: 5px;
     color: #EDF1D6;
-    border: 2px solid #1e2f1a;
+    border: 2px solid #005249
 }
+body {
+    background-image: url('https://localhost:44364/Images/ShowTripsBG.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 
+}
+table {
+    margin-top: 20px;
+    background: rgba(255,238,203, 0.85);
+    border-radius: 10px;
+
+}
+#titleDiv {
+    margin: 30px;
+    font-size: 50px;
+}
 #searchInput {
     background-color: #EDF1D6;
     border-radius: 5px;
-    border: 2px solid #1e2f1a;
+    border: 2px solid #005249;
 }
-.largeList {
-    max-height: 50px;
-    overflow: hidden;
+
+.AddSearchDiv {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-gap: 20px;
+    align-items: start;
+}
+#addTrip {
+    font-size: 20px;
+    background-color: #005249 !important;
+    color: #FFEECB;
+    border: none;
 }

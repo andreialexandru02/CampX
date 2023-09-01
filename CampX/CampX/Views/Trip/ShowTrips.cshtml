@@ -4,12 +4,24 @@
     ViewData["Title"] = "ShowTrip";
 }
 
-<h1>ShowTrip</h1>
+<div id ="titleDiv" >Tripurile publice</div>
 <link rel="stylesheet" href="~/css/Trip/ShowTrips.css" type="text/css" />
+<link rel="stylesheet" href="~/css/ShowMoreStyling.css" type="text/css" />
 <script type="text/javascript" defer src="~/js/Trip/ShowTrips.js"></script>
-<p>
-    <a asp-action="ShowMap">Create New</a>
-</p>
+<script type="text/javascript" defer src="~/js/ShowMoreLogic.js"></script>
+<div class = "AddSearchDiv">
+  @*  <a id="addTrip" asp-action="ShowMap">Creaza un trip nou</a>*@
+    <button id="addTrip" onclick="window.location.href='../Trip/ShowMap'" type="button" class="btn btn-dark">Creaza un trip nou </button>
+    <div class="input-group">
+        <input id="searchInput" type="search" placeholder="Introdu codul de 6 litere!" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+        <button id="searchButton" type="button" class="btn btn-outline-primary">Cauta</button>
+    </div>
+    <div id="searchDiv"></div>
+</div>
+
+
+
+
 <table class="table">
     <thead>
         <tr>
@@ -37,7 +49,22 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                    @if (item.Description != null)
+                    {
+                        <div class="ShowMoreDiv">
+
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </div>
+                        @if (item.Description.Length > 90)
+                        {
+                            <div class="showMore">ShowMore</div>
+                        }
+
+                    }
+                    else
+                    {
+                        <div>Nu a fost adaugata o descriere!</div>
+                    }
             </td>
             <td>
                 @if (item.Date != null)
@@ -49,15 +76,20 @@
                     <text>Nu a fost setat o data pentru acesta excursie</text>
                 }
             </td>
-            <td class= "largeList">
-               
-                    @foreach (var campsite in item.Campsites)
-                    {
+            <td >
+                    <div class="ShowMoreDiv" id="campsites">
+                        @foreach (var campsite in item.Campsites)
+                        {
 
                         <a asp-controller="Map" asp-action="CampsiteDetails" asp-route-id=@campsite.Id> 
                             @campsite.Name
                         </a>
-                    }
+                        }
+                    </div>
+                        @if (item.Campsites.Count > 2)
+                        {
+                            <div class="showMore">ShowMore</div>
+                        }
             </td>
             <td>
                     @foreach(var camper in item.TripCampers)
@@ -81,8 +113,4 @@
 }
     </tbody>
 </table>
-<div class="input-group">
-    <input id="searchInput" type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-    <button id="searchButton" type="button" class="btn btn-outline-primary">Search</button>
-</div>
-<div id="searchDiv"><div>
+

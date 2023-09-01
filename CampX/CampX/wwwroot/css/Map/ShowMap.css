@@ -1,18 +1,41 @@
 #map {
-    height:1000px;
-    width: 1000px;
-    position: relative;
-    margin-left: -550px;
-    margin-top: 50px;
+    height: 100%;
+    width: 100%;
+    /*margin-left: 30px;*/
+
 }
 table {
-    position: relative;
-    margin-left: 550px;
-    margin-top: -800px;
+    width: 100%;
 }
 
-.campsiteDescription {
-    
-    max-height: 50px;
+#container {
+    display: grid;
+    grid-template-columns: 0.75fr 1.25fr;
+    grid-gap: 20px;
+    align-items: start;
+    height: calc(100vh - 118px);
+}
+
+.campsiteDescription{
+    max-height: 30px;
     overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.campsiteDescription.expanded {
+    max-height: none;
+}
+
+.showMore {
+    cursor: pointer;
+}
+
+body.show-map .container {
+    max-width: none;
+    width: 100%;
+}
+
+.table-wrapper {
+    overflow: auto;
+    height: 100%;
 }

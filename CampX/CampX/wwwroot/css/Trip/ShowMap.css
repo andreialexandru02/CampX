@@ -1,7 +1,11 @@
 ﻿
 #map {
-    height: 400px;
-    width: 600px;
+    margin-top: 30px;
+    height: 500px;
+    width: 100%;
+    position: relative;
+    height: 100%;
+    width: 100%;
 }
 .expandable-input {
     position: relative;
@@ -57,4 +61,12 @@ i{
     to {
         transform: translateY(40px);
     }
+}
+#addCampsite {
+    font-size: 20px;
+    background-color: #005249 !important;
+    color: #FFEECB;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: none;
 }

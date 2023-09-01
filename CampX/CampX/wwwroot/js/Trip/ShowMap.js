@@ -141,8 +141,16 @@ const displayCampsites = () => {
                     span.innerText = 'Selecteaza de pe harta campsite-urile unde vrei sa mergi!'
                     span.style.display = 'block'
                 }
-                else if (nameInput.value === '') { 
+                else if (nameInput.value === '') {
                     span.innerText = 'Seteaza numele'
+                    span.style.display = 'block'
+                }
+                else if (nameInput.value.length > 100) {
+                    span.innerText = 'Numele este prea lung'
+                    span.style.display = 'block'
+                }
+                else if (descriptionInput.value != null && descriptionInput.value.length > 500) {
+                    span.innerText = 'Descriere prea lunga'
                     span.style.display = 'block'
                 }
                 else if (publicInput.value === "") {

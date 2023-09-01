@@ -58,7 +58,7 @@ namespace CampX.BusinessLogic.Implementations.Trips
             ExecuteInTransaction(uow =>
             {
             
-                TripValidator.Validate(model).ThenThrow();
+               // TripValidator.Validate(model).ThenThrow();
 
                 var trip = Mapper.Map<AddTripModel, Trip>(model);
 

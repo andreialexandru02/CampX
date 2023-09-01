@@ -27,3 +27,4 @@ searchButton.onclick = () => {
             })
     }
 }
+

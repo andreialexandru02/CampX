@@ -25,18 +25,21 @@
 
 
 <div id="map"></div>
-@foreach (var imgId in Model.ImageIds)  
+@if (Model != null)
 {
-    <div id=@($"div{imgId}") style ="display: inline-block;">
+    @foreach (var imgId in Model.ImageIds)
+    {
+        <div id=@($"div{imgId}") style="display: inline-block;">
 
-        <img style="height: 225px; display: block;" src="/Image/GetImgContent?id=@imgId" />
-        <button id=@($"buton{imgId}") class="butoaneStergere" style="color: red; display: block;"> Sterge Imaginea</button>
-    </div>
+            <img style="height: 225px; display: block;" src="/Image/GetImgContent?id=@imgId" />
+            <button id=@($"buton{imgId}") class="butoaneStergere" style="color: red; display: block;"> Sterge Imaginea</button>
+        </div>
+    }
 }
 <div class="row">
     <div class="col-md-4">
         <form asp-action="EditCampsite" asp-controller="Map" asp-route-id="@ViewContext.RouteData.Values["id"]" enctype="multipart/form-data" method="post">
-            
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -55,12 +58,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Latitude" class="control-label id = " lat_form""></label>
-                <input id="LatInput" asp-for="Latitude" class="form-control" value="@Model.Latitude" />
+                <input id="LatInput" asp-for="Latitude" class="form-control">
                 <span asp-validation-for="Latitude" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Longitude" class="control-label" id="lng_form"></label>
-                <input id="LngInput" asp-for="Longitude" class="form-control" value ="@Model.Longitude" />
+                <input id="LngInput" asp-for="Longitude" class="form-control" />
                 <span asp-validation-for="Longitude" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -69,11 +72,12 @@
                 <span asp-validation-for="Images" class="text-danger"></span>
             </div>
             <div>
-
-                <select style ="display: none; asp-for="ImageIds"  multiple="multiple" name="ImageIds" id="multipleSelect">
-                    @foreach (var img in Model.ImageIds)
-                    {
-                        <option id=@($"option{img}") value="@img"></option>
+                <select style="display: none; asp-for="ImageIds" multiple="multiple" name="ImageIds" id="multipleSelect">
+                    @if (Model != null && Model.ImageIds != null)
+                        @foreach (var img in Model.ImageIds)
+                        {
+                            <option id=@($"option{img}") value="@img"></option>
+                        }
                     }
                 </select>
             </div>
@@ -81,7 +85,7 @@
             <br></br>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
-            </div>                   
+            </div>
         </form>
     </div>
 </div>

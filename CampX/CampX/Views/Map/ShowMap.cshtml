@@ -1,5 +1,9 @@
 ﻿@model IEnumerable<CampX.BusinessLogic.Implementations.Map.Models.ShowCampsitesModel>
 
+@{
+    ViewData["Class"] = "show-map";
+}
+
 <a href="~/Map/AddCampsite">Adauga Campsite</a>
 <script type="text/javascript" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
@@ -9,57 +13,74 @@
     crossorigin=""/>
 
 <link rel="stylesheet" href="~/css/Map/ShowMap.css" type="text/css"/>
+<link rel="stylesheet" href="~/css/ShowMoreStyling.css" type="text/css" />
 <script type="text/javascript" defer src="~/js/TentIcon.js"></script>
 <script type="text/javascript" defer src="~/js/Map/ShowMap.js"></script>
 
-
+<script type="text/javascript" defer src="~/js/ShowMoreLogic.js"></script>
 
 
 <div id="container">
     <div id="map" class="box-shadow"></div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Difficulty)
-                </th>
-                <th>
-                    Rating
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+    <div class="table-wrapper">
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td >
-                       <div class="campsiteDescription">
-
-                        @Html.DisplayFor(modelItem => item.Description)
-                       </div>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Difficulty)
-                    </td>
-                    <td>
-                        rating
-                    </td>
-                    <td>
-                        <a asp-controller="Map" asp-action="CampsiteDetails" asp-route-id=@item.Id> Detalii</a>
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Difficulty)
+                    </th>
+                    <th>
+                        Rating
+                    </th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @if (item.Description != null)
+                            {
+                                <div class="ShowMoreDiv">
+
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </div>
+                                @if (item.Description.Length > 196)
+                                {
+                                    <div class="showMore">ShowMore</div>
+                                }
+
+                            }
+                            else
+                            {
+                                <div>Nu a fost adaugata o descriere!</div>
+                            }
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Difficulty)
+                        </td>
+                        <td>
+                            rating
+                        </td>
+                        <td>
+                            <a asp-controller="Map" asp-action="CampsiteDetails" asp-route-id=@item.Id> Detalii</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+   
 
 </div>

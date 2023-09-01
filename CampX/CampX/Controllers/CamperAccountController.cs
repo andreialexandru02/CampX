@@ -90,7 +90,21 @@ namespace CampX.Controllers
 
             await LogIn(camper);
 
-            return RedirectToAction("Index", "Home");
+          /*  string originalUrl = Session["OriginalUrl"] as string;
+            if (!string.IsNullOrEmpty(originalUrl))
+            {
+                // Clear the stored original URL
+                Session["OriginalUrl"] = null;
+
+                // Redirect to the stored original URL
+                return Redirect(originalUrl);
+            }
+            else
+            {
+                // Redirect to default landing page
+                return RedirectToAction("Index", "Home");
+            }*/
+                return RedirectToAction("Index", "Home");
         }
         [HttpGet]
         public IActionResult YouHaveBeenBanned()
