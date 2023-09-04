@@ -60,12 +60,27 @@ namespace CampX.BusinessLogic.Implementations.Reviews
 
             var review = Mapper.Map<AddReviewModel, Review>(model);
 
-            
-
             UnitOfWork.Reviews.Insert(review);
 
             UnitOfWork.SaveChanges();
+            var campsite = UnitOfWork.Campsites.Get()
+                .SingleOrDefault(c => c.Id == model.CampsiteId);
+
+            var reviews = UnitOfWork.Reviews.Get()
+                .Where(r => r.CampsiteId == model.CampsiteId)
+                .ToList();
+
+            
+            campsite.Rating *= reviews.Count()-1;
+            campsite.Rating += model.Rating;
+            campsite.Rating /= reviews.Count();
+            campsite.Rating = Math.Round( campsite.Rating, 1);
+            
+            UnitOfWork.Campsites.Update(campsite); 
+            UnitOfWork.SaveChanges();
         }
+            
+
         public void EditReview(EditReviewModel model)
         {
             ReviewEditValidator.Validate(model).ThenThrow();

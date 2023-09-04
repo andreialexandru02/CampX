@@ -22,6 +22,8 @@ namespace CampX.BusinessLogic.Implementations.Map.Models
 
         public int CamperId { get; set; }
 
+        public decimal Rating { get; set;}
+
         public List<IFormFile>? Images { get; set; }
     }
 }

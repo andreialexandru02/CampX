@@ -9,50 +9,56 @@
 else
 {
     <input id="currentCamper" type= "hidden" value = @currentCamper.Id></input>
-    <button id="addCampsite" onclick="window.location.href='../Map/AddCampsite'" type="button" class="btn btn-dark">Creaza un campsite nou </button>
-    <script type="text/javascript" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-            crossorigin=""></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-          crossorigin="" />
+    <div id="ShowMapDiv">
+        <button id="addCampsite" onclick="window.location.href='../Map/AddCampsite'" type="button" class="btn btn-dark">Creaza un campsite nou </button>
+        <script type="text/javascript" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+                integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+                crossorigin=""></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+              integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+              crossorigin="" />
 
-    <link rel="stylesheet" href="~/css/Trip/ShowMap.css" type="text/css" />
+        <link rel="stylesheet" href="~/css/Trip/ShowMap.css" type="text/css" />
+        <link rel="stylesheet" href="~/css/Form.css" type="text/css" />
 
-    <script type="text/javascript" defer src="~/js/Trip/ShowMap.js"></script>  
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+        <script type="text/javascript" defer src="~/js/Trip/ShowMap.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
 
-    <div>Selecteaza de pe harta campsite-urile unde vrei sa mergi in excursie si cate nopti vei sta in fiecare </div>
-    <div id="map"></div>
-    <div id="selectedCampsites">
+        <div>Selectează de pe hartă campsite-urile unde vrei să mergi și câte nopți vei sta în fiecare! </div>
+        <div id="map"></div>
+        <div id="selectedCampsites">
+        </div>
+        <div id="formDiv">
 
-    </div>
-    <div class="row">
-        <div id ="tripForm" class="col-md-4">
+            <div class="row">
+                <div id="tripForm">
 
-                <div class="form-group">
-                    <label a class="control-label">Nume trip</label>
-                    <input id= "nameInput" class="form-control" />
-                    <span  class="text-danger"></span>
+                    <div class="form-group">
+                        <label a class="control-label">Nume trip</label>
+                        <input id="nameInput" class="form-control" />
+                        <span class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Descriere</label>
+                        <textarea id="descriptionInput" class="form-control"></textarea>
+                    </div>
+
+                    <select class="form-control" id="visibility">
+                        <option value="" disabled selected>Alege vizibilitatea...</option>
+                        <option value="public">Public</option>
+                        <option value="private">Privat</option>
+                    </select>
+                    <div class="form-group">
+                        <label class="control-label">Data trip</label>
+                        <input id="dateInput" type="date" class="form-control" value=null />
+                    </div>
+                    <div class="form-group">
+                        <input id="submitButton" type="submit" value="Save" class="btn btn-primary" />
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="control-label">Descriere</label>
-                    <textarea id="descriptionInput" class="form-control"></textarea>
-                </div>
-                
-                <select class="form-control" id="visibility">
-                    <option value="" disabled selected>Alege vizibilitatea...</option>
-                    <option value="public">Public</option>
-                    <option value="private">Privat</option>
-                </select>
-                <div class="form-group">
-                    <label  class="control-label">Data trip</label>
-                    <input id="dateInput" type="date" class="form-control" value = null />
-                </div>
-                <div class="form-group">
-                    <input id="submitButton" type="submit" value="Save" class="btn btn-primary" />
-                </div>
+            </div>
         </div>
     </div>
+    
 }

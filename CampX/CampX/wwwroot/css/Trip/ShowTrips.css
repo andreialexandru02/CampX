@@ -17,10 +17,15 @@ table {
     background: rgba(255,238,203, 0.85);
     border-radius: 10px;
 
+    font-size: 18px;
 }
 #titleDiv {
     margin: 30px;
     font-size: 50px;
+    color: #005249;
+    text-decoration: underline;
+    /*text-decoration-color: rgba(255,238,203, 0.85);*/
+    width: fit-content;
 }
 #searchInput {
     background-color: #EDF1D6;

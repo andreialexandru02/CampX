@@ -12,5 +12,7 @@ namespace CampX.BusinessLogic.Implementations.Map.Models
         public decimal Latitude { get; set; }
 
         public decimal Longitude { get; set; }
+
+   
     }
 }

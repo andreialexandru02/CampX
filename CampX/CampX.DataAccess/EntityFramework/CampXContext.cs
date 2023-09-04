@@ -106,6 +106,8 @@ public partial class CampXContext : DbContext
             entity.Property(e => e.Description).HasMaxLength(500);
             entity.Property(e => e.Latitude).HasColumnType("decimal(12, 9)");
             entity.Property(e => e.Longitude).HasColumnType("decimal(12, 9)");
+            entity.Property(e => e.Rating).HasColumnType("decimal(2, 1)");
+
             entity.Property(e => e.Name).HasMaxLength(100);
 
             entity.HasOne(d => d.Camper).WithMany(p => p.Campsites)

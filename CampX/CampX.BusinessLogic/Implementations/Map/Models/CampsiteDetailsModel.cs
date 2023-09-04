@@ -21,6 +21,7 @@ namespace CampX.BusinessLogic.Implementations.Map.Models
         public decimal Longitude { get; set; }
 
         public List <int> ImageIds { get; set; }
+        public decimal Rating { get; set; }
 
         public int CamperId { get; set; }
     }

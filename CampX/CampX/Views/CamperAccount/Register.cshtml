@@ -1,14 +1,14 @@
 ﻿@model CampX.BusinessLogic.Implementations.Account.Models.RegisterModel
+<link rel="stylesheet" href="~/css/Form.css" type="text/css" />
 @{
     ViewData["Title"] = "View";
 }
+<div id="formDiv">
 
-<h1>View</h1>
+<h1>Register</h1>
 
-<h4>RegisterVm</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
+    <div c>
         <form asp-action="Register" asp-controller="CamperAccount">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -42,15 +42,13 @@
                 <span asp-validation-for="BirthDay" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                    <input id="submitButton" type="submit" value="Register" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
+
 
 @section Scripts {
     @{

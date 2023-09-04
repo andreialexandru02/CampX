@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace CampX.Entities;
 
@@ -20,6 +21,8 @@ public partial class Campsite
     public int CamperId { get; set; }
 
     public virtual Camper Camper { get; set; } = null!;
+
+    public decimal Rating { get; set; }
 
     public virtual ICollection<Night> Nights { get; set; } = new List<Night>();
 

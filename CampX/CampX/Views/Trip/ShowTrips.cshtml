@@ -13,7 +13,7 @@
   @*  <a id="addTrip" asp-action="ShowMap">Creaza un trip nou</a>*@
     <button id="addTrip" onclick="window.location.href='../Trip/ShowMap'" type="button" class="btn btn-dark">Creaza un trip nou </button>
     <div class="input-group">
-        <input id="searchInput" type="search" placeholder="Introdu codul de 6 litere!" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+        <input id="searchInput" type="search" placeholder="Pentru a cauta un trip privat, introdu aici codul de 6 litere!" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
         <button id="searchButton" type="button" class="btn btn-outline-primary">Cauta</button>
     </div>
     <div id="searchDiv"></div>
@@ -91,7 +91,7 @@
                             <div class="showMore">ShowMore</div>
                         }
             </td>
-            <td>
+            <td id="organizatorTD">
                     @foreach(var camper in item.TripCampers)
                     {
                         @if (camper.IsOrganizer)
@@ -101,7 +101,7 @@
                                       @camper.Camper.FirstName
                                       @camper.Camper.LastName  
                                   </a>
-                                   este organizatorul acestui trip!
+                                   este organizator!
                              </span>
                         }
                     }

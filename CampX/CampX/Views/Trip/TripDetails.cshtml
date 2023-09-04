@@ -15,7 +15,7 @@
       crossorigin="" />
 @*my refs*@
 <link rel="stylesheet" href="~/css/Trip/TripDetails.css" type="text/css" />
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 <script type="text/javascript" defer src="~/js/Trip/TripDetails.js"></script>
 <script type="text/javascript" defer src="~/js/TentIcon.js"></script>
 @*@if (currentCamper.IsAuthenticated == false)
@@ -164,7 +164,8 @@ else{  *@
                 location: address, //Enter an address
                 unitGroup: "metric", //"us" or "metric"
                 forecastDays: 5, //how many days forecast to show
-                title: address,// `${campsite.Name}`, //optional title to show in the
+                title: @($"{@campsite.Name}"),// `${campsite.Name}`
+              //  title: ,
                 showTitle: true,
                 showConditions: true
             });

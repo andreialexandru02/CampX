@@ -2,3 +2,12 @@
     height: 350px;
     width: 700px;
 }
+#ShowMapDiv {
+    background: rgba(255,238,203, 0.85);
+    padding: 5px 40px 5px 40px;
+    color: #005249;
+    font-size: 20px;
+}
+#formDiv {
+    background-color: transparent !important;
+}

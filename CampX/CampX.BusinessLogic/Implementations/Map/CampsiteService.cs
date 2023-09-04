@@ -44,6 +44,7 @@ namespace CampX.BusinessLogic.Implementations.Map
                     Name = c.Name,
                     Description = c.Description,
                     Difficulty = c.Difficulty,
+                    Rating = c.Rating
                 })
                 .ToList();
 
@@ -66,6 +67,8 @@ namespace CampX.BusinessLogic.Implementations.Map
                 .ToList();
 
             campsite.Images = images;
+
+            campsite.Rating = 0;
 
             var insertedCampsite = UnitOfWork.Campsites.Insert(campsite);
 

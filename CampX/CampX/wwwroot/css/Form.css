@@ -1,0 +1,33 @@
+﻿
+body {
+    background-image: url('https://localhost:44364/Images/ShowTripsBG.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+#formDiv {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 100px;
+    padding: 20px;
+    width: 35%;
+    background: rgba(255,238,203, 0.85);
+    border-radius: 15px;
+    color: #005249;
+    font-size: 20px;
+    font-weight: bold;
+}
+#formDiv h1 {
+    margin: 0 auto;
+    width: fit-content;      
+    padding: 5px 15px 5px 15px;
+}
+#submitButton{
+    font-size: 20px;
+    background-color: #005249 !important;
+    color: #FFEECB;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: none;
+}

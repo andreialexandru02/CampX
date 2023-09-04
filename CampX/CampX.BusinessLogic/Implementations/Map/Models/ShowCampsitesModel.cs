@@ -14,5 +14,7 @@ namespace CampX.BusinessLogic.Implementations.Map.Models
         public string? Description { get; set; }
 
         public int Difficulty { get; set; }
+
+        public decimal Rating { get; set; }
     }
 }

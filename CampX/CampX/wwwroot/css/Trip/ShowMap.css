@@ -3,9 +3,7 @@
     margin-top: 30px;
     height: 500px;
     width: 100%;
-    position: relative;
-    height: 100%;
-    width: 100%;
+    margin-bottom: 20px;
 }
 .expandable-input {
     position: relative;
@@ -24,7 +22,7 @@
 }
 
 .expandable-input textarea:focus {
-    border-color: #007bff;
+    border-color: #005249;
     outline: none;
 }
 #visibility{
@@ -69,4 +67,16 @@ i{
     margin-top: 20px;
     margin-bottom: 20px;
     border: none;
+}
+#ShowMapDiv {
+    background: rgba(255,238,203, 0.85);
+    padding: 5px 40px 5px 40px;
+    color: #005249;
+    font-size: 20px;
+}
+#formDiv{
+    background-color: transparent !important;
+}
+#selectedCampsites{
+    text-align: center;
 }
