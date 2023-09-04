@@ -23,31 +23,23 @@
     <a href="~/CamperAccount/Login">Login</a>
 }
 else{  *@ 
-<div id="detailsDiv">
+<div id="tripDetailsDiv">
 
 
-    
-        <h1>TripDetails</h1>
+    <div  id="tripName">
+        @Model.Name
+    </div>
+       
         <div id="map"></div>
         <div>
 
-            <dl >
-                <dt >
-                    Nume:
-                </dt>
-                <dd >
-                    @Html.DisplayFor(model => model.Name)
-                </dd>
-                <dt >
-                    Descriere:
-                </dt>
-                <dd >
-                    @Html.DisplayFor(model => model.Description) 
-                </dd>
-                <dt >
-                    Vizibilitate:
-                </dt>
-                <dd >
+        <div id="detailsDiv">
+
+            <div class="detailsField">
+                   @Model.Description
+                </div>
+            <div class="detailsField">
+            
                     @if (Model.IsPublic)
                     {
                         <span>Public</span>
@@ -57,31 +49,27 @@ else{  *@
                        <span>Privat</span>
          
                     }
-                </dd>
-                <dt >
-                    Data:
-                </dt>
-                <dd ">       
-                    @if (Model.Date != null)
-                    {
-                        @String.Format("{0:d}", Model.Date);
-                    }
-                    else
-                    {
-                        <span>Nu a fost setat o data pentru acesta excursie</span>
-                    }
-                </dd>
-                <dt >
-                    Cod
-                </dt>
-                <dd>
-                    @Html.DisplayFor(model => model.Code)
-                </dd>
-                <dt >
+                </div>
+
+            <div class="detailsField">
+                Data:    
+                @if (Model.Date != null)
+                            {
+                                @String.Format("{0:d}", Model.Date);
+                            }
+                            else
+                            {
+                                <span>Nu a fost setat o data pentru acesta excursie</span>
+                            }
+                </div>
+
+            <div class="detailsField">
+                    Cod: @Model.Code
+                </div>
+                <div id="participantsDiv">
+                     
                     Participanti:
-                </dt>
-                <dd >
-                
+                               
                     @foreach(var tripCamper in Model.TripCampers)
                     {
                         <a href="~/CamperAccount/CamperProfile/@tripCamper.Camper.Id">
@@ -89,12 +77,12 @@ else{  *@
                         </a>
                     }
             
-                </dd>
-            </dl>
+                </div>
+            </div>
         </div>
 
         <input id="currentCamper" type= "hidden" value = @currentCamper.Id>
-        <button class="btn btn-primary" id="joinButton">Join</button>
+        <button  id="joinButton">Join</button>
         <div id="requestContainer">
             <div id="RequstInput" class="row">
                 <div class="col-md-6">
@@ -103,23 +91,22 @@ else{  *@
                         <textarea id="expandableField" class="form-control"></textarea>
                     </div>
                     <div id="requestButtonDiv">
-                        <button id="requestButton" class="btn btn-primary">Add Request</button>
+                        <button id="requestButton" >Add Request</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div>
-            <a asp-action="ShowTrips">Back to List</a>
-        </div>
-        <div>
+        <div id="buttonsDiv">
+            
             <a id="deleteButton" asp-controller = "Trip" asp-action="DeleteTrip" asp-route-id=@Model.Id>Delete Trip</a>
             <a id="finishButton" asp-controller = "Trip" asp-action="FinishTrip" asp-route-id=@Model.Id>Finish Trip</a>
-        <a id="finishButton" asp-controller="Trip" asp-action="EditTrip" asp-route-id=@Model.Id>Edit Trip</a>
+            <a id="finishButton" asp-controller="Trip" asp-action="EditTrip" asp-route-id=@Model.Id>Edit Trip</a>
+            <a asp-action="ShowTrips">Back to List</a>
         </div>
     
         <div id="note-container">
-            Notite
+        <span id="noteSpan">Notite</span>
 
             <div id="noteInput" class="row">
                 <div class="col-md-6">
@@ -157,32 +144,33 @@ else{  *@
 
     @foreach(var campsite in Model.Campsites)
     {
+        <div class="weatherDiv">
+            <!-- the DIV that will contain the widget --> <div class=@($"weatherWidget{@campsite.Id}")></div>
+            <script>
+                reverseGeocode(@campsite.Latitude, @campsite.Longitude, function (address) {
+                    window.weatherWidgetConfig = window.weatherWidgetConfig || [];
+                    window.weatherWidgetConfig.push({
+                        selector: `.weatherWidget${@campsite.Id}`,
+                        apiKey: "JKTNYCW7LJPC3HEPDAXN93LT7", //Sign up for your personal key
+                        location: address, //Enter an address
+                        unitGroup: "metric", //"us" or "metric"
+                        forecastDays: 5, //how many days forecast to show
+                        title: "@campsite.Name",// `${campsite.Name}`
+                      //  title: ,
+                        showTitle: true,
+                        showConditions: true
+                    });
 
-        <!-- the DIV that will contain the widget --> <div class=@($"weatherWidget{@campsite.Id}")></div>
-        <script>
-            reverseGeocode(@campsite.Latitude, @campsite.Longitude, function (address) {
-                window.weatherWidgetConfig = window.weatherWidgetConfig || [];
-                window.weatherWidgetConfig.push({
-                    selector: `.weatherWidget${@campsite.Id}`,
-                    apiKey: "JKTNYCW7LJPC3HEPDAXN93LT7", //Sign up for your personal key
-                    location: address, //Enter an address
-                    unitGroup: "metric", //"us" or "metric"
-                    forecastDays: 5, //how many days forecast to show
-                    title: address/*@($"{@campsite.Name}"),*/// `${campsite.Name}`
-                  //  title: ,
-                    showTitle: true,
-                    showConditions: true
+                    (function () {
+                        var d = document, s = d.createElement('script');
+                        s.src = 'https://www.visualcrossing.com/widgets/forecast-simple/weather-forecast-widget-simple.js';
+                        s.setAttribute('data-timestamp', +new Date());
+                        (d.head || d.body).appendChild(s);
+                    })();
                 });
 
-                (function () {
-                    var d = document, s = d.createElement('script');
-                    s.src = 'https://www.visualcrossing.com/widgets/forecast-simple/weather-forecast-widget-simple.js';
-                    s.setAttribute('data-timestamp', +new Date());
-                    (d.head || d.body).appendChild(s);
-                })();
-            });
-
-        </script>
+            </script>
+        </div>
     }
 
 </div>

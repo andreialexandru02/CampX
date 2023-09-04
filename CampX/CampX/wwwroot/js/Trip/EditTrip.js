@@ -168,7 +168,10 @@ $.ajax({
 
                     if (!participant.isOrganizer) {
                         
-                        participantSpan.innerText = `${participant.camper.firstName} ${participant.camper.lastName}`                      
+                        participantSpan.innerText = `${participant.camper.firstName} ${participant.camper.lastName}`
+                        delIcon = document.createElement('i')
+                        delIcon.className = 'fas fa-times'
+                        participantSpan.appendChild(delIcon)
                         participantsDiv.appendChild(participantSpan)
                     }
 
@@ -186,7 +189,7 @@ $.ajax({
             var codeInput = GenerateRandomCode()
             let span = document.createElement('span')
             span.style.color = 'red'
-            document.getElementById('tripForm').appendChild(span)
+            document.getElementById('formDiv').appendChild(span)
             span.style.display = 'none'
             nameInput.value = trip.name
             descriptionInput.value = trip.description

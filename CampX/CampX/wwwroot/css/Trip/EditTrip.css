@@ -5,40 +5,43 @@
     width: 100%;
     margin-bottom: 20px;
 }
+
 .expandable-input {
     position: relative;
     width: 100%;
     max-width: 400px; /* Set a maximum width if desired */
 }
 
-.expandable-input textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    resize: none;
-    overflow: hidden;
-    min-height: 40px;
-    transition: min-height 0.2s ease-in-out;
-}
+    .expandable-input textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        resize: none;
+        overflow: hidden;
+        min-height: 40px;
+        transition: min-height 0.2s ease-in-out;
+    }
 
-.expandable-input textarea:focus {
-    border-color: #005249;
-    outline: none;
-}
-#visibility{
+        .expandable-input textarea:focus {
+            border-color: #005249;
+            outline: none;
+        }
+
+#visibility {
     margin-top: 25px
 }
+
 .nightIcon {
     margin-left: 5px;
     margin-right: 5px;
     animation: slideIn 1s ease-out forwards;
 }
-.slide-down {
 
+.slide-down {
     animation: slideOut 0.4s ease-in forwards;
 }
 
-i{
+i {
     margin-right: 5px
 }
 
@@ -51,6 +54,7 @@ i{
         transform: translateY(0px);
     }
 }
+
 @keyframes slideOut {
     from {
         transform: translateY(0px);
@@ -60,6 +64,7 @@ i{
         transform: translateY(40px);
     }
 }
+
 #addCampsite {
     font-size: 20px;
     background-color: #005249 !important;
@@ -68,18 +73,44 @@ i{
     margin-bottom: 20px;
     border: none;
 }
+
 #ShowMapDiv {
     background: rgba(255,238,203, 0.85);
     padding: 5px 40px 5px 40px;
     color: #005249;
     font-size: 20px;
 }
+
 #formDiv {
-    
     margin: auto !important;
     padding-left: 60px !important;
-    background-color: transparent !important;
+    background-color: transparent !important;   
 }
-#selectedCampsites{
+
+#selectedCampsites {
     text-align: center;
+}
+#participantsDiv {
+    margin-top: 30px;
+    font-weight: 700;
+}
+#participantsDiv span {
+    
+    width: fit-content;
+    margin-top: 5px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    background-color: #9F8354;
+    color: #FFEECB;
+    font-weight: 700;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 3px 15px 3px 15px;
+    margin-left: 20px;
+}
+#participantsDiv span:hover{
+    cursor: pointer;
+}
+#participantsDiv i{
+    margin-left:10px;
 }

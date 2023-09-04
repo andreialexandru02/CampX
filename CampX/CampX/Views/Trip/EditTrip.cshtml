@@ -2,14 +2,8 @@
 @using CampX.Common.ViewModels;
 @inject CurrentCamperDTO currentCamper
 
-@if (currentCamper.IsAuthenticated == false)
-{
-    <a href="~/CamperAccount/Login">Login</a>
-}
-else
-{
+
     <input id="currentCamper" type="hidden" value=@currentCamper.Id></input>
-    <a href="~/Map/AddCampsite">Adauga Campsite</a>
     <script type="text/javascript" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
             crossorigin=""></script>
@@ -17,41 +11,46 @@ else
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
           crossorigin="" />
 
-    <link rel="stylesheet" href="~/css/Trip/ShowMap.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/Trip/EditTrip.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/Form.css" type="text/css" />
 
     <script type="text/javascript" defer src="~/js/Trip/EditTrip.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+<div id="ShowMapDiv">
 
+    <button id="addCampsite" onclick="window.location.href='../Map/AddCampsite'" type="button" class="btn btn-dark">Creaza un campsite nou</button>
 
-    <span>Selecteaza de pe harta campsite-urile unde vrei sa mergi in excursie si cate nopti vei sta in fiecare </span>
+    <div>Selecteaza de pe harta campsite-urile unde vrei sa mergi in excursie si cate nopti vei sta in fiecare </div>
     <div id="map"></div>
     <div id="selectedCampsites"></div>
-    <div id="participantsDiv"></div>
-    <div class="row">
-        <div id="tripForm" class="col-md-4">
+    <div id="participantsDiv">Participanți:</div>
+    <div>          
+        <div>
+            <div id="formDiv">
 
-            <div class="form-group">
-                <label a class="control-label">Nume trip</label>
-                <input id="nameInput" class="form-control"/>
-                <span class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Descriere</label>
-                <textarea id="descriptionInput" class="form-control" ></textarea>
-            </div>
+                <div class="form-group">
+                    <label a class="control-label">Nume trip</label>
+                    <input id="nameInput" class="form-control"/>
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Descriere</label>
+                    <textarea id="descriptionInput" class="form-control" ></textarea>
+                </div>
 
-            <select class="form-control" id="visibility" >
-                <option value="" disabled selected>Alege vizibilitatea...</option>
-                <option id="public" value="public">Public</option>
-                <option id="privat" value="privat">Privat</option>
-            </select>
-            <div class="form-group">
-                <label class="control-label">Data trip</label>
-                <input id="dateInput" type="date" class="form-control" value=null />
-            </div>
-            <div class="form-group">
-                <input id="submitButton" type="button" value="Save" class="btn btn-primary" />
+                <select class="form-control" id="visibility" >
+                    <option value="" disabled selected>Alege vizibilitatea...</option>
+                    <option id="public" value="public">Public</option>
+                    <option id="privat" value="privat">Privat</option>
+                </select>
+                <div class="form-group">
+                    <label class="control-label">Data trip</label>
+                    <input id="dateInput" type="date" class="form-control" value=null />
+                </div>
+                <div class="form-group">
+                    <input id="submitButton" type="button" value="Save" class="btn btn-primary" />
+                </div>
             </div>
         </div>
     </div>
-}
+</div>

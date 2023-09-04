@@ -1,18 +1,21 @@
 ﻿#map {
-    height: 350px;
-    width: 700px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 400px;
+    width: 100%;
 }
 #joinButton, #requestButton {
-    margin-bottom: 10px;
-    background-color: transparent;
-    color: #1e2f1a;
-    border: 1.5px solid #1e2f1a;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    width: fit-content;
+    background-color: #9F8354;
+    color: #FFEECB;
+    font-weight: 700;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 3px 15px 3px 15px;
 }
 
-#joinButton:hover,#requestButton:hover {
-    background-color: #1e2f1a;
+#joinButton:hover, #requestButton:hover {
+    background-color: #7a5d2c;
     color: #EDF1D6;
     border-radius: 5px;
 }
@@ -22,20 +25,20 @@
     max-width: 400px; /* Set a maximum width if desired */
 }
 
-    .expandable-input textarea {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        resize: none;
-        overflow: hidden;
-        min-height: 40px;
-        transition: min-height 0.2s ease-in-out;
-    }
+.expandable-input textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    resize: none;
+    overflow: hidden;
+    min-height: 40px;
+    transition: min-height 0.2s ease-in-out;
+}
 
-        .expandable-input textarea:focus {
-            border-color: #007bff;
-            outline: none;
-        }
+.expandable-input textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
 
 #reviewInput {
     display: none;
@@ -46,4 +49,77 @@
 }
 i {
     margin-left: 20px;
+}
+body {
+    background-image: url('https://localhost:44364/Images/ShowTripsBG.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+#tripDetailsDiv {
+    background: rgba(255,238,203, 0.85);
+    padding: 3px 40px 5px 40px;
+    color: #005249;
+    font-size: 20px;
+    height: 100%;
+}
+#tripName {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 40px;
+    font-weight: 700;
+}
+#detailsDiv {
+    width: 100%;
+    margin: 30px auto;
+    color: #FFEECB;
+    border-radius: 10px;
+}
+
+.detailsField, #participantsDiv {
+    background-color: #005249;
+    color: #FFEECB;
+    width: fit-content;
+    padding: 7px 15px 7px 15px;
+    border-radius: 10px;
+    font-size: 21px;
+    margin-top: 20px;
+}
+#participantsDiv a {
+    color: #FFEECB;
+    display: inline-block;
+}
+#participantsDiv a:hover {
+   background-color: #9F8354;
+    
+}
+#buttonsDiv {
+    width: 100%;
+    display: grid;
+    grid-auto-columns: 1fr 1fr 1fr 1fr;
+}
+
+#buttonsDiv a, #noteButton {
+    width: fit-content;
+    margin-top: 5px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    background-color: #9F8354;
+    color: #FFEECB;
+    font-weight: 700;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 3px 15px 3px 15px;
+}
+.noteElement {
+    background-color: #005249;
+    color: #FFEECB;
+    margin-top: 15px;
+    width: fit-content;
+    padding: 5px 15px 5px 15px;
+    border-radius: 10px;
+}
+.weatherDiv{
+    margin-top: 15px;
 }

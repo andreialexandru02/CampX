@@ -81,7 +81,17 @@ const ShowReviews = (id) => {
                 var contentSpan = document.createElement('span')
                 contentSpan.innerText = `Continut: ${review.content}`
                 var ratingSpan = document.createElement('span')
-                ratingSpan.innerText = `Rating: ${review.rating}`
+                //ratingSpan.innerText = `Rating: ${review.rating}`
+                var starDiv = document.createElement('div')
+                for (var i = 0; i < 5; i++) {
+                    var starIcon = document.createElement('i')
+                    starIcon.className = 'fas fa-star'
+                    if (i < review.rating) {
+                        starIcon.style.color = '#EBB446'
+                    }
+                    starDiv.appendChild(starIcon)
+                }
+                ratingSpan.appendChild(starDiv)
                 reviewDiv = document.createElement('div')
                 reviewDiv.className = "reviewDiv"
                 reviewDiv.appendChild(ratingSpan)

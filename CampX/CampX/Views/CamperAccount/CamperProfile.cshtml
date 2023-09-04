@@ -66,11 +66,15 @@
             </tbody>
         </table>
     }
+
     @using CampX.Common.ViewModels;
     @inject CurrentCamperDTO currentCamper
 
     @if (Model.Id == currentCamper.Id)
     {
+        <div>
+            <a asp-action="ChangePassword">Schimba Parola</a>
+        </div>
         <a href="~/CamperAccount/EditCamper/@Model.Id">Editeaza Profilul</a>
     }
 

@@ -195,7 +195,7 @@ $.ajax({
                 noteElement = document.createElement('div')
                 var contentSpan = document.createElement('span')
                 contentSpan.innerText = note.content
-                noteElement.appendChild(document.createElement('br'))
+                //noteElement.appendChild(document.createElement('br'))
                 noteElement.appendChild(contentSpan)
                 var deleteIcon = document.createElement('i')
                 var editIcon = document.createElement('i')
@@ -203,6 +203,7 @@ $.ajax({
                 deleteIcon.className = 'fas fa-times'
                 noteElement.appendChild(editIcon)
                 noteElement.appendChild(deleteIcon)
+                noteElement.className = 'noteElement'
                 if (!authorized) {
 
                     deleteIcon.style.display = 'none'

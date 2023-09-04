@@ -85,7 +85,7 @@ i{
 #details {
     
     
-    width: 70%;
+    width: 100%;
     margin: 30px auto;
     color: #FFEECB;
     border-radius: 10px;
@@ -127,23 +127,28 @@ i{
     padding: 3px 15px 10px 10px;
     border-radius: 10px;
 }
-#reviewSpan{
-    font-size: 25px;
+#reviewSpan {
+    font-size: 30px;
+    background-color: transparent;
+    color: #005249;
+    font-weight: 700;
+
 }
 #review-container {
-    padding: 5px 15px 10px 10px;
+   /* padding: 5px 0px 10px 10px;*/
     margin-top: 20px;
 }
 .dificultyRatingDiv a {
     width: fit-content;
-    background-color: #005249;
+    background-color: #9F8354;
     color: #FFEECB;
+    font-weight: 700;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
 }
 .dificultyRatingDiv a:hover {
     width: fit-content;
-    background-color: transparent;
-    color: #005249;
-    font-weight: bold;
+    background-color: #7a5d2c;
+    color: #FFEECB;
 }
 .addButon {
     font-size: 20px;
@@ -153,3 +158,4 @@ i{
     margin-bottom: 10px;
     border: none;
 }
+    
