@@ -23,161 +23,166 @@
     <a href="~/CamperAccount/Login">Login</a>
 }
 else{  *@ 
-    <h1>TripDetails</h1>
-    <div id="map"></div>
-    <div>
+<div id="detailsDiv">
 
-        <dl class="row">
-            <dt class = "col-sm-2">
-                Nume:
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.Name)
-            </dd>
-            <dt class = "col-sm-2">
-                Descriere:
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.Description) 
-            </dd>
-            <dt class = "col-sm-2">
-                Vizibilitate:
-            </dt>
-            <dd class = "col-sm-10">
-                @if (Model.IsPublic)
-                {
-                    <span>Public</span>
-                }
-                else
-                {
-                   <span>Privat</span>
-         
-                }
-            </dd>
-            <dt class = "col-sm-2">
-                Data:
-            </dt>
-            <dd class = "col-sm-10">       
-                @if (Model.Date != null)
-                {
-                    @String.Format("{0:d}", Model.Date);
-                }
-                else
-                {
-                    <span>Nu a fost setat o data pentru acesta excursie</span>
-                }
-            </dd>
-            <dt class = "col-sm-2">
-                Cod
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.Code)
-            </dd>
-            <dt class="col-sm-2">
-                Participanti:
-            </dt>
-            <dd class="col-sm-10">
-                
-                @foreach(var tripCamper in Model.TripCampers)
-                {
-                    <a href="~/CamperAccount/CamperProfile/@tripCamper.Camper.Id">
-                        @tripCamper.Camper.FirstName @tripCamper.Camper.LastName    
-                    </a>
-                }
-            
-            </dd>
-        </dl>
-    </div>
 
-    <input id="currentCamper" type= "hidden" value = @currentCamper.Id>
-    <button class="btn btn-primary" id="joinButton">Join</button>
-    <div id="requestContainer">
-        <div id="RequstInput" class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="control-label">Descriere</label>
-                    <textarea id="expandableField" class="form-control"></textarea>
-                </div>
-                <div id="requestButtonDiv">
-                    <button id="requestButton" class="btn btn-primary">Add Request</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div>
-        <a asp-action="ShowTrips">Back to List</a>
-    </div>
-    <div>
-        <a id="deleteButton" asp-controller = "Trip" asp-action="DeleteTrip" asp-route-id=@Model.Id>Delete Trip</a>
-        <a id="finishButton" asp-controller = "Trip" asp-action="FinishTrip" asp-route-id=@Model.Id>Finish Trip</a>
-    <a id="finishButton" asp-controller="Trip" asp-action="EditTrip" asp-route-id=@Model.Id>Edit Trip</a>
-    </div>
     
-    <div id="note-container">
-        Notite
+        <h1>TripDetails</h1>
+        <div id="map"></div>
+        <div>
 
-        <div id="noteInput" class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label class="control-label">Descriere</label>
-                    <textarea id="noteExpandableField" class="form-control"></textarea>
-                </div>
-                <div id="noteButtonDiv">
-                    <button id="noteButton" type="button" class="btn btn-primary">Add Note</button>
+            <dl >
+                <dt >
+                    Nume:
+                </dt>
+                <dd >
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <dt >
+                    Descriere:
+                </dt>
+                <dd >
+                    @Html.DisplayFor(model => model.Description) 
+                </dd>
+                <dt >
+                    Vizibilitate:
+                </dt>
+                <dd >
+                    @if (Model.IsPublic)
+                    {
+                        <span>Public</span>
+                    }
+                    else
+                    {
+                       <span>Privat</span>
+         
+                    }
+                </dd>
+                <dt >
+                    Data:
+                </dt>
+                <dd ">       
+                    @if (Model.Date != null)
+                    {
+                        @String.Format("{0:d}", Model.Date);
+                    }
+                    else
+                    {
+                        <span>Nu a fost setat o data pentru acesta excursie</span>
+                    }
+                </dd>
+                <dt >
+                    Cod
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Code)
+                </dd>
+                <dt >
+                    Participanti:
+                </dt>
+                <dd >
+                
+                    @foreach(var tripCamper in Model.TripCampers)
+                    {
+                        <a href="~/CamperAccount/CamperProfile/@tripCamper.Camper.Id">
+                            @tripCamper.Camper.FirstName @tripCamper.Camper.LastName    
+                        </a>
+                    }
+            
+                </dd>
+            </dl>
+        </div>
+
+        <input id="currentCamper" type= "hidden" value = @currentCamper.Id>
+        <button class="btn btn-primary" id="joinButton">Join</button>
+        <div id="requestContainer">
+            <div id="RequstInput" class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">Descriere</label>
+                        <textarea id="expandableField" class="form-control"></textarea>
+                    </div>
+                    <div id="requestButtonDiv">
+                        <button id="requestButton" class="btn btn-primary">Add Request</button>
+                    </div>
                 </div>
             </div>
-
         </div>
-    </div>
+
+        <div>
+            <a asp-action="ShowTrips">Back to List</a>
+        </div>
+        <div>
+            <a id="deleteButton" asp-controller = "Trip" asp-action="DeleteTrip" asp-route-id=@Model.Id>Delete Trip</a>
+            <a id="finishButton" asp-controller = "Trip" asp-action="FinishTrip" asp-route-id=@Model.Id>Finish Trip</a>
+        <a id="finishButton" asp-controller="Trip" asp-action="EditTrip" asp-route-id=@Model.Id>Edit Trip</a>
+        </div>
+    
+        <div id="note-container">
+            Notite
+
+            <div id="noteInput" class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label">Descriere</label>
+                        <textarea id="noteExpandableField" class="form-control"></textarea>
+                    </div>
+                    <div id="noteButtonDiv">
+                        <button id="noteButton" type="button" class="btn btn-primary">Add Note</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
 
 
-@*   <div id="weatherContainer"></div>
-*@@*<iframe src="https://www.meteoblue.com/en/weather/widget/three/voineasa?geoloc=fixed&nocurrent=0&noforecast=0&days=4&tempunit=CELSIUS&windunit=KILOMETER_PER_HOUR&layout=image" frameborder="0" scrolling="NO" allowtransparency="true" sandbox="allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox" style="width: 460px; height: 590px"></iframe>
-<div><!-- DO NOT REMOVE THIS LINK --><a href="https://www.meteoblue.com/en/weather/week/voineasa_romania_662531?utm_source=weather_widget&utm_medium=linkus&utm_content=three&utm_campaign=Weather%2BWidget" target="_blank" rel="noopener">meteoblue</a></div>*@
-<script>
-    function reverseGeocode(lat, lng, callback) {
-        const apiUrl = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`;
-        fetch(apiUrl)
-            .then((response) => response.json())
-            .then((data) => {
-                const address = data.display_name;
-                callback(address);
-            })
-            .catch((error) => {
-                console.error("Error performing reverse geocoding:", error);
-            });
-    }
-</script>
-
-
-@foreach(var campsite in Model.Campsites)
-{
-
-    <!-- the DIV that will contain the widget --> <div class=@($"weatherWidget{@campsite.Id}")></div>
+    @*   <div id="weatherContainer"></div>
+    *@@*<iframe src="https://www.meteoblue.com/en/weather/widget/three/voineasa?geoloc=fixed&nocurrent=0&noforecast=0&days=4&tempunit=CELSIUS&windunit=KILOMETER_PER_HOUR&layout=image" frameborder="0" scrolling="NO" allowtransparency="true" sandbox="allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox" style="width: 460px; height: 590px"></iframe>
+    <div><!-- DO NOT REMOVE THIS LINK --><a href="https://www.meteoblue.com/en/weather/week/voineasa_romania_662531?utm_source=weather_widget&utm_medium=linkus&utm_content=three&utm_campaign=Weather%2BWidget" target="_blank" rel="noopener">meteoblue</a></div>*@
     <script>
-        reverseGeocode(@campsite.Latitude, @campsite.Longitude, function (address) {
-            window.weatherWidgetConfig = window.weatherWidgetConfig || [];
-            window.weatherWidgetConfig.push({
-                selector: `.weatherWidget${@campsite.Id}`,
-                apiKey: "JKTNYCW7LJPC3HEPDAXN93LT7", //Sign up for your personal key
-                location: address, //Enter an address
-                unitGroup: "metric", //"us" or "metric"
-                forecastDays: 5, //how many days forecast to show
-                title: @($"{@campsite.Name}"),// `${campsite.Name}`
-              //  title: ,
-                showTitle: true,
-                showConditions: true
+        function reverseGeocode(lat, lng, callback) {
+            const apiUrl = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`;
+            fetch(apiUrl)
+                .then((response) => response.json())
+                .then((data) => {
+                    const address = data.display_name;
+                    callback(address);
+                })
+                .catch((error) => {
+                    console.error("Error performing reverse geocoding:", error);
+                });
+        }
+    </script>
+
+
+    @foreach(var campsite in Model.Campsites)
+    {
+
+        <!-- the DIV that will contain the widget --> <div class=@($"weatherWidget{@campsite.Id}")></div>
+        <script>
+            reverseGeocode(@campsite.Latitude, @campsite.Longitude, function (address) {
+                window.weatherWidgetConfig = window.weatherWidgetConfig || [];
+                window.weatherWidgetConfig.push({
+                    selector: `.weatherWidget${@campsite.Id}`,
+                    apiKey: "JKTNYCW7LJPC3HEPDAXN93LT7", //Sign up for your personal key
+                    location: address, //Enter an address
+                    unitGroup: "metric", //"us" or "metric"
+                    forecastDays: 5, //how many days forecast to show
+                    title: address/*@($"{@campsite.Name}"),*/// `${campsite.Name}`
+                  //  title: ,
+                    showTitle: true,
+                    showConditions: true
+                });
+
+                (function () {
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://www.visualcrossing.com/widgets/forecast-simple/weather-forecast-widget-simple.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
             });
 
-            (function () {
-                var d = document, s = d.createElement('script');
-                s.src = 'https://www.visualcrossing.com/widgets/forecast-simple/weather-forecast-widget-simple.js';
-                s.setAttribute('data-timestamp', +new Date());
-                (d.head || d.body).appendChild(s);
-            })();
-        });
+        </script>
+    }
 
-    </script>
-}
-
+</div>

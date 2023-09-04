@@ -1,7 +1,21 @@
-﻿#map {
+﻿body {
+    background-image: url('https://localhost:44364/Images/ShowTripsBG.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+#campsiteDetailsDiv {
+    background: rgba(255,238,203, 0.85);
+    padding: 3px 40px 5px 40px;
+    color: #005249;
+    font-size: 20px;
+    height: 100%;
+}
+
+#map {
     height: 350px;
-    width: 700px;
- 
+    width: 100%;
 }
 #Lat{
     display: none;
@@ -16,31 +30,7 @@ span{
 i{
     margin-left: 20px;
 }
-.star-rating {
-    display: inline-block;
-}
 
-    .star-rating input[type="radio"] {
-        display: none;
-    }
-
-    .star-rating label {
-        font-size: 24px;
-        color: #ccc;
-        cursor: pointer;
-    }
-
-        .star-rating label:before {
-            content: "\2605"; /* Unicode character for a star */
-        }
-
-    .star-rating input[type="radio"]:checked ~ label {
-        color: gold;
-    }
-
-        .star-rating input[type="radio"]:checked ~ label ~ input[type="radio"] + label {
-            color: #ccc;
-        }
 .expandable-input {
     position: relative;
     width: 100%;
@@ -61,9 +51,105 @@ i{
     border-color: #007bff;
     outline: none;
 }
-#reviewInput{
+#reviewButton {
+    font-size: 20px;
+    background-color: #005249 !important;
+    color: #FFEECB;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: none;
+}
+#reviewInput {
     display: none;
 }
 #reviewRatingDiv{
     max-height:fit-content;
+}
+#imgDiv {
+    margin-top: 30px;
+    overflow: auto;
+    white-space: nowrap;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+#imgDiv img {
+    padding: 5px;
+    border-radius: 15px;
+      
+}
+
+#imgDiv::-webkit-scrollbar {
+    height: 10px !important;
+}
+#details {
+    
+    
+    width: 70%;
+    margin: 30px auto;
+    color: #FFEECB;
+    border-radius: 10px;
+}
+.detailsField {
+    background-color: #005249;
+    color: #FFEECB;
+
+    width: fit-content;
+    padding: 7px 15px 7px 15px;
+    border-radius: 10px;
+    font-size: 21px;
+
+}
+/*#dificulty{
+    margin-left:10px;
+}*/
+#ratingAverage{
+
+    justify-content:right;
+}
+.dificultyRatingDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+#campsiteName {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 40px;
+}
+
+.reviewDiv, #reviewSpan {
+    background-color: #005249;
+    color: #FFEECB;
+    margin-top:15px;
+    width: fit-content;
+    padding: 3px 15px 10px 10px;
+    border-radius: 10px;
+}
+#reviewSpan{
+    font-size: 25px;
+}
+#review-container {
+    padding: 5px 15px 10px 10px;
+    margin-top: 20px;
+}
+.dificultyRatingDiv a {
+    width: fit-content;
+    background-color: #005249;
+    color: #FFEECB;
+}
+.dificultyRatingDiv a:hover {
+    width: fit-content;
+    background-color: transparent;
+    color: #005249;
+    font-weight: bold;
+}
+.addButon {
+    font-size: 20px;
+    background-color: #005249 !important;
+    color: #FFEECB;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: none;
 }

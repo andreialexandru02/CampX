@@ -31,7 +31,8 @@ body {
     padding: 3px 20px;
 }
 #map {
-
+    border: 6px solid #005249;
+    border-radius: 20px;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
 }
 .my-account {

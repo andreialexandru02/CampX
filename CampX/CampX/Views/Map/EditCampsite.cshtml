@@ -13,87 +13,104 @@
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
       crossorigin="" />
 
-<link rel="stylesheet" href="~/css/Map/AddCampsite.css" type="text/css" />
+<link rel="stylesheet" href="~/css/Map/EditCampsite.css" type="text/css" />
+<link rel="stylesheet" href="~/css/Form.css" type="text/css" />
 <script type="text/javascript" defer src="~/js/TentIcon.js"></script>
 <script type="text/javascript" defer src="~/js/Map/EditCampsite.js"></script>
 
-<h1>Edit Campsite</h1>
+<div id="ShowMapDiv"> 
+
+    <h1>Editeaza Campsite</h1>
 
 
-<hr />
+
+    <hr />
 
 
 
-<div id="map"></div>
-@if (Model != null)
-{
-    @foreach (var imgId in Model.ImageIds)
-    {
-        <div id=@($"div{imgId}") style="display: inline-block;">
+   
 
-            <img style="height: 225px; display: block;" src="/Image/GetImgContent?id=@imgId" />
-            <button id=@($"buton{imgId}") class="butoaneStergere" style="color: red; display: block;"> Sterge Imaginea</button>
-        </div>
-    }
-}
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="EditCampsite" asp-controller="Map" asp-route-id="@ViewContext.RouteData.Values["id"]" enctype="multipart/form-data" method="post">
+    <div id = "mapFormDiv">
+        <div id="map"></div>
+        <div id= "formDiv">
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Difficulty" class="control-label"></label>
-                <input type="range" min="1" max="5" asp-for="Difficulty" class="form-control" />
-                <span asp-validation-for="Difficulty" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Latitude" class="control-label id = " lat_form""></label>
-                <input id="LatInput" asp-for="Latitude" class="form-control">
-                <span asp-validation-for="Latitude" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Longitude" class="control-label" id="lng_form"></label>
-                <input id="LngInput" asp-for="Longitude" class="form-control" />
-                <span asp-validation-for="Longitude" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Images" class="control-label" id="img_form"></label>
-                <input class="form-control" asp-for="Images" type="file" name="Images" id="ImageData" multiple />
-                <span asp-validation-for="Images" class="text-danger"></span>
-            </div>
+        <div class="row">
             <div>
-                <select style="display: none; asp-for="ImageIds" multiple="multiple" name="ImageIds" id="multipleSelect">
-                    @if (Model != null && Model.ImageIds != null)
-                        @foreach (var img in Model.ImageIds)
-                        {
-                            <option id=@($"option{img}") value="@img"></option>
-                        }
-                    }
-                </select>
+                <form asp-action="EditCampsite" asp-controller="Map" asp-route-id="@ViewContext.RouteData.Values["id"]" enctype="multipart/form-data" method="post">
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Difficulty" class="control-label"></label>
+                        <input type="range" min="1" max="5" asp-for="Difficulty" class="form-control" />
+                        <span asp-validation-for="Difficulty" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Latitude" class="control-label id = " lat_form""></label>
+                        <input id="LatInput" asp-for="Latitude" class="form-control">
+                        <span asp-validation-for="Latitude" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Longitude" class="control-label" id="lng_form"></label>
+                        <input id="LngInput" asp-for="Longitude" class="form-control" />
+                        <span asp-validation-for="Longitude" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Images" class="control-label" id="img_form"></label>
+                        <input class="form-control" asp-for="Images" type="file" name="Images" id="ImageData" multiple />
+                        <span asp-validation-for="Images" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <select style="display: none; asp-for="ImageIds" multiple="multiple" name="ImageIds" id="multipleSelect">
+                            @if (Model != null && Model.ImageIds != null)
+                                @foreach (var img in Model.ImageIds)
+                                {
+                                    <option id=@($"option{img}") value="@img"></option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <input asp-for="CamperId" type="hidden" value=@currentCamper.Id>
+                    <br></br>
+                    <div class="form-group">
+                            <input id="submitButton" type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </form>
             </div>
-            <input asp-for="CamperId" type="hidden" value=@currentCamper.Id>
-            <br></br>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
+    </div>
+
+    </div>
+
+
+    <div id="imgDiv">
+
+        @if (Model != null)
+        {
+            @foreach (var imgId in Model.ImageIds)
+            {
+                <div id=@($"div{imgId}") class="divDelBtnImg"style="display: inline-block;">
+
+                    <img style="height: 225px; display: block;" src="/Image/GetImgContent?id=@imgId" />
+                 @*   <button id=@($"buton{imgId}") class="butoaneStergere" style="color: red; display: block;"> Sterge Imaginea</button>*@
+                    <button  id=@($"buton{imgId}") class="butoaneStergere">Sterge</button>
+                </div>
+            }
+        }
+    </div>
+    <div>
+        <a asp-action="ShowMap">Inapoi la hartă</a>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

@@ -170,7 +170,8 @@ namespace CampX.Controllers
             }
             Service.EditCampsite(model,imgList,id);
 
-            return RedirectToAction("ShowMap", "Map");
+            // return RedirectToAction("ShowMap", "Map");
+            return RedirectToAction("CampsiteDetails", "Map", new { id = id });
         }
     }
 

@@ -1,12 +1,12 @@
-var map = L.map('map').setView([45.9443, 25.0094], 6);
+
+var inputLat = document.getElementById('LatInput')
+var inputLng = document.getElementById('LngInput')
+
+var map = L.map('map').setView([inputLat.value, inputLng.value], 7);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 20,
     attribution: '© OpenStreetMap'
 }).addTo(map);
-var inputLat = document.get
-
-var inputLat = document.getElementById('LatInput')
-var inputLng = document.getElementById('LngInput')
 
 
 marker = L.marker([inputLat.value, inputLng.value], { icon: tentIcon }).addTo(map)

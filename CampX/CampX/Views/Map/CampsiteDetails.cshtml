@@ -19,59 +19,75 @@
 <script type="text/javascript" defer src="~/js/Map/CampsiteDetails.js"></script>
 @*<script type="text/javascript" defer src="~/js/Map/ReviewsCRUD.js"></script>*@
 
-
-      
-    <div>
-       Nume: @Model.Name
+<div id="campsiteDetailsDiv">
+    <div id="campsiteName" class="detailsField">
+           @Model.Name
     </div>
-    <div>
-        Descriere: @Model.Description
-    </div>
-    <div>
-       Dificultate: @Model.Difficulty
-    </div>
-    <div id="ratingAverage">
-        Rating:  
-    </div>
-    <div id="Lat">
-        @Model.Latitude
-    </div>
-    <div id="Lng">
-        @Model.Longitude
-    </div>
+    <div id="map"></div>
     
-<div id="map"></div>
-
-@foreach(var imgId in Model.ImageIds)
-{
-    <img style="height: 225px; display: inline-block;" src="/Image/GetImgContent?id=@imgId" />
+    <div id="details">
     
-}
-@if(Model.CamperId == currentCamper.Id)
-{ 
-    <a style="display: block;" asp-controller="Map" asp-action="Delete" asp-route-id="@ViewContext.RouteData.Values["id"]"> Delete Campsite</a>
-    <a style="display: block;" asp-controller="Map" asp-action="EditCampsite" asp-route-id="@ViewContext.RouteData.Values["id"]"> Edit Campsite</a>
-}
-
-<div id="review-container">Reviews
-
-    <div id="reviewInput" class="row">
-        <div class="col-md-6" >
-            <div class="form-group">
-                <label class="control-label">Descriere</label>
-                <textarea id="expandableField" class="form-control"></textarea>
+        <div id="descriere" class="detailsField">
+           @Model.Description
+        </div class="detailsField">
+        <div class="dificultyRatingDiv">
+            <div id="dificulty" class="detailsField">
+               Dificultate: @Model.Difficulty
             </div>
-             
-            <div id="ratingDiv" class="form-group">
-                <label class="control-label">Rating review</label>
-                <input id="reviewRating" type="range" min="1" max="5" disabled class="form-control" />
-            </div>
-            <div id= "reviewButtonDiv" >
-                <button id="reviewButton" type="button" class="btn btn-primary">Add Review</button>
-            </div>
+            <div id="ratingAverage"  class="detailsField">
+            Rating:  
         </div>
+        </div>
+        <div id="Lat">
+            @Model.Latitude
+        </div>
+        <div id="Lng">
+            @Model.Longitude
+        </div>
+    </div>    
+    
+    
+    <div id="imgDiv">
 
+        @foreach(var imgId in Model.ImageIds)
+        {
+            <img style="height: 225px; display: inline-block;" src="/Image/GetImgContent?id=@imgId" />
+    
+        }
+    </div>
+    <div id="review-container"><span id="reviewSpan">Review-uri</span>
+
+        <div id="reviewInput" class="row">
+            <div class="col-md-4" >
+                <div class="form-group">
+                    <label class="control-label">Descriere</label>
+                    <textarea id="expandableField" class="form-control"></textarea>
+                </div>
+             
+                <div id="ratingDiv" class="form-group">
+                    <label class="control-label">Rating review</label>
+                    <input id="reviewRating" type="range" min="1" max="5" disabled class="form-control" />
+                </div>
+                <div id= "reviewButtonDiv" >
+                    <button @*class = "addButon"*@ id="reviewButton" type="button" class="btn btn-primary">Add Review</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="dificultyRatingDiv">
+    
+        @if(Model.CamperId == currentCamper.Id)
+        { 
+            <div>
+                <a style="display: block;" asp-controller="Map" asp-action="Delete" asp-route-id="@ViewContext.RouteData.Values["id"]"> Delete Campsite</a>
+            </div>
+            <div>
+                <a style="display: block;" asp-controller="Map" asp-action="EditCampsite" asp-route-id="@ViewContext.RouteData.Values["id"]"> Edit Campsite</a>
+            </div>
+        }
     </div>
 </div>
+
 
 <input id="currentCamper" type="hidden" value=@currentCamper.Id>

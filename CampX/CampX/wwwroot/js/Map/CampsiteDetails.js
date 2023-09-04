@@ -19,7 +19,8 @@ const ShowReviews = (id) => {
             var div = document.getElementById("review-container")
             var plusIcon = document.createElement('i')
             plusIcon.className = "fas fa-plus"
-            div.appendChild(plusIcon)
+            reviewSpan = document.getElementById('reviewSpan')
+            reviewSpan.appendChild(plusIcon)
             var reviewInput = document.getElementById("reviewInput")
             reviewButton = document.getElementById("reviewButton")
             var reviewContent = document.getElementById("expandableField")
@@ -81,15 +82,18 @@ const ShowReviews = (id) => {
                 contentSpan.innerText = `Continut: ${review.content}`
                 var ratingSpan = document.createElement('span')
                 ratingSpan.innerText = `Rating: ${review.rating}`
-                reviewElement.appendChild(ratingSpan)
-                reviewElement.appendChild(document.createElement('br'))
-                reviewElement.appendChild(contentSpan)
+                reviewDiv = document.createElement('div')
+                reviewDiv.className = "reviewDiv"
+                reviewDiv.appendChild(ratingSpan)
+                reviewDiv.appendChild(document.createElement('br'))
+                reviewDiv.appendChild(contentSpan)
                 var deleteIcon = document.createElement('i')
                 var editIcon = document.createElement('i')
                 editIcon.className = 'fas fa-pencil-alt'
                 deleteIcon.className = 'fas fa-times'
-                reviewElement.appendChild(editIcon)
-                reviewElement.appendChild(deleteIcon)
+                reviewDiv.appendChild(editIcon)
+                reviewDiv.appendChild(deleteIcon)
+                reviewElement.appendChild(reviewDiv)
                 if (!authorized) {
 
                     deleteIcon.style.display = 'none'
