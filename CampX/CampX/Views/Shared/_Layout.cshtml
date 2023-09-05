@@ -35,21 +35,27 @@
                         else{
                             <text> Autentifica-te  </text>
                         }
+       
                         <div class="dropdown-content">
-                            <a href="~/CamperAccount/Login">Login</a>
+                            <a asp-controller="CamperAccount" asp-action="Login">Login</a>
                             <div class="divider"></div>
-                            <a href="~/CamperAccount/Register">Register</a>
+                            <a asp-controller="CamperAccount" asp-action="Register">Register</a>
+                            
                             @if (currentCamper.IsAuthenticated == true)
                             {
                                 <div class="divider"></div>
-                                <a href=@($"CamperAccount/CamperProfile/{currentCamper.Id}")>My Profile</a>
+                                <a asp-controller="Request" asp-action="ShowRequests">Cereri active</a>
+                                <div class="divider"></div>
+                                <a asp-controller="CamperAccount" asp-action="CamperProfile" asp-route-id=@($"{currentCamper.Id}")>Profilul meu</a>
                                 <div class="divider"></div>
                                 <form method="post" asp-controller="CamperAccount" asp-action="Logout">
                                     <button type="submit">Logout</button>
                                 </form>
                             }
+                            
                         </div>
                     </div>
+
                 </div>
                 @*<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">                     

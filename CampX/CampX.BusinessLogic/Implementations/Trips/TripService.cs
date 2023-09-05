@@ -429,6 +429,10 @@ namespace CampX.BusinessLogic.Implementations.Trips
             return trip != null;
 
         }
+        public bool isAdmin()
+        {
+            return CurrentCamper.Roles.Contains("Admin");
+        }
 
     }
 

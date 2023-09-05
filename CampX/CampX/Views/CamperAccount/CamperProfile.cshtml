@@ -1,92 +1,130 @@
 ﻿@model CampX.BusinessLogic.Implementations.Campers.Models.CamperProfileModel;
-
+<link rel="stylesheet" href="~/css/CamperAccount/CamperProfile.css" type="text/css" />
+<link rel="stylesheet" href="~/css/ShowMoreStyling.css" type="text/css" />
+<script type="text/javascript" defer src="~/js/ShowMoreLogic.js"></script>
 @if(!@Model.isBanned){
 
+<div id="profileDiv">
+    <div id = "camperDetails">
 
-    <h1>Camper Profile</h1>
-    <h3>@Model.FirstName @Model.LastName</h3>
-    <div>@Model.Email </div>
+            <h1>@Model.FirstName @Model.LastName</h1>
+            <div>@Model.Email </div>
+    </div>
+    <div id="badgesDiv">
 
-    <h3>Badge-uri</h3>
-    @foreach (var camperBadge in Model.CamperBadges)
-    {
-        if (camperBadge.Badge.Milestone <= camperBadge.Score)
+        <h2>Badge-uri</h2>
+        @foreach (var camperBadge in Model.CamperBadges)
         {
+            if (camperBadge.Badge.Milestone <= camperBadge.Score)
+            {
             
-            <div style=" display: inline-block; margin-right: 50px;">
-                <img style="height: 100px; display: inline-block;" src="/Image/GetImgContent?id=@camperBadge.Badge.ImageId" />
-                <div>@camperBadge.Badge.Name</div>
-                <div>Scor @camperBadge.Score</div>
+                <div style=" display: inline-block; margin-right: 50px;">
+                    <img style="height: 100px; display: inline-block;" src="/Image/GetImgContent?id=@camperBadge.Badge.ImageId" />
+                    <div>@camperBadge.Badge.Name</div>
+                    <div>Scor @camperBadge.Score</div>
 
+                </div>
+            }
+        }
+    </div>
+        @if (Model.Trips.Count != 0)
+        {
+
+            <table class="table">
+                <thead>
+                    <h3>Tripuri organizate de @Model.FirstName @Model.LastName</h3>
+                    <tr>
+                        <th>
+                            Nume
+                        </th>
+                        <th>
+                            Descriere
+                        </th>
+                        <th>
+                            Date
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                
+                    @foreach (var item in Model.Trips)
+                    {
+                        <tr>
+                            <td>
+                                @if (item.isPublic)
+                                {
+                                    <a asp-controller="Trip" asp-action="TripDetails" asp-route-id=@item.Id>@item.Name</a>
+                                }
+                                else
+                                {
+                                    <a href=@($"/Trip/TripDetails/{item.Id}?code={item.Code}")>@item.Name</a>
+                                }
+                                @*`?code=${searchInput.value}*@
+                            </td>
+                            <td>
+                                @if (item.Description != null)
+                                {
+                                    <div class="ShowMoreDiv">
+
+                                        @Html.DisplayFor(modelItem => item.Description)
+                                    </div>
+                                    @if (item.Description.Length > 196)
+                                    {
+                                        <div class="showMore">ShowMore</div>
+                                    }
+
+                                }
+                                else
+                                {
+                                    <div>Nu a fost adaugata o descriere!</div>
+                                }
+
+                            </td>
+                            <td>
+                                @if (item.Date != null)
+                                {
+                                    @String.Format("{0:d}", item.Date)
+                                    ;
+                                }
+                                else
+                                {
+                                    <text>Data nesetata!</text>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div id="noTrips">Nu organizeaza niciun trip!</div>
+        }
+
+        @using CampX.Common.ViewModels;
+        @inject CurrentCamperDTO currentCamper
+
+        @if (Model.Id == currentCamper.Id)
+        {
+            <div id="editCamperDiv">
+                <a asp-action="ChangePassword">Schimba Parola</a>
+                <a asp-controller = "CamperAccount" asp-action = "EditCamper" asp-route-id="@Model.Id">Editeaza Profilul</a>
             </div>
         }
+
+        @if (currentCamper.Id == 9)
+        {
+            <a id="banCamper" asp-controller="CamperAccount" asp-action="BanCamper" asp-route-id="@Model.Id">Baneaza Camperul</a>
+        }
+</div>
     }
-    @if (Model.Trips.Count != 0)
-    {
-
-        <table class="table">
-            <thead>
-                <h3>Tripuri organizate de @Model.FirstName @Model.LastName</h3>
-                <tr>
-                    <th>
-                        Nume
-                    </th>
-                    <th>
-                        Descriere
-                    </th>
-                    <th>
-                        Date
-                    </th>
-                </tr>
-            </thead>
-
-            <tbody>
-                @foreach (var item in Model.Trips)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                        <td>
-                            @if (item.Date != null)
-                            {
-                                @String.Format("{0:d}", item.Date)
-                                ;
-                            }
-                            else
-                            {
-                                <text>Nu a fost setat o data pentru acesta excursie</text>
-                            }
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    }
-
-    @using CampX.Common.ViewModels;
-    @inject CurrentCamperDTO currentCamper
-
-    @if (Model.Id == currentCamper.Id)
-    {
-        <div>
-            <a asp-action="ChangePassword">Schimba Parola</a>
+    else{
+        <div id="banCamperDiv">
+            <div>Camperul a fost banat</div>
+            @if (currentCamper.Roles.Contains("Admin"))
+            {
+                <a id="banCamper" asp-controller="CamperAccount" asp-action="UnBanCamper" asp-route-id="@Model.Id">Activeaza Camperul</a>
+            }
         </div>
-        <a href="~/CamperAccount/EditCamper/@Model.Id">Editeaza Profilul</a>
-    }
-
-    @if (currentCamper.Id == 9)
-    {
-        <a href="~/CamperAccount/BanCamper/@Model.Id">Baneaza Camperul</a>
-    }
-}
-else{
-    <h1>Camperul a fost banat</h1>
-    @if (currentCamper.Id == 9)
-    {
-        <a href="~/CamperAccount/UnBanCamper/@Model.Id">Activeaza Camperul</a>
-    }
 }

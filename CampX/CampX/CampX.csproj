@@ -26,7 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\css\CamperAccount\" />
     <Folder Include="wwwroot\js\CamperAccount\" />
     <Folder Include="wwwroot\js\Request\" />
   </ItemGroup>

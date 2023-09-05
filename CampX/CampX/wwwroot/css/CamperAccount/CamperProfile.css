@@ -1,0 +1,70 @@
+﻿#profileDiv {
+    background: rgba(255,238,203, 0.85);
+    padding: 3px 40px 5px 40px;
+    color: #005249;
+    font-size: 20px;
+}
+body {
+    background-image: url('https://localhost:44364/Images/ShowTripsBG.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+#camperDetails {
+    width: fit-content;
+    margin: 30px auto;
+}
+#camperDetails div{
+    font-size: 20px;
+    text-align: center;
+}
+#badgesDiv{
+    margin: 30px 0px;
+}
+#editCamperDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#editCamperDiv a {
+    width: fit-content;
+    background-color: #9F8354;
+    color: #FFEECB;
+    font-weight: 700;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+}
+
+#editCamperDiv a:hover {
+    background-color: #7a5d2c;
+    color: #FFEECB;
+}
+#banCamper {
+    width: fit-content;
+    background-color: #9F8354;
+    color: #FFEECB;
+    font-weight: 700;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+    margin: 20px auto;
+}
+#banCamperDiv {
+    color: #005249;
+    font-size: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#banCamperDiv a{
+    font-size: 30px;
+}
+#banCamperDiv a:hover {
+    font-size: 30px;
+    background-color: #7a5d2c;
+     
+}
+

@@ -31,7 +31,7 @@ h1 {
     margin: 20px auto;
     width: fit-content;
 }
-#imgDiv {
+/*#imgDiv {
 
     margin-top: 30px;
     overflow: auto;
@@ -48,7 +48,7 @@ h1 {
 #imgDiv::-webkit-scrollbar {
     height: 10px !important;
 
-}
+}*/
 .butoaneStergere {
     height: 40px;
     width: 100px;
@@ -73,4 +73,19 @@ button:hover {
 
 button:focus {
     outline: none;
+}
+
+#backButton {
+    width: fit-content;
+    background-color: #9F8354;
+    color: #FFEECB;
+    font-weight: 700;
+    margin-top:20px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+#backButton {
+    width: fit-content;
+    background-color: #7a5d2c;
+    color: #FFEECB;
 }

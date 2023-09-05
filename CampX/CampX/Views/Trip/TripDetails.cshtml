@@ -36,8 +36,13 @@ else{  *@
         <div id="detailsDiv">
 
             <div class="detailsField">
-                   @Model.Description
-                </div>
+                @if(Model.Description != null){
+                    @Model.Description 
+                }
+                else{
+                    <text>Nu a fost intordusă o descriere!</text>
+                }
+            </div>
             <div class="detailsField">
             
                     @if (Model.IsPublic)
@@ -98,10 +103,15 @@ else{  *@
         </div>
 
         <div id="buttonsDiv">
-            
-            <a id="deleteButton" asp-controller = "Trip" asp-action="DeleteTrip" asp-route-id=@Model.Id>Delete Trip</a>
-            <a id="finishButton" asp-controller = "Trip" asp-action="FinishTrip" asp-route-id=@Model.Id>Finish Trip</a>
-            <a id="finishButton" asp-controller="Trip" asp-action="EditTrip" asp-route-id=@Model.Id>Edit Trip</a>
+            <div class="tooltip-btn">
+            <a id="finishButton" asp-controller="Trip" asp-action="FinishTrip" asp-route-id=@Model.Id>Finalizează Tripul</a>
+                <div class="tooltip-text">
+                    Pentru ca progresul tău să fie înregistrat în sistemul de badge-uri, după ce te întorci acasă, finalizează tripul!
+                </div>
+            </div>
+
+        <a id="editButton" asp-controller="Trip" asp-action="EditTrip" asp-route-id=@Model.Id>Editează Tripul</a>
+        <a id="deleteButton" asp-controller="Trip" asp-action="DeleteTrip" asp-route-id=@Model.Id>Sterge Tripul</a>
             <a asp-action="ShowTrips">Back to List</a>
         </div>
     

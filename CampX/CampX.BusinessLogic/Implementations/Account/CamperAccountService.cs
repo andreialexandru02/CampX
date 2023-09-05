@@ -64,7 +64,7 @@ namespace CampX.BusinessLogic.Implementations.Account
             };
         }
 
-        public void RegisterNewCamper(RegisterModel model)
+        public CurrentCamperDTO RegisterNewCamper(RegisterModel model)
         {
             RegisterCamperValidator.Validate(model).ThenThrow();
 
@@ -80,6 +80,8 @@ namespace CampX.BusinessLogic.Implementations.Account
             UnitOfWork.SaveChanges();
             
             AddCamperBadgesForCreatedCamper(CamperId.Id);
+
+            return Login(model.Email, model.Password);
 
         }
         public void AddCamperBadgesForCreatedCamper(int id)
@@ -207,11 +209,22 @@ namespace CampX.BusinessLogic.Implementations.Account
                     }
                 });
             }
-            var trips = UnitOfWork.Trips.Get()
+            var trips = new List<Trip>();
+            if (camper.Id == CurrentCamper.Id)
+            {
+                trips = UnitOfWork.Trips.Get()
                     .Include(tc => tc.TripCampers)
-                    .Where(t => t.IsPublic &&
-                        t.TripCampers.Any(tc => tc.IsOrganizer && tc.CamperId == camper.Id))
+                    .Where(t => t.TripCampers.Any(tc => tc.IsOrganizer && tc.CamperId == camper.Id))
                     .ToList();
+            }
+            else
+            {
+                trips = UnitOfWork.Trips.Get()
+                        .Include(tc => tc.TripCampers)
+                        .Where(t => t.IsPublic &&
+                            t.TripCampers.Any(tc => tc.IsOrganizer && tc.CamperId == camper.Id))
+                        .ToList();
+            }
 
             var profileTrips = new List<TripForCamperProfileModel>();
             foreach(var trip in trips)
@@ -221,7 +234,9 @@ namespace CampX.BusinessLogic.Implementations.Account
                     Id = trip.Id,
                     Name = trip.Name,
                     Description = trip.Description,
-                    Date = trip.Date
+                    Date = trip.Date,
+                    isPublic = trip.IsPublic,
+                    Code = trip.Code
                 });
             }
             var camperProfileDebugger = new CamperProfileModel

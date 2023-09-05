@@ -37,6 +37,7 @@ namespace CampX.BusinessLogic.Implementations.Map
 
         public List<ShowCampsitesModel> GetCampsites()
         {
+
             var campsites = UnitOfWork.Campsites.Get()
                 .Select(c => new ShowCampsitesModel
                 {
@@ -105,13 +106,13 @@ namespace CampX.BusinessLogic.Implementations.Map
             .Select(c => new CampsiteDetailsModel
             {
                 Name = c.Name
-                ,Description = c.Description
-                ,Difficulty = c.Difficulty
-                ,Latitude = c.Latitude
-                ,Longitude = c.Longitude
-                ,ImageIds = c.Images.Select(i => i.Id).ToList()
-                ,CamperId = c.CamperId
-             
+                , Description = c.Description
+                , Difficulty = c.Difficulty
+                , Latitude = c.Latitude
+                , Longitude = c.Longitude
+                , ImageIds = c.Images.Select(i => i.Id).ToList()
+                , CamperId = c.CamperId
+
             })
             .SingleOrDefault();
 
@@ -152,10 +153,10 @@ namespace CampX.BusinessLogic.Implementations.Map
                 .ToList();
             //.Concat(model.ImageIds.ToList())
 
-           /* foreach(var image in images)
-            {
-                campsite.Images.Add(image);
-            }*/
+            /* foreach(var image in images)
+             {
+                 campsite.Images.Add(image);
+             }*/
             campsite.Images = images;
 
             campsite.Id = id;
@@ -169,7 +170,8 @@ namespace CampX.BusinessLogic.Implementations.Map
             return UnitOfWork.Campsites.Get()
                 .Where(r => r.Id == id)
                 .Select(r => r.CamperId)
-                .SingleOrDefault() == CurrentCamper.Id;
+                .SingleOrDefault() == CurrentCamper.Id ||
+                CurrentCamper.Roles.Contains("Admin");
         }
         public bool IdExists(int id)
         {

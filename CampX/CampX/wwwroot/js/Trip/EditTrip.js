@@ -16,6 +16,17 @@ function GenerateRandomCode() {
 
     return randomCode;
 }
+function isDateInTheFuture(dateToCheck) {
+
+    const inputDate = new Date(dateToCheck);
+    const currentDate = new Date();
+
+    if (inputDate > currentDate) {
+        return true;
+    } else {
+        return false;
+    }
+}
 var url = window.location.href.split('/');
 var id = url[url.length - 1];
 var tentIcon = L.icon({
@@ -215,6 +226,10 @@ $.ajax({
                 }
                 else if (publicInput.value === "") {
                     span.innerText = 'Seteaza daca vrei ca tripul tau sa fie public sau privat'
+                    span.style.display = 'block'
+                }
+                else if (!isDateInTheFuture(dateInput.value)) {
+                    span.innerText = 'Data selectata trebuie sa fie una viitoare'
                     span.style.display = 'block'
                 }
                 else {

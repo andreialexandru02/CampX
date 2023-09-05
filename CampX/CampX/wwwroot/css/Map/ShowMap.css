@@ -14,8 +14,8 @@ body {
 table {
     width: 100%;
     background: rgba(255,238,203, 0.85);
-    border-radius: 15px;
-    border: 10px solid red;
+    border-radius: 10px !important;
+   
 }
 
 #container {

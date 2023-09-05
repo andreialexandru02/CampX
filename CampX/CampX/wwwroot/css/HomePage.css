@@ -102,20 +102,20 @@
 
 .home-icon {
     display: block;
-    padding: 0 50px;
+    padding: 0 30px;
     transition: .2s all ease-in-out;
 }
 #mapIcon {
     animation: slideRight 0.5s ease-in-out forwards;
 }
 #tripListIcon {
+    padding: 0 35px;
     animation: slideLeft 0.5s ease-in-out forwards;
 }
 
 .home-icon:hover {
-    padding: 0 20px;
+    padding: 0 10px;
 }
-
 .home-map {
     height: 100%;
 }

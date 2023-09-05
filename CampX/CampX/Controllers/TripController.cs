@@ -2,6 +2,7 @@
 using CampX.BusinessLogic.Implementations.Trips;
 using CampX.BusinessLogic.Implementations.Trips.Models;
 using CampX.Code.Base;
+using CampX.Common.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +16,6 @@ namespace CampX.Controllers
 
         private readonly TripService Service;
         private readonly CampsiteService campsiteService;
-
         public TripController(ControllerDependencies dependencies, TripService service)
            : base(dependencies)
         {
@@ -53,13 +53,17 @@ namespace CampX.Controllers
         }
         [HttpGet]
 
-        public IActionResult TripDetails(int id)
+        public IActionResult TripDetails(int id, [FromQuery]string code = null)
         {
             var model = Service.TripDetails(id);
-
             if (model == null)
             {
                 return View("Error_NotFound");
+            }
+            if(!model.IsPublic && model.Code != code)
+            {
+                return RedirectToAction("Error_Unauthorized", "Home");
+
             }
             return View("TripDetails", model);
         }
@@ -80,7 +84,7 @@ namespace CampX.Controllers
             {
                 return View("Error_NotFound");
             }
-            if (!Service.CheckOrganizer(id))
+            if (!Service.CheckOrganizer(id) && !Service.isAdmin())
             {
                 return RedirectToAction("Error_Unauthorized", "Home");
             }

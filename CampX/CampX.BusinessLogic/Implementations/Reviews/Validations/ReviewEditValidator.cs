@@ -19,6 +19,15 @@ namespace CampX.BusinessLogic.Implementations.Reviews.Validations
                 .NotEmpty().WithMessage("Camp obligatoriu!");
             RuleFor(r => r.CampsiteId)
                 .NotEmpty().WithMessage("Camp obligatoriu!");
+            RuleFor(r => r.Content)
+                .Must(DescriptionTooLong)
+                .WithMessage("Continutul este prea lung!");
+        }
+        public bool DescriptionTooLong(string description)
+        {
+            if (description == null)
+                return true;
+            return description.Length <= 500;
         }
     }
 }

@@ -1,9 +1,13 @@
 ﻿using CampX.BusinessLogic.Base;
+using CampX.BusinessLogic.Implementations.Map.Validations;
 using CampX.BusinessLogic.Implementations.Notes.Models;
+using CampX.BusinessLogic.Implementations.Notes.Validations;
 using CampX.BusinessLogic.Implementations.Reviews.Models;
 using CampX.BusinessLogic.Implementations.Reviews.Validations;
+using CampX.Common.Extensions;
 using CampX.DataAccess;
 using CampX.Entities;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,10 +20,11 @@ namespace CampX.BusinessLogic.Implementations.Notes
     public class NoteService : BaseService
     {
 
-
+        private readonly NoteValidator NoteValidator;
         public NoteService(ServiceDependencies dependencies)
             : base(dependencies)
         {
+            this.NoteValidator = new NoteValidator();
         }
 
         public List<ShowNoteModel> ShowNotes(int id) {
@@ -39,8 +44,8 @@ namespace CampX.BusinessLogic.Implementations.Notes
         }
         public void AddNote(AddNoteModel model)
         {
-        
 
+            NoteValidator.Validate(model).ThenThrow();
             var note = Mapper.Map<AddNoteModel, Note>(model);
 
           

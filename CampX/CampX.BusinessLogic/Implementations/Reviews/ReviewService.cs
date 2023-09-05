@@ -103,9 +103,9 @@ namespace CampX.BusinessLogic.Implementations.Reviews
             var reviewOwnerId = UnitOfWork.Reviews.Get()
                 .Where(r => r.Id == id)
                 .Select(r => r.CamperId)
-                .SingleOrDefault();
+                .SingleOrDefault() ;
 
-            return reviewOwnerId == CurrentCamper.Id;
+            return reviewOwnerId == CurrentCamper.Id || CurrentCamper.Roles.Contains("Admin");
     }
     }
   

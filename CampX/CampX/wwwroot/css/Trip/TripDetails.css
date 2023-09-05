@@ -96,8 +96,9 @@ body {
 }
 #buttonsDiv {
     width: 100%;
-    display: grid;
-    grid-auto-columns: 1fr 1fr 1fr 1fr;
+    display: flex;
+   justify-content: space-between;
+   margin-bottom: 30px;
 }
 
 #buttonsDiv a, #noteButton {
@@ -120,6 +121,44 @@ body {
     padding: 5px 15px 5px 15px;
     border-radius: 10px;
 }
-.weatherDiv{
+.weatherDiv {
     margin-top: 15px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+}
+#buttonsDiv a:hover {
+    background-color: #7a5d2c;
+}
+#finishButton:hover #finishDiv{
+    background-color: red !important;
+}
+#finishDiv {
+    width: 400px;
+    background-color: #7a5d2c;
+    color: #FFEECB;
+    font-weight: 700;
+    padding: 5px 15px 5px 15px;
+    border-radius: 10px;
+}
+
+.tooltip-btn {
+    display: inline-block;
+    position: relative;
+}
+
+    .tooltip-btn .tooltip-text {
+        display: none;
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        background: #000;
+        color: #fff;
+        font-size: 13px;
+        font-weight: 700;
+        padding: 8px;
+        border-radius: 4px;
+        min-width: 300px;
+    }
+
+.tooltip-btn:hover .tooltip-text {
+    display: block;
 }

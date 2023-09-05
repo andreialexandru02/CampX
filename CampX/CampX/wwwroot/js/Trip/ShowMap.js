@@ -15,7 +15,17 @@ function GenerateRandomCode() {
 
     return randomCode;
 }
-
+function isDateInTheFuture(dateToCheck) {
+   
+    const inputDate = new Date(dateToCheck);
+    const currentDate = new Date();
+    
+    if (inputDate > currentDate) {
+        return true; 
+    } else {
+        return false;
+    }
+}
 var tentIcon = L.icon({
     iconUrl: 'https://localhost:44364/Images/icons8-tent-48.png',
 
@@ -156,6 +166,12 @@ const displayCampsites = () => {
                 else if (publicInput.value === "") {
                     span.innerText = 'Seteaza daca vrei ca tripul tau sa fie public sau privat'
                     span.style.display = 'block'
+                    
+                }
+                else if (!isDateInTheFuture(dateInput.value))
+                {
+                    span.innerText = 'Data selectata trebuie sa fie una viitoare'
+                    span.style.display = 'block'
                 }
                 else {                   
                     $.ajax({
@@ -176,7 +192,7 @@ const displayCampsites = () => {
                     })
                         .done(() => {
                           
-                            window.location.reload()
+                            window.location.href = '../Trip/ShowTrips';
                         })
                 }
             }

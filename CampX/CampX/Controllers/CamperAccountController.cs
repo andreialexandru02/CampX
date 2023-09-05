@@ -3,6 +3,7 @@ using CampX.BusinessLogic.Implementations.Account;
 using CampX.BusinessLogic.Implementations.Account.Models;
 using CampX.Code.Base;
 using CampX.Common.ViewModels;
+using CampX.Entities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -42,14 +43,16 @@ namespace CampX.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(RegisterModel model)
+        public async Task<IActionResult> Register(RegisterModel model)
         {
             if (model == null)
             {
                 return View("Error_NotFound");
             }
 
-            Service.RegisterNewCamper(model);
+            //Service.RegisterNewCamper(model);
+
+            await LogIn(Service.RegisterNewCamper(model));
 
             return RedirectToAction("Index", "Home");
         }

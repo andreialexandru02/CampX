@@ -21,3 +21,18 @@
         margin: 20px auto;
         width: fit-content;
 }
+#backToMap {
+    font-size: 20px;
+    width: fit-content;
+    background-color: #9F8354;
+    color: #FFEECB;
+    font-weight: 700;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+
+}
+
+#backToMap:hover {
+    font-size: 20px;
+    background-color: #7a5d2c;
+}

@@ -49,7 +49,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Name)
                         </td>
-                        <td>
+                        <td style="width: 1050px;">
                             @if (item.Description != null)
                             {
                                 <div class="ShowMoreDiv">
@@ -71,7 +71,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Difficulty)
                         </td>
-                        <td>
+                        <td >
                             @if(item.Rating == 0.0M)
                             {
                                 <text>Nu exista rating</text>

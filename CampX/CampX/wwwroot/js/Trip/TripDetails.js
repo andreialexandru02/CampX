@@ -6,13 +6,14 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 var currentCamper = document.getElementById('currentCamper')
 
 var url = window.location.href.split('/');
-var id = url[url.length - 1];
-console.log(id)
+var id = url[url.length - 1].split('?')[0];
+console.log(id) 
 $.ajax({
     type: "GET",
     url: "/Trip/TripDetailsJSON",
     data: { id: id }
 }).done((trip) => {
+    debugger
     trip.campsites.forEach((campsite) => {
         console.log(campsite.latitude, campsite.longitude)
         
@@ -51,14 +52,21 @@ $.ajax({
     deleteButton.style.display = 'none'
     finishButton = document.getElementById("finishButton")
     finishButton.style.display = 'none'
+    editButton = document.getElementById("editButton")
+    editButton.style.display = 'none'
     trip.tripCampers.forEach((item) => {
-
+        debugger
         if (item.camper.id == currentCamper.value && item.isOrganizer) {
 
             deleteButton.style.display = 'block'
             finishButton.style.display = 'block'
+            editButton.style.display = 'block'
           // break
-        }   
+        }
+        else if (currentCamper.value == 9) {
+            deleteButton.style.display = 'block'
+        }
+        
     })
     var requestDiv = document.getElementById('requestContainer')
     requestDiv.style.display = 'none'
@@ -89,42 +97,51 @@ $.ajax({
         joinButton.style.display = 'none'
         requestDiv.style.display = 'block'
         requestButton.onclick = () => {
-           requestDiv.style.display = 'none'
-           //console.log(trip.id)
+            if (requestDescription.value.length > 500) {
+
+                requestSpan.innerHTML = 'Descrierea este prea lunga!'
+                requestSpan.style.display = 'block'
+            }
+            else {
+
+                requestDiv.style.display = 'none'
+               //console.log(trip.id)
 
             
-            $.ajax({
-                type: "post",
-                url: '/Request/CheckRequest',
-                data: {
-                    TripId: trip.id
-                    , CamperId: currentCamper.value
-                    , Description: requestDescription.value ?? 'Nu a fost introdusa o descriere!'
-                }
-            })  
-                .done((result) => {
-                    if (result) {
-                        $.ajax({
-                            type: "post",
-                            url: '/Request/AddRequest',
-                            datatype: "json",
-                            data: {
-                                TripId: trip.id
-                                , CamperId: currentCamper.value
-                                , Description: requestDescription.value ?? 'Nu a fost introdusa o descriere!'
-                            }
-                        })
-                            .done(() => {
-                                window.location.reload()
+                $.ajax({
+                    type: "post",
+                    url: '/Request/CheckRequest',
+                    data: {
+                        TripId: trip.id
+                        , CamperId: currentCamper.value
+                        , Description: requestDescription.value ?? 'Nu a fost introdusa o descriere!'
+                    }
+                })  
+                    .done((result) => {
+                        if (result) {
+                            $.ajax({
+                                type: "post",
+                                url: '/Request/AddRequest',
+                                datatype: "json",
+                                data: {
+                                    TripId: trip.id
+                                    , CamperId: currentCamper.value
+                                    , Description: requestDescription.value ?? 'Nu a fost introdusa o descriere!'
+                                }
                             })
-                    }
-                    else {                       
-                        requestSpan.style.display = 'block'
-                        requestDiv.style.display = 'block'
+                                .done(() => {
+                                    window.location.reload()
+                                })
+                        }
+                        else {                       
+                            requestSpan.innerHTML = 'Ai facut deja un request pentru acest trip!'
+                            requestSpan.style.display = 'block'
+                            requestDiv.style.display = 'block'
                         
+                        }
                     }
-                }
-            )
+                )
+            }
 
         }
 
@@ -163,6 +180,11 @@ $.ajax({
                     noteButton.onclick = () => {
                         console.log(noteContent.value)
                         if (noteContent.value == '') {
+                            span.innerText = 'Notita incompleta'
+                            span.style.display = 'block'
+                        }
+                        else if (noteContent.value.length > 500) {
+                            span.innerText = "Notita prea lunga!"
                             span.style.display = 'block'
                         }
                         else {

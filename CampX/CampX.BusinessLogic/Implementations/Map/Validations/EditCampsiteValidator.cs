@@ -1,6 +1,7 @@
 ﻿using CampX.BusinessLogic.Implementations.Map.Models;
 using CampX.DataAccess;
 using FluentValidation;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,8 +30,13 @@ namespace CampX.BusinessLogic.Implementations.Map.Validations
                 .NotEmpty().WithMessage("Camp obligatoriu!");
             RuleFor(c => c.Longitude)
                 .NotEmpty().WithMessage("Camp obligatoriu!");
+            RuleFor(c => c.Images)
+                .Must(IsImageExtensionCorrect)
+                .WithMessage("Format invalid, selecteaza poze!");
 
-            }
+
+
+        }
             public bool NameTooLong(string name)
             {
                 return name.Length <= 100;
@@ -41,7 +47,29 @@ namespace CampX.BusinessLogic.Implementations.Map.Validations
                     return true;
                 return description.Length <= 500;
             }
+        private bool IsImageExtensionCorrect(List<IFormFile> images)
+        {
+            var ok = false;
+            foreach (var image in images)
+            {
 
-        
+                if (image == null)
+                {
+                    ok = false;
+                    break;
+                }
+                var acceptedContentTypes = new List<string>()
+                    {
+                        "image/gif",
+                        "image/jpeg",
+                        "image/jpg",
+                        "image/png"
+                    };
+                ok = ok && acceptedContentTypes.Contains(image.ContentType) ;
+
+            }
+            return ok;
+
+        }
     }
 }

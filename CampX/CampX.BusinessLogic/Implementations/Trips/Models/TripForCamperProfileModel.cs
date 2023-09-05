@@ -16,5 +16,9 @@ namespace CampX.BusinessLogic.Implementations.Trips.Models
         
         public DateTime? Date { get; set; }
 
+        public bool isPublic { get; set; }
+
+        public string Code { get; set; }
+
     }
 }

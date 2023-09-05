@@ -1,0 +1,48 @@
+﻿/*#imgContainer{
+    background-color: red;
+    display:flex;
+    display: inline;
+}
+ img{
+    max-width: 100px;
+}
+.imgPreview{
+    width: fit-content;
+}*/
+#imgContainer {
+    width: 100%;
+    margin-top: 30px;
+    overflow: auto;
+    white-space: nowrap;
+    padding: 10px;
+    margin: 0 auto;
+    display:flex;
+}
+.imgPreview{
+    
+}
+.imgPreview img {
+    height: 225px;
+    padding: 5px;
+    border-radius: 15px;
+}
+
+#imgContainer::-webkit-scrollbar {
+    height: 10px !important;
+}
+
+.deleteButton {
+    height: 40px;
+    width: 100px;
+    justify-content: center;
+    cursor: pointer;
+    display: flex;
+    color: #FFEECB;
+    align-items: center;
+    background: red;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+    background: #e62222;
+    margin: 0 auto;
+}

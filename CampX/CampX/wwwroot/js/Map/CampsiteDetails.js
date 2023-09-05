@@ -45,6 +45,11 @@ const ShowReviews = (id) => {
                     reviewButton.onclick = () => {                      
                         if (reviewRating.disabled === true || reviewContent.value === '') {
 
+                            span.innerText = 'Review incomplet'
+                            span.style.display = 'block'
+                        }
+                        else if (reviewContent.value.length > 500) {
+                            span.innerText="Review prea lung!"
                             span.style.display = 'block'
                         }
                         else {
@@ -75,7 +80,7 @@ const ShowReviews = (id) => {
             var sumReviews = 0
             reviews.forEach(review => {
 
-                var authorized = review.camperId == currentCamper.value
+                var authorized = review.camperId == currentCamper.value || currentCamper.value == 9
                 sumReviews += review.rating
                 reviewElement = document.createElement('div')
                 var contentSpan = document.createElement('span')
@@ -109,25 +114,33 @@ const ShowReviews = (id) => {
                     deleteIcon.style.display = 'none'
                     editIcon.style.display = 'none'
                 }
+                if (currentCamper.value == 9) {
+                     editIcon.style.display = 'none'
+                }
                 div.appendChild(reviewElement)
                 console.log(review.rating)
                 deleteIcon.onclick = () => {
-                    if (!authorized) {
-                        window.location.href = '/Home/Error_Unauthorized';
-                    }
-                    else {
-                        $.ajax({
-                            type: "post",
-                            url: `/Review/DeleteReview`,
-                            datatype: "json",
-                            data: {
-                                Id: review.id,
-                                CampsiteId: id
-                            }
-                        })
-                            .done(() => {
-                                window.location.reload()
+                    debugger
+                    let result = confirm("Esti sigur ca vrei sa stergi?");
+                    if (result) {
+
+                        if (!authorized) {
+                            window.location.href = '/Home/Error_Unauthorized';
+                        }
+                        else {
+                            $.ajax({
+                                type: "post",
+                                url: `/Review/DeleteReview`,
+                                datatype: "json",
+                                data: {
+                                    Id: review.id,
+                                    CampsiteId: id
+                                }
                             })
+                                .done(() => {
+                                    window.location.reload()
+                                })
+                        }
                     }
                 }
                                
@@ -180,3 +193,16 @@ marker = L.marker([latitude.innerText, longitude.innerText], { icon: tentIcon })
 var url = window.location.href.split('/');
 var id = url[url.length - 1];
 ShowReviews(id)
+var deleteCampsiteButton = document.getElementById("deleteCampsiteButton")
+
+
+deleteCampsiteButton.onclick = () => {
+    let result = confirm("Esti sigur ca vrei sa stergi?");
+    debugger
+    if (result) {
+        deleteCampsiteButton.click()
+    }
+    else {
+        deleteCampsiteButton.href = window.location.href
+    }
+}

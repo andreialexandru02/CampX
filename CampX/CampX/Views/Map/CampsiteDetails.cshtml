@@ -62,6 +62,7 @@
                 <div class="form-group">
                     <label class="control-label">Descriere</label>
                     <textarea id="expandableField" class="form-control"></textarea>
+                   
                 </div>
              
                 <div id="ratingDiv" class="form-group">
@@ -77,10 +78,10 @@
     </div>
     <div class="dificultyRatingDiv">
     
-        @if(Model.CamperId == currentCamper.Id)
+        @if(Model.CamperId == currentCamper.Id || currentCamper.Roles.Contains("Admin"))
         { 
             <div>
-                <a style="display: block;" asp-controller="Map" asp-action="Delete" asp-route-id="@ViewContext.RouteData.Values["id"]"> Delete Campsite</a>
+                <a id="deleteCampsiteButton" style="display: block;" asp-controller="Map" asp-action="Delete" asp-route-id="@ViewContext.RouteData.Values["id"]"> Delete Campsite</a>
             </div>
             <div>
                 <a style="display: block;" asp-controller="Map" asp-action="EditCampsite" asp-route-id="@ViewContext.RouteData.Values["id"]"> Edit Campsite</a>

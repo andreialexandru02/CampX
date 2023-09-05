@@ -96,7 +96,7 @@ namespace CampX.BusinessLogic.Implementations.Requests
                         Id = request.Trip.Id,
                         Date = request.Trip.Date
                     },
-                    Description = "asdasd"
+                    Description = request.Description
                 });
                     
             }

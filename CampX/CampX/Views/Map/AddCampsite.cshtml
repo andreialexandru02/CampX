@@ -15,8 +15,11 @@
 
 <link rel="stylesheet" href="~/css/Map/AddCampsite.css" type="text/css"/>
 <link rel="stylesheet" href="~/css/Form.css" type="text/css" />
+<link rel="stylesheet" href="~/css/ImagesPreview.css" type="text/css"/>
 <script type="text/javascript" defer src="~/js/TentIcon.js"></script>
 <script type="text/javascript" defer src="~/js/Map/AddEditCampsite.js"></script>
+<script type="text/javascript" defer src="~/js/ImagesPreview.js"></script>
+
 <div id="ShowMapDiv">
 
     <h1>Adauga Campsite</h1>
@@ -57,7 +60,7 @@
                     <div class="form-group">
                         <label asp-for="Images" class="control-label" id="img_form"></label>
                         <input class="form-control" asp-for="Images" type="file" name="Images" id="ImageData" multiple />
-                        <span asp-validation-for="Images" class="text-danger"></span>
+                        <span asp-validation-for="Images" class="text-danger"></span>                      
                     </div>
 
                     <input asp-for="CamperId" type="hidden" value=@currentCamper.Id>
@@ -69,8 +72,9 @@
             </div>
         </div>
     </div>
+    <div id="imgContainer"></div>
     <div>
-        <a asp-action="ShowMap">Inapoi la hartă</a>
+        <a id="backToMap" asp-action="ShowMap">Inapoi la hartă</a>
     </div>
 </div>
 

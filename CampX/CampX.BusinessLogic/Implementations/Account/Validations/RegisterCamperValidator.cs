@@ -3,7 +3,7 @@ using CampX.BusinessLogic.Implementations.Account;
 using CampX.BusinessLogic.Implementations.Account.Models;
 using CampX.DataAccess;
 using FluentValidation;
-
+using System.Text.RegularExpressions;
 
 namespace CampX.BusinessLogic.Implementations.Account
 {
@@ -18,7 +18,9 @@ namespace CampX.BusinessLogic.Implementations.Account
                 .NotEmpty().WithMessage("Camp obligatoriu!")
                 .Must(NotAlreadyExist)
                 .WithMessage("Exista deja un utilizator cu acest email!")
-                .EmailAddress(FluentValidation.Validators.EmailValidationMode.AspNetCoreCompatible)
+                //.EmailAddress(FluentValidation.Validators.EmailValidationMode.AspNetCoreCompatible)
+                .Must(IsValidEmail)
+                .WithMessage("Formatul email-ului nu este corect!")
                 .Must(InputTooLong)
                 .WithMessage("Email-ul este prea lung");
             RuleFor(r => r.Password)
@@ -74,6 +76,13 @@ namespace CampX.BusinessLogic.Implementations.Account
         public bool InputTooLong(string name)
         {
             return name.Length <= 100;
+        }
+        public static bool IsValidEmail(string email)
+        {
+           
+            string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+
+            return Regex.IsMatch(email, pattern);
         }
     }
 }

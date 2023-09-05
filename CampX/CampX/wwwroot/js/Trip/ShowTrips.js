@@ -23,7 +23,8 @@ searchButton.onclick = () => {
                 searchDiv.style.display = 'block'
             })
             .done((id) => {
-                window.location.href = '../Trip/TripDetails/' + id;
+            
+                window.location.href = '../Trip/TripDetails/' + id + `?code=${searchInput.value}`;
             })
     }
 }
