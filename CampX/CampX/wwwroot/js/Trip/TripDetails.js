@@ -13,7 +13,7 @@ $.ajax({
     url: "/Trip/TripDetailsJSON",
     data: { id: id }
 }).done((trip) => {
-    debugger
+    
     trip.campsites.forEach((campsite) => {
         console.log(campsite.latitude, campsite.longitude)
         
@@ -55,7 +55,7 @@ $.ajax({
     editButton = document.getElementById("editButton")
     editButton.style.display = 'none'
     trip.tripCampers.forEach((item) => {
-        debugger
+        
         if (item.camper.id == currentCamper.value && item.isOrganizer) {
 
             deleteButton.style.display = 'block'
