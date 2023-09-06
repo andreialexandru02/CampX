@@ -24,7 +24,7 @@
                     <div class="logo">
                     <a href="~/Home/Index">
                     @*<img id="campXLogo" src="~/Images/icons8-tent-48.png" alt="Tent Logo">*@
-                    <img id="campXLogo"  class="textLogoImg" src="../Images/CampXTextLogo.png" alt="CampXTextLogo">
+                    <img id="campXLogo"  class="textLogoImg" src="~/Images/CampXTextLogo.png" alt="CampXTextLogo">
                     </a>
 
                     </div>
@@ -32,8 +32,8 @@
                     <div class="my-account">
                         @if(currentCamper.IsAuthenticated) 
                         {
-                            <text>Contul meu</text> 
-                        }
+                        <text>@currentCamper.FirstName</text>
+                }
                         else{
                             <text> Autentifica-te  </text>
                         }

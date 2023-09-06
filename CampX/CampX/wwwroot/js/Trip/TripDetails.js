@@ -287,24 +287,43 @@ $.ajax({
 
 })
 
-deleteTripButton = document.getElementById("deleteButton");
 
-deleteTripButton.onclick = () => {
+
+deleteTripButton = document.getElementById("deleteButton");
+deleteTripButton.onclick = (event) => {
+    event.preventDefault()
+
     let result = confirm("Esti sigur ca vrei sa stergi?");
+    console.log(result)
     if (result) {
-        deleteTripButton.click()
+        $.ajax({
+            type: "post",
+            url: `/Trip/DeleteTrip/${id}`,
+            datatype: "json",
+        })
+            .done(() => {
+                window.location.href = `/Trip/ShowTrips`;
+            })
     }
     else {
         deleteTripButton.href = window.location.href
     }
 }
-
 finishTripButton = document.getElementById("finishButton");
+finishTripButton.onclick = (event) => {
+    event.preventDefault()
 
-finishTripButton.onclick = () => {
     let result = confirm("Esti sigur ca vrei sa finalizezi?");
+    console.log(result)
     if (result) {
-        finishTripButton.click()
+        $.ajax({
+            type: "post",
+            url: `/Trip/FinishTrip/${id}`,
+            datatype: "json",
+        })
+            .done(() => {
+                window.location.href = `/Trip/ShowTrips`;
+            })
     }
     else {
         finishTripButton.href = window.location.href

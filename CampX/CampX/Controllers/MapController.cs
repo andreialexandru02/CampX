@@ -116,6 +116,14 @@ namespace CampX.Controllers
 
         public IActionResult DeleteCampsite(int id)
         {
+            if (!Service.IdExists(id))
+            {
+                return View("Error_NotFound");
+            }
+            if (!Service.CheckCampsiteOwner(id))
+            {
+                return RedirectToAction("Error_Unauthorized", "Home");
+            }
             Service.DeleteCampsite(id);
 
             return RedirectToAction("ShowMap", "Map");

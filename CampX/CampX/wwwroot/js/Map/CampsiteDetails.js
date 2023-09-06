@@ -195,14 +195,27 @@ var id = url[url.length - 1];
 ShowReviews(id)
 var deleteCampsiteButton = document.getElementById("deleteCampsiteButton")
 
+var alreadyClicked = false;
+deleteCampsiteButton.onclick = (event) => {
+    event.preventDefault()
+    if (!alreadyClicked) {
+        alreadyClicked = true;
+        let result = confirm("Esti sigur ca vrei sa stergi?");
+        console.log(result)
+        if (result) {
+            $.ajax({
+                type: "post",
+                url: `/Map/DeleteCampsite/${id}`,
+                datatype: "json",
+            })
+                .done(() => {
+                    window.location.href = `/Map/ShowMap`;
+                })
 
-deleteCampsiteButton.onclick = () => {
-    let result = confirm("Esti sigur ca vrei sa stergi?");
- //   debugger
-    if (result) {
-        deleteCampsiteButton.click()
-    }
-    else {
-        deleteCampsiteButton.href = window.location.href
+         
+        }
+        else {
+            deleteCampsiteButton.href = window.location.href
+        }
     }
 }

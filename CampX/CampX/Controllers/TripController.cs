@@ -24,7 +24,11 @@ namespace CampX.Controllers
         [HttpGet]
         public IActionResult ShowMap()
         {
-            return View();
+
+            return View( new AddTripModel
+            {
+                Date = DateTime.Now,
+            });
         }
 
         [HttpGet]
@@ -77,7 +81,7 @@ namespace CampX.Controllers
             return Json(Service.TripDetails(id));
         }
 
-        [HttpGet]
+        [HttpPost]
         public IActionResult DeleteTrip(int id)
         {
             if (!Service.IdExists(id))
@@ -140,7 +144,7 @@ namespace CampX.Controllers
             return Ok(model.Id);
         }
 
-        [HttpGet]
+        [HttpPost]
 
         public IActionResult FinishTrip(int id)
         {

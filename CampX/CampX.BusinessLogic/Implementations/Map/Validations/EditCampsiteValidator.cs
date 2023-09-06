@@ -49,12 +49,12 @@ namespace CampX.BusinessLogic.Implementations.Map.Validations
             }
         private bool IsImageExtensionCorrect(List<IFormFile> images)
         {
-            var ok = false;
-            if(images == null)
+            var ok = true;
+
+            if (images == null)
             {
-                return true;
+                ok = false;
             }
-            
             foreach (var image in images)
             {
 
@@ -68,7 +68,13 @@ namespace CampX.BusinessLogic.Implementations.Map.Validations
                         "image/gif",
                         "image/jpeg",
                         "image/jpg",
-                        "image/png"
+                        "image/png",
+                        "image/jfif",
+                        "image/GIF",
+                        "image/JPEG",
+                        "image/JPG",
+                        "image/PNG",
+                        "image/JFIF"
                     };
                 ok = ok && acceptedContentTypes.Contains(image.ContentType) ;
 
