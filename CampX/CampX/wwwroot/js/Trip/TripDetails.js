@@ -285,4 +285,28 @@ $.ajax({
                 }
             })
 
-})           
+})
+
+deleteTripButton = document.getElementById("deleteButton");
+
+deleteTripButton.onclick = () => {
+    let result = confirm("Esti sigur ca vrei sa stergi?");
+    if (result) {
+        deleteTripButton.click()
+    }
+    else {
+        deleteTripButton.href = window.location.href
+    }
+}
+
+finishTripButton = document.getElementById("finishButton");
+
+finishTripButton.onclick = () => {
+    let result = confirm("Esti sigur ca vrei sa finalizezi?");
+    if (result) {
+        finishTripButton.click()
+    }
+    else {
+        finishTripButton.href = window.location.href
+    }
+}

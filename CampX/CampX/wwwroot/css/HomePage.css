@@ -39,9 +39,10 @@
 }
 
 .textLogoImg {
-    height: 175px;
+    height: 400px;
     max-width: 100%;
     z-index: 3;
+    animation: fade-in 1s forwards;
 }
 
 .mottoDiv {
@@ -52,7 +53,6 @@
 
 .hartaRomaniaDiv {
     position: relative;
-    animation: fade-in 1s forwards;
 }
 
 @keyframes slideRight {

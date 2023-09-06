@@ -50,6 +50,11 @@ namespace CampX.BusinessLogic.Implementations.Map.Validations
         private bool IsImageExtensionCorrect(List<IFormFile> images)
         {
             var ok = false;
+            if(images == null)
+            {
+                return true;
+            }
+            
             foreach (var image in images)
             {
 

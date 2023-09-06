@@ -23,8 +23,10 @@
                 <div class="navbar">
                     <div class="logo">
                     <a href="~/Home/Index">
-                    <img id="campXLogo" src="~/Images/icons8-tent-48.png" alt="Tent Logo">
-                        </a>
+                    @*<img id="campXLogo" src="~/Images/icons8-tent-48.png" alt="Tent Logo">*@
+                    <img id="campXLogo"  class="textLogoImg" src="../Images/CampXTextLogo.png" alt="CampXTextLogo">
+                    </a>
+
                     </div>
 
                     <div class="my-account">
@@ -37,8 +39,16 @@
                         }
        
                         <div class="dropdown-content">
-                            <a asp-controller="CamperAccount" asp-action="Login">Login</a>
-                            <div class="divider"></div>
+                            @if(currentCamper.Id == 0)
+                            {                       
+                                <a asp-controller="CamperAccount" asp-action="Login">Login</a>
+                            }
+                            else
+                            {
+                        
+                                <a asp-controller="CamperAccount" asp-action="Login">Alt Cont</a>
+                            }
+                    <div class="divider"></div>
                             <a asp-controller="CamperAccount" asp-action="Register">Register</a>
                             
                             @if (currentCamper.IsAuthenticated == true)

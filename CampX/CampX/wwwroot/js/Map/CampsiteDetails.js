@@ -198,7 +198,7 @@ var deleteCampsiteButton = document.getElementById("deleteCampsiteButton")
 
 deleteCampsiteButton.onclick = () => {
     let result = confirm("Esti sigur ca vrei sa stergi?");
-    debugger
+ //   debugger
     if (result) {
         deleteCampsiteButton.click()
     }
