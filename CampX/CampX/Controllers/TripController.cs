@@ -144,6 +144,16 @@ namespace CampX.Controllers
             return Ok(model.Id);
         }
 
+
+        [HttpGet]
+
+        public IActionResult FinishTrip()
+        {
+            var models = Service.GetFinishedTrips();
+
+            return View(models);
+        }
+
         [HttpPost]
 
         public IActionResult FinishTrip(int id)
@@ -157,7 +167,9 @@ namespace CampX.Controllers
                 return RedirectToAction("Error_Unauthorized", "Home");
             }
             Service.FinishTrip(id);
-            return RedirectToAction("ShowTrips", "Trip");
+
+            return RedirectToAction("FinishTrip");
+            
         }
     }
 }

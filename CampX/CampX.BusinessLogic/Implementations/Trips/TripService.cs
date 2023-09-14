@@ -71,6 +71,8 @@ namespace CampX.BusinessLogic.Implementations.Trips
 
                 trip.Campsites = campsites;
 
+                trip.IsFinished = false;
+
                 trip = uow.Trips.Insert(trip);
 
                 uow.SaveChanges();
@@ -107,7 +109,7 @@ namespace CampX.BusinessLogic.Implementations.Trips
             var trips = UnitOfWork.Trips.Get()
                 .Include(c => c.Campsites)
                 .Include(tc => tc.TripCampers).ThenInclude(tcc => tcc.Camper)
-                .Where(t => t.IsPublic == true)
+                .Where(t => t.IsPublic == true && t.IsFinished == false)
                 .ToList();
             
             var tripModels = new List<ShowTripsModel>();
@@ -338,9 +340,7 @@ namespace CampX.BusinessLogic.Implementations.Trips
             return trip;
         }
         public void FinishTrip(int id)
-        {
-
-           
+        {     
 
             var tripCampers = UnitOfWork.Trips.Get()
                 .Include(tc => tc.TripCampers).ThenInclude(c => c.Camper).ThenInclude(cb => cb.CamperBadges)
@@ -372,14 +372,65 @@ namespace CampX.BusinessLogic.Implementations.Trips
                 }
             }
 
-            var trip = UnitOfWork.Trips.Get()
+            var finishedTrip = UnitOfWork.Trips.Get()
                 .SingleOrDefault(t => t.Id == id);
 
-            UnitOfWork.Trips.Delete(trip);
+            finishedTrip.IsFinished = true;
+
+            UnitOfWork.Trips.Update(finishedTrip);
             UnitOfWork.SaveChanges();
 
-        }
 
+        }
+        public List<ShowTripsModel> GetFinishedTrips()
+        {
+
+            var trips = UnitOfWork.Trips.Get()
+                .Include(c => c.Campsites)
+                .Include(tc => tc.TripCampers).ThenInclude(tcc => tcc.Camper)
+                .Where(t => t.IsFinished == true)
+                .ToList();
+
+            var tripModels = new List<ShowTripsModel>();
+
+
+
+            foreach (var trip in trips)
+            {
+                tripModels.Add(new ShowTripsModel
+                {
+
+                    Id = trip.Id,
+                    Name = trip.Name,
+                    Description = trip.Description,
+                    IsPublic = trip.IsPublic,
+                    Date = trip.Date,
+                    Code = trip.Code,
+                    TripCampers = trip.TripCampers.Select(tc => new TripCamperModel
+                    {
+                        TripId = tc.TripId,
+                        Camper = new CamperModel
+                        {
+                            Id = tc.Camper.Id,
+                            FirstName = tc.Camper.FirstName,
+                            LastName = tc.Camper.LastName,
+                            Email = tc.Camper.Email
+                        },
+                        IsOrganizer = tc.IsOrganizer,
+                    }).ToList(),
+                    Campsites = trip.Campsites.Select(tc => new TripCampsitesModel
+                    {
+                        Id = tc.Id,
+                        Name = tc.Name,
+                        Description = tc.Description,
+                        Difficulty = tc.Difficulty,
+                        Latitude = tc.Latitude,
+                        Longitude = tc.Longitude
+                    }).ToList()
+                });
+            }
+            return tripModels;
+        }
 
         public void EditTrip(ShowTripsModel model)
         {

@@ -322,7 +322,7 @@ finishTripButton.onclick = (event) => {
             datatype: "json",
         })
             .done(() => {
-                window.location.href = `/Trip/ShowTrips`;
+                //window.location.href = `/Trip/FinishTrip`;
             })
     }
     else {

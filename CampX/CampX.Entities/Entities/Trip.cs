@@ -12,6 +12,8 @@ public partial class Trip
     public string? Description { get; set; }
 
     public bool IsPublic { get; set; }
+    public bool IsFinished { get; set; }
+
 
     public DateTime? Date { get; set; }
 

@@ -255,6 +255,8 @@ public partial class CampXContext : DbContext
             entity.Property(e => e.Date).HasColumnType("date");
             entity.Property(e => e.Description).HasMaxLength(500);
             entity.Property(e => e.IsPublic).HasColumnName("isPublic");
+            entity.Property(e => e.IsFinished).HasColumnName("IsFinished");
+
             entity.Property(e => e.Name).HasMaxLength(100);
 
             entity.HasMany(d => d.Campsites).WithMany(p => p.Trips)

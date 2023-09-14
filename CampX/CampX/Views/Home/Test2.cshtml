@@ -9,9 +9,9 @@
 <script type="text/javascript" defer src="~/js/ShowMoreLogic.js"></script>
 <div id="showTripsDiv">
 
-    <div id ="titleDiv" >Tripurile publice</div>
-    <div class = "AddSearchDiv">
-      @*  <a id="addTrip" asp-action="ShowMap">Creaza un trip nou</a>*@
+    <div id="titleDiv">Tripurile publice</div>
+    <div class="AddSearchDiv">
+        @*  <a id="addTrip" asp-action="ShowMap">Creaza un trip nou</a>*@
         <button id="addTrip" onclick="window.location.href='../Trip/ShowMap'" type="button" class="btn btn-dark">Creaza un trip nou </button>
         <div class="input-group">
             <input id="searchInput" type="search" placeholder="Pentru a cauta un trip privat, introdu aici codul de 6 litere!" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
@@ -44,12 +44,13 @@
             </tr>
         </thead>
         <tbody>
-    @foreach (var item in  Model) {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td style = "width: 400px;">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td style="width: 400px;">
                         @if (item.Description != null)
                         {
                             <div class="ShowMoreDiv">
@@ -66,53 +67,54 @@
                         {
                             <div>Nu a fost adaugata o descriere!</div>
                         }
-                </td>
-                <td>
-                    @if (item.Date != null)
-                    {
-                            @String.Format("{0:d}", item.Date);
-                    }
-                    else
-                    {
-                        <text>Nu a fost setat o data pentru acesta excursie</text>
-                    }
-                </td>
-                <td >
+                    </td>
+                    <td>
+                        @if (item.Date != null)
+                        {
+                            @String.Format("{0:d}", item.Date)
+                            ;
+                        }
+                        else
+                        {
+                            <text>Nu a fost setat o data pentru acesta excursie</text>
+                        }
+                    </td>
+                    <td>
                         <div class="ShowMoreDiv" id="campsites">
                             @foreach (var campsite in item.Campsites)
                             {
 
-                            <a asp-controller="Map" asp-action="CampsiteDetails" asp-route-id=@campsite.Id> 
-                                @campsite.Name
-                            </a>
+                                <a asp-controller="Map" asp-action="CampsiteDetails" asp-route-id=@campsite.Id>
+                                    @campsite.Name
+                                </a>
                             }
                         </div>
-                            @if (item.Campsites.Count > 2)
-                            {
-                                <div class="showMore">ShowMore</div>
-                            }
-                </td>
-                <td id="organizatorTD">
-                        @foreach(var camper in item.TripCampers)
+                        @if (item.Campsites.Count > 2)
+                        {
+                            <div class="showMore">ShowMore</div>
+                        }
+                    </td>
+                    <td id="organizatorTD">
+                        @foreach (var camper in item.TripCampers)
                         {
                             @if (camper.IsOrganizer)
                             {
-                                 <span>
+                                <span>
                                     <a href="~/CamperAccount/CamperProfile/@camper.Camper.Id">
-                                          @camper.Camper.FirstName
-                                          @camper.Camper.LastName
+                                        @camper.Camper.FirstName
+                                        @camper.Camper.LastName
                                         este organizator!
-                                      </a>
-                                       
-                                 </span>
+                                    </a>
+
+                                </span>
                             }
                         }
-                </td>
-                <td >
+                    </td>
+                    <td>
                         <a asp-controller="Trip" asp-action="TripDetails" asp-route-id=@item.Id> Detalii</a>
-                </td>
-            </tr>
-    }
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>
