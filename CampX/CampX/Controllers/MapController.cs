@@ -103,6 +103,7 @@ namespace CampX.Controllers
         public IActionResult Delete(int id)
         {
             if (!Service.IdExists(id))
+
             {
                 return View("Error_NotFound");
             }
