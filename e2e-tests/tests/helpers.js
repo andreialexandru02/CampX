@@ -10,6 +10,15 @@ const user = {
   name: 'Alex'
 }
 
+const registerUser = {
+  email: 'register1@email.com',  //must be changed for each test
+  password: 'Registertest1!',
+  confirmPassword: 'Registertest1!',
+  firstName: 'Test',
+  lastName: 'Register',
+  birthDay: '2000-01-01',
+}
+
 async function loginUser(page, email=user.email, password=user.password) {
   await page.goto(`${urls.base}/CamperAccount/Login`);
 
@@ -30,4 +39,4 @@ async function logoutUser(page) {
   await expect(page.getByText('Autentifica-te')).toBeVisible();
 }
 
-export { urls, user, loginUser, logoutUser};
+export { urls, user, registerUser, loginUser, logoutUser};
