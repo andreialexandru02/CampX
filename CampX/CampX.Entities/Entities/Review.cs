@@ -18,4 +18,6 @@ public partial class Review
     public virtual Camper Camper { get; set; } = null!;
 
     public virtual Campsite Campsite { get; set; } = null!;
+
+    public bool Pending { get; set; }
 }

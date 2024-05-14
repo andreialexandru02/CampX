@@ -29,7 +29,7 @@ namespace CampX.BusinessLogic.Implementations.Reviews
         public List<ReviewModel> ShowReviews(int id)
         {
             var reviews = UnitOfWork.Reviews.Get()
-            .Where(r => r.CampsiteId == id)
+            .Where(r => r.CampsiteId == id && r.Pending == true)
             .Select(r => new ReviewModel
             {
                 Id = r.Id
@@ -59,6 +59,8 @@ namespace CampX.BusinessLogic.Implementations.Reviews
             ReviewValidator.Validate(model).ThenThrow();
 
             var review = Mapper.Map<AddReviewModel, Review>(model);
+
+            review.Pending = false;
 
             UnitOfWork.Reviews.Insert(review);
 
