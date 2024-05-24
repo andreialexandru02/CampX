@@ -1,4 +1,5 @@
 ﻿using CampX.BusinessLogic.Implementations.Map;
+using CampX.BusinessLogic.Implementations.Requests.Models;
 using CampX.BusinessLogic.Implementations.Reviews;
 using CampX.BusinessLogic.Implementations.Reviews.Models;
 using CampX.Code.Base;
@@ -36,7 +37,7 @@ namespace CampX.Controllers
         //}
 
         [HttpPost]
-         
+
         public IActionResult DeleteReview(DeleteReviewModel model)
         {
             if (!Service.CheckReviewOwner(model.Id))
@@ -64,8 +65,36 @@ namespace CampX.Controllers
                 return RedirectToAction("Error_Unauthorized", "Home");
             }
             Service.EditReview(model);
-;           
+            ;
             return RedirectToAction("CampsiteDetails", "Map", new { id = model.CampsiteId });
         }
+        [HttpGet]
+        [Authorize(Policy = "RequireModeratorRole")]
+        [Authorize(Policy = "RequireAdministratorRole")]
+
+
+        public IActionResult ShowPendingReviews()
+        {
+
+            var model = Service.ShowPendingReviews();
+            return View(model);
+
+        }
+        [HttpPost]
+
+        public IActionResult AcceptPendingReview(int id)
+        {
+            Service.AcceptPendingReview(id);
+
+            return Ok();
+        }
+        [HttpPost]
+        public IActionResult DeletePendingReview(int id)
+        {
+            Service.DeleteReview(id);
+
+            return Ok();
+        }
+
     }
 }

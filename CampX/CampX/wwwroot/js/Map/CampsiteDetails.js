@@ -1,11 +1,11 @@
-
+﻿
 var latitude = document.getElementById('Lat')
 var longitude = document.getElementById('Lng')
 
 var map = L.map('map').setView([latitude.innerText, longitude.innerText],12);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 20,
-    attribution: '� OpenStreetMap'
+    attribution: '© OpenStreetMap'
 }).addTo(map);
 var currentCamper = document.getElementById('currentCamper')
 const ShowReviews = (id) => {
@@ -45,11 +45,13 @@ const ShowReviews = (id) => {
                     reviewButton.onclick = () => {                      
                         if (reviewRating.disabled === true || reviewContent.value === '') {
 
+                            span.style.color = 'red'
                             span.innerText = 'Review incomplet'
                             span.style.display = 'block'
                         }
                         else if (reviewContent.value.length > 500) {
-                            span.innerText="Review prea lung!"
+                            span.style.color = 'black'
+                            span.innerText = "Review prea lung!"
                             span.style.display = 'block'
                         }
                         else {
@@ -65,7 +67,14 @@ const ShowReviews = (id) => {
                                 }
                             })
                                 .done(() => {
-                                    window.location.reload()
+                                    span.innerText = 'Review trimis către aprobare'
+                                    span.style.display = 'block'
+                                    span.style.color = 'black'
+                                    setTimeout(() => {
+                                        reviewInput.style.display = "none";
+                                        plusIcon.className = 'fas fa-plus'
+                                        span.style.display = 'none'
+                                    },1000)
                                 })
                         }
 

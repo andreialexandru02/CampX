@@ -11,103 +11,110 @@
     <link rel="stylesheet" href="~/CampX.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Layout.css" type="text/css" />
     <!--Js  -->
-         <script type="text/javascript" defer src="~/js/Layout.js></script>
-    
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script type="text/javascript" defer src="~/js/Layout.js></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body class="@ViewData["Class"]">
     <header>
-                <div class="navbar">
-                    <div class="logo">
-                    <a href="~/Home/Index">
+        <div class="navbar">
+            <div class="logo">
+                <a href="~/Home/Index">
                     @*<img id="campXLogo" src="~/Images/icons8-tent-48.png" alt="Tent Logo">*@
-                    <img id="campXLogo"  class="textLogoImg" src="~/Images/CampXTextLogo.png" alt="CampXTextLogo">
-                    </a>
+                    <img id="campXLogo" class="textLogoImg" src="~/Images/CampXTextLogo.png" alt="CampXTextLogo">
+                </a>
 
-                    </div>
+            </div>
 
-                    <div class="my-account">
-                        @if(currentCamper.IsAuthenticated) 
-                        {
-                        <text>@currentCamper.FirstName</text>
+            <div class="my-account">
+                @if (currentCamper.IsAuthenticated)
+                {
+                    <text>@currentCamper.FirstName</text>
                 }
-                        else{
-                            <text> Autentifica-te  </text>
-                        }
-       
-                        <div class="dropdown-content">
-                            @if(currentCamper.Id == 0)
-                            {                       
-                                <a asp-controller="CamperAccount" asp-action="Login">Login</a>
-                            }
-                            else
-                            {
-                        
-                                <a asp-controller="CamperAccount" asp-action="Login">Alt Cont</a>
-                            }
+                else
+                {
+                    <text> Autentifica-te  </text>
+                }
+
+                <div class="dropdown-content">
+                    @if (currentCamper.Id == 0)
+                    {
+                        <a asp-controller="CamperAccount" asp-action="Login">Login</a>
+                    }
+                    else
+                    {
+
+                        <a asp-controller="CamperAccount" asp-action="Login">Alt Cont</a>
+                    }
                     <div class="divider"></div>
-                            <a asp-controller="CamperAccount" asp-action="Register">Register</a>
-                            
-                            @if (currentCamper.IsAuthenticated == true)
-                            {
-                                <div class="divider"></div>
-                                <a asp-controller="Request" asp-action="ShowRequests">Cereri active</a>
-                                <div class="divider"></div>
-                                <a asp-controller="CamperAccount" asp-action="CamperProfile" asp-route-id=@($"{currentCamper.Id}")>Profilul meu</a>
-                                <div class="divider"></div>
-                                <form method="post" asp-controller="CamperAccount" asp-action="Logout">
-                                    <button type="submit">Logout</button>
-                                </form>
-                            }
-                            
-                        </div>
-                    </div>
+                    <a asp-controller="CamperAccount" asp-action="Register">Register</a>
+
+                    @if (currentCamper.IsAuthenticated == true)
+                    {
+                        <div class="divider"></div>
+                        <a asp-controller="Request" asp-action="ShowRequests">Cereri active</a>
+                        @if (currentCamper.Roles.Contains("Admin") || currentCamper.Roles.Contains("Moderator"))
+                        {
+                            <div class="divider"></div>                          
+                            <a asp-controller="Review" asp-action="ShowPendingReviews" >Review-uri în așteptare</a>
+                        }
+                      
+                        <div class="divider"></div>
+                        <a asp-controller="CamperAccount" asp-action="CamperProfile" asp-route-id=@($"{currentCamper.Id}")>Profilul meu</a>
+                        <div class="divider"></div>
+                        <form method="post" asp-controller="CamperAccount" asp-action="Logout">
+                            <button type="submit">Logout</button>
+                        </form>
+                    }
 
                 </div>
-                @*<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">                     
-                        <li class="nav-item">
-                                <a href="~/CamperAccount/Login">Login</a>
-                           </li>
-                           <li class="nav-item">
-                                <a href="~/CamperAccount/Register">Register</a>
-                           </li>
-                           <li class="nav-item">
-                                <a  href="~/Map/ShowMap">Map</a>
-                           </li>
-                           <li class="nav-item">
-                                <a href="~/Trip/ShowTrips">TripsList</a>
-                           </li>   
-                        @if (currentCamper.IsAuthenticated == true)
-                        {
-                            <li  class="nav-item">
-                                <a href="~/CamperAccount/CamperProfile/2">ProfileCEo</a>
-                            </li>
+            </div>
 
-                            <li class="nav-item">
-                                <a href="~/Trip/ShowMap">TripsMap</a>
-                            </li>
+        </div>
+        @*<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+        <ul class="navbar-nav flex-grow-1">
+        <li class="nav-item">
+        <a href="~/CamperAccount/Login">Login</a>
+        </li>
+        <li class="nav-item">
+        <a href="~/CamperAccount/Register">Register</a>
+        </li>
+        <li class="nav-item">
+        <a  href="~/Map/ShowMap">Map</a>
+        </li>
+        <li class="nav-item">
+        <a href="~/Trip/ShowTrips">TripsList</a>
+        </li>
+        @if (currentCamper.IsAuthenticated == true)
+        {
+        <li  class="nav-item">
+        <a href="~/CamperAccount/CamperProfile/2">ProfileCEo</a>
+        </li>
 
-                            <l1 class ="nav-item">
-                                <a href="~/Trip/TripDetails/54">TripDetails54</a>
-                            </l1>
-                            <l1 class="nav-item">
-                                <a href="~/Request/ShowRequests">My Requests</a>
-                            </l1>
-                            <l1 class="nav-item">
-                                <a href="~/Trip/ShowCurrentCamperTrips">myTrips</a>
-                            </l1>
-                            <l1 class="nav-item">
-                                <a href="~/Request/ShowPendingRequests">Pending Requests</a>
-                            </l1>
-                            @*<l1 class="nav-item">
-                                <a href="~/CamperAccount/EditCamper/2">EditCamper2</a>
-                            </l1>*
-                    </ul>
-                </div>*@
+        <li class="nav-item">
+        <a href="~/Trip/ShowMap">TripsMap</a>
+        </li>
+
+        <l1 class ="nav-item">
+        <a href="~/Trip/TripDetails/54">TripDetails54</a>
+        </l1>
+        <l1 class="nav-item">
+        <a href="~/Request/ShowRequests">My Requests</a>
+        </l1>
+        <l1 class="nav-item">
+        <a href="~/Trip/ShowCurrentCamperTrips">myTrips</a>
+        </l1>
+        <l1 class="nav-item">
+        <a href="~/Request/ShowPendingRequests">Pending Requests</a>
+        </l1>
+        @*<l1 class="nav-item">
+        <a href="~/CamperAccount/EditCamper/2">EditCamper2</a>
+        </l1>*
+        </ul>
+        </div>*@
 
     </header>
     <div class="container">
@@ -117,9 +124,9 @@
     </div>
 
     @*<footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - CampX - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+    <div class="container">
+    &copy; 2023 - CampX - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </div>
     </footer>*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

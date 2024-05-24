@@ -1,0 +1,69 @@
+﻿body {
+    background-image: url('https://localhost:44364/Images/ShowTripsBG.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.acceptDecline:hover {
+    cursor: pointer
+}
+
+#iconsDiv {
+    width: fit-content;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+    #iconsDiv a {
+        width: fit-content;
+    }
+
+#noReviews {
+    font-size: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+    #noReviews a {
+        background-color: #9F8354;
+        color: #FFEECB;
+        width: fit-content;
+        font-size: 30px;
+    }
+
+#reviewsDiv {
+    background: rgba(255,238,203, 0.85);
+    padding: 3px 40px 5px 40px;
+    color: #005249;
+    font-size: 20px;
+}
+
+table {
+    color: #005249;
+}
+
+#titleDiv {
+    width: 100%;
+    display: grid;
+    display: flex;
+    justify-content: space-between;
+}
+
+    #titleDiv a {
+        background-color: #9F8354;
+        color: #FFEECB;
+        width: fit-content;
+        font-size: 30px;
+    }
+
+        #titleDiv a:hover {
+            background-color: #7a5d2c;
+        }
+
+    #titleDiv h1 {
+        width: fit-content;
+    }

@@ -1,7 +1,3 @@
-/*
-
-
-*/
 function AcceptDelete(camperId, tripId,method) {
 
     $.ajax({

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<CampX.BusinessLogic.Implementations.Reviews.Models.PendingReviewModel>
+@{
+    ViewData["Title"] = "ShowReviews";
+}
+
+<link rel="stylesheet" href="~/css/ShowMoreStyling.css" type="text/css" />
+<script type="text/javascript" defer src="~/js/ShowMoreLogic.js"></script>
+<link rel="stylesheet" href="~/css/Review/ShowReviews.css" type="text/css" />
+<script type="text/javascript" defer src="~/js/Review/AcceptDeleteReview.js"></script>
+
+
+<div id="reviewsDiv">
+
+    @if (Model.Count() == 0)
+    {
+            <div id="noReviews"> Nu aveti niciun review nou! </div>  
+    }
+    else
+    {
+        <div id="titleDiv">
+            <h1>Review-uri în așteptare:</h1>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Rating
+                    </th>
+                    <th>
+                        Content
+                    </th>
+                    <th>
+                        Campsite
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="reviewTd">
+                            @Html.DisplayFor(modelItem => item.Rating)
+                        </td>
+                        <td class="reviewTd">
+                            @Html.DisplayFor(modelItem => item.Content)
+                        </td>                     
+                        <td class="reviewTd">
+                            <a asp-controller="Map" asp-action="CampsiteDetails" asp-route-id=@item.Campsite.Id>
+                                @item.Campsite.Name
+                            </a>
+                        </td>
+                        
+                        <td>
+                            <div id="iconsDiv">
+                                <a class="acceptDecline" onclick="AcceptDelete('@item.Id', 'AcceptPendingReview')">&#x2714;</a>
+                                <a class="acceptDecline" onclick="AcceptDelete('@item.Id', 'DeletePendingReview')">&#10006;</a>
+                            </div>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
