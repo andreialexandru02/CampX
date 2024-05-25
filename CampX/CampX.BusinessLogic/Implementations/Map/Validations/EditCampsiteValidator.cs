@@ -18,21 +18,21 @@ namespace CampX.BusinessLogic.Implementations.Map.Validations
         {
             
             RuleFor(c => c.Name)
-                .NotEmpty().WithMessage("Camp obligatoriu!")
+                .NotEmpty().WithMessage("Câmp obligatoriu!")
                 .Must(NameTooLong)
                 .WithMessage("Numele este prea lung");
             RuleFor(c => c.Description)
                 .Must(DescriptionTooLong)
-                .WithMessage("Descrierea este prea lunga!");
+                .WithMessage("Descrierea este prea lungă!");
             RuleFor(c => c.Difficulty)
-                .NotEmpty().WithMessage("Camp obligatoriu!");
+                .NotEmpty().WithMessage("Câmp obligatoriu!");
             RuleFor(c => c.Latitude)
-                .NotEmpty().WithMessage("Camp obligatoriu!");
+                .NotEmpty().WithMessage("Câmp obligatoriu!");
             RuleFor(c => c.Longitude)
-                .NotEmpty().WithMessage("Camp obligatoriu!");
+                .NotEmpty().WithMessage("Câmp obligatoriu!");
             RuleFor(c => c.Images)
                 .Must(IsImageExtensionCorrect)
-                .WithMessage("Format invalid, selecteaza poze!");
+                .WithMessage("Format invalid, selectează poze!");
 
 
 

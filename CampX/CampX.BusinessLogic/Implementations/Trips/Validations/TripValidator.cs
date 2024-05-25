@@ -15,14 +15,14 @@ namespace CampX.BusinessLogic.Implementations.Trips.Validations
         public TripValidator(UnitOfWork unitOfWork)
         {
             RuleFor(c => c.Name)
-                .NotEmpty().WithMessage("Camp obligatoriu!")
+                .NotEmpty().WithMessage("Câmp obligatoriu!")
                 .Must(NameTooLong)
                 .WithMessage("Numele este prea lung");
             RuleFor(c => c.Description)
                 .Must(DescriptionTooLong)
                 .WithMessage("Descrierea este prea lunga!");
             RuleFor(c => c.IsPublic)
-                .NotEmpty().WithMessage("Camp obligatoriu!");
+                .NotEmpty().WithMessage("Câmp obligatoriu!");
         }
         public bool NameTooLong(string name)
         {

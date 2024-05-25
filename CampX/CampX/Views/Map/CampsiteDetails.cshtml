@@ -76,6 +76,20 @@
 
         </div>
     </div>
+    <div  class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+      <div  class="modal-dialog" role="document">
+        <div class="modal-content" style="background-color: rgba(255, 238, 203); border-radius: 10px">
+          <div class="modal-header">
+            <h5 class="modal-title" id="confirmDeleteModalLabel">Sunteți sigur că vreți să stergeți acest campsite?</h5>  
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelDeleteButton">Anulează</button>
+            <button type="button" class="btn btn-danger" id="confirmDeleteButton">Șterge</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="dificultyRatingDiv">
     
         @if(Model.CamperId == currentCamper.Id || currentCamper.Roles.Contains("Admin"))

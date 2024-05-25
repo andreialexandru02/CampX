@@ -16,12 +16,12 @@ namespace CampX.BusinessLogic.Implementations.Reviews.Validations
         {
             _unitOfWork = unitOfWork;
             RuleFor(r => r.Rating)
-                .NotEmpty().WithMessage("Camp obligatoriu!");
+                .NotEmpty().WithMessage("Câmp obligatoriu!");
             RuleFor(r => r.CampsiteId)
-                .NotEmpty().WithMessage("Camp obligatoriu!");
+                .NotEmpty().WithMessage("Câmp obligatoriu!");
             RuleFor(r => r.Content)
                 .Must(DescriptionTooLong)
-                .WithMessage("Continutul este prea lung!");
+                .WithMessage("Conținutul este prea lung!");
         }
         public bool DescriptionTooLong(string description)
         {

@@ -16,12 +16,12 @@ namespace CampX.BusinessLogic.Implementations.Requests.Validations
         {
 
             RuleFor(c => c.TripId)
-                .NotEmpty().WithMessage("Camp obligatoriu!");
+                .NotEmpty().WithMessage("Câmp obligatoriu!");
             RuleFor(c => c.CamperId)
-               .NotEmpty().WithMessage("Camp obligatoriu!");
+               .NotEmpty().WithMessage("Câmp obligatoriu!");
             RuleFor(r => r.Description)
                 .Must(DescriptionTooLong)
-                .WithMessage("Continutul este prea lunga!");
+                .WithMessage("Conținutul este prea lunga!");
         }
         public bool DescriptionTooLong(string description)
         {

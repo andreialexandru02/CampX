@@ -45,7 +45,7 @@ namespace CampX.BusinessLogic.Implementations.Reviews
 
             })
             .ToList();
-            // UnitOfWork.SaveChanges();
+           
             return reviews;
         }
         public void DeleteReview(int id)

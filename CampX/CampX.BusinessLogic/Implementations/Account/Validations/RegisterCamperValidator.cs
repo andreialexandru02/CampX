@@ -15,36 +15,35 @@ namespace CampX.BusinessLogic.Implementations.Account
         {
             _unitOfWork = unitOfWork;
             RuleFor(r => r.Email)
-                .NotEmpty().WithMessage("Camp obligatoriu!")
+                .NotEmpty().WithMessage("Câmp obligatoriu!")
                 .Must(NotAlreadyExist)
-                .WithMessage("Exista deja un utilizator cu acest email!")
+                .WithMessage("Există deja un utilizator cu acest email!")
                 //.EmailAddress(FluentValidation.Validators.EmailValidationMode.AspNetCoreCompatible)
                 .Must(IsValidEmail)
                 .WithMessage("Formatul email-ului nu este corect!")
                 .Must(InputTooLong)
                 .WithMessage("Email-ul este prea lung");
             RuleFor(r => r.Password)
-                .NotEmpty().WithMessage("Camp obligatoriu!")
+                .NotEmpty().WithMessage("Câmp obligatoriu!")
                 .Must(PasswordTooShort)
-                .WithMessage("Parola trebuie sa aiba mai mult de 10 caractere");
+                .WithMessage("Parola trebuie să aibă mai mult de 10 caractere");
             RuleFor(r => r.FirstName)
-                .NotEmpty().WithMessage("Camp obligatoriu!")
+                .NotEmpty().WithMessage("Câmp obligatoriu!")
                 .Must(InputTooLong)
                 .WithMessage("Prenumele este prea lung");
             RuleFor(r => r.ConfirmPassword)
-                .NotEmpty().WithMessage("Camp obligatoriu!")
+                .NotEmpty().WithMessage("Câmp obligatoriu!")
                 .Equal(r => r.Password)
                 .WithMessage("Cele 2 parole nu coincid!");
             RuleFor(r => r.LastName)
-                .NotEmpty().WithMessage("Camp obligatoriu!")
+                .NotEmpty().WithMessage("Câmp obligatoriu!")
                 .Must(InputTooLong)
                 .WithMessage("Numele de familie este prea lung");
             RuleFor(r => r.BirthDay)
-                .NotEmpty().WithMessage("Camp obligatoriu!")
-                .Must(BeValidBirthDate).WithMessage("Camperii trebuie sa aiba minim 13 ani!");
+                .NotEmpty().WithMessage("Câmp obligatoriu!")
+                .Must(BeValidBirthDate).WithMessage("Camperii trebuie să aibă minim 13 ani!");
             
         }
-
         public bool NotAlreadyExist(string email)
         {
             var camper = _unitOfWork.Campers.Get()

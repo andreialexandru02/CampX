@@ -198,33 +198,36 @@ const ShowReviews = (id) => {
             
 }
 marker = L.marker([latitude.innerText, longitude.innerText], { icon: tentIcon }).addTo(map)
-
 var url = window.location.href.split('/');
 var id = url[url.length - 1];
-ShowReviews(id)
-var deleteCampsiteButton = document.getElementById("deleteCampsiteButton")
+ShowReviews(id);
 
+var deleteCampsiteButton = document.getElementById("deleteCampsiteButton");
 var alreadyClicked = false;
+
 deleteCampsiteButton.onclick = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     if (!alreadyClicked) {
         alreadyClicked = true;
-        let result = confirm("Esti sigur ca vrei sa stergi?");
-        console.log(result)
-        if (result) {
-            $.ajax({
-                type: "post",
-                url: `/Map/DeleteCampsite/${id}`,
-                datatype: "json",
-            })
-                .done(() => {
-                    window.location.href = `/Map/ShowMap`;
-                })
-
-         
-        }
-        else {
-            deleteCampsiteButton.href = window.location.href
-        }
+        $('#confirmDeleteModal').modal('show');
     }
 }
+
+document.getElementById('confirmDeleteButton').onclick = () => {
+    $.ajax({
+        type: "post",
+        url: `/Map/DeleteCampsite/${id}`,
+        datatype: "json",
+    })
+        .done(() => {
+            window.location.href = `/Map/ShowMap`;
+        });
+};
+document.getElementById("cancelDeleteButton").onclick = () => {
+    $('#confirmDeleteModal').modal('hide');
+}
+
+// Reset alreadyClicked flag when the modal is hidden
+$('#confirmDeleteModal').on('hidden.bs.modal', function () {
+    alreadyClicked = false;
+});

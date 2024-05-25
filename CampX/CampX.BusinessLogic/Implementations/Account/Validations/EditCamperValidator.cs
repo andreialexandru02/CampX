@@ -21,23 +21,23 @@ namespace CampX.BusinessLogic.Implementations.Account.Validations
             _unitOfWork = unitOfWork;
             _currentCamper = currentCamper;
             RuleFor(r => r.Email)
-                .NotEmpty().WithMessage("Camp obligatoriu!")
+                .NotEmpty().WithMessage("Câmp obligatoriu!")
                 .Must(NotAlreadyExist)
                 .WithMessage("Exista deja un utilizator cu acest email!")
                 .Must(InputTooLong)
                 .WithMessage("Email-ul este prea lung")
                 .EmailAddress(FluentValidation.Validators.EmailValidationMode.AspNetCoreCompatible);
             RuleFor(r => r.FirstName)
-                .NotEmpty().WithMessage("Camp obligatoriu!")
+                .NotEmpty().WithMessage("Câmp obligatoriu!")
                 .Must(InputTooLong)
                 .WithMessage("Prenumele este prea lung");
             RuleFor(r => r.LastName)
-                .NotEmpty().WithMessage("Camp obligatoriu!")
+                .NotEmpty().WithMessage("Câmp obligatoriu!")
                 .Must(InputTooLong)
                 .WithMessage("Numele de familie este prea lung");
             RuleFor(r => r.BirthDay)
-                .NotEmpty().WithMessage("Camp obligatoriu!")
-                .Must(BeValidBirthDate).WithMessage("Camperii trebuie sa aiba minim 13 ani!");
+                .NotEmpty().WithMessage("Câmp obligatoriu!")
+                .Must(BeValidBirthDate).WithMessage("Camperii trebuie sa aibă minim 13 ani!");
 
         }
 

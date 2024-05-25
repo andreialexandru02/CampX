@@ -12,6 +12,7 @@ using CampX.Common.Extensions;
 using CampX.Common.ViewModels;
 using CampX.DataAccess;
 using CampX.Entities;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -28,11 +29,13 @@ namespace CampX.BusinessLogic.Implementations.Trips
     {
 
         private readonly TripValidator TripValidator;
+        private readonly EditTripValidator EditTripValidator;
 
         public TripService(ServiceDependencies dependencies)
             : base(dependencies)
         {
             this.TripValidator = new TripValidator(UnitOfWork);
+            this.EditTripValidator = new EditTripValidator(UnitOfWork);
         }
         public List<TripCampsiteModel> DisplayCampsites()
         {
@@ -58,7 +61,7 @@ namespace CampX.BusinessLogic.Implementations.Trips
             ExecuteInTransaction(uow =>
             {
             
-               // TripValidator.Validate(model).ThenThrow();
+               TripValidator.Validate(model).ThenThrow();
 
                 var trip = Mapper.Map<AddTripModel, Trip>(model);
 
@@ -434,7 +437,7 @@ namespace CampX.BusinessLogic.Implementations.Trips
 
         public void EditTrip(ShowTripsModel model)
         {
-
+            EditTripValidator.Validate(model).ThenThrow();
             var trip = UnitOfWork.Trips.Get()
                 .Include(n => n.Nights)
                 .Include(c => c.Campsites)

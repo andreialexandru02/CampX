@@ -15,10 +15,10 @@ namespace CampX.BusinessLogic.Implementations.Account.Validations
         public LoginValidator(UnitOfWork unitOfWork)
         {
             RuleFor(r => r.Email)
-                .NotEmpty().WithMessage("Camp obligatoriu!")
+                .NotEmpty().WithMessage("Câmp obligatoriu!")
                 .EmailAddress(FluentValidation.Validators.EmailValidationMode.AspNetCoreCompatible);
             RuleFor(r => r.Password)
-                .NotEmpty().WithMessage("Camp obligatoriu!");
+                .NotEmpty().WithMessage("Câmp obligatoriu!");
         }    
 
     }

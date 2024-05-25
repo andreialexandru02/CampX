@@ -19,7 +19,7 @@ namespace CampX.BusinessLogic.Implementations.Notes.Validations
         
             RuleFor(c => c.Content)
                 .Must(DescriptionTooLong)
-                .WithMessage("Continut este prea lung!");
+                .WithMessage("Conținutul este prea lung!");
             
 
         }
