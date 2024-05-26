@@ -288,44 +288,62 @@ $.ajax({
 })
 
 
-
 deleteTripButton = document.getElementById("deleteButton");
+var alreadyClicked = false;
+
 deleteTripButton.onclick = (event) => {
-    event.preventDefault()
-
-    let result = confirm("Esti sigur ca vrei sa stergi?");
-    console.log(result)
-    if (result) {
-        $.ajax({
-            type: "post",
-            url: `/Trip/DeleteTrip/${id}`,
-            datatype: "json",
-        })
-            .done(() => {
-                window.location.href = `/Trip/ShowTrips`;
-            })
-    }
-    else {
-        deleteTripButton.href = window.location.href
+    event.preventDefault();
+    if (!alreadyClicked) {
+        alreadyClicked = true;
+        $('#confirmDeleteModal').modal('show');
     }
 }
+
+document.getElementById('confirmDeleteButton').onclick = () => {
+    $.ajax({
+        type: "post",
+        url: `/Trip/DeleteTrip/${id}`,
+        datatype: "json",
+    })
+        .done(() => {
+            window.location.href = `/Trip/ShowTrips`;
+        });
+};
+document.getElementById("cancelDeleteButton").onclick = () => {
+    $('#confirmDeleteModal').modal('hide');
+}
+
+$('#confirmDeleteModal').on('hidden.bs.modal', function () {
+    alreadyClicked = false;
+});
+
+
 finishTripButton = document.getElementById("finishButton");
-finishTripButton.onclick = (event) => {
-    event.preventDefault()
+var alreadyClicked = false;
 
-    let result = confirm("Esti sigur ca vrei sa finalizezi?");
-    console.log(result)
-    if (result) {
-        $.ajax({
-            type: "post",
-            url: `/Trip/FinishTrip/${id}`,
-            datatype: "json",
-        })
-            .done(() => {
-                //window.location.href = `/Trip/FinishTrip`;
-            })
-    }
-    else {
-        finishTripButton.href = window.location.href
+finishTripButton.onclick = (event) => {
+    event.preventDefault();
+    if (!alreadyClicked) {
+        alreadyClicked = true;
+        $('#confirmFinalizeModal').modal('show');
     }
 }
+
+document.getElementById('confirmFinalizeButton').onclick = () => {
+    $.ajax({
+        type: "post",
+        url: `/Trip/FinishTrip/${id}`,
+        datatype: "json",
+    })
+        .done(() => {
+            window.location.href = `/Trip/FinishTrip`;
+        });
+};
+document.getElementById("cancelFinalizeButton").onclick = () => {
+    $('#confirmFinalizeModal').modal('hide');
+}
+
+$('#confirmFinalizeModal').on('hidden.bs.modal', function () {
+    alreadyClicked = false;
+});
+

@@ -391,7 +391,7 @@ namespace CampX.BusinessLogic.Implementations.Trips
             var trips = UnitOfWork.Trips.Get()
                 .Include(c => c.Campsites)
                 .Include(tc => tc.TripCampers).ThenInclude(tcc => tcc.Camper)
-                .Where(t => t.IsFinished == true)
+                .Where(t => t.IsFinished == true && t.TripCampers.Any(tc => tc.Camper.Id == CurrentCamper.Id))
                 .ToList();
 
             var tripModels = new List<ShowTripsModel>();
