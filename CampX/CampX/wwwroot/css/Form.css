@@ -1,4 +1,4 @@
-﻿
+
 body {
     background-image: url('https://localhost:44364/Images/ShowTripsBG.jpg');
     background-size: cover;
@@ -33,4 +33,5 @@ body {
     margin-top: 10px;
     margin-bottom: 10px;
     border: none;
+  
 }

@@ -5,10 +5,10 @@
         $ShowMoreDiv.toggleClass("expanded");
         console.log($(this).prev(".ShowMoreDiv"))
         if ($ShowMoreDiv.hasClass("expanded")) {
-            $(this).text("Show Less");
+            $(this).text("Arată mai puțin");
             $("#ShowMoreDiv").addClass("expanded");
         } else {
-            $(this).text("Show More");
+            $(this).text("Arată mai mult");
             $("#ShowMoreDiv").removeClass("expanded");
         }
     });

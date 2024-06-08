@@ -5,7 +5,7 @@
 }
 
 @*<a href="~/Map/AddCampsite">Adauga Campsite</a>*@
-<button id="addCampsite" onclick="window.location.href='../Map/AddCampsite'" type="button" class="btn btn-dark">Creaza un campsite nou</button>
+<button id="addCampsite" onclick="window.location.href='../Map/AddCampsite'" type="button" class="btn btn-dark">Creză un nou loc de campare</button>
 <script type="text/javascript" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""></script>
@@ -29,13 +29,13 @@
             <thead>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.Name)
+                        Nume
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Description)
+                        Descriere
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Difficulty)
+                        Dificultate
                     </th>
                     <th>
                         Rating
@@ -58,7 +58,7 @@
                                 </div>
                                 @if (item.Description.Length > 196)
                                 {
-                                    <div class="showMore">ShowMore</div>
+                                    <div class="showMore">Arată mai mult</div>
                                 }
 
                             }

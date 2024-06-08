@@ -43,13 +43,13 @@ namespace CampX.BusinessLogic.Implementations.Account
                 .SingleOrDefault(u => u.Email == email);
 
 
-            if (camper.IsBanned)
-            {
-                return new CurrentCamperDTO { IsBanned = true };
-            }
             if (camper == null || !BCrypt.Net.BCrypt.EnhancedVerify(password, camper.Password))          
             {
                 return new CurrentCamperDTO { IsAuthenticated = false };
+            }
+            if (camper.IsBanned)
+            {
+                return new CurrentCamperDTO { IsBanned = true };
             }
 
             return new CurrentCamperDTO

@@ -1,4 +1,4 @@
-
+﻿
 var fileInput = document.getElementById("ImageData")
 imageContainer = document.getElementById("imgContainer")
 /*images = []*/
@@ -19,7 +19,7 @@ fileInput.addEventListener('change', function () {
 
         const deleteButton = document.createElement('span');
         deleteButton.classList.add('deleteButton');
-        deleteButton.innerText = 'Delete';
+        deleteButton.innerText = 'Șterge';
 
 
         deleteButton.addEventListener('click', function () {

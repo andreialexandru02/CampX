@@ -36,21 +36,16 @@
                 }
                 else
                 {
-                    <text> Autentifica-te  </text>
+                    <text> Vizitator  </text>
                 }
 
                 <div class="dropdown-content">
                     @if (currentCamper.Id == 0)
                     {
                         <a asp-controller="CamperAccount" asp-action="Login">Login</a>
+                        <div class="divider"></div>
+                        <a asp-controller="CamperAccount" asp-action="Register">Înregistrare</a>
                     }
-                    else
-                    {
-
-                        <a asp-controller="CamperAccount" asp-action="Login">Alt Cont</a>
-                    }
-                    <div class="divider"></div>
-                    <a asp-controller="CamperAccount" asp-action="Register">Register</a>
 
                     @if (currentCamper.IsAuthenticated == true)
                     {

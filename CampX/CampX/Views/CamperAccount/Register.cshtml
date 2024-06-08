@@ -12,37 +12,37 @@
             <form asp-action="Register" asp-controller="CamperAccount">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="Email" class="control-label"></label>
+                    <label asp-for="Email" class="control-label">Email</label>
                     <input asp-for="Email" class="form-control" />
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Password" class="control-label"></label>
+                    <label asp-for="Password" class="control-label">Parolă</label>
                     <input asp-for="Password" type="password" class="form-control" />
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="ConfirmPassword" class="control-label"></label>
+                    <label asp-for="ConfirmPassword" class="control-label">Confirmarea parolie</label>
                     <input asp-for="ConfirmPassword" type="password" class="form-control" />
                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="FirstName" class="control-label"></label>
+                    <label asp-for="FirstName" class="control-label">Prenume</label>
                     <input asp-for="FirstName" class="form-control" />
                     <span asp-validation-for="FirstName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="LastName" class="control-label"></label>
+                    <label asp-for="LastName" class="control-label">Nume</label>
                     <input asp-for="LastName" class="form-control" />
                     <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="BirthDay" class="control-label"></label>
+                    <label asp-for="BirthDay" class="control-label">Data nașterii</label>
                     <input asp-for="BirthDay" type="date" value = "01/01/2023" class="form-control" />
                     <span asp-validation-for="BirthDay" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                        <input id="submitButton" type="submit" value="Register" class="btn btn-primary" />
+                        <input id="submitButton" type="submit" value="Înregistrare" class="btn btn-primary" />
                 </div>
             </form>
         </div>

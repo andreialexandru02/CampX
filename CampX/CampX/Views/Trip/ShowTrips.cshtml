@@ -9,12 +9,12 @@
 <script type="text/javascript" defer src="~/js/ShowMoreLogic.js"></script>
 <div id="showTripsDiv">
 
-    <div id ="titleDiv" >Tripurile publice</div>
+    <div id ="titleDiv" >Excursii publice</div>
     <div class = "AddSearchDiv">
       @*  <a id="addTrip" asp-action="ShowMap">Creaza un trip nou</a>*@
-        <button id="addTrip" onclick="window.location.href='../Trip/ShowMap'" type="button" class="btn btn-dark">Creaza un trip nou </button>
+        <button id="addTrip" onclick="window.location.href='../Trip/ShowMap'" type="button" class="btn btn-dark">Excursie nouă </button>
         <div class="input-group">
-            <input id="searchInput" type="search" placeholder="Pentru a cauta un trip privat, introdu aici codul de 6 litere!" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+            <input id="searchInput" type="search" placeholder="Pentru a cauta o excursie privată, introdu aici codul de 6 litere!" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
             <button id="searchButton" type="button" class="btn btn-outline-primary">Cauta</button>
         </div>
         <div id="searchDiv"></div>
@@ -27,13 +27,13 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Name)
+                    Nume
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Description)
+                    Descriere
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Date)
+                    Dată
                 </th>
                 <th>
                     Locuri de campare
@@ -58,13 +58,13 @@
                             </div>
                             @if (item.Description.Length > 50)
                             {
-                                <div class="showMore">ShowMore</div>
+                                <div class="showMore">Arată mai mult</div>
                             }
 
                         }
                         else
                         {
-                            <div>Nu a fost adaugata o descriere!</div>
+                            <div>Nu a fost adaugată o descriere!</div>
                         }
                 </td>
                 <td>
@@ -74,7 +74,7 @@
                     }
                     else
                     {
-                        <text>Nu a fost setat o data pentru acesta excursie</text>
+                        <text>Nu a fost setat o dată pentru acestă excursie</text>
                     }
                 </td>
                 <td >

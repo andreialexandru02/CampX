@@ -22,43 +22,43 @@
 
 <div id="ShowMapDiv">
 
-    <h1>Adauga Campsite</h1>
+    <h1>Adaugă loc de campare</h1>
 
     <div id="map"></div>
-    <div id="instructionsDiv">Alege pe pe hartă locul în care vrei să adaugi un campsite!</div>
+    <div id="instructionsDiv">Alege pe hartă locul în care vrei să adaugi un loc de campare!</div>
     <div id ="formDiv">
         <div class="row">
             <div >
                 <form id="AddCampSiteForm" asp-action="AddCampsite" asp-controller="Map" enctype="multipart/form-data" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
-                        <label asp-for="Name" class="control-label"></label>
+                        <label asp-for="Name" class="control-label">Nume</label>
                         <input asp-for="Name" class="form-control" />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Description" class="control-label"></label>
+                        <label asp-for="Description" class="control-label">Descriere</label>
                         <input asp-for="Description" class="form-control" />
                         <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Difficulty" class="control-label"></label>
+                        <label asp-for="Difficulty" class="control-label">Dificulate</label>
                         <input type="range" min="1" max="5" asp-for="Difficulty" class="form-control" />
                         <span asp-validation-for="Difficulty" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Latitude" class="control-label id = " lat_form""></label>
+                        <label asp-for="Latitude" class="control-label id = " lat_form"">Latitudine</label>
                         <input id="LatInput" asp-for="Latitude" class="form-control" />
                         <span asp-validation-for="Latitude" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Longitude" class="control-label" id="lng_form"></label>
+                        <label asp-for="Longitude" class="control-label" id="lng_form">Longitudine</label>
                         <input id="LngInput" asp-for="Longitude" class="form-control" />
                         <span asp-validation-for="Longitude" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="Images" class="control-label" id="img_form"></label>
+                        <label asp-for="Images" class="control-label" id="img_form">Imagini</label>
                         <input class="form-control" asp-for="Images" type="file" name="Images" id="ImageData" multiple />
                         <span asp-validation-for="Images" class="text-danger"></span>                      
                     </div>
@@ -66,7 +66,7 @@
                     <input asp-for="CamperId" type="hidden" value=@currentCamper.Id>
                     <br></br>
                     <div class="form-group">
-                        <input id="submitButton" type="submit" value="Save" class="btn btn-primary" />
+                        <input id="submitButton" type="submit" value="Salvează" class="btn btn-primary" />
                     </div>
                 </form>
             </div>
