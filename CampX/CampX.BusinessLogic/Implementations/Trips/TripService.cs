@@ -42,18 +42,12 @@ namespace CampX.BusinessLogic.Implementations.Trips
             List<TripCampsiteModel> campsites = UnitOfWork.Campsites.Get()
             .Select(c => new TripCampsiteModel
             {
-                Id = c.Id
-                ,
-                Name = c.Name
-                ,
-                Latitude = c.Latitude
-                ,
+                Id = c.Id,
+                Name = c.Name ,
+                Latitude = c.Latitude,
                 Longitude = c.Longitude,
-
             })
             .ToList();
-
-            UnitOfWork.SaveChanges();
             return campsites;
         }
         public void AddTrip(AddTripModel model)
@@ -69,13 +63,8 @@ namespace CampX.BusinessLogic.Implementations.Trips
                     .Where(c => model.Campsites.Contains(c.Id))
                     .ToList();
 
-                //INSERT IN NIGHTS
-
-
                 trip.Campsites = campsites;
-
                 trip.IsFinished = false;
-
                 trip = uow.Trips.Insert(trip);
 
                 uow.SaveChanges();
@@ -108,7 +97,6 @@ namespace CampX.BusinessLogic.Implementations.Trips
     }
     public List<ShowTripsModel> ShowTrips() {
 
-
             var trips = UnitOfWork.Trips.Get()
                 .Include(c => c.Campsites)
                 .Include(tc => tc.TripCampers).ThenInclude(tcc => tcc.Camper)
@@ -116,14 +104,10 @@ namespace CampX.BusinessLogic.Implementations.Trips
                 .ToList();
             
             var tripModels = new List<ShowTripsModel>();
-
-
-
             foreach (var trip in trips)
             {
                 tripModels.Add(new ShowTripsModel
-                {
-                
+                {              
                     Id = trip.Id,
                     Name =  trip.Name,
                     Description = trip.Description,
@@ -475,12 +459,9 @@ namespace CampX.BusinessLogic.Implementations.Trips
                     IsOrganizer = tripCamper.IsOrganizer
 
                 });
-            }
-            //trip.TripCampers = model.TripCampers;
-
+            }            
             UnitOfWork.Trips.Update(trip);
             UnitOfWork.SaveChanges();
-
         }
         public bool IdExists(int id)
         {

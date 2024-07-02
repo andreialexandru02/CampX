@@ -26,7 +26,5 @@ namespace CampX.BusinessLogic.Implementations.Trips.Models
         public List<int> TripCampers { get; set; }
 
         public List<int> Campsites { get; set; }
-
-
     }
 }

@@ -22,7 +22,8 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly, typeof(BaseService).Ass
 
 builder.Services.AddDbContext<CampXContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Server=((localdb)\\MSSQLLocalDB);Initial Catalog=CampiX;Integrated Security=true;TrustServerCertificate=true;"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("Server=((localdb)\\" +
+        "MSSQLLocalDB);Initial Catalog=CampiX;Integrated Security=true;TrustServerCertificate=true;"));
 });
 
 builder.Services.AddScoped<UnitOfWork>();
@@ -35,9 +36,7 @@ builder.Services.AddAuthorization(options => {
     options.AddPolicy("RequireAdministratorRole",
         policy => policy.RequireClaim(ClaimTypes.Role, "Admin"));
     options.AddPolicy("RequireModeratorRole",
-        policy => policy.RequireClaim(ClaimTypes.Role, "Moderator"));
-
-    
+        policy => policy.RequireClaim(ClaimTypes.Role, "Moderator")); 
 });
 
 builder.Services.AddAuthentication("CampXCookies")

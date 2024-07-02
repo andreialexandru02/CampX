@@ -73,7 +73,7 @@ else{  *@
                 </div>
                 <div id="participantsDiv">
                      
-                    Participanti:
+                    Participanți:
                                
                     @foreach(var tripCamper in Model.TripCampers)
                     {
@@ -87,7 +87,7 @@ else{  *@
         </div>
 
         <input id="currentCamper" type= "hidden" value = @currentCamper.Id>
-        <button  id="joinButton">Join</button>
+        <button  id="joinButton">Înscrie-te</button>
         <div id="requestContainer">
             <div id="RequstInput" class="row">
                 <div class="col-md-6">
@@ -96,7 +96,7 @@ else{  *@
                         <textarea id="expandableField" class="form-control"></textarea>
                     </div>
                     <div id="requestButtonDiv">
-                        <button id="requestButton" >Add Request</button>
+                        <button id="requestButton" >Trimite cerere</button>
                     </div>
                 </div>
             </div>
@@ -104,19 +104,19 @@ else{  *@
 
         <div id="buttonsDiv">
             <div class="tooltip-btn">
-            <a id="finishButton" asp-controller="Trip" asp-action="FinishTrip" asp-route-id=@Model.Id>Finalizează Tripul</a>
+            <a id="finishButton" asp-controller="Trip" asp-action="FinishTrip" asp-route-id=@Model.Id>Finalizează excursia</a>
                 <div class="tooltip-text">
-                    Pentru ca progresul tău să fie înregistrat în sistemul de badge-uri, după ce te întorci acasă, finalizează tripul!
+                    Pentru ca progresul tău să fie înregistrat în sistemul de badge-uri, după ce te întorci acasă, finalizează excursia!
                 </div>
             </div>
 
-        <a id="editButton" asp-controller="Trip" asp-action="EditTrip" asp-route-id=@Model.Id>Editează Tripul</a>
-        <a id="deleteButton" asp-controller="Trip" asp-action="DeleteTrip" asp-route-id=@Model.Id>Sterge Tripul</a>
-            <a asp-action="ShowTrips">Back to List</a>
+        <a id="editButton" asp-controller="Trip" asp-action="EditTrip" asp-route-id=@Model.Id>Editează excursia</a>
+        <a id="deleteButton" asp-controller="Trip" asp-action="DeleteTrip" asp-route-id=@Model.Id>Șterge excursia</a>
+            <a asp-action="ShowTrips">Înapoi la listă</a>
         </div>
     
         <div id="note-container">
-        <span id="noteSpan">Notite</span>
+        <span id="noteSpan">Notițe</span>
 
             <div id="noteInput" class="row">
                 <div class="col-md-6">
@@ -125,7 +125,7 @@ else{  *@
                         <textarea id="noteExpandableField" class="form-control"></textarea>
                     </div>
                     <div id="noteButtonDiv">
-                        <button id="noteButton" type="button" class="btn btn-primary">Add Note</button>
+                        <button id="noteButton" type="button" class="btn btn-primary">Adaugă notița</button>
                     </div>
                 </div>
 

@@ -10,7 +10,7 @@ else
 {
     <input id="currentCamper" type= "hidden" value = @currentCamper.Id></input>
     <div id="ShowMapDiv">
-        <button id="addCampsite" onclick="window.location.href='../Map/AddCampsite'" type="button" class="btn btn-dark">Creaza un campsite nou </button>
+        <button id="addCampsite" onclick="window.location.href='../Map/AddCampsite'" type="button" class="btn btn-dark">Creează un campsite nou </button>
         <script type="text/javascript" src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
                 integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
                 crossorigin=""></script>
@@ -35,7 +35,7 @@ else
                 <div id="tripForm">
 
                     <div class="form-group">
-                        <label a class="control-label">Nume trip</label>
+                        <label a class="control-label">Nume excursie</label>
                         <input id="nameInput" class="form-control" />
                         <span class="text-danger"></span>
                     </div>
@@ -50,11 +50,11 @@ else
                         <option value="private">Privat</option>
                     </select>
                     <div class="form-group">
-                        <label class="control-label">Data trip</label>
+                        <label class="control-label">Dată excursie</label>
                         <input id="dateInput" type="date" class="form-control" value=@Model.Date/>
                     </div>
                     <div class="form-group">
-                        <input id="submitButton" type="submit" value="Save" class="btn btn-primary" />
+                        <input id="submitButton" type="submit" value="Salvează" class="btn btn-primary" />
                     </div>
                 </div>
             </div>

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace CampX.BusinessLogic.Implementations.Map.Validations
@@ -49,6 +50,10 @@ namespace CampX.BusinessLogic.Implementations.Map.Validations
             }
         private bool IsImageExtensionCorrect(List<IFormFile> images)
         {
+            if(images == null)
+            {
+                return true;
+            }
             var ok = true;
 
             if (images == null)

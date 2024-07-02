@@ -5,13 +5,13 @@
 }
 <div id="formDiv">
 
-    <h1>Login</h1>
+    <h1>Autentificare</h1>
 
     <div class="row">
         <div>
             @if (Model.AreCredentialsInvalid)
             {
-                <div><span style="color:red">Invalid credentials</span></div>
+                <div><span style="color:red">Credențiale incorecte</span></div>
             }
             <form asp-action="Login">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>

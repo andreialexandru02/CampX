@@ -51,14 +51,6 @@ namespace CampX.Controllers
         //[Authorize(Policy = "RequireAdministratorRole")]
         public IActionResult AddCampsite(AddCampsiteModel model)
         {
-            /*for (int i = 0; i < Request.Files.Count; i++)
-            {
-                HttpPostedFileBase file = Request.Files[i];
-                if (file != null)
-                {
-                    // Do something here
-                }
-            }*/
                 if (model == null)
             {
                 return View("Error_NotFound");

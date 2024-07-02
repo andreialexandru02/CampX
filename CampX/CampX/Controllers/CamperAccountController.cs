@@ -26,7 +26,7 @@ namespace CampX.Controllers
             this.Service = service;
         }
 
-        [HttpGet]
+        [HttpGet]   
         public IActionResult Register()
         {
             var model = new RegisterModel();

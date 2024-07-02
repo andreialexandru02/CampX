@@ -32,7 +32,7 @@
 
             <table class="table">
                 <thead>
-                    <h3>Tripuri organizate de @Model.FirstName @Model.LastName</h3>
+                    <h3>Excursii organizate de @Model.FirstName @Model.LastName</h3>
                     <tr>
                         <th>
                             Nume
@@ -99,7 +99,7 @@
         }
         else
         {
-            <div id="noTrips">Nu organizeaza niciun trip!</div>
+            <div id="noTrips">Nu organizeaza nicio excursie!</div>
         }
 
         @using CampX.Common.ViewModels;
@@ -113,7 +113,7 @@
             </div>
         }
 
-        @if (currentCamper.Id == 9)
+        @if (currentCamper.Roles.Contains("Admin"))
         {
             <a id="banCamper" asp-controller="CamperAccount" asp-action="BanCamper" asp-route-id="@Model.Id">Baneaza Camperul</a>
         }

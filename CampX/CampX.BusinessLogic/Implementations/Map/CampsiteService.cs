@@ -106,12 +106,18 @@ namespace CampX.BusinessLogic.Implementations.Map
             .Select(c => new CampsiteDetailsModel
             {
                 Name = c.Name
-                , Description = c.Description
-                , Difficulty = c.Difficulty
-                , Latitude = c.Latitude
-                , Longitude = c.Longitude
-                , ImageIds = c.Images.Select(i => i.Id).ToList()
-                , CamperId = c.CamperId
+                ,
+                Description = c.Description
+                ,
+                Difficulty = c.Difficulty
+                ,
+                Latitude = c.Latitude
+                ,
+                Longitude = c.Longitude
+                ,
+                ImageIds = c.Images.Select(i => i.Id).ToList()
+                ,
+                CamperId = c.CamperId
 
             })
             .SingleOrDefault();
@@ -148,16 +154,14 @@ namespace CampX.BusinessLogic.Implementations.Map
 
             campsite = Mapper.Map<EditCampsiteModel, Campsite>(model);
 
-            var images = UnitOfWork.Images.Get()
-                .Where(i => imgList.Contains(i.Id))
-                .ToList();
-            //.Concat(model.ImageIds.ToList())
+            if (imgList.Count != 0)
+            {
 
-            /* foreach(var image in images)
-             {
-                 campsite.Images.Add(image);
-             }*/
-            campsite.Images = images;
+                campsite.Images = UnitOfWork.Images.Get()
+                    .Where(i => imgList.Contains(i.Id))
+                    .ToList(); ;
+
+            }
 
             campsite.Id = id;
 
@@ -179,7 +183,7 @@ namespace CampX.BusinessLogic.Implementations.Map
                 .SingleOrDefault(r => r.Id == id);
 
             return campsite != null;
-           
+
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<CampX.BusinessLogic.Implementations.Trips.Models.ShowTripsModel>
-
 @{
     ViewData["Title"] = "ShowTrip";
 }
@@ -19,28 +18,14 @@
         </div>
         <div id="searchDiv"></div>
     </div>
-
-
-
-
     <table class="table">
         <thead>
             <tr>
-                <th>
-                    Nume
-                </th>
-                <th>
-                    Descriere
-                </th>
-                <th>
-                    Dată
-                </th>
-                <th>
-                    Locuri de campare
-                </th>
-                <th>
-                    Organizator
-                </th>
+                <th>Nume</th>
+                <th>Descriere</th>
+                <th>Dată</th>
+                <th>Locuri de campare</th>
+                <th>Organizator</th>
             </tr>
         </thead>
         <tbody>
@@ -60,7 +45,6 @@
                             {
                                 <div class="showMore">Arată mai mult</div>
                             }
-
                         }
                         else
                         {
@@ -89,7 +73,7 @@
                         </div>
                             @if (item.Campsites.Count > 2)
                             {
-                                <div class="showMore">ShowMore</div>
+                                <div class="showMore">Arată mai mult</div>
                             }
                 </td>
                 <td id="organizatorTD">
